@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class WebsiteController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
-        return Inertia::render('App');
+        return Inertia::render(
+            'App',
+            [
+                'company' => config('app.company.name'),
+                'slogan' => config('app.company.slogan')
+            ]
+        );
     }
 }
