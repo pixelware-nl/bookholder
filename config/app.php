@@ -123,4 +123,22 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Company Details
+    |--------------------------------------------------------------------------
+    |
+    | This is important for users to know and understand the name of the company.
+    | If you miss this setting, users of your website might get confused.
+    | This is it is necessary to always have this filled in.
+    |
+    |
+    */
+
+    'company' => [
+        'name' => env('COMPANY_NAME', 'NO NAME'),
+        'slogan' => env('COMPANY_SLOGAN', 'NO SLOGAN'),
+        'kvk' => env('COMPANY_KVK', 'N/A'),
+        'btw' => env('COMPANY_BTW', 'N/A'),
+    ],
 ];
