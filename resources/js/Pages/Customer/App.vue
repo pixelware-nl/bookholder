@@ -26,16 +26,16 @@
 </template>
 <script setup lang="ts">
     import {onMounted, defineProps} from "vue";
-    import MainSection from "../Components/MainSection.vue";
-    import Navigation from "../Components/Navigation.vue";
-    import SectionImage from "../Components/SectionImage.vue";
-    import About from "../Components/About.vue";
-    import Contact from "../Components/Contact.vue";
-    import Projects from "../Components/Projects.vue";
+    import MainSection from "../../Components/Customer/MainSection.vue";
+    import Navigation from "../../Components/Customer/Navigation.vue";
+    import SectionImage from "../../Components/Customer/SectionImage.vue";
+    import About from "../../Components/Customer/About.vue";
+    import Contact from "../../Components/Customer/Contact.vue";
+    import Projects from "../../Components/Customer/Projects.vue";
 
     interface Props {
         company: string,
-    };
+    }
 
     const props = defineProps<Props>();
 
