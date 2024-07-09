@@ -14,6 +14,7 @@ class InvoiceController extends Controller
     {
         $pdf = Pdf::loadHTML(
             view('pdf.invoice', [
+
             ])->render()
         );
 
@@ -24,6 +25,6 @@ class InvoiceController extends Controller
         $pdf->setPaper('a4');
         $pdf->render();
 
-        return $pdf->stream('archive.pdf');
+        return $pdf->stream('invoice.pdf');
     }
 }

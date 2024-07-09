@@ -1,13 +1,13 @@
 @extends('pdf.layout', ['title' => 'Invoice'])
 
 @section('content')
-<table class="">
+<table class="header mb-1">
     <tr>
-        <td class="align-left"> <span> PIXELWARE </span> </td>
-        <td class="align-right"> NO. 000001 </td>
+        <td class="align-left"> <span> PIXELWARE™ </span> </td>
+        <td class="align-right"> NO. 000031 </td>
     </tr>
 </table>
-<h1 class="title"> <span> FACTUUR </span> </h1>
+<h1 class="title mb-2"> <span> FACTUUR. </span> </h1>
 <p class="date mb-2"> <span> Datum: </span> 08/07/2024 </p>
 <table class="from-to mb-2">
     <tr>
