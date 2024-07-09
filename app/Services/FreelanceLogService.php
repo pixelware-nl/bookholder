@@ -7,7 +7,6 @@ use App\Models\FreelanceLogEntry;
 use App\Models\Product;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
 
 class FreelanceLogService
 {

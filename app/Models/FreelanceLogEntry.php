@@ -12,6 +12,11 @@ class FreelanceLogEntry extends Model
 
     protected $table = 'freelance_log_entries';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'product_id',
         'rate',

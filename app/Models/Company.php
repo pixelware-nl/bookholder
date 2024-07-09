@@ -12,6 +12,11 @@ class Company extends Model
 
     protected $table = 'companies';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'name',
         'street_address',
