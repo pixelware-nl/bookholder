@@ -3,28 +3,37 @@
 namespace App\Http\Controllers;
 
 
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Company;
+use App\Services\FreelanceLogService;
+use App\Services\PDFService;
+use Exception;
+use Throwable;
 
 class InvoiceController extends Controller
 {
     /**
-     * @throws \Exception
+     * @throws Exception|Throwable
      */
     public function pdf(): \Illuminate\Http\Response
     {
-        $pdf = Pdf::loadHTML(
+        $freelanceLogService = new FreelanceLogService();
+        $pdfService = new PDFService();
+
+        $fromCompany = Company::where('name', 'Pixelware')->first();
+        $toCompany = Company::where('name', 'InShared')->first();
+
+        $logs = $freelanceLogService->getFreelanceLogs($toCompany);
+        $total = $freelanceLogService->getFreelanceLogsTotal($logs);
+
+        return $pdfService->streamToPdf(
             view('pdf.invoice', [
-
-            ])->render()
+                'toCompany' => $toCompany,
+                'fromCompany' => $fromCompany,
+                'logs' => $logs,
+                'total' => $total,
+            ])
         );
-
-        $pdf->setOption([
-            'isRemoveEnabled' => true,
-        ]);
-
-        $pdf->setPaper('a4');
-        $pdf->render();
-
-        return $pdf->stream('invoice.pdf');
     }
+
+
 }

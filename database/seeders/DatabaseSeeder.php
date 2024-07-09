@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $productDevelopmentTeamFinance = Product::create([
-            'company_id' => 0,
+            'company_id' => $inshared->id,
             'name' => 'Development Team Finance',
             'type' => ProductType::DEVELOPMENT
         ]);

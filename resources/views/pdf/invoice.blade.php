@@ -1,34 +1,28 @@
 @extends('pdf.layout', ['title' => 'Invoice'])
 
 @section('content')
-<table class="header mb-1">
-    <tr>
-        <td class="align-left"> <span> PIXELWARE™ </span> </td>
-        <td class="align-right"> NO. 000031 </td>
-    </tr>
-</table>
 <h1 class="title mb-2"> <span> FACTUUR. </span> </h1>
-<p class="date mb-2"> <span> Datum: </span> 08/07/2024 </p>
+<p class="date mb-2"> <span> Datum: </span> {{ \Carbon\Carbon::now()->format('d-m-Y') }} </p>
 <table class="from-to mb-2">
     <tr>
         <td> <span> Naar: </span> </td>
         <td> <span> Van: </span> </td>
     </tr>
     <tr>
-        <td> Inshared B.V. </td>
-        <td> Pixelware </td>
+        <td> {{ $toCompany->name }} </td>
+        <td> {{ $fromCompany->name }} </td>
     </tr>
     <tr>
-        <td> 56 Leusderend, Leusden </td>
-        <td> Huidenclubplein 4C, Rotterdam </td>
+        <td> {{ sprintf('%s, %s', $fromCompany->street_address, $fromCompany->city) }} </td>
+        <td> {{ sprintf('%s, %s', $toCompany->street_address, $toCompany->city) }} </td>
     </tr>
     <tr>
-        <td> Utrecht, 3832RC </td>
-        <td> Zuid-Holland, 3029PB </td>
+        <td> {{ sprintf('%s, %s', $fromCompany->province, $fromCompany->postal_code) }} </td>
+        <td> {{ sprintf('%s, %s', $toCompany->province, $toCompany->postal_code) }} </td>
     </tr>
     <tr>
-        <td> invoice@inshared.nl </td>
-        <td> o.ozbek@pixelware.nl </td>
+        <td> {{ $fromCompany->email }} </td>
+        <td> {{ $toCompany->email }}</td>
     </tr>
 </table>
 <div>
@@ -39,23 +33,19 @@
             <th> Tarief (€) </th>
             <th> Totaal </th>
         </tr>
-        <tr>
-            <td> Development (Team Finance) </td>
-            <td> 10 </td>
-            <td> €80 </td>
-            <td> €800 </td>
-        </tr>
-        <tr>
-            <td> Development (Team Infra) </td>
-            <td> 4 </td>
-            <td> €80 </td>
-            <td> €400 </td>
-        </tr>
+        @foreach($logs as $log)
+            <tr>
+                <td> {{ $log->product->name }} </td>
+                <td> {{ $log->hours }} </td>
+                <td> {{ sprintf('€%s', number_format($log->rate, decimal_separator: ',', thousands_separator: '.')) }} </td>
+                <td> {{ sprintf('€%s', number_format($log->rate * $log->hours, decimal_separator: ',', thousands_separator: '.')) }} </td>
+            </tr>
+        @endforeach
         <tr>
             <th></th>
             <th></th>
             <th> Totaal </th>
-            <th> €1200 </th>
+            <th> {{ sprintf('€%s', number_format($total, decimal_separator: ',', thousands_separator: '.')) }} </th>
         </tr>
     </table>
 </div>
