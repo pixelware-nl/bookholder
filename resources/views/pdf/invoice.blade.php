@@ -13,16 +13,16 @@
             <td> {{ $fromCompany->name }} </td>
         </tr>
         <tr>
-            <td> {{ sprintf('%s, %s', $fromCompany->street_address, $fromCompany->city) }} </td>
             <td> {{ sprintf('%s, %s', $toCompany->street_address, $toCompany->city) }} </td>
+            <td> {{ sprintf('%s, %s', $fromCompany->street_address, $fromCompany->city) }} </td>
         </tr>
         <tr>
-            <td> {{ sprintf('%s, %s', $fromCompany->province, $fromCompany->postal_code) }} </td>
             <td> {{ sprintf('%s, %s', $toCompany->province, $toCompany->postal_code) }} </td>
+            <td> {{ sprintf('%s, %s', $fromCompany->province, $fromCompany->postal_code) }} </td>
         </tr>
         <tr>
-            <td> {{ $fromCompany->email }} </td>
-            <td> {{ $toCompany->email }}</td>
+            <td> {{ $toCompany->email }} </td>
+            <td> {{ $fromCompany->email }}</td>
         </tr>
     </table>
     <div>

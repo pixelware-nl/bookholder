@@ -6,4 +6,4 @@ use App\Http\Controllers\WebsiteController;
 
 Route::get('/', [WebsiteController::class, 'index'])->name('index');
 
-Route::get('/pdf', [InvoiceController::class, 'pdf'])->name('pdf');
+Route::get('/pdf', [InvoiceController::class, 'generatePDF'])->name('pdf');

@@ -10,6 +10,7 @@ use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Factories\CompanyFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -38,6 +39,15 @@ class DatabaseSeeder extends Seeder
             'country' => 'Netherlands',
             'phone' => '0612345678',
             'email' => 'finance@inshared.nl'
+        ]);
+
+        $user = User::create([
+            'company_id' => $pixelware->id,
+            'full_name' => 'Okan Ozbek',
+            'email' => 'o.ozbek@pixelware.nl',
+            'email_verified_at' => now(),
+            'password' => Hash::make('password'),
+            'remember_token' => null,
         ]);
 
         $productDevelopmentTeamFinance = Product::create([

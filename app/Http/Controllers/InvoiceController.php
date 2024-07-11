@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\User;
 use App\Services\FreelanceLogService;
 use App\Services\PDFService;
 use Exception;
@@ -24,12 +25,14 @@ class InvoiceController extends Controller
     /**
      * @throws Exception|Throwable
      */
-    public function pdf(): Response
+    public function generatePDF(): Response
     {
+        // FAKE LOGIN
+        $user = User::first();
+
         $freelanceLogService = new FreelanceLogService();
         $pdfService = new PDFService();
 
-        $fromCompany = Company::where('name', 'Pixelware')->first();
         $toCompany = Company::where('name', 'InShared')->first();
 
         $logs = $freelanceLogService->getFreelanceLogs($toCompany);
@@ -38,7 +41,7 @@ class InvoiceController extends Controller
         return $pdfService->streamToPdf(
             view('pdf.invoice', [
                 'toCompany' => $toCompany,
-                'fromCompany' => $fromCompany,
+                'fromCompany' => $user->company,
                 'logs' => $logs,
                 'total' => $total,
             ])
