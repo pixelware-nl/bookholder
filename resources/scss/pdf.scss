@@ -43,6 +43,7 @@ table {
     padding: 0;
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 table th, table td {

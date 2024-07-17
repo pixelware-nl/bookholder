@@ -2,7 +2,12 @@
 
 @section('content')
     <h1 class="title mb-2"> <span> FACTUUR. </span> </h1>
-    <p class="date mb-2"> <span> Datum: </span> {{ \Carbon\Carbon::now()->format('d-m-Y') }} </p>
+    <table class="from-to mb-2">
+        <tr>
+            <td> <span> Gegenereerd op: </span> {{ \Carbon\Carbon::now()->format('d-m-Y') }} </p> </td>
+            <td> <span> Uren reeks: </span> {{ $start_date->format('d/m/Y') }} - {{ $end_date->format('d/m/Y') }}  </p> </td>
+        </tr>
+    </table>
     <table class="from-to mb-2">
         <tr>
             <td> <span> Naar: </span> </td>

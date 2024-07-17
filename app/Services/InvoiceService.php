@@ -27,6 +27,8 @@ class InvoiceService
             view('pdf.invoice', [
                 'toCompany' => $invoice->toCompany,
                 'fromCompany' => $invoice->fromCompany,
+                'start_date' => $invoice->start_date,
+                'end_date' => $invoice->end_date,
                 'logs' => $logs,
                 'total' => $total,
             ])

@@ -43,8 +43,8 @@ class InvoiceController extends Controller
         $invoice->user_id = $user->id;
         $invoice->from_company_id = $user->company_id;
         $invoice->to_company_id = $request->company_id;
-        $invoice->start_date = Carbon::now()->startOfDay();
-        $invoice->end_date = Carbon::now()->startOfDay()->addmonths();
+        $invoice->start_date = $request->start_date;
+        $invoice->end_date = $request->end_date;
 
         $invoice->save();
 
