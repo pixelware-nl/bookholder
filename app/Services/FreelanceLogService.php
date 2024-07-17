@@ -15,15 +15,9 @@ class FreelanceLogService
      * public function getUserFreelanceLogs(User $user, Carbon $startDate = Carbon::now(), int $lengthInMonths = 1);
      */
 
-    public function getFreelanceLogs(Company $company, Carbon $startDate = null, int $months = 1): Collection
+    public function getFreelanceLogs(Company $company, Carbon $startDate, Carbon $endDate): Collection
     {
         $products = Product::where('company_id', $company->id)->pluck('id');
-
-        if (is_null($startDate)) {
-            $startDate = Carbon::now()->startOfDay();
-        }
-
-        $endDate = Carbon::create($startDate)->addMonths($months);
 
         return FreelanceLogEntry::where('created_at', '>=', $startDate->toDateString())
             ->where('created_at', '<=', $endDate->toDateString())

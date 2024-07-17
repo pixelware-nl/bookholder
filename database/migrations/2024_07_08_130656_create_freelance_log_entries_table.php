@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('freelance_log_entries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('rate');
-            $table->integer('hours');
+            $table->unsignedSmallInteger('rate');
+            $table->unsignedInteger('hours');
             $table->timestamps();
         });
     }

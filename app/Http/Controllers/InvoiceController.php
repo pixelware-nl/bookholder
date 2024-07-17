@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateInvoiceRequest;
 use App\Models\Company;
+use App\Models\Invoice;
 use App\Models\User;
-use App\Services\FreelanceLogService;
-use App\Services\PDFService;
-use Exception;
+use App\Services\InvoiceService;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 use Throwable;
 
 // TODO:
@@ -22,31 +25,39 @@ use Throwable;
 
 class InvoiceController extends Controller
 {
-    /**
-     * @throws Exception|Throwable
-     */
-    public function generatePDF(): Response
+    public function create(): InertiaResponse
     {
-        // FAKE LOGIN
-        $user = User::first();
+        $companies = Company::all();
 
-        $freelanceLogService = new FreelanceLogService();
-        $pdfService = new PDFService();
-
-        $toCompany = Company::where('name', 'InShared')->first();
-
-        $logs = $freelanceLogService->getFreelanceLogs($toCompany);
-        $total = $freelanceLogService->getFreelanceLogsTotal($logs);
-
-        return $pdfService->streamToPdf(
-            view('pdf.invoice', [
-                'toCompany' => $toCompany,
-                'fromCompany' => $user->company,
-                'logs' => $logs,
-                'total' => $total,
-            ])
-        );
+        return Inertia::render('Admin/Invoice/Create', [
+            'companies' => $companies
+        ]);
     }
 
+    public function store(CreateInvoiceRequest $request)
+    {
+        $user = User::first();
 
+        $invoice = new Invoice();
+
+        $invoice->user_id = $user->id;
+        $invoice->from_company_id = $user->company_id;
+        $invoice->to_company_id = $request->company_id;
+        $invoice->start_date = Carbon::now()->startOfDay();
+        $invoice->end_date = Carbon::now()->startOfDay()->addmonths();
+
+        $invoice->save();
+
+        return Inertia::location(route('invoice.show', $invoice));
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function show(Invoice $invoice): Response
+    {
+        $invoiceService = new InvoiceService();
+
+        return $invoiceService->generatePDF($invoice);
+    }
 }
