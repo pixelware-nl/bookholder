@@ -13,6 +13,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
 /**
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -49,6 +50,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
 class User extends Authenticatable
 {

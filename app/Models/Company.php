@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -50,6 +51,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereStreetAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
 class Company extends Model
 {

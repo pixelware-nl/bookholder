@@ -3,28 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateInvoiceRequest;
+use App\Http\Resources\InvoiceCollection;
+use App\Http\Resources\InvoiceResource;
 use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\User;
 use App\Services\InvoiceService;
-use Carbon\Carbon;
-use Illuminate\Http\Response;
 use Inertia\Inertia;
+use Illuminate\Http\Response;
 use Inertia\Response as InertiaResponse;
+use \Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Throwable;
 
 // TODO:
 // The following is a wishlist from yours truly.
-// * Create authentication for the user to login
-// * An user is tied to a company
-// * The fromCompany will always be the logged in users company
-// * The toCompany can be selected in a select box
-// * * Eventual extra would be to make a user relations table to see which user works for who
-// * User can create his own "products", also in a seperate view
-// * User can log his own hours in a calendar type view
+// * [ ] Create authentication for the user to login
+// * [X] An user is tied to a company
+// * [X] The fromCompany will always be the logged in users company
+// * [X] The toCompany can be selected in a select box
+// * [ ] Eventual extra would be to make a user relations table to see which user works for who
+// * [ ] User can create his own "products", also in a seperate view
+// * [ ] User can log his own hours in a calendar type view
 
 class InvoiceController extends Controller
 {
+    public function index(): InertiaResponse
+    {
+        $invoices = Invoice::all();
+
+        return Inertia::render('Admin/Invoice/Index', [
+            'invoices' => InvoiceResource::collection($invoices)
+        ]);
+    }
+
     public function create(): InertiaResponse
     {
         $companies = Company::all();
@@ -34,7 +45,7 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function store(CreateInvoiceRequest $request)
+    public function store(CreateInvoiceRequest $request): SymfonyResponse
     {
         $user = User::first();
 

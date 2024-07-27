@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -36,6 +37,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereUpdatedAt($value)
  * @mixin Eloquent
+ * @mixin \Eloquent
  */
 class FreelanceLogEntry extends Model
 {
