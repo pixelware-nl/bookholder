@@ -22,7 +22,7 @@ use Throwable;
 // * [X] The fromCompany will always be the logged in users company
 // * [X] The toCompany can be selected in a select box
 // * [ ] Eventual extra would be to make a user relations table to see which user works for who
-// * [ ] User can create his own "products", also in a seperate view
+// * [ ] User can create his own "products", also in a separate view
 // * [ ] User can log his own hours in a calendar type view
 
 class InvoiceController extends Controller
@@ -30,30 +30,31 @@ class InvoiceController extends Controller
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Index', [
-            'invoices' => InvoiceResource::collection(Invoice::forAuthenticatedUser())
+            'invoices' => InvoiceResource::collection(
+                Invoice::forAuthenticatedUser()->get()
+            )
         ]);
     }
 
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Create', [
-            'companies' => Company::withoutAuthenticatedUserCompany()
+            'companies' => Company::withoutAuthenticatedUserCompany()->get()
         ]);
     }
 
     public function store(CreateInvoiceRequest $request): SymfonyResponse
     {
+        // @TODO should be Auth::user()
         $user = User::first();
 
-        $invoice = new Invoice();
-
-        $invoice->user_id = $user->id;
-        $invoice->from_company_id = $user->company_id;
-        $invoice->to_company_id = $request->company_id;
-        $invoice->start_date = $request->start_date;
-        $invoice->end_date = $request->end_date;
-
-        $invoice->save();
+        Invoice::create([
+            'user_id' => $user->id,
+            'from_company_id' => $user->company_id,
+            'to_company_id' => $request->company_id,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date
+        ]);
 
         return redirect()->route('invoice.index');
     }

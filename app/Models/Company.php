@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 /**
- * 
+ *
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -77,10 +77,10 @@ class Company extends Model
         'email',
     ];
 
-    public function scopeWithoutAuthenticatedUserCompany(Builder $query): Collection
+    public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
     {
         // @TODO should be Auth::user();
-        return $query->all()->except(User::first()->company_id);
+        return $query->whereNot('id', User::first()->company_id);
     }
 
     public function products(): HasMany

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
- * 
+ *
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -57,6 +57,14 @@ class Invoice extends Model
         'end_date'
     ];
 
+    protected $fillable = [
+        'user_id',
+        'from_company_id',
+        'to_company_id',
+        'start_date',
+        'end_date'
+    ];
+
     protected $casts = [
         'user_id' => 'integer',
         'from_company_id' => 'integer',
@@ -65,10 +73,10 @@ class Invoice extends Model
         'end_date' => 'datetime',
     ];
 
-    public function scopeForAuthenticatedUser(Builder $query): Collection
+    public function scopeForAuthenticatedUser(Builder $query): Builder
     {
         // @TODO use auth user
-        return $query->where('user_id', User::first()->id)->get();
+        return $query->where('user_id', User::first()->id);
     }
 
     public function fromCompany(): HasOne
