@@ -24,7 +24,5 @@ class InvoiceResource extends JsonResource
             'start_date' => $this->start_date->format('Y-m-d'),
             'end_date' => $this->end_date->format('Y-m-d'),
         ];
-
-        return parent::toArray($request);
     }
 }

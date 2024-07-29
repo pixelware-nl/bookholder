@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateInvoiceRequest;
-use App\Http\Resources\InvoiceCollection;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Company;
 use App\Models\Invoice;
@@ -29,7 +28,8 @@ class InvoiceController extends Controller
 {
     public function index(): InertiaResponse
     {
-        $invoices = Invoice::all();
+        // @TODO: needs to be \Auth::user(), currently User::first() since there is no authentication.
+        $invoices = Invoice::whereUser(User::first());
 
         return Inertia::render('Admin/Invoice/Index', [
             'invoices' => InvoiceResource::collection($invoices)

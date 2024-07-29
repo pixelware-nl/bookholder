@@ -72,6 +72,10 @@ class Invoice extends Model
         'end_date' => 'datetime',
     ];
 
+    public static function whereUser(User $user)
+    {
+        return self::where('user_id', $user->id)->get();
+    }
 
     public function fromCompany(): HasOne
     {
