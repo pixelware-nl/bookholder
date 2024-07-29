@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use FontLib\TrueType\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
 
 /**
- *
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -42,6 +43,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereToCompanyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Invoice forAuthenticatedUser()
  * @mixin \Eloquent
  */
 class Invoice extends Model
@@ -63,9 +65,10 @@ class Invoice extends Model
         'end_date' => 'datetime',
     ];
 
-    public static function whereUser(User $user): Collection
+    public function scopeForAuthenticatedUser(Builder $query): Collection
     {
-        return self::where('user_id', $user->id)->get();
+        // @TODO use auth user
+        return $query->where('user_id', User::first()->id)->get();
     }
 
     public function fromCompany(): HasOne

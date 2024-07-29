@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -51,6 +52,7 @@ use Illuminate\Support\Carbon;
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereStreetAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
  * @mixin Eloquent
+ * @method static Builder|Company withoutAuthenticatedUserCompany()
  * @mixin \Eloquent
  */
 class Company extends Model
@@ -74,6 +76,12 @@ class Company extends Model
         'phone',
         'email',
     ];
+
+    public function scopeWithoutAuthenticatedUserCompany(Builder $query): Collection
+    {
+        // @TODO should be Auth::user();
+        return $query->all()->except(User::first()->company_id);
+    }
 
     public function products(): HasMany
     {

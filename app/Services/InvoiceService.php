@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use App\Http\Requests\CreateInvoiceRequest;
-use App\Models\Company;
 use App\Models\Invoice;
-use App\Models\User;
 use Exception;
 use Illuminate\Http\Response;
 use Throwable;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateInvoiceRequest;
+use App\Http\Requests\UpdateInvoiceRequest;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Company;
 use App\Models\Invoice;
@@ -28,20 +29,15 @@ class InvoiceController extends Controller
 {
     public function index(): InertiaResponse
     {
-        // @TODO: needs to be \Auth::user(), currently User::first() since there is no authentication.
-        $invoices = Invoice::whereUser(User::first());
-
         return Inertia::render('Admin/Invoice/Index', [
-            'invoices' => InvoiceResource::collection($invoices)
+            'invoices' => InvoiceResource::collection(Invoice::forAuthenticatedUser())
         ]);
     }
 
     public function create(): InertiaResponse
     {
-        $companies = Company::all();
-
         return Inertia::render('Admin/Invoice/Create', [
-            'companies' => $companies
+            'companies' => Company::withoutAuthenticatedUserCompany()
         ]);
     }
 
@@ -59,7 +55,7 @@ class InvoiceController extends Controller
 
         $invoice->save();
 
-        return Inertia::location(route('invoice.show', $invoice));
+        return redirect()->route('invoice.index');
     }
 
     /**
@@ -70,5 +66,22 @@ class InvoiceController extends Controller
         $invoiceService = new InvoiceService();
 
         return $invoiceService->generatePDF($invoice);
+    }
+
+    public function edit(Invoice $invoice): void
+    {
+        // @TODO add edit capabilities
+    }
+
+    public function update(UpdateInvoiceRequest $request, Invoice $invoice): void
+    {
+        // @TODO update invoice
+    }
+
+    public function destroy(Invoice $invoice): SymfonyResponse
+    {
+        $invoice->delete();
+
+        return redirect()->route('invoice.index');
     }
 }
