@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
+use FontLib\TrueType\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Carbon;
 
 /**
  *
@@ -23,13 +24,13 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $user_id
  * @property int $from_company_id
  * @property int $to_company_id
- * @property \Illuminate\Support\Carbon $start_date
- * @property \Illuminate\Support\Carbon $end_date
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Company|null $fromCompany
- * @property-read \App\Models\Company|null $toCompany
- * @property-read \App\Models\User|null $user
+ * @property Carbon $start_date
+ * @property Carbon $end_date
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Company|null $fromCompany
+ * @property-read Company|null $toCompany
+ * @property-read User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice query()
@@ -54,16 +55,6 @@ class Invoice extends Model
         'end_date'
     ];
 
-    /*
-    protected $fillable = [
-        'user_id',
-        'from_company_id',
-        'to_company_id',
-        'start_date',
-        'end_date',
-    ];
-*/
-
     protected $casts = [
         'user_id' => 'integer',
         'from_company_id' => 'integer',
@@ -72,7 +63,7 @@ class Invoice extends Model
         'end_date' => 'datetime',
     ];
 
-    public static function whereUser(User $user)
+    public static function whereUser(User $user): Collection
     {
         return self::where('user_id', $user->id)->get();
     }
