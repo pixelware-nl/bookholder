@@ -9,7 +9,7 @@
                 <th class="table-header-item"> To </th>
                 <th class="table-header-item"> Date </th>
                 <th class="table-header-item"> View </th>
-                <th class="table-header-item]"> Delete </th>
+                <th class="table-header-item"> Delete </th>
                 <th class="table-header-item"> Mail </th>
             </tr>
         </thead>
