@@ -2,20 +2,13 @@
 
 namespace App\Rules;
 
-use App\Models\User;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
 class NotAuthenticatedUserCompany implements ValidationRule
 {
-    private User $user;
-
-    public function __construct(User $user)
-    {
-        $this->user = $user;
-    }
-
     /**
      * Run the validation rule.
      *
@@ -23,7 +16,7 @@ class NotAuthenticatedUserCompany implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ($value === $this->user->company_id) {
+        if ($value === Auth::user()->company_id) {
             $fail('Company can not be the same as your own.');
         }
     }

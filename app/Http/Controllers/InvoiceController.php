@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\User;
 use App\Services\InvoiceService;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Illuminate\Http\Response;
 use Inertia\Response as InertiaResponse;
@@ -17,10 +18,7 @@ use Throwable;
 
 // TODO:
 // The following is a wishlist from yours truly.
-// * [ ] Create authentication for the user to login
 // * [X] An user is tied to a company
-// * [X] The fromCompany will always be the logged in users company
-// * [X] The toCompany can be selected in a select box
 // * [ ] Eventual extra would be to make a user relations table to see which user works for who
 // * [ ] User can create his own "products", also in a separate view
 // * [ ] User can log his own hours in a calendar type view
@@ -45,8 +43,7 @@ class InvoiceController extends Controller
 
     public function store(CreateInvoiceRequest $request): SymfonyResponse
     {
-        // @TODO should be Auth::user()
-        $user = User::first();
+        $user = Auth::user();
 
         Invoice::create([
             'user_id' => $user->id,
