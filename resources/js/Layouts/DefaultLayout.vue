@@ -12,7 +12,7 @@
     />
 </template>
 <script setup lang="ts">
-    import {onMounted, defineProps} from "vue";
+    import {defineProps} from "vue";
     import Header from "../Components/Customer/Header.vue";
     import Footer from "../Components/Customer/Footer.vue";
 
@@ -22,8 +22,4 @@
     }
 
     const props = defineProps<Props>();
-
-    onMounted(() => {
-        console.log(props.company);
-    })
 </script>

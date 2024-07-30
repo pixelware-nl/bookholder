@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -75,8 +76,7 @@ class Invoice extends Model
 
     public function scopeForAuthenticatedUser(Builder $query): Builder
     {
-        // @TODO use auth user
-        return $query->where('user_id', User::first()->id);
+        return $query->where('user_id', Auth::user()->id);
     }
 
     public function fromCompany(): HasOne

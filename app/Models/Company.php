@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -79,8 +80,7 @@ class Company extends Model
 
     public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
     {
-        // @TODO should be Auth::user();
-        return $query->whereNot('id', User::first()->company_id);
+        return $query->whereNot('id', Auth::user()->company_id);
     }
 
     public function products(): HasMany

@@ -32,6 +32,7 @@
 <script setup lang="ts">
 import {defineProps, onMounted, ref} from "vue";
 import { Link } from '@inertiajs/vue3'
+import AdminLayout from "../../../Layouts/AdminLayout.vue";
 
 interface Props {
     invoices: object,
