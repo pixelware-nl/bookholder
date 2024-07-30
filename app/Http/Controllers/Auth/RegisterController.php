@@ -15,7 +15,7 @@ class RegisterController extends Controller
 {
     public function create(): InertiaResponse|RedirectResponse
     {
-        if (UserHelper::isAuthenticated()) {
+        if (Auth::check()) {
             return redirect()->back();
         }
 
