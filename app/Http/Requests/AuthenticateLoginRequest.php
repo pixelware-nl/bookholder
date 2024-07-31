@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AuthenticateLoginRequest extends FormRequest
@@ -17,6 +16,7 @@ class AuthenticateLoginRequest extends FormRequest
         return [
             'email' => ['required', 'email'],
             'password' => ['required'],
+            'remember_me' => ['required', 'boolean']
         ];
     }
 

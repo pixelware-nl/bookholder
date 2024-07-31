@@ -14,7 +14,8 @@ class LoginController extends Controller
     public function create(): InertiaResponse|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->back();
+            // @TODO: Redirect to a dashboard
+            return redirect()->route('invoices.index');
         }
 
         return Inertia::render('Auth/Login');
@@ -24,7 +25,7 @@ class LoginController extends Controller
     {
         $credentials = $request->toArray();
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, )) {
             $request->session()->regenerate();
 
             // @TODO: Redirect to a dashboard

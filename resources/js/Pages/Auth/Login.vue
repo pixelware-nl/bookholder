@@ -1,5 +1,5 @@
 <template>
-    <div class="w-1/3 px-8 py-12 rounded-lg shadow-xl h-[34rem] bg-white">
+    <div class="w-1/3 px-8 pt-12 pb-6 rounded-lg shadow-xl bg-white">
         <p class="text-5xl text-center font-black mb-2"> PIXELWARE<span class="text-red-600">.</span> </p>
         <h1 class="header-title text-center"> Login </h1>
         <form @submit.prevent="form.post(route('login.authenticate'))" class="pb-10 border-b">

@@ -15,7 +15,8 @@ class RegisterController extends Controller
     public function create(): InertiaResponse|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->back();
+            // @TODO: Redirect to a dashboard
+            return redirect()->route('invoices.index');
         }
 
         return Inertia::render('Auth/Register');

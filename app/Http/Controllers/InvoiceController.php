@@ -7,7 +7,6 @@ use App\Http\Requests\UpdateInvoiceRequest;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Company;
 use App\Models\Invoice;
-use App\Models\User;
 use App\Services\InvoiceService;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
