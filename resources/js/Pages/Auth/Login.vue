@@ -75,4 +75,12 @@ const form = useForm({
 .input-submit {
     @apply border bg-slate-800 border-gray-300 text-slate-50 text-sm rounded-lg py-3 w-full hover:bg-slate-900 hover:text-slate-200
 }
+
+.input-error {
+    @apply text-red-600 text-sm mt-2
+}
+
+.input-field-error {
+    @apply !border-red-600
+}
 </style>

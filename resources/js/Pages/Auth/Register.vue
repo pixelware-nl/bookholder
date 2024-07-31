@@ -1,6 +1,6 @@
 <template>
     <div class="w-1/3 px-8 py-12 rounded-lg shadow-xl h-[44rem] bg-white">
-        <p class="text-5xl text-center font-black mb-2"> PIXELWARE<span class="text-red-600">.</span> </p>
+        <p class="text-5xl text-center font-black mb-2"> <Link :href="route('login')">PIXELWARE</Link><span class="text-red-600">.</span> </p>
         <h1 class="header-title text-center"> Register </h1>
         <form @submit.prevent="form.post(route('register.store'))" class="pb-10 border-b">
             <div class="input-container flex">
@@ -122,5 +122,13 @@ const form = useForm({
 
 .input-two-inbetween:last-child {
     margin-left: 5%;
+}
+
+.input-error {
+    @apply text-red-600 text-sm mt-2
+}
+
+.input-field-error {
+    @apply !border-red-600
 }
 </style>

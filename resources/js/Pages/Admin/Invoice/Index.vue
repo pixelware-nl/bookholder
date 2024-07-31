@@ -1,5 +1,5 @@
 <template>
-    <h1 class="header-title"> Overview </h1>
+    <h1 class="header-title"> Overview of Invoices </h1>
     <Link :href="route('invoice.create')" method="get" class="link-button"> Create Invoice </Link>
     <table class="table">
         <thead>
