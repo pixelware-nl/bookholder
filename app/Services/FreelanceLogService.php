@@ -19,8 +19,8 @@ class FreelanceLogService
     {
         $products = Product::where('company_id', $company->id)->pluck('id');
 
-        return FreelanceLogEntry::where('created_at', '>=', $startDate->toDateString())
-            ->where('created_at', '<=', $endDate->toDateString())
+        return FreelanceLogEntry::where('created_at', '>=', $startDate->toDateTimeString())
+            ->where('created_at', '<=', $endDate->toDateTimeString())
             ->whereIn('product_id', $products)
             ->get();
     }
