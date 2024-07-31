@@ -1,48 +1,42 @@
 <template>
-    <div class="w-1/3 px-8 pt-12 pb-6 rounded-lg shadow-xl bg-white">
-        <p class="text-5xl text-center font-black mb-2"> PIXELWARE<span class="text-red-600">.</span> </p>
-        <h1 class="header-title text-center"> Login </h1>
+    <FormContainer form-title="Login">
         <form @submit.prevent="form.post(route('login.authenticate'))" class="pb-10 border-b">
-            <div class="input-container">
-                <label for="email" class="input-label">Email</label>
-                <input
-                    id="email"
-                    type="text"
-                    name="email"
+            <InputContainer>
+                <TextInput
                     v-model="form.email"
-                    :class="{'input-field-error': errors.email}"
-                    class="input"
-                    placeholder="john@doe.com"
+                    id="email"
+                    name="email"
+                    label="Email"
+                    placeholder="j.doe@pixelware.nl"
+                    :error="errors.email"
                 />
-                <p class="input-error"> {{ errors.email }} </p>
-            </div>
-            <div class="input-container">
-                <label for="password" class="input-label">Password</label>
-                <input
-                    id="password"
-                    type="password"
-                    name="password"
+            </InputContainer>
+            <InputContainer>
+                <PasswordInput
                     v-model="form.password"
-                    :class="{'input-field-error': errors.password}"
-                    class="input"
+                    id="password"
+                    name="password"
+                    label="Password"
                     placeholder="••••••••"
+                    :error="errors.password"
                 />
-                <p class="input-error"> {{ errors.password }} </p>
                 <div class="text-right">
-                    <Link :href="route('invoices.index')" class="text-blue-600 hover:underline text-xs"> Forgot password? </Link>
+                    <Link :href="route('password.request')" class="text-blue-600 hover:underline text-xs"> Forgot password? </Link>
                 </div>
-
-            </div>
-            <button type="submit" :disabled="form.processing" class="input-submit">
-                Login
-            </button>
+            </InputContainer>
+            <SubmitButton :form-processing="form.processing"> Login </SubmitButton>
         </form>
         <p class="mt-6 text-center"> Don't have an account? <Link :href="route('register')" class="text-blue-600 hover:underline"> Signup now </Link> </p>
-    </div>
+    </FormContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
 import {useForm, Link} from "@inertiajs/vue3";
+import FormContainer from "./Partials/FormContainer.vue";
+import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
+import InputContainer from "../Partials/Containers/InputContainer.vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
 
 interface Props {
     errors: object,
@@ -64,9 +58,7 @@ const form = useForm({
     @apply border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
 }
 
-.input-label {
-    @apply block mb-2 text-sm font-medium text-gray-900
-}
+
 
 .input-container {
     @apply mb-6
