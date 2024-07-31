@@ -1,0 +1,66 @@
+<template>
+    <FormContainer form-title="Reset password" :logo-to-route="route('login')">
+        <form @submit.prevent="form.post(route('password.update'))">
+            <input type="hidden" name="token" :value="form.token" />
+            <InputContainer>
+                <TextInput
+                    v-model="form.email"
+                    id="email"
+                    name="email"
+                    label="Email"
+                    :disabled="true"
+                    aria-disabled="true"
+                    :error="errors.email"
+                />
+            </InputContainer>
+            <InputContainer>
+                <PasswordInput
+                    v-model="form.password"
+                    id="password"
+                    name="password"
+                    label="Password"
+                    placeholder="••••••••"
+                    :error="errors.password"
+                />
+            </InputContainer>
+            <InputContainer>
+                <PasswordInput
+                    v-model="form.password_confirmation"
+                    id="password-confirmation"
+                    name="password_confirmation"
+                    label="Password"
+                    placeholder="••••••••"
+                    :error="errors.password_confirmation"
+                />
+            </InputContainer>
+            <SubmitButton :form-processing="form.processing"> Reset password </SubmitButton>
+        </form>
+    </FormContainer>
+</template>
+<script setup lang="ts">
+import FormContainer from "./Partials/FormContainer.vue";
+import InputContainer from "../Partials/Containers/InputContainer.vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
+import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
+import {useForm} from "@inertiajs/vue3";
+import {defineProps, onBeforeMount, onMounted} from "vue";
+
+interface Props {
+    errors: object,
+}
+
+const props = defineProps<Props>();
+
+const form = useForm({
+    token: null,
+    email: null,
+    password: null,
+    password_confirmation: null,
+})
+
+onBeforeMount(() => {
+    form.token = route().params.token;
+    form.email = route().params.email;
+})
+</script>

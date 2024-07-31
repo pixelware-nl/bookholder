@@ -9,7 +9,7 @@ class WebsiteController extends Controller
     public function index(): \Inertia\Response
     {
         return Inertia::render(
-            'App',
+            'Customer/App',
             [
                 'company' => config('app.company.name'),
                 'slogan' => config('app.company.slogan')
