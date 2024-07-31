@@ -1,6 +1,6 @@
 <template>
     <h1 class="header-title"> Invoice settings </h1>
-    <form @submit.prevent="form.post(route('invoice.store'))">
+    <form @submit.prevent="form.post(route('invoices.store'))">
         <div class="input-container">
             <label for="companies" class="input-label">Companies</label>
             <select

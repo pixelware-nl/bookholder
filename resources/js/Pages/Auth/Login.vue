@@ -29,7 +29,7 @@
                 />
                 <p class="input-error"> {{ errors.password }} </p>
                 <div class="text-right">
-                    <Link :href="route('invoice.index')" class="text-blue-600 hover:underline text-xs"> Forgot password? </Link>
+                    <Link :href="route('invoices.index')" class="text-blue-600 hover:underline text-xs"> Forgot password? </Link>
                 </div>
 
             </div>

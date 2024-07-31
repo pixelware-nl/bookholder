@@ -1,6 +1,6 @@
 <template>
     <h1 class="header-title"> Overview of Invoices </h1>
-    <Link :href="route('invoice.create')" method="get" class="link-button"> Create Invoice </Link>
+    <Link :href="route('invoices.create')" method="get" class="link-button"> Create Invoice </Link>
     <table class="table">
         <thead>
             <tr class="table-header">
@@ -19,8 +19,8 @@
                 <td class="table-item"> {{ data.from_company }} </td>
                 <td class="table-item"> {{ data.to_company }}</td>
                 <td class="table-item"> {{ data.start_date }} t/m {{ data.end_date}}</td>
-                <td class="table-item table-item-link"> <a :href="route('invoice.show', data.id)" target="_blank"> View </a> </td>
-                <td class="table-item table-item-link"> <Link :href="route('invoice.destroy', data.id)" method="delete"> Delete </Link> </td>
+                <td class="table-item table-item-link"> <a :href="route('invoices.show', data.id)" target="_blank"> View </a> </td>
+                <td class="table-item table-item-link"> <Link :href="route('invoices.destroy', data.id)" method="delete"> Delete </Link> </td>
                 <td class="table-item table-item-link"> <a href="#"> Send </a> </td>
             </tr>
         </tbody>

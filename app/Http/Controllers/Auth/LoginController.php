@@ -28,7 +28,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             // @TODO: Redirect to a dashboard
-            return redirect()->intended(route('invoice.index'));
+            return redirect()->intended(route('invoices.index'));
         }
 
         return back()->withErrors([

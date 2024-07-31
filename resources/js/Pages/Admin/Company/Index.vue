@@ -1,27 +1,21 @@
 <template>
-    <h1 class="header-title"> Overview </h1>
-    <Link :href="route('invoice.create')" method="get" class="link-button"> Create Invoice </Link>
+    <h1 class="header-title"> Overview of Companies </h1>
+    <Link href="#" method="get" class="link-button"> Create Company </Link>
     <table class="table">
         <thead>
         <tr class="table-header">
-            <th class="table-header-item table-item-first"> Ref nr. </th>
-            <th class="table-header-item"> From </th>
-            <th class="table-header-item"> To </th>
-            <th class="table-header-item"> Date </th>
-            <th class="table-header-item"> View </th>
-            <th class="table-header-item]"> Delete </th>
-            <th class="table-header-item"> Mail </th>
+            <th class="table-header-item table-item-first"> Name </th>
+            <th class="table-header-item"> Location </th>
+            <th class="table-header-item"> Phone </th>
+            <th class="table-header-item"> Email </th>
         </tr>
         </thead>
-        <tbody v-for="invoice in invoices">
-        <tr v-for="data in invoice" class="border-b-[1px] ">
-            <td class="table-item table-item-first"> {{ data.id }} </td>
-            <td class="table-item"> {{ data.from_company }} </td>
-            <td class="table-item"> {{ data.to_company }}</td>
-            <td class="table-item"> {{ data.start_date }} t/m {{ data.end_date}}</td>
-            <td class="table-item table-item-link"> <a :href="route('invoice.show', data.id)" target="_blank"> View </a> </td>
-            <td class="table-item table-item-link"> <Link :href="route('invoice.destroy', data.id)" method="delete"> Delete </Link> </td>
-            <td class="table-item table-item-link"> <a href="#"> Send </a> </td>
+        <tbody v-for="company in companies">
+        <tr class="border-b-[1px] ">
+            <td class="table-item table-item-first"> {{ company.name }} </td>
+            <td class="table-item"> {{ company.city }}, {{ company.province }} </td>
+            <td class="table-item"> {{ company.phone }} </td>
+            <td class="table-item"> {{ company.email }} </td>
         </tr>
         </tbody>
     </table>
@@ -30,11 +24,11 @@
     </div>
 </template>
 <script setup lang="ts">
-import {defineProps, onMounted, ref} from "vue";
+import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3'
 
 interface Props {
-    invoices: object,
+    companies: object,
 }
 
 const props = defineProps<Props>();

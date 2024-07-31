@@ -53,7 +53,7 @@ class InvoiceController extends Controller
             'end_date' => $request->end_date
         ]);
 
-        return redirect()->route('invoice.index');
+        return redirect()->route('invoices.index');
     }
 
     /**
@@ -80,6 +80,6 @@ class InvoiceController extends Controller
     {
         $invoice->delete();
 
-        return redirect()->route('invoice.index');
+        return redirect()->route('invoices.index');
     }
 }
