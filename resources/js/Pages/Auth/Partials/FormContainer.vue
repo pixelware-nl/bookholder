@@ -23,11 +23,11 @@ const props = defineProps<Props>();
 </script>
 <style scoped>
 .container {
-    @apply w-1/3 px-8 pt-12 pb-8 rounded-lg shadow-xl bg-white
+    @apply sm:w-full md:w-2/3 lg:w-2/3 xl:w-1/3 px-8 pt-12 pb-8 rounded-lg sm:shadow-xl bg-white
 }
 
 .logo {
-    @apply text-5xl text-center font-black mb-2 select-none
+    @apply text-4xl sm:text-5xl text-center font-black mb-2 select-none
 }
 
 .header-title {
