@@ -1,5 +1,5 @@
 <template>
-    <FormContainer form-title="Reset password" :logo-to-route="route('login')">
+    <AuthFormContainer form-title="Reset password" :logo-to-route="route('login')">
         <form @submit.prevent="form.post(route('password.update'))">
             <input type="hidden" name="token" :value="form.token" />
             <InputContainer>
@@ -35,10 +35,10 @@
             </InputContainer>
             <SubmitButton :form-processing="form.processing"> Reset password </SubmitButton>
         </form>
-    </FormContainer>
+    </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import FormContainer from "./Partials/FormContainer.vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 import InputContainer from "../Partials/Containers/InputContainer.vue";
 import TextInput from "../Partials/Inputs/TextInput.vue";
 import PasswordInput from "../Partials/Inputs/PasswordInput.vue";

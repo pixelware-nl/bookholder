@@ -1,39 +1,38 @@
 <template>
-    <h1 class="header-title"> Invoice settings </h1>
-    <form @submit.prevent="form.post(route('invoices.store'))">
-        <InputContainer>
-            <SelectInput
-                id="companies"
-                :options="companies"
-                name="company_id"
-                v-model="form.company_id"
-                label="Companies"
-            />
-        </InputContainer>
-        <InputContainer class="flex">
-            <DoubleInputContainer>
-                <DateInput
-                    id="start-date"
-                    name="start_date"
-                    v-model="form.start_date"
-                    label="Start date"
-                    placeholder="01-01-2024"
+    <AdminFormContainer form-title="Invoice settings">
+        <form @submit.prevent="form.post(route('invoices.store'))">
+            <InputContainer>
+                <SelectInput
+                    id="companies"
+                    :options="companies"
+                    name="company_id"
+                    v-model="form.company_id"
+                    label="Companies"
                 />
-            </DoubleInputContainer>
-            <DoubleInputContainer>
-                <DateInput
-                    id="end-date"
-                    name="end_date"
-                    v-model="form.end_date"
-                    label="End date"
-                    placeholder="31-01-2024"
-                />
-            </DoubleInputContainer>
-        </InputContainer>
-        <button type="submit" :disabled="form.processing" class="input-submit">
-            Create PDF
-        </button>
-    </form>
+            </InputContainer>
+            <InputContainer class="flex">
+                <DoubleInputContainer>
+                    <DateInput
+                        id="start-date"
+                        name="start_date"
+                        v-model="form.start_date"
+                        label="Start date"
+                        placeholder="01-01-2024"
+                    />
+                </DoubleInputContainer>
+                <DoubleInputContainer>
+                    <DateInput
+                        id="end-date"
+                        name="end_date"
+                        v-model="form.end_date"
+                        label="End date"
+                        placeholder="31-01-2024"
+                    />
+                </DoubleInputContainer>
+            </InputContainer>
+            <SubmitButton :form-processing="form.processing"> Create PDF </SubmitButton>
+        </form>
+    </AdminFormContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
@@ -42,6 +41,8 @@ import InputContainer from "../../Partials/Containers/InputContainer.vue";
 import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
 import DateInput from "../../Partials/Inputs/DateInput.vue";
 import SelectInput from "../../Partials/Inputs/SelectInput.vue";
+import AdminFormContainer from "../Partials/AdminFormContainer.vue";
+import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 
 interface Props {
     companies: object,

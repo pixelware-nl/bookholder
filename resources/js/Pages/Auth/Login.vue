@@ -1,5 +1,5 @@
 <template>
-    <FormContainer form-title="Login">
+    <AuthFormContainer form-title="Login">
         <form @submit.prevent="form.post(route('login.authenticate'))" class="pb-10 border-b">
             <InputContainer>
                 <TextInput
@@ -27,12 +27,12 @@
             <SubmitButton :form-processing="form.processing"> Login </SubmitButton>
         </form>
         <p class="mt-6 text-center"> Don't have an account? <Link :href="route('register')" class="text-blue-600 hover:underline"> Signup now </Link> </p>
-    </FormContainer>
+    </AuthFormContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
 import {useForm, Link} from "@inertiajs/vue3";
-import FormContainer from "./Partials/FormContainer.vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
 import InputContainer from "../Partials/Containers/InputContainer.vue";
 import TextInput from "../Partials/Inputs/TextInput.vue";
