@@ -1,48 +1,35 @@
 <template>
     <h1 class="header-title"> Invoice settings </h1>
     <form @submit.prevent="form.post(route('invoices.store'))">
-        <div class="input-container">
-            <label for="companies" class="input-label">Companies</label>
-            <select
+        <InputContainer>
+            <SelectInput
                 id="companies"
+                :options="companies"
                 name="company_id"
                 v-model="form.company_id"
-                :class="{'input-field-error': errors.company_id}"
-                class="input-select"
-            >
-                <option :value="null" selected>Choose a company</option>
-                <option v-for="company in companies" :value="company.id">
-                    {{ company.name }}
-                </option>
-            </select>
-            <p class="input-error"> {{ errors.company_id }} </p>
-        </div>
-        <div class="input-container flex">
-            <div class="input-two-inbetween">
-                <label for="start-date" class="input-label">Start date</label>
-                <input
+                label="Companies"
+            />
+        </InputContainer>
+        <InputContainer class="flex">
+            <DoubleInputContainer>
+                <DateInput
                     id="start-date"
-                    type="date"
                     name="start_date"
                     v-model="form.start_date"
-                    :class="{'input-field-error': errors.start_date}"
-                    class="input-date"
+                    label="Start date"
+                    placeholder="01-01-2024"
                 />
-                <p class="input-error"> {{ errors.start_date }} </p>
-            </div>
-            <div class="input-two-inbetween">
-                <label for="end-date" class="input-label">End date</label>
-                <input
+            </DoubleInputContainer>
+            <DoubleInputContainer>
+                <DateInput
                     id="end-date"
-                    type="date"
                     name="end_date"
                     v-model="form.end_date"
-                    :class="{'input-field-error': errors.end_date}"
-                    class="input-date"
+                    label="End date"
+                    placeholder="31-01-2024"
                 />
-                <p class="input-error"> {{ errors.end_date }} </p>
-            </div>
-        </div>
+            </DoubleInputContainer>
+        </InputContainer>
         <button type="submit" :disabled="form.processing" class="input-submit">
             Create PDF
         </button>
@@ -51,6 +38,10 @@
 <script setup lang="ts">
 import {defineProps} from "vue";
 import {useForm} from "@inertiajs/vue3";
+import InputContainer from "../../Partials/Containers/InputContainer.vue";
+import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
+import DateInput from "../../Partials/Inputs/DateInput.vue";
+import SelectInput from "../../Partials/Inputs/SelectInput.vue";
 
 interface Props {
     companies: object,
