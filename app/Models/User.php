@@ -20,7 +20,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $company_id
+ * @property int $company_kvk
  * @property-read \App\Models\Company $company
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
@@ -45,7 +45,7 @@ class User extends Authenticatable implements CanResetPassword
         'full_name',
         'email',
         'password',
-        'company_id'
+        'company_kvk'
     ];
 
     protected $hidden = [

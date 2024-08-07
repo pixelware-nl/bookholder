@@ -1,84 +1,103 @@
+
 <template>
     <AdminContainer form-title="Company settings">
-        <form @submit.prevent="form.post(route('companies.store'))">
-            <InputContainer>
-                <TextInput
-                    id="name"
-                    name="name"
-                    v-model="form.name"
-                    label="Company name"
-                    placeholder="Pixelware"
-                />
-            </InputContainer>
-            <InputContainer>
-                <TextInput
-                    id="email"
-                    name="email"
-                    v-model="form.email"
-                    label="Email"
-                    placeholder="j.doe@pixelware.nl"
-                />
-            </InputContainer>
-            <InputContainer>
-                <TextInput
-                    id="phone"
-                    name="phone"
-                    v-model="form.phone"
-                    label="Phone"
-                    placeholder="+31 6 1234 5678"
-                />
-            </InputContainer>
-            <InputContainer class="flex">
-                <DoubleInputContainer>
+        <div class="pb-8 border-b">
+            <h2 class="text-xl font-bold mb-2 uppercase"> Search KVK </h2>
+            <form @submit.prevent="kvkForm.post(route('companies.find-kvk'))">
+                <InputContainer>
                     <TextInput
-                        id="street_address"
-                        name="street_address"
-                        v-model="form.street_address"
-                        label="Street address"
-                        placeholder="Weena 4B"
+                        id="kvk"
+                        name="kvk"
+                        v-model="kvkForm.kvk"
+                        label="KVK"
+                        placeholder="12345678"
                     />
-                </DoubleInputContainer>
-                <DoubleInputContainer>
+                </InputContainer>
+                <SubmitButton :form-processing="kvkForm.processing"> Search KVK </SubmitButton>
+            </form>
+        </div>
+        <div class="pt-8">
+            <h2 class="text-xl font-bold mb-2 uppercase"> Create new </h2>
+            <form @submit.prevent="form.post(route('companies.store'))">
+                <InputContainer>
                     <TextInput
-                        id="city"
-                        name="city"
-                        v-model="form.city"
-                        label="City"
-                        placeholder="Rotterdam"
+                        id="name"
+                        name="name"
+                        v-model="form.name"
+                        label="Company name"
+                        placeholder="Pixelware"
                     />
-                </DoubleInputContainer>
-            </InputContainer>
-            <InputContainer class="flex">
-                <DoubleInputContainer>
+                </InputContainer>
+                <InputContainer>
                     <TextInput
-                        id="postal_code"
-                        name="postal_code"
-                        v-model="form.postal_code"
-                        label="Postal code"
-                        placeholder="4111KK"
+                        id="email"
+                        name="email"
+                        v-model="form.email"
+                        label="Email"
+                        placeholder="j.doe@pixelware.nl"
                     />
-                </DoubleInputContainer>
-                <DoubleInputContainer>
+                </InputContainer>
+                <InputContainer>
                     <TextInput
-                        id="province"
-                        name="province"
-                        v-model="form.province"
-                        label="Province"
-                        placeholder="South-Holland"
+                        id="phone"
+                        name="phone"
+                        v-model="form.phone"
+                        label="Phone"
+                        placeholder="+31 6 1234 5678"
                     />
-                </DoubleInputContainer>
-            </InputContainer>
-            <InputContainer>
-                <TextInput
-                    id="country"
-                    name="country"
-                    v-model="form.country"
-                    label="Country"
-                    placeholder="Netherlands"
-                />
-            </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Create company </SubmitButton>
-        </form>
+                </InputContainer>
+                <InputContainer class="flex">
+                    <DoubleInputContainer>
+                        <TextInput
+                            id="street_address"
+                            name="street_address"
+                            v-model="form.street_address"
+                            label="Street address"
+                            placeholder="Weena 4B"
+                        />
+                    </DoubleInputContainer>
+                    <DoubleInputContainer>
+                        <TextInput
+                            id="city"
+                            name="city"
+                            v-model="form.city"
+                            label="City"
+                            placeholder="Rotterdam"
+                        />
+                    </DoubleInputContainer>
+                </InputContainer>
+                <InputContainer class="flex">
+                    <DoubleInputContainer>
+                        <TextInput
+                            id="postal_code"
+                            name="postal_code"
+                            v-model="form.postal_code"
+                            label="Postal code"
+                            placeholder="4111KK"
+                        />
+                    </DoubleInputContainer>
+                    <DoubleInputContainer>
+                        <TextInput
+                            id="province"
+                            name="province"
+                            v-model="form.province"
+                            label="Province"
+                            placeholder="South-Holland"
+                        />
+                    </DoubleInputContainer>
+                </InputContainer>
+                <InputContainer>
+                    <TextInput
+                        id="country"
+                        name="country"
+                        v-model="form.country"
+                        label="Country"
+                        placeholder="Netherlands"
+                    />
+                </InputContainer>
+                <SubmitButton :form-processing="form.processing"> Create company </SubmitButton>
+            </form>
+        </div>
     </AdminContainer>
 </template>
 <script setup lang="ts">
@@ -106,4 +125,8 @@ const form = useForm({
     phone: null,
     email: null
 });
+
+const kvkForm = useForm({
+    kvk: null,
+})
 </script>

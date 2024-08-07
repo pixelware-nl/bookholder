@@ -69,6 +69,7 @@ class Company extends Model
      */
     protected $fillable = [
         'name',
+        'kvk',
         'street_address',
         'city',
         'province',
@@ -80,7 +81,7 @@ class Company extends Model
 
     public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
     {
-        return $query->whereNot('id', Auth::user()->company_id);
+        return $query->whereNot('id', Auth::user()->company_kvk);
     }
 
     public function products(): HasMany
@@ -90,6 +91,6 @@ class Company extends Model
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'company_id', 'id');
+        return $this->hasMany(User::class, 'company_kvk', 'kvk');
     }
 }

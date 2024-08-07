@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Invoices;
 
-use App\Models\User;
 use App\Rules\NotAuthenticatedUserCompany;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class CreateInvoiceRequest extends FormRequest
 {

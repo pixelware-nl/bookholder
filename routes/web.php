@@ -13,5 +13,6 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('invoices', InvoiceController::class);
         Route::resource('companies', CompanyController::class);
+        Route::post('companies/find-kvk', [CompanyController::class, 'findKvk'])->name('companies.find-kvk');
     });
 });

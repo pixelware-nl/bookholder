@@ -1,12 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Companies;
 
-use App\Models\User;
-use App\Rules\NotAuthenticatedUserCompany;
-use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class CreateCompanyRequest extends FormRequest
 {
@@ -25,7 +21,7 @@ class CreateCompanyRequest extends FormRequest
             'postal_code' => ['required'],
             'country' => ['required'],
             'phone' => ['required'],
-            'email' => ['required'],
+            'email' => ['required', 'email'],
         ];
     }
 }

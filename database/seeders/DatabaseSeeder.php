@@ -21,28 +21,27 @@ class DatabaseSeeder extends Seeder
     {
         $pixelware = Company::create([
             'name' => 'Pixelware',
+            'kvk' => '94129770',
             'street_address' => 'Huidenclubplein 4C',
             'city' => 'Rotterdam',
             'province' => 'South-Holland',
             'postal_code' => '3029PB',
             'country' => 'Netherlands',
-            'phone' => '0614412521',
-            'email' => 'o.ozbek@pixelware.nl'
         ]);
 
         $inshared = Company::create([
             'name' => 'InShared',
+            'kvk' => '08053410',
             'street_address' => '56 Leusderend',
             'city' => 'Leusden',
             'province' => 'Utrecht',
             'postal_code' => '3832RC',
             'country' => 'Netherlands',
-            'phone' => '0612345678',
-            'email' => 'finance@inshared.nl'
         ]);
 
+        // @TODO change all company_id to company_kvk
         $user = User::create([
-            'company_id' => $pixelware->id,
+            'company_kvk' => $pixelware->kvk,
             'full_name' => 'Okan Ozbek',
             'email' => 'o.ozbek@pixelware.nl',
             'email_verified_at' => now(),
