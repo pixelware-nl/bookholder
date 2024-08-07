@@ -1,5 +1,5 @@
 <template>
-    <FormContainer form-title="Register" :logo-to-route="route('login')">
+    <AuthFormContainer form-title="Register" :logo-to-route="route('login')">
         <form @submit.prevent="form.post(route('register.store'))" class="pb-10 border-b">
             <InputContainer class="flex">
                 <DoubleInputContainer>
@@ -56,13 +56,13 @@
             <SubmitButton :form-processing="form.processing"> Register </SubmitButton>
         </form>
         <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
-    </FormContainer>
+    </AuthFormContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
 import {useForm, Link} from "@inertiajs/vue3";
 import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
-import FormContainer from "./Partials/FormContainer.vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 import InputContainer from "../Partials/Containers/InputContainer.vue";
 import DoubleInputContainer from "../Partials/Containers/DoubleInputContainer.vue";
 import TextInput from "../Partials/Inputs/TextInput.vue";
