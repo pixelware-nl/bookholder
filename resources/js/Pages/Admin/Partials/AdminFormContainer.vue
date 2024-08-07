@@ -15,10 +15,10 @@ const props = defineProps<Props>();
 </script>
 <style scoped>
 .container {
-    @apply sm:w-full md:w-2/3 lg:w-2/3 xl:w-1/3 px-8 pt-12 pb-8 rounded-lg sm:shadow-xl bg-white
+    @apply sm:w-full px-8 pt-12 pb-8 rounded-lg sm:shadow-xl bg-white
 }
 
 .header-title {
-    @apply font-medium text-xl mb-8 text-center mb-8
+    @apply font-black uppercase text-3xl mb-8 text-left mb-8
 }
 </style>

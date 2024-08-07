@@ -1,7 +1,7 @@
 <template>
     <AdminFormContainer form-title="Invoice settings">
         <Link :href="route('invoices.create')" method="get" class="link-button"> Create Invoice </Link>
-        <TableContainer :collection="invoices">
+        <TableContainer>
             <template #thead>
                 <tr>
                     <th> Ref nr. </th>
@@ -13,14 +13,16 @@
                     <th> Mail </th>
                 </tr>
             </template>
-            <template #tbody>
-                <td> {{ data.id }} </td>
-                <td> {{ data.from_company }} </td>
-                <td> {{ data.to_company }} </td>
-                <td> {{ data.start_date }} to {{ data.end_date }}</td>
-                <td class="table-item table-item-link"> <a :href="route('invoices.show', data.id)" target="_blank"> View </a> </td>
-                <td class="table-item table-item-link"> <Link :href="route('invoices.destroy', data.id)" method="delete"> Delete </Link> </td>
-                <td class="table-item table-item-link"> <a href="#"> Send </a> </td>
+            <template #tbody v-for="invoice in invoices">
+                <tr v-for="data in invoice">
+                    <td> {{ data.id }} </td>
+                    <td> {{ data.from_company }} </td>
+                    <td> {{ data.to_company }} </td>
+                    <td> {{ data.start_date }} to {{ data.end_date }}</td>
+                    <td class="table-item table-item-link"> <a :href="route('invoices.show', data.id)" target="_blank"> View </a> </td>
+                    <td class="table-item table-item-link"> <Link :href="route('invoices.destroy', data.id)" method="delete"> Delete </Link> </td>
+                    <td class="table-item table-item-link"> <a href="#"> Send </a> </td>
+                </tr>
             </template>
         </TableContainer>
     </AdminFormContainer>

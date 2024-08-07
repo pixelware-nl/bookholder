@@ -3,31 +3,19 @@
         <thead>
             <slot name="thead" />
         </thead>
-        <tbody v-for="item in collection">
-            <tr v-for="data in item">
-                <slot name="tbody" />
-            </tr>
+        <tbody>
+            <slot name="tbody" />
         </tbody>
     </table>
 </template>
-<script setup lang="ts">
-interface Props {
-    collection: object,
-}
-
-const props = defineProps<Props>();
-</script>
-<style scoped>
+<style>
+/* @TODO: make this scoped */
 .table {
     @apply border-collapse w-full
 }
 
-tr {
-    @apply bg-slate-100
-}
-
 tr th {
-    @apply text-left py-[15px]
+    @apply text-left py-[15px] bg-slate-100
 }
 
 th:first-child, td:first-child {

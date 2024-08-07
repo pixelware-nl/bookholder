@@ -1,31 +1,31 @@
 <template>
-    <h1 class="header-title"> Overview of Companies </h1>
-    <Link href="#" method="get" class="link-button"> Create Company </Link>
-    <table class="table">
-        <thead>
-        <tr class="table-header">
-            <th class="table-header-item table-item-first"> Name </th>
-            <th class="table-header-item"> Location </th>
-            <th class="table-header-item"> Phone </th>
-            <th class="table-header-item"> Email </th>
-        </tr>
-        </thead>
-        <tbody v-for="company in companies">
-        <tr class="border-b-[1px] ">
-            <td class="table-item table-item-first"> {{ company.name }} </td>
-            <td class="table-item"> {{ company.city }}, {{ company.province }} </td>
-            <td class="table-item"> {{ company.phone }} </td>
-            <td class="table-item"> {{ company.email }} </td>
-        </tr>
-        </tbody>
-    </table>
-    <div >
-
-    </div>
+    <AdminFormContainer form-title="Company settings">
+        <Link href="#" method="get" class="link-button"> Create Company </Link>
+        <TableContainer>
+            <template #thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Location </th>
+                    <th> Phone </th>
+                    <th> Email </th>
+                </tr>
+            </template>
+            <template #tbody>
+                <tr v-for="company in companies">
+                    <td> {{ company.name }} </td>
+                    <td> {{ company.city }}, {{ company.province }} </td>
+                    <td> {{ company.phone }} </td>
+                    <td> {{ company.email }} </td>
+                </tr>
+            </template>
+        </TableContainer>
+    </AdminFormContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3'
+import TableContainer from "../../Partials/Tables/TableContainer.vue";
+import AdminFormContainer from "../Partials/AdminFormContainer.vue";
 
 interface Props {
     companies: object,
