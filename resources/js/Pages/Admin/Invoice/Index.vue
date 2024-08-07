@@ -1,5 +1,5 @@
 <template>
-    <AdminFormContainer form-title="Invoice settings">
+    <AdminContainer form-title="Invoice settings">
         <Link :href="route('invoices.create')" method="get" class="link-button"> Create Invoice </Link>
         <TableContainer>
             <template #thead>
@@ -25,13 +25,13 @@
                 </tr>
             </template>
         </TableContainer>
-    </AdminFormContainer>
+    </AdminContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
-import AdminFormContainer from "../Partials/AdminFormContainer.vue";
+import AdminContainer from "../Partials/AdminContainer.vue";
 
 interface Props {
     invoices: object,

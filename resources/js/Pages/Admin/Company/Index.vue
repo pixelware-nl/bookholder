@@ -1,6 +1,6 @@
 <template>
-    <AdminFormContainer form-title="Company settings">
-        <Link href="#" method="get" class="link-button"> Create Company </Link>
+    <AdminContainer form-title="Company settings">
+        <Link :href="route('companies.create')" method="get" class="link-button"> Create Company </Link>
         <TableContainer>
             <template #thead>
                 <tr>
@@ -19,13 +19,13 @@
                 </tr>
             </template>
         </TableContainer>
-    </AdminFormContainer>
+    </AdminContainer>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
-import AdminFormContainer from "../Partials/AdminFormContainer.vue";
+import AdminContainer from "../Partials/AdminContainer.vue";
 
 interface Props {
     companies: object,

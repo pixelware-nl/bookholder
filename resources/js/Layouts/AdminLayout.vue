@@ -1,23 +1,24 @@
 <template>
     <nav>
         <ul class="flex justify-end p-6 bg-slate-900 text-slate-100">
-            <li class="px-4 font-bold hover:cursor-pointer"> <Link :href="route('invoices.index')" method="get"> Invoicing </Link> </li>
+            <NavLink slug="invoices" route-name="invoices.index"> Invoicing </NavLink>
             <li class="px-4 text-slate-500 hover:cursor-not-allowed"> Logging </li>
-            <li class="px-4 text-slate-100 hover:cursor-pointer hover:text-white hover:underline"> <Link :href="route('companies.index')"> Companies </Link> </li>
-            <li class="px-4 text-slate-100 hover:cursor-pointer hover:text-white hover:underline"> <Link :href="route('logout')" method="post"> Logout </Link> </li>
+            <NavLink slug="companies" route-name="companies.index"> Companies </NavLink>
+            <NavLink slug="logout" route-name="logout" method="post"> Logout </NavLink>
         </ul>
     </nav>
-    <main class="w-full flex justify-center pt-12 bg-slate-100 min-h-screen">
+    <main class="w-full flex justify-center pt-12 sm:bg-slate-100 xs:bg-white min-h-screen">
         <div class="container w-full">
             <slot />
         </div>
     </main>
 </template>
 <script setup lang="ts">
-import {Link, usePage} from "@inertiajs/vue3";
+import {usePage} from "@inertiajs/vue3";
 import {computed} from "vue";
+import NavLink from "./Partials/NavLink.vue";
 
 const page = usePage();
+const user = computed(() => page.props.auth.user);
 
-const user = computed(() => page.props.auth.user)
 </script>
