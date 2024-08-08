@@ -9,7 +9,7 @@
 
         @input="$emit('update:modelValue', $event.target.value)"
     >
-        <option :value="null" selected>Choose an option</option>
+        <option value="" selected>Choose an option</option>
         <option v-for="option in options" :value="option.id">
             {{ option.name }}
         </option>
@@ -17,13 +17,12 @@
     <ErrorField :error="error" />
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
+import {defineProps, onMounted} from "vue";
 import LabelField from "./LabelField.vue";
 import ErrorField from "./ErrorField.vue";
-import BaseInput from "./BaseInput.vue";
 
 interface Props {
-    modelValue: object,
+    modelValue?: string|number,
     options: object,
     id: string,
     name: string,
@@ -35,3 +34,12 @@ interface Props {
 
 const props = defineProps<Props>();
 </script>
+<style scoped>
+.input-field-error {
+    @apply !border-red-600
+}
+
+.input-select {
+    @apply border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 disabled:text-gray-500 disabled:select-none
+}
+</style>

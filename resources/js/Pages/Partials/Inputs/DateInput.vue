@@ -22,7 +22,7 @@ import ErrorField from "./ErrorField.vue";
 import BaseInput from "./BaseInput.vue";
 
 interface Props {
-    modelValue: object,
+    modelValue?: string,
     id: string,
     name: string,
     label: string,

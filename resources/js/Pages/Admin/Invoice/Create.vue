@@ -1,5 +1,5 @@
 <template>
-    <AdminContainer form-title="Invoice settings">
+    <AdminContainer form-title="Invoice settings" :route-name="route('invoice.index')">
         <form @submit.prevent="form.post(route('invoices.store'))">
             <InputContainer>
                 <SelectInput
@@ -8,6 +8,7 @@
                     name="company_id"
                     v-model="form.company_id"
                     label="Companies"
+                    :error="errors.company_id"
                 />
             </InputContainer>
             <InputContainer class="flex">
@@ -18,6 +19,7 @@
                         v-model="form.start_date"
                         label="Start date"
                         placeholder="01-01-2024"
+                        :error="errors.start_date"
                     />
                 </DoubleInputContainer>
                 <DoubleInputContainer>
@@ -27,6 +29,7 @@
                         v-model="form.end_date"
                         label="End date"
                         placeholder="31-01-2024"
+                        :error="errors.end_date"
                     />
                 </DoubleInputContainer>
             </InputContainer>

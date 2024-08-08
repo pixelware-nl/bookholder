@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCompanyRequest;
+use App\Http\Requests\Companies\CreateCompanyRequest;
+use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
+use App\Services\KVKService;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
-use \Inertia\Response as InertiaResponse;
-use \Illuminate\Http\RedirectResponse;
+use Inertia\Response as InertiaResponse;
 
 class CompanyController extends Controller
 {
@@ -19,6 +23,12 @@ class CompanyController extends Controller
 
     public function create(): InertiaResponse
     {
+        if (Session::has('company')) {
+            return Inertia::render('Admin/Company/Create', [
+                'company' => Session::get('company')
+            ]);
+        }
+
         return Inertia::render('Admin/Company/Create');
     }
 
@@ -26,15 +36,30 @@ class CompanyController extends Controller
     {
         Company::create([
             'name' => $request->name,
+            'kvk' => $request->kvk,
             'street_address' => $request->street_address,
             'city' => $request->city,
-            'province' => $request->province,
             'postal_code' => $request->postal_code,
             'country' => $request->country,
-            'phone' => $request->phone,
-            'email' => $request->email
         ]);
 
         return redirect()->route('companies.index');
+    }
+
+    public function find(): InertiaResponse
+    {
+        return Inertia::render('Admin/Company/Find');
+    }
+
+    /**
+     * @throws ConnectionException
+     */
+    public function found(FindKVKRequest $request): RedirectResponse
+    {
+        $kvkService = new KVKService();
+
+        $company = $kvkService->getCompanyDetails($request->kvk_to_find);
+
+        return redirect()->route('companies.create')->with(['company' => $company]);
     }
 }

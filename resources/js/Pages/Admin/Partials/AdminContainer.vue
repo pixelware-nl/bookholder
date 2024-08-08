@@ -1,17 +1,26 @@
 <template>
     <div class="container">
-        <h1 class="header-title">{{ formTitle }}</h1>
+        <div class="flex mb-8 items-center justify-between">
+            <h1 class="header-title">{{ formTitle }}</h1>
+            <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none"> Return </Link>
+        </div>
         <slot />
     </div>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
+import {defineProps, onMounted} from "vue";
+import { Link } from '@inertiajs/vue3'
 
 interface Props {
     formTitle: string,
+    routeName?: string,
 }
 
 const props = defineProps<Props>();
+
+onMounted(() => {
+    console.log(props.routeName);
+})
 </script>
 <style scoped>
 .container {
@@ -19,6 +28,6 @@ const props = defineProps<Props>();
 }
 
 .header-title {
-    @apply font-black uppercase text-3xl mb-8 text-left mb-8
+    @apply font-black uppercase text-3xl text-left
 }
 </style>

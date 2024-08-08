@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Auth;
  * @property string $name
  * @property string|null $street_address
  * @property string|null $city
- * @property string|null $province
  * @property string|null $postal_code
  * @property string|null $country
  * @property string|null $phone
@@ -49,7 +48,6 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company wherePostalCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Company whereProvince($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereStreetAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
  * @mixin Eloquent
@@ -69,9 +67,9 @@ class Company extends Model
      */
     protected $fillable = [
         'name',
+        'kvk',
         'street_address',
         'city',
-        'province',
         'postal_code',
         'country',
         'phone',
@@ -90,6 +88,6 @@ class Company extends Model
 
     public function users(): HasMany
     {
-        return $this->hasMany(User::class, 'company_id', 'id');
+        return $this->hasMany(User::class, 'company_kvk', 'kvk');
     }
 }

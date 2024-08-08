@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\Auth\CreateUserRequest;
 use App\Models\User;
-use \Illuminate\Http\RedirectResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -36,6 +36,8 @@ class RegisterController extends Controller
             'password' => \Hash::make($request->password),
             'company_id' => 1, // @TODO: user needs to select his company as wel
         ]);
+
+
 
         return redirect()->route('login');
     }

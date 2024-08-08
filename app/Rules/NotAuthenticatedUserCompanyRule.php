@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Translation\PotentiallyTranslatedString;
 
-class NotAuthenticatedUserCompany implements ValidationRule
+class NotAuthenticatedUserCompanyRule implements ValidationRule
 {
     /**
      * Run the validation rule.
