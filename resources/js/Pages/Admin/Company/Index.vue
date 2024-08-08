@@ -1,21 +1,17 @@
 <template>
     <AdminContainer form-title="Company settings">
-        <Link :href="route('companies.create')" method="get" class="link-button"> Create Company </Link>
+        <Link :href="route('companies.find')" method="get" class="link-button"> Create Company </Link>
         <TableContainer>
             <template #thead>
                 <tr>
                     <th> Name </th>
                     <th> Location </th>
-                    <th> Phone </th>
-                    <th> Email </th>
                 </tr>
             </template>
             <template #tbody>
                 <tr v-for="company in companies">
                     <td> {{ company.name }} </td>
-                    <td> {{ company.city }}, {{ company.province }} </td>
-                    <td> {{ company.phone }} </td>
-                    <td> {{ company.email }} </td>
+                    <td> {{ company.street_address }}, {{ company.city }} </td>
                 </tr>
             </template>
         </TableContainer>

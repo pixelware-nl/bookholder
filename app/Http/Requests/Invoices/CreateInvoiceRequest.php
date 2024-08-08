@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Invoices;
 
-use App\Rules\NotAuthenticatedUserCompany;
+use App\Rules\NotAuthenticatedUserCompanyRule;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -16,7 +16,7 @@ class CreateInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => ['required', new NotAuthenticatedUserCompany()],
+            'company_id' => ['required', new NotAuthenticatedUserCompanyRule()],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
         ];

@@ -22,8 +22,8 @@
             <td> {{ sprintf('%s, %s', $fromCompany->street_address, $fromCompany->city) }} </td>
         </tr>
         <tr>
-            <td> {{ sprintf('%s, %s', $toCompany->province, $toCompany->postal_code) }} </td>
-            <td> {{ sprintf('%s, %s', $fromCompany->province, $fromCompany->postal_code) }} </td>
+            <td> {{ $toCompany->postal_code }} </td>
+            <td> {{ $fromCompany->postal_code }} </td>
         </tr>
         <tr>
             <td> {{ $toCompany->email }} </td>

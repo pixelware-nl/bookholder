@@ -34,8 +34,10 @@ class RegisterController extends Controller
             'full_name' => $fullname,
             'email' => $email,
             'password' => \Hash::make($request->password),
-            'company_kvk' => 12345678, // @TODO: user needs to select his company as wel
+            'company_id' => 1, // @TODO: user needs to select his company as wel
         ]);
+
+
 
         return redirect()->route('login');
     }

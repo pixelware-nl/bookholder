@@ -1,103 +1,87 @@
 
 <template>
-    <AdminContainer form-title="Company settings">
-        <div class="pb-8 border-b">
-            <h2 class="text-xl font-bold mb-2 uppercase"> Search KVK </h2>
-            <form @submit.prevent="kvkForm.post(route('companies.find-kvk'))">
-                <InputContainer>
+    <div
+        v-if="showHasCompanyNotification"
+        @click="showHasCompanyNotification = false"
+        class="bg-emerald-200 w-full text-emerald-900 p-8 rounded-lg shadow-lg mb-8 flex justify-between hover:cursor-pointer"
+    >
+        <p>Company details found.</p>
+    </div>
+    <AdminContainer form-title="Company settings" :route-name="route('companies.find')">
+        <h2 class="text-xl font-bold mb-2 uppercase"> Create new </h2>
+        <form @submit.prevent="form.post(route('companies.store'))">
+            <InputContainer>
+                <TextInput
+                    id="name"
+                    name="name"
+                    v-model="form.name"
+                    label="Company name"
+                    placeholder="Pixelware"
+                    :error="errors.name"
+                    :disabled="hasCompany"
+                />
+            </InputContainer>
+            <InputContainer>
+                <TextInput
+                    id="kvk"
+                    name="kvk"
+                    v-model="form.kvk"
+                    label="KVK number"
+                    placeholder="12345678"
+                    :error="errors.kvk"
+                    :disabled="hasCompany"
+                />
+            </InputContainer>
+            <InputContainer class="flex">
+                <DoubleInputContainer>
                     <TextInput
-                        id="kvk"
-                        name="kvk"
-                        v-model="kvkForm.kvk"
-                        label="KVK"
-                        placeholder="12345678"
+                        id="street_address"
+                        name="street_address"
+                        v-model="form.street_address"
+                        label="Street address"
+                        placeholder="Weena 4B"
+                        :error="errors.street_address"
+                        :disabled="hasCompany"
                     />
-                </InputContainer>
-                <SubmitButton :form-processing="kvkForm.processing"> Search KVK </SubmitButton>
-            </form>
-        </div>
-        <div class="pt-8">
-            <h2 class="text-xl font-bold mb-2 uppercase"> Create new </h2>
-            <form @submit.prevent="form.post(route('companies.store'))">
-                <InputContainer>
+                </DoubleInputContainer>
+                <DoubleInputContainer>
                     <TextInput
-                        id="name"
-                        name="name"
-                        v-model="form.name"
-                        label="Company name"
-                        placeholder="Pixelware"
+                        id="city"
+                        name="city"
+                        v-model="form.city"
+                        label="City"
+                        placeholder="Rotterdam"
+                        :error="errors.city"
+                        :disabled="hasCompany"
                     />
-                </InputContainer>
-                <InputContainer>
+                </DoubleInputContainer>
+            </InputContainer>
+            <InputContainer class="flex">
+                <DoubleInputContainer>
                     <TextInput
-                        id="email"
-                        name="email"
-                        v-model="form.email"
-                        label="Email"
-                        placeholder="j.doe@pixelware.nl"
+                        id="postal_code"
+                        name="postal_code"
+                        v-model="form.postal_code"
+                        label="Postal code"
+                        placeholder="4111KK"
+                        :error="errors.postal_code"
+                        :disabled="hasCompany"
                     />
-                </InputContainer>
-                <InputContainer>
-                    <TextInput
-                        id="phone"
-                        name="phone"
-                        v-model="form.phone"
-                        label="Phone"
-                        placeholder="+31 6 1234 5678"
-                    />
-                </InputContainer>
-                <InputContainer class="flex">
-                    <DoubleInputContainer>
-                        <TextInput
-                            id="street_address"
-                            name="street_address"
-                            v-model="form.street_address"
-                            label="Street address"
-                            placeholder="Weena 4B"
-                        />
-                    </DoubleInputContainer>
-                    <DoubleInputContainer>
-                        <TextInput
-                            id="city"
-                            name="city"
-                            v-model="form.city"
-                            label="City"
-                            placeholder="Rotterdam"
-                        />
-                    </DoubleInputContainer>
-                </InputContainer>
-                <InputContainer class="flex">
-                    <DoubleInputContainer>
-                        <TextInput
-                            id="postal_code"
-                            name="postal_code"
-                            v-model="form.postal_code"
-                            label="Postal code"
-                            placeholder="4111KK"
-                        />
-                    </DoubleInputContainer>
-                    <DoubleInputContainer>
-                        <TextInput
-                            id="province"
-                            name="province"
-                            v-model="form.province"
-                            label="Province"
-                            placeholder="South-Holland"
-                        />
-                    </DoubleInputContainer>
-                </InputContainer>
-                <InputContainer>
+                </DoubleInputContainer>
+                <DoubleInputContainer>
                     <TextInput
                         id="country"
                         name="country"
                         v-model="form.country"
                         label="Country"
                         placeholder="Netherlands"
+                        :error="errors.country"
+                        :disabled="hasCompany"
                     />
-                </InputContainer>
-                <SubmitButton :form-processing="form.processing" as="submit-button"> Create company </SubmitButton>
-            </form>
-        </div>
+                </DoubleInputContainer>
+            </InputContainer>
+            <SubmitButton :form-processing="form.processing"> Create company </SubmitButton>
+        </form>
     </AdminContainer>
 </template>
 <script setup lang="ts">
@@ -108,25 +92,28 @@ import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer
 import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 import {defineProps} from "vue/dist/vue";
 import {useForm} from "@inertiajs/vue3";
+import {onMounted, ref} from "vue";
 
 interface Props {
-    errors: object,
+    errors?: object,
+    company?: object,
 }
 
 const props = defineProps<Props>();
 
+const hasCompany = ref(false);
+const showHasCompanyNotification = ref(false);
+
 const form = useForm({
-    name: null,
-    street_address: null,
-    city: null,
-    province: null,
-    postal_code: null,
-    country: null,
-    phone: null,
-    email: null
+    name: props.company?.name,
+    kvk: props.company?.kvk,
+    street_address: props.company?.street_address,
+    city: props.company?.city,
+    postal_code: props.company?.postal_code,
+    country: props.company?.country,
 });
 
-const kvkForm = useForm({
-    kvk: null,
+onMounted(() => {
+    showHasCompanyNotification.value = hasCompany.value = (props.company != null);
 })
 </script>

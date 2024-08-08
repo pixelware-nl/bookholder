@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Companies;
 
+use App\Rules\ValidKVKNumberRule;
+use App\Rules\ValidPostalCodeRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateCompanyRequest extends FormRequest
@@ -14,14 +16,19 @@ class CreateCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'street_address' => ['required'],
+            'name' => ['required', 'max:256'],
+            'kvk' => ['required', 'unique:companies,kvk', new ValidKVKNumberRule()],
+            'street_address' => ['required', 'max:256'],
             'city' => ['required'],
-            'province' => ['required'],
-            'postal_code' => ['required'],
+            'postal_code' => ['required', new ValidPostalCodeRule()],
             'country' => ['required'],
-            'phone' => ['required'],
-            'email' => ['required', 'email'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'kvk.unique' => 'This KVK already exists in the database.',
         ];
     }
 }

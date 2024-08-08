@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             'kvk' => '94129770',
             'street_address' => 'Huidenclubplein 4C',
             'city' => 'Rotterdam',
-            'province' => 'South-Holland',
             'postal_code' => '3029PB',
             'country' => 'Netherlands',
         ]);
@@ -34,7 +33,6 @@ class DatabaseSeeder extends Seeder
             'kvk' => '08053410',
             'street_address' => '56 Leusderend',
             'city' => 'Leusden',
-            'province' => 'Utrecht',
             'postal_code' => '3832RC',
             'country' => 'Netherlands',
         ]);

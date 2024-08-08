@@ -1,5 +1,5 @@
 <template>
-    <AdminContainer form-title="Invoice settings">
+    <AdminContainer form-title="Invoice settings" :route-name="route('invoice.index')">
         <form @submit.prevent="form.post(route('invoices.store'))">
             <InputContainer>
                 <SelectInput
