@@ -10,7 +10,7 @@
 import {defineProps} from "vue";
 
 interface Props {
-    modelValue: object,
+    modelValue?: object|string|number,
     error?: string,
 }
 

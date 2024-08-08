@@ -95,7 +95,7 @@
                         placeholder="Netherlands"
                     />
                 </InputContainer>
-                <SubmitButton :form-processing="form.processing"> Create company </SubmitButton>
+                <SubmitButton :form-processing="form.processing" as="submit-button"> Create company </SubmitButton>
             </form>
         </div>
     </AdminContainer>

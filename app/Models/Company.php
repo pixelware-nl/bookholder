@@ -81,7 +81,7 @@ class Company extends Model
 
     public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
     {
-        return $query->whereNot('id', Auth::user()->company_kvk);
+        return $query->whereNot('id', Auth::user()->company_id);
     }
 
     public function products(): HasMany

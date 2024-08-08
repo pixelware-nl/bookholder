@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
         // @TODO change all company_id to company_kvk
         $user = User::create([
-            'company_kvk' => $pixelware->kvk,
+            'company_id' => $pixelware->id,
             'full_name' => 'Okan Ozbek',
             'email' => 'o.ozbek@pixelware.nl',
             'email_verified_at' => now(),

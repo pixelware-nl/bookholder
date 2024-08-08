@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('company_kvk')->references('kvk')->on('companies')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('company_id')->references('id')->on('companies')->cascadeOnDelete()->cascadeOnUpdate();
             $table->renameColumn('name', 'full_name');
         });
     }
