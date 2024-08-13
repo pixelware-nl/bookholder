@@ -18,7 +18,7 @@ class KVKService
     {
         try {
             $response = $this->getJsonDecodedRequest(self::BASIC_PROFILE_MAIN_COMPANY_URL, $kvk);
-        } catch (ConnectionException $exception) {
+        } catch (ConnectionException) {
             return null;
         }
 
