@@ -63,6 +63,11 @@ php artisan serve
 vite
 ```
 
+Use the following command to run the `PHPUnit` unit tests.
+```bash
+vendor/bin/phpunit
+```
+
 ## Login
 You can now log into the test environment using the following account details
 ```text

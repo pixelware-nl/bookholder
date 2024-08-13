@@ -22,7 +22,7 @@ use Throwable;
 // * [ ] User can create his own "products", also in a separate view
 // * [ ] User can log his own hours in a calendar type view
 
-class InvoiceController extends Controller
+final class InvoiceController extends Controller
 {
     public function index(): InertiaResponse
     {

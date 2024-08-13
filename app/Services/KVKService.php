@@ -3,42 +3,36 @@
 namespace App\Services;
 
 use App\DTO\AddressDTO;
+use App\DTO\CompanyDTO;
 use App\Enums\KVKAddressType;
-use App\Models\Company;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
-use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class KVKService
 {
     const BASIC_PROFILE_MAIN_COMPANY_URL = 'https://api.kvk.nl/test/api/v1/basisprofielen/%s/hoofdvestiging';
 
-    /**
-     * @throws ConnectionException
-     */
-    public function getCompanyDetails($kvk): JsonResponse
+    public function getCompanyDetails($kvk): ?CompanyDTO
     {
         try {
             $response = $this->getJsonDecodedRequest(self::BASIC_PROFILE_MAIN_COMPANY_URL, $kvk);
         } catch (ConnectionException $exception) {
-            return response()->json()->setStatusCode(ResponseAlias::HTTP_BAD_REQUEST);
+            return null;
         }
 
         $address = $response->adressen[0];
         $addressDTO = $this->getAddress($address);
 
-        return response()->json()->setData([
-            'company' => new Company([
-                'name' => $response->eersteHandelsnaam,
-                'kvk' => $response->kvkNummer,
-                'street_address' => $addressDTO->getStreetAddress(),
-                'city' => $addressDTO->getCity(),
-                'postal_code' => $addressDTO->getPostalCode(),
-                'country' => $addressDTO->getCountry(),
-            ])
-        ])->setStatusCode(ResponseAlias::HTTP_OK);
+        return new CompanyDTO(
+            $response->eersteHandelsnaam,
+            $response->kvkNummer,
+            $addressDTO->getStreetAddress(),
+            $addressDTO->getCity(),
+            $addressDTO->getPostalCode(),
+            $addressDTO->getCountry(),
+        );
     }
 
     private function getAddress(object $address): ?AddressDTO

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\CompanyDTO;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
-class CompanyController extends Controller
+final class CompanyController extends Controller
 {
     public function index(): InertiaResponse
     {
@@ -51,15 +52,18 @@ class CompanyController extends Controller
         return Inertia::render('Admin/Company/Find');
     }
 
-    /**
-     * @throws ConnectionException
-     */
     public function found(FindKVKRequest $request): RedirectResponse
     {
         $kvkService = new KVKService();
 
-        $company = $kvkService->getCompanyDetails($request->kvk_to_find);
+        $companyDTO = $kvkService->getCompanyDetails($request->kvk_to_find);
 
-        return redirect()->route('companies.create')->with(['company' => $company]);
+        dd(Company::create([
+            'name' => $companyDTO->getName(),
+            'kvk' => $companyDTO->getKvk(),
+            'street_address' => $companyDTO->getStreetAddress()
+        ]));
+
+        return redirect()->route('companies.create')->with(['company' => new Company($companyDTO->toArray())]);
     }
 }
