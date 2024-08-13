@@ -58,12 +58,6 @@ final class CompanyController extends Controller
 
         $companyDTO = $kvkService->getCompanyDetails($request->kvk_to_find);
 
-        dd(Company::create([
-            'name' => $companyDTO->getName(),
-            'kvk' => $companyDTO->getKvk(),
-            'street_address' => $companyDTO->getStreetAddress()
-        ]));
-
-        return redirect()->route('companies.create')->with(['company' => new Company($companyDTO->toArray())]);
+        return redirect()->route('companies.create')->with(['company' => $companyDTO->company()]);
     }
 }
