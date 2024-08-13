@@ -4,8 +4,6 @@ Bookholder is an easy-to-use SaaS focussed on providing accountant services to p
 In this document we will discuss how to set up the project as wel as the technologies that are being used.
 
 ## Stack
-
----
 The project is written in PHP and TypeScript using the Laravel en and Vue frameworks respectively. 
 For the backend we make use of PHP Laravel and PHPUnit for the unit testing.
 Due to the scale of the project and ability to grow it is important to create a maintainable project throughout.
@@ -16,9 +14,6 @@ For the flow we use UI tests, and write unit tests for composables using JEST.
 The database is a simple SQLite database with intention to migrate to MySQL in the future.
 
 ## Requirements
-
----
-
 - Operating systems
   - Windows
   - MacOS
@@ -29,8 +24,6 @@ The database is a simple SQLite database with intention to migrate to MySQL in t
   - PHP
 
 ## Installation
-
----
 First make sure **composer** is installed on your computer, as wel as **node**
 
 Then run the following commands to set up your local environment
@@ -50,8 +43,6 @@ php artisan migrate:fresh --seed
 ```
 
 ## Set up the ENV
-
----
 Create the `.env` file locally.
 ```bash
 cp .env.example .env
@@ -62,8 +53,6 @@ php artisan key:generate
 ```
 
 ## Running the application
-
----
 To run the application you need to run the following two commands at the same time.
 
 Note, when `php artisan serve` is done with its initial set up it shows you a localhost URL, use that
@@ -75,8 +64,6 @@ vite
 ```
 
 ## Login
-
----
 You can now log into the test environment using the following account details
 ```text
 username: test@pixelware.nl 
