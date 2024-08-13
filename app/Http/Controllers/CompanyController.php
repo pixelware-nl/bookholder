@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\CompanyDTO;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
 use App\Services\KVKService;
-use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
 final class CompanyController extends Controller
 {
@@ -43,6 +42,13 @@ final class CompanyController extends Controller
             'postal_code' => $request->postal_code,
             'country' => $request->country,
         ]);
+
+        return redirect()->route('companies.index');
+    }
+
+    public function destroy(Company $company): SymfonyResponse
+    {
+        $company->delete();
 
         return redirect()->route('companies.index');
     }

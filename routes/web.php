@@ -14,7 +14,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('invoices', InvoiceController::class);
-        Route::resource('companies', CompanyController::class)->only(['index', 'store', 'create']);
+        Route::resource('companies', CompanyController::class)->only(['index', 'store', 'create', 'destroy']);
 
         Route::prefix('companies')->group(function () {
             Route::get('find', [CompanyController::class, 'find'])->name('companies.find');
