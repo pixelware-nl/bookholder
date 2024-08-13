@@ -2,6 +2,8 @@
 
 namespace App\DTO;
 
+use App\Models\Company;
+
 final class CompanyDTO extends AbstractDTO
 {
     public function __construct(
@@ -12,6 +14,18 @@ final class CompanyDTO extends AbstractDTO
         private readonly string $postalCode,
         private readonly string $country,
     ) {}
+
+    public function company(): Company
+    {
+        return new Company([
+            'name' => $this->getName(),
+            'kvk' => $this->getKvk(),
+            'street_address' => $this->getStreetAddress(),
+            'city' => $this->getCity(),
+            'postal_code' => $this->getPostalCode(),
+            'country' => $this->getCountry()
+        ]);
+    }
 
     public function getName(): string
     {
