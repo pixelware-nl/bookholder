@@ -72,8 +72,6 @@ class Company extends Model
         'city',
         'postal_code',
         'country',
-        'phone',
-        'email',
     ];
 
     public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
