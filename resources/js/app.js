@@ -1,6 +1,5 @@
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
-import DefaultLayout from './Layouts/DefaultLayout.vue';
 import AdminLayout from './Layouts/AdminLayout.vue';
 import { ZiggyVue } from 'ziggy-js';
 import AuthLayout from "./Layouts/AuthLayout.vue";
@@ -17,9 +16,6 @@ createInertiaApp({
                 break;
             case 'Auth':
                 page.default.layout = AuthLayout
-                break;
-            default:
-                page.default.layout = DefaultLayout
                 break;
         }
 
