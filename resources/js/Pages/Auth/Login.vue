@@ -26,7 +26,7 @@
             </InputContainer>
             <SubmitButton :form-processing="form.processing"> Login </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> Don't have an account? <Link :href="route('register')" class="text-blue-600 hover:underline"> Signup now </Link> </p>
+        <p class="mt-6 text-center"> Don't have an account? <Link :href="route('register.find')" class="text-blue-600 hover:underline"> Signup now </Link> </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
