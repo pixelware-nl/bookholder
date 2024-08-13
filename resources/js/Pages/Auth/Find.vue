@@ -15,7 +15,7 @@
             <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Search KVK </SubmitButton>
             <div v-if="errors.kvk_to_find">
                 <hr>
-                <p class="w-full text-center mt-6"> Sure that your company exists? <Link :href="route('register.get-company')" class="text-blue-600 hover:underline">Create it manually</Link> </p>
+                <p class="w-full text-center mt-6 mb-2"> Sure that your company exists? <Link :href="route('register.get-company')" class="text-blue-600 hover:underline">Create it manually</Link> </p>
             </div>
         </form>
         <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
@@ -26,7 +26,7 @@ import InputContainer from "../Partials/Containers/InputContainer.vue";
 import TextInput from "../Partials/Inputs/TextInput.vue";
 import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
 import {useForm, Link} from "@inertiajs/vue3";
-import {defineProps, onMounted} from "vue";
+import {defineProps} from "vue";
 import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
@@ -37,9 +37,5 @@ const props = defineProps<Props>();
 
 const kvkForm = useForm({
     kvk_to_find: null,
-})
-
-onMounted(() => {
-    console.log();
 })
 </script>

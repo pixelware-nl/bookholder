@@ -27,7 +27,7 @@ import InputContainer from "../../Partials/Containers/InputContainer.vue";
 import TextInput from "../../Partials/Inputs/TextInput.vue";
 import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 import {useForm, Link} from "@inertiajs/vue3";
-import {defineProps, onMounted} from "vue";
+import {defineProps} from "vue";
 
 interface Props {
     errors?: object,
@@ -37,9 +37,5 @@ const props = defineProps<Props>();
 
 const kvkForm = useForm({
     kvk_to_find: null,
-})
-
-onMounted(() => {
-    console.log();
 })
 </script>

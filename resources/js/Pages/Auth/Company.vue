@@ -107,8 +107,6 @@ const form = useForm({
 });
 
 onMounted(() => {
-    console.log(props.company.name);
-
     showHasCompanyNotification.value = hasCompany.value = (props.company != null);
 })
 </script>
