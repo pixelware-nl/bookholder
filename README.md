@@ -23,6 +23,9 @@ The database is a simple SQLite database with intention to migrate to MySQL in t
   - Composer
   - PHP
 
+Keep in mind to only push to `master` if there are no bugs in the unit tests and flow. 
+If it does have bugs and/or breaking unit test we use the `develop` branch.
+
 ## Installation
 First make sure **composer** is installed on your computer, as wel as **node**
 
