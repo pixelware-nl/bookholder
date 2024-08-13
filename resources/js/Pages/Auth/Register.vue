@@ -1,6 +1,7 @@
 <template>
     <AuthFormContainer form-title="Register" :logo-to-route="route('login')">
         <form @submit.prevent="form.post(route('register.store'))" class="pb-10 border-b">
+            <input type="hidden" name="company_id" :value="form.company_id" />
             <InputContainer class="flex">
                 <DoubleInputContainer>
                     <TextInput
@@ -69,12 +70,14 @@ import TextInput from "../Partials/Inputs/TextInput.vue";
 import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
 
 interface Props {
+    company?: object,
     errors: object,
 }
 
 const props = defineProps<Props>();
 
 const form = useForm({
+    company_id: props.company?.id,
     firstname: null,
     lastname: null,
     email: null,

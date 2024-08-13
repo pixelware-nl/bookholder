@@ -1,7 +1,6 @@
 <template>
-    <AdminContainer form-title="Company settings" :route-name="route('companies.index')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> Search KVK </h2>
-        <form @submit.prevent="kvkForm.post(route('companies.found'))">
+    <AuthFormContainer form-title="Register" :route-name="route('login')">
+        <form @submit.prevent="kvkForm.post(route('register.found'))" class="pb-4 border-b">
             <InputContainer>
                 <TextInput
                     id="kvk"
@@ -16,18 +15,19 @@
             <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Search KVK </SubmitButton>
             <div v-if="errors.kvk_to_find">
                 <hr>
-                <p class="w-full text-center mt-6"> Sure that your company exists? <Link :href="route('companies.create')" class="text-blue-600 hover:underline">Create it manually</Link> </p>
+                <p class="w-full text-center mt-6 mb-2"> Sure that your company exists? <Link :href="route('register.get-company')" class="text-blue-600 hover:underline">Create it manually</Link> </p>
             </div>
         </form>
-    </AdminContainer>
+        <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
+    </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import AdminContainer from "../Partials/AdminContainer.vue";
-import InputContainer from "../../Partials/Containers/InputContainer.vue";
-import TextInput from "../../Partials/Inputs/TextInput.vue";
-import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
+import InputContainer from "../Partials/Containers/InputContainer.vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
 import {useForm, Link} from "@inertiajs/vue3";
 import {defineProps} from "vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
     errors?: object,

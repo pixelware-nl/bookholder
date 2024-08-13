@@ -1,15 +1,7 @@
 
 <template>
-    <div
-        v-if="showHasCompanyNotification"
-        @click="showHasCompanyNotification = false"
-        class="bg-emerald-200 w-full text-emerald-900 p-8 rounded-lg shadow-lg mb-8 flex justify-between hover:cursor-pointer"
-    >
-        <p>Company details found.</p>
-    </div>
-    <AdminContainer form-title="Company settings" :route-name="route('companies.find')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> Create new </h2>
-        <form @submit.prevent="form.post(route('companies.store'))">
+    <AuthFormContainer form-title="Register" :route-name="route('login')">
+        <form @submit.prevent="form.post(route('register.set-company'))" class="pb-10 border-b">
             <InputContainer>
                 <TextInput
                     id="name"
@@ -80,19 +72,20 @@
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Create company </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> Continue </SubmitButton>
         </form>
-    </AdminContainer>
+        <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
+    </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import AdminContainer from "../Partials/AdminContainer.vue";
-import InputContainer from "../../Partials/Containers/InputContainer.vue";
-import TextInput from "../../Partials/Inputs/TextInput.vue";
-import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
-import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
+import InputContainer from "../Partials/Containers/InputContainer.vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import DoubleInputContainer from "../Partials/Containers/DoubleInputContainer.vue";
+import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
 import {defineProps} from "vue/dist/vue";
-import {useForm} from "@inertiajs/vue3";
+import {Link, useForm} from "@inertiajs/vue3";
 import {onMounted, ref} from "vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
     errors?: object,

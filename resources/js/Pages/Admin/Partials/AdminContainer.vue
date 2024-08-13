@@ -8,7 +8,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import {defineProps, onMounted} from "vue";
+import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3'
 
 interface Props {
@@ -17,10 +17,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-onMounted(() => {
-    console.log(props.routeName);
-})
 </script>
 <style scoped>
 .container {
