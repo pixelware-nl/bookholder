@@ -14,7 +14,7 @@ class LoginController extends Controller
     public function create(): InertiaResponse|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         }
 
         return Inertia::render('Auth/Login');
@@ -27,7 +27,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, )) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('dashboard.index'));
         }
 
         return back()->withErrors([

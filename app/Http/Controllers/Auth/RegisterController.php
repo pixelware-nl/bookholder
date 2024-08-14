@@ -64,7 +64,7 @@ class RegisterController extends Controller
     public function create(): InertiaResponse|RedirectResponse
     {
         if (Auth::check()) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard.index');
         }
 
         if (Session::has('company')) {
