@@ -1,6 +1,7 @@
 <template>
     <nav>
         <ul class="flex justify-end p-6 bg-slate-900 text-slate-100">
+            <NavLink slug="dashboard" route-name="dashboard.index"> Dashboard </NavLink>
             <NavLink slug="invoices" route-name="invoices.index"> Invoicing </NavLink>
             <li class="px-4 text-slate-500 hover:cursor-not-allowed"> Logging </li>
             <NavLink slug="companies" route-name="companies.index"> Companies </NavLink>

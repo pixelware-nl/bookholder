@@ -65,18 +65,21 @@ class DatabaseSeeder extends Seeder
         ]);
 
         FreelanceLogEntry::create([
+            'user_id' => $user->id,
             'product_id' => $productDevelopmentTeamFinance->id,
             'rate' => 80,
             'hours' => 88,
         ]);
 
         FreelanceLogEntry::create([
+            'user_id' => $user->id,
             'product_id' => $productDevelopmentAlgorithm->id,
             'rate' => 80,
             'hours' => 57,
         ]);
 
         FreelanceLogEntry::create([
+            'user_id' => $user->id,
             'product_id' => $productDocumentationAlgorithm->id,
             'rate' => 80,
             'hours' => 15,

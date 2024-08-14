@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 include_once __DIR__ . '/auth.php';
@@ -12,6 +13,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+
         Route::resource('invoices', InvoiceController::class);
         Route::resource('companies', CompanyController::class)->only(['index', 'store', 'destroy']);
         Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');

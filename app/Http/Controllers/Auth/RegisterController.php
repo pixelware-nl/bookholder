@@ -34,7 +34,7 @@ class RegisterController extends Controller
             return redirect()->route('register.create')->with(['company' => $company->first()]);
         }
 
-        return KVKHelper::redirectOnSuccess($request->kvk_to_find);
+        return KVKHelper::redirectOnSuccess($request->kvk_to_find, 'register.create');
     }
 
     public function getCompany(?string $kvk = null): InertiaResponse
@@ -64,8 +64,7 @@ class RegisterController extends Controller
     public function create(): InertiaResponse|RedirectResponse
     {
         if (Auth::check()) {
-            // @TODO: Redirect to a dashboard
-            return redirect()->route('invoices.index');
+            return redirect()->route('dashboard.index');
         }
 
         if (Session::has('company')) {

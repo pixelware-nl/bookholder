@@ -63,6 +63,11 @@ class User extends Authenticatable implements CanResetPassword
         ];
     }
 
+    public function freelanceLogEntries(): hasMany
+    {
+        return $this->hasMany(FreelanceLogEntry::class, 'user_id', 'id');
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
