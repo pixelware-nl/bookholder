@@ -15,15 +15,12 @@ use Inertia\Response as InertiaResponse;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use Throwable;
 
-// TODO:
-// The following is a wishlist from yours truly.
-// * [X] An user is tied to a company
-// * [ ] Eventual extra would be to make a user relations table to see which user works for who
-// * [ ] User can create his own "products", also in a separate view
-// * [ ] User can log his own hours in a calendar type view
-
 final class InvoiceController extends Controller
 {
+    public function __construct(
+        private readonly InvoiceService $invoiceService = new InvoiceService()
+    ) {}
+
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Index', [
@@ -60,9 +57,7 @@ final class InvoiceController extends Controller
      */
     public function show(Invoice $invoice): Response
     {
-        $invoiceService = new InvoiceService();
-
-        return $invoiceService->generatePDF($invoice);
+        return $this->invoiceService->generatePDF($invoice);
     }
 
     public function edit(Invoice $invoice): void
