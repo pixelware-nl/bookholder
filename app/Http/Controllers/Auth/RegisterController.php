@@ -30,15 +30,16 @@ class RegisterController extends Controller
         return KVKHelper::redirectOnSuccess($request->kvk_to_find);
     }
 
-    public function getCompany(): InertiaResponse
+    public function getCompany(?string $kvk = null): InertiaResponse
     {
         if (Session::has('company')) {
             return Inertia::render('Auth/Company', [
-                'company' => Session::get('company')
+                'company' => Session::get('company'),
+                'kvk' => $kvk
             ]);
         }
 
-        return Inertia::render('Auth/Company');
+        return Inertia::render('Auth/Company', ['kvk' => $kvk]);
     }
 
     /**

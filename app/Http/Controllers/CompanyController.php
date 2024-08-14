@@ -21,15 +21,16 @@ final class CompanyController extends Controller
         ]);
     }
 
-    public function create(): InertiaResponse
+    public function create(?string $kvk = null): InertiaResponse
     {
         if (Session::has('company')) {
             return Inertia::render('Admin/Company/Create', [
-                'company' => Session::get('company')
+                'company' => Session::get('company'),
+                'kvk' => $kvk,
             ]);
         }
 
-        return Inertia::render('Admin/Company/Create');
+        return Inertia::render('Admin/Company/Create', ['kvk' => $kvk]);
     }
 
     public function store(CreateCompanyRequest $request): RedirectResponse
