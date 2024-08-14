@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Http\Requests\Companies\FindKVKRequest;
 use App\Services\KVKService;
 use Illuminate\Http\RedirectResponse;
 
