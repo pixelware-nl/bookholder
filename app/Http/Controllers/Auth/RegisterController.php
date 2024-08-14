@@ -12,6 +12,7 @@ use App\Http\Requests\Auth\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
 use App\Models\User;
+use App\Services\CompanyService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -27,6 +28,12 @@ class RegisterController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
+        $company = Company::fromKvk($request->kvk_to_find);
+
+        if ($company->exists()) {
+            return redirect()->route('register.create')->with(['company' => $company->first()]);
+        }
+
         return KVKHelper::redirectOnSuccess($request->kvk_to_find);
     }
 
@@ -49,7 +56,6 @@ class RegisterController extends Controller
     public function setCompany(CreateCompanyRequest $request): RedirectResponse
     {
         $companyDTO = CompanyDTO::fromRequest($request);
-
         $company = Company::createOrGet($companyDTO->toArray());
 
         return redirect()->route('register.create')->with(['company' => $company]);

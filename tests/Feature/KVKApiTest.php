@@ -5,13 +5,7 @@ namespace Tests\Feature;
 use App\Enums\Tests\KVKNumber;
 use App\Models\Company;
 use App\Services\KVKService;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Tests\TestCase;
-use function PHPUnit\Framework\assertTrue;
 
 class KVKApiTest extends TestCase
 {
