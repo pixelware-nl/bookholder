@@ -6,6 +6,8 @@ use App\Helpers\KVKHelper;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
+use App\Models\UserCompany;
+use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -17,7 +19,7 @@ final class CompanyController extends Controller
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Company/Index', [
-            'companies' => Company::all()
+            'companies' => Auth::user()->companies()->get(),
         ]);
     }
 
@@ -35,7 +37,7 @@ final class CompanyController extends Controller
 
     public function store(CreateCompanyRequest $request): RedirectResponse
     {
-        Company::create([
+        $company = Company::createOrGet([
             'name' => $request->name,
             'kvk' => $request->kvk,
             'street_address' => $request->street_address,
@@ -44,12 +46,20 @@ final class CompanyController extends Controller
             'country' => $request->country,
         ]);
 
+        if ($userCompany = UserCompany::authFind($company->id)->exists()) {
+            $userCompany->restore();
+
+            return redirect()->route('companies.index');
+        }
+
+        UserCompany::authCreate($company->id);
+
         return redirect()->route('companies.index');
     }
 
     public function destroy(Company $company): SymfonyResponse
     {
-        $company->delete();
+        UserCompany::authFind($company->id)->delete();
 
         return redirect()->route('companies.index');
     }

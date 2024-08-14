@@ -17,7 +17,7 @@ class CreateCompanyRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:256'],
-            'kvk' => ['required', 'unique:companies,kvk', new ValidKVKNumberRule()],
+            'kvk' => ['required', new ValidKVKNumberRule()],
             'street_address' => ['required', 'max:256'],
             'city' => ['required'],
             'postal_code' => ['required', new ValidPostalCodeRule()],

@@ -8,6 +8,7 @@ use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
@@ -60,7 +61,7 @@ use Illuminate\Support\Facades\Auth;
  */
 class Company extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $table = 'companies';
 
@@ -93,9 +94,14 @@ class Company extends Model
         return $this->hasMany(Product::class, 'company_id', 'id');
     }
 
-    public function users(): HasMany
+    public function employees(): HasMany
     {
         return $this->hasMany(User::class, 'company_kvk', 'kvk');
+    }
+
+    public function partners(): belongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_companies', 'company_id', 'user_id');
     }
 
     /**
