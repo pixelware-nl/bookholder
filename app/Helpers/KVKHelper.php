@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 
 class KVKHelper
 {
-    public static function redirectOnSuccess(string $kvk): RedirectResponse
+    public static function redirectOnSuccess(string $kvk, string $route): RedirectResponse
     {
         $kvkService = new KVKService();
 
@@ -19,6 +19,6 @@ class KVKHelper
             ]);
         }
 
-        return redirect()->route('companies.create')->with(['company' => $companyDTO->company()]);
+        return redirect()->route($route)->with(['company' => $companyDTO->company()]);
     }
 }
