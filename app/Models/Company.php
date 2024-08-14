@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -72,7 +73,7 @@ class Company extends Model
         'street_address',
         'city',
         'postal_code',
-        'country',
+        'country'
     ];
 
     public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
@@ -88,5 +89,16 @@ class Company extends Model
     public function users(): HasMany
     {
         return $this->hasMany(User::class, 'company_kvk', 'kvk');
+    }
+
+    public static function createOrGet(array $array): Company
+    {
+        $company = Company::where('kvk', $array['kvk']);
+
+        if ($company->exists()) {
+            return $company->first();
+        }
+
+        return Company::create($array);
     }
 }

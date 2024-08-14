@@ -14,7 +14,7 @@ class KVKService
 {
     const BASIC_PROFILE_MAIN_COMPANY_URL = 'https://api.kvk.nl/test/api/v1/basisprofielen/%s/hoofdvestiging';
 
-    public function getCompanyDetails($kvk): ?CompanyDTO
+    public function getCompanyDetails(string $kvk): ?CompanyDTO
     {
         try {
             $response = $this->getJsonDecodedRequest(self::BASIC_PROFILE_MAIN_COMPANY_URL, $kvk);

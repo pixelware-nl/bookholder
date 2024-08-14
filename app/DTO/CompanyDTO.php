@@ -2,9 +2,12 @@
 
 namespace App\DTO;
 
+use App\Exceptions\InvalidRequestToDTOException;
+use App\Helpers\DTOHelper;
 use App\Models\Company;
+use Illuminate\Http\Request;
 
-final class CompanyDTO extends AbstractDTO
+final class CompanyDTO implements DTOInterface
 {
     public function __construct(
         private readonly string $name,
@@ -25,6 +28,37 @@ final class CompanyDTO extends AbstractDTO
             'postal_code' => $this->getPostalCode(),
             'country' => $this->getCountry()
         ]);
+    }
+
+    /**
+     * @throws InvalidRequestToDTOException
+     */
+    public static function fromRequest(Request $request): CompanyDTO
+    {
+        if (DTOHelper::missingRequiredRequestParams(['name', 'kvk', 'street_address', 'city', 'postal_code', 'country'], $request)) {
+            throw new InvalidRequestToDTOException();
+        }
+
+        return new self(
+            $request->input('name'),
+            $request->input('kvk'),
+            $request->input('street_address'),
+            $request->input('city'),
+            $request->input('postal_code'),
+            $request->input('country')
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'name' => $this->getName(),
+            'kvk' => $this->getKvk(),
+            'street_address' => $this->getStreetAddress(),
+            'city' => $this->getCity(),
+            'postal_code' => $this->getPostalCode(),
+            'country' => $this->getCountry()
+        ];
     }
 
     public function getName(): string
