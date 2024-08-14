@@ -82,3 +82,5 @@ password: secret!2024
 That is all, happy programming!
 
 Authored by Okan can Ozbek, August 13th 2024.
+
+v0.2.2
