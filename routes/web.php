@@ -13,7 +13,8 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('invoices', InvoiceController::class);
-        Route::resource('companies', CompanyController::class)->only(['index', 'store', 'create', 'destroy']);
+        Route::resource('companies', CompanyController::class)->only(['index', 'store', 'destroy']);
+        Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');
 
         Route::prefix('companies')->group(function () {
             Route::get('find', [CompanyController::class, 'find'])->name('companies.find');

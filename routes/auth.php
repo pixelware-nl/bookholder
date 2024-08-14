@@ -12,7 +12,7 @@ Route::post('login', [LoginController::class, 'authenticate'])->name('login.auth
 Route::prefix('register')->group(function () {
     Route::get('find', [RegisterController::class, 'find'])->name('register.find');
     Route::post('find', [RegisterController::class, 'found'])->name('register.found');
-    Route::get('company', [RegisterController::class, 'getCompany'])->name('register.get-company');
+    Route::get('company/{kvk?}', [RegisterController::class, 'getCompany'])->name('register.get-company');
     Route::post('company', [RegisterController::class, 'setCompany'])->name('register.set-company');
     Route::get('user', [RegisterController::class, 'create'])->name('register.create');
     Route::post('user', [RegisterController::class, 'store'])->name('register.store');

@@ -90,6 +90,7 @@ import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 interface Props {
     errors?: object,
     company?: object,
+    kvk?: string
 }
 
 const props = defineProps<Props>();
@@ -99,7 +100,7 @@ const showHasCompanyNotification = ref(false);
 
 const form = useForm({
     name: props.company?.name,
-    kvk: props.company?.kvk,
+    kvk: props.company?.kvk ?? props.kvk,
     street_address: props.company?.street_address,
     city: props.company?.city,
     postal_code: props.company?.postal_code,

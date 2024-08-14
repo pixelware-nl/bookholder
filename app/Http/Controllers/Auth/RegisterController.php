@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\DTO\CompanyDTO;
+use App\Exceptions\InvalidArrayParamsException;
+use App\Exceptions\InvalidRequestToDTOException;
+use App\Helpers\KVKHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Auth\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
 use App\Models\User;
-use App\Services\KVKService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -17,6 +20,41 @@ use Inertia\Response as InertiaResponse;
 
 class RegisterController extends Controller
 {
+    public function find(): InertiaResponse
+    {
+        return Inertia::render('Auth/Find');
+    }
+
+    public function found(FindKVKRequest $request): RedirectResponse
+    {
+        return KVKHelper::redirectOnSuccess($request->kvk_to_find);
+    }
+
+    public function getCompany(?string $kvk = null): InertiaResponse
+    {
+        if (Session::has('company')) {
+            return Inertia::render('Auth/Company', [
+                'company' => Session::get('company'),
+                'kvk' => $kvk
+            ]);
+        }
+
+        return Inertia::render('Auth/Company', ['kvk' => $kvk]);
+    }
+
+    /**
+     * @throws InvalidRequestToDTOException
+     * @throws InvalidArrayParamsException
+     */
+    public function setCompany(CreateCompanyRequest $request): RedirectResponse
+    {
+        $companyDTO = CompanyDTO::fromRequest($request);
+
+        $company = Company::createOrGet($companyDTO->toArray());
+
+        return redirect()->route('register.create')->with(['company' => $company]);
+    }
+
     public function create(): InertiaResponse|RedirectResponse
     {
         if (Auth::check()) {
@@ -49,46 +87,5 @@ class RegisterController extends Controller
         ]);
 
         return redirect()->route('login');
-    }
-
-    public function find(): InertiaResponse
-    {
-        return Inertia::render('Auth/Find');
-    }
-
-    public function found(FindKVKRequest $request): RedirectResponse
-    {
-        $kvkService = new KVKService();
-
-        $companyDTO = $kvkService->getCompanyDetails($request->kvk_to_find);
-
-        return redirect()->route('register.set-company')->with(['company' => $companyDTO?->company()]);
-    }
-
-    public function getCompany(): InertiaResponse
-    {
-        if (Session::has('company')) {
-            return Inertia::render('Auth/Company', [
-                'company' => Session::get('company')
-            ]);
-        }
-
-        return Inertia::render('Auth/Company');
-    }
-
-    public function setCompany(CreateCompanyRequest $request): RedirectResponse
-    {
-        $company = Company::where('kvk', $request->kvk)->exists() === false
-            ? Company::create([
-                'name' => $request->name,
-                'kvk' => $request->kvk,
-                'street_address' => $request->street_address,
-                'city' => $request->city,
-                'postal_code' => $request->postal_code,
-                'country' => $request->country,
-            ])
-            : Company::where('kvk', $request->kvk)->first();
-
-        return redirect()->route('register.create')->with(['company' => $company]);
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\KVKHelper;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
-use App\Services\KVKService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -21,15 +21,16 @@ final class CompanyController extends Controller
         ]);
     }
 
-    public function create(): InertiaResponse
+    public function create(?string $kvk = null): InertiaResponse
     {
         if (Session::has('company')) {
             return Inertia::render('Admin/Company/Create', [
-                'company' => Session::get('company')
+                'company' => Session::get('company'),
+                'kvk' => $kvk,
             ]);
         }
 
-        return Inertia::render('Admin/Company/Create');
+        return Inertia::render('Admin/Company/Create', ['kvk' => $kvk]);
     }
 
     public function store(CreateCompanyRequest $request): RedirectResponse
@@ -60,10 +61,6 @@ final class CompanyController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
-        $kvkService = new KVKService();
-
-        $companyDTO = $kvkService->getCompanyDetails($request->kvk_to_find);
-
-        return redirect()->route('companies.create')->with(['company' => $companyDTO->company()]);
+        return KVKHelper::redirectOnSuccess($request->kvk_to_find);
     }
 }
