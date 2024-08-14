@@ -76,6 +76,6 @@ final class CompanyController extends Controller
             return redirect()->route('companies.index');
         }
 
-        return KVKHelper::redirectOnSuccess($request->kvk_to_find);
+        return KVKHelper::redirectOnSuccess($request->kvk_to_find, 'company.create');
     }
 }
