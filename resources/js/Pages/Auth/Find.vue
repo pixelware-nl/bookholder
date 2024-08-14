@@ -15,7 +15,7 @@
             <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Search KVK </SubmitButton>
             <div v-if="errors.kvk_to_find">
                 <hr>
-                <p class="w-full text-center mt-6 mb-2"> Sure that your company exists? <Link :href="route('register.get-company')" class="text-blue-600 hover:underline">Create it manually</Link> </p>
+                <p class="w-full text-center mt-6 mb-2"> Sure that your company exists? <Link :href="route('register.get-company', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">Create it manually</Link> </p>
             </div>
         </form>
         <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
