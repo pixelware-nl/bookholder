@@ -3,7 +3,7 @@
 namespace App\DTO;
 
 use App\Exceptions\InvalidRequestToDTOException;
-use App\Helpers\DTOHelper;
+use App\Helpers\ValidationHelper;
 use Illuminate\Http\Request;
 
 final class AddressDTO implements DTOInterface
@@ -36,7 +36,7 @@ final class AddressDTO implements DTOInterface
      */
     public static function fromRequest(Request $request): AddressDTO
     {
-        if (DTOHelper::missingRequiredRequestParams(['street_address', 'city', 'postal_code', 'country'], $request)) {
+        if (ValidationHelper::isMissingRequiredRequestParams(['street_address', 'city', 'postal_code', 'country'], $request)) {
             throw new InvalidRequestToDTOException();
         }
 

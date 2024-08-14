@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\DTO\CompanyDTO;
+use App\Exceptions\InvalidArrayParamsException;
 use App\Exceptions\InvalidRequestToDTOException;
 use App\Helpers\KVKHelper;
 use App\Http\Controllers\Controller;
@@ -42,6 +43,7 @@ class RegisterController extends Controller
 
     /**
      * @throws InvalidRequestToDTOException
+     * @throws InvalidArrayParamsException
      */
     public function setCompany(CreateCompanyRequest $request): RedirectResponse
     {
