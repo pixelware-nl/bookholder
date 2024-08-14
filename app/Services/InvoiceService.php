@@ -17,7 +17,7 @@ class InvoiceService
         $freelanceLogService = new FreelanceLogService();
         $pdfService = new PDFService();
 
-        $logs = $freelanceLogService->getFreelanceLogs($invoice->toCompany, $invoice->start_date, $invoice->end_date);
+        $logs = $freelanceLogService->getFreelanceLogsForCompany($invoice->toCompany, $invoice->start_date, $invoice->end_date);
         $total = $freelanceLogService->getFreelanceLogsTotal($logs);
 
         return $pdfService->streamToPdf(

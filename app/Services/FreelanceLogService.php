@@ -15,7 +15,7 @@ class FreelanceLogService
      * public function getUserFreelanceLogs(User $user, Carbon $startDate = Carbon::now(), int $lengthInMonths = 1);
      */
 
-    public function getFreelanceLogs(Company $company, Carbon $startDate, Carbon $endDate): Collection
+    public function getFreelanceLogsForCompany(Company $company, Carbon $startDate, Carbon $endDate): Collection
     {
         $products = Product::where('company_id', $company->id)->pluck('id');
 
@@ -23,6 +23,11 @@ class FreelanceLogService
             ->where('created_at', '<=', $endDate->toDateTimeString())
             ->whereIn('product_id', $products)
             ->get();
+    }
+
+    public function getFreelanceLogs(Carbon $startDate, Carbon $endDate): Collection
+    {
+        return \Auth::user()->freelanceLogEntries()->get();
     }
 
     public function getFreelanceLogsTotal(Collection $freelanceLogs): int
