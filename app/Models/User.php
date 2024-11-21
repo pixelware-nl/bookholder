@@ -37,6 +37,13 @@ use Illuminate\Notifications\Notifiable;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @property int $company_id
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Company> $companies
+ * @property-read int|null $companies_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FreelanceLogEntry> $freelanceLogEntries
+ * @property-read int|null $freelance_log_entries_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements CanResetPassword
@@ -75,6 +82,8 @@ class User extends Authenticatable implements CanResetPassword
 
     public function companies(): belongsToMany
     {
-        return $this->belongsToMany(Company::class, 'user_companies', 'user_id', 'company_id')->whereNull('user_companies.deleted_at');
+        return $this->belongsToMany(Company::class, 'user_companies', 'user_id', 'company_id')
+            ->whereNull('user_companies.deleted_at')
+            ->whereNot('company_id', $this->company_id);
     }
 }

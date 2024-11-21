@@ -11,8 +11,8 @@ use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
 use App\Models\UserCompany;
 use App\Services\CompanyService;
-use Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -27,6 +27,7 @@ final class CompanyController extends Controller
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Company/Index', [
+            'userCompany' => Auth::user()->company()->first(),
             'companies' => Auth::user()->companies()->get(),
         ]);
     }

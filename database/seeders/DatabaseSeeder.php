@@ -7,8 +7,6 @@ use App\Models\Company;
 use App\Models\FreelanceLogEntry;
 use App\Models\Product;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Factories\CompanyFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 

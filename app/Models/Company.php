@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 /**
- *
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -57,6 +57,13 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
  * @mixin Eloquent
  * @method static Builder|Company withoutAuthenticatedUserCompany()
+ * @property string $kvk
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $employees
+ * @property-read int|null $employees_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $partners
+ * @property-read int|null $partners_count
+ * @method static Builder|Company fromKvk(string $kvk)
+ * @method static Builder|Company whereKvk($value)
  * @mixin \Eloquent
  */
 class Company extends Model

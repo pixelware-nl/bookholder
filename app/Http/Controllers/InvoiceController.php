@@ -7,6 +7,7 @@ use App\Http\Requests\Invoices\UpdateInvoiceRequest;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Company;
 use App\Models\Invoice;
+use App\Models\UserCompany;
 use App\Services\InvoiceService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ final class InvoiceController extends Controller
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Create', [
-            'companies' => Company::withoutAuthenticatedUserCompany()->get()
+            'companies' => Auth::user()->companies()->get()
         ]);
     }
 
