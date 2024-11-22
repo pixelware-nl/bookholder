@@ -7,6 +7,9 @@ use App\Models\Company;
 use App\Models\FreelanceLogEntry;
 use App\Models\Product;
 use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\UserCompany;
+use Database\Factories\CompanyFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -42,6 +45,20 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('secret!2024'),
             'remember_token' => null,
+        ]);
+
+        $user = User::create([
+            'company_id' => $pixelware->id,
+            'full_name' => 'Okan Ozbek',
+            'email' => 'o.ozbek@pixelware.nl',
+            'email_verified_at' => now(),
+            'password' => Hash::make('qwedsazxc321'),
+            'remember_token' => null,
+        ]);
+
+        UserCompany::create([
+            'user_id' => $user->id,
+            'company_id' => $pixelware->id,
         ]);
 
         $productDevelopmentTeamFinance = Product::create([
