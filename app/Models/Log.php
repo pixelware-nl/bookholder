@@ -58,15 +58,13 @@ class Log extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'product_id',
+        'user_id',
+        'company_id',
         'rate',
         'hours',
+        'name',
+        'description',
     ];
-
-    public function scopeForAuthenticatedUser(Builder $query): Builder
-    {
-        return $query->where('user_id', Auth::id());
-    }
 
     public function user(): HasOne
     {

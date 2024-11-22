@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\LogDTO;
 use App\Models\Company;
 use App\Models\Log;
 use Illuminate\Support\Carbon;
@@ -27,5 +28,17 @@ class LogService
         return $logs->sum(function($log) {
            return $log->rate * $log->hours;
         });
+    }
+
+    public function create(LogDTO $logDTO): void
+    {
+        Log::create([
+            'user_id' => Auth::id(),
+            'company_id' => $logDTO->getCompanyId(),
+            'rate' => $logDTO->getRate(),
+            'hours' => $logDTO->getHours(),
+            'name' => $logDTO->getName(),
+            'description' => $logDTO->getDescription()
+        ]);
     }
 }

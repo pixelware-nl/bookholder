@@ -1,6 +1,6 @@
 <template>
-    <AdminContainer form-title="Invoice settings" :route-name="route('invoices.index')">
-        <form @submit.prevent="form.post(route('invoices.store'))">
+    <AdminContainer form-title="Invoice settings" :route-name="route('logs.index')">
+        <form @submit.prevent="form.post(route('logs.store'))">
             <InputContainer>
                 <SelectInput
                     id="companies"
@@ -13,27 +13,47 @@
             </InputContainer>
             <InputContainer class="flex">
                 <DoubleInputContainer>
-                    <DateInput
-                        id="start-date"
-                        name="start_date"
-                        v-model="form.start_date"
-                        label="Start date"
-                        placeholder="01-01-2024"
-                        :error="errors.start_date"
+                    <TextInput
+                        id="rate"
+                        name="rate"
+                        v-model="form.rate"
+                        label="Rate"
+                        :error="errors.rate"
+                        placeholder="60"
                     />
                 </DoubleInputContainer>
                 <DoubleInputContainer>
-                    <DateInput
-                        id="end-date"
-                        name="end_date"
-                        v-model="form.end_date"
-                        label="End date"
-                        placeholder="31-01-2024"
-                        :error="errors.end_date"
+                    <TextInput
+                        id="hours"
+                        name="hours"
+                        v-model="form.hours"
+                        label="Hours"
+                        :error="errors.hours"
+                        placeholder="10"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Create PDF </SubmitButton>
+            <InputContainer>
+                <TextInput
+                    id="name"
+                    name="name"
+                    v-model="form.name"
+                    label="Name"
+                    :error="errors.name"
+                    placeholder="API koppeling aangemaakt"
+                />
+            </InputContainer>
+            <InputContainer>
+                <TextArea
+                    id="description"
+                    name="description"
+                    v-model="form.description"
+                    label="Description"
+                    :error="errors.description"
+                    placeholder="Uitleg over het specifieke API koppeling"
+                />
+            </InputContainer>
+            <SubmitButton :form-processing="form.processing"> Create Log </SubmitButton>
         </form>
     </AdminContainer>
 </template>
@@ -42,10 +62,11 @@ import {defineProps} from "vue";
 import {useForm} from "@inertiajs/vue3";
 import InputContainer from "../../Partials/Containers/InputContainer.vue";
 import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
-import DateInput from "../../Partials/Inputs/DateInput.vue";
 import SelectInput from "../../Partials/Inputs/SelectInput.vue";
 import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
+import TextInput from "@/Pages/Partials/Inputs/TextInput.vue";
+import TextArea from "@/Pages/Partials/Inputs/TextArea.vue";
 
 interface Props {
     companies: object,
@@ -56,7 +77,9 @@ const props = defineProps<Props>();
 
 const form = useForm({
     company_id: null,
-    start_date: null,
-    end_date: null,
+    rate: null,
+    hours: null,
+    name: null,
+    description: null,
 });
 </script>

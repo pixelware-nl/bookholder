@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\DTO\CompanyDTO;
+use App\DTO\LogDTO;
 use App\Exceptions\InvalidArrayParamsException;
 use App\Exceptions\InvalidRequestToDTOException;
 use App\Helpers\KVKHelper;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
+use App\Http\Requests\Logs\CreateLogRequest;
 use App\Http\Resources\LogResource;
 use App\Models\Company;
+use App\Models\Log;
 use App\Models\UserCompany;
 use App\Services\CompanyService;
+use App\Services\LogService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 final class LogController extends Controller
 {
     public function __construct(
-        private readonly CompanyService $companyService
+        private readonly LogService $logService
     ) {}
 
     public function index(): InertiaResponse
@@ -34,51 +38,28 @@ final class LogController extends Controller
         ]);
     }
 
-    public function create(?string $kvk = null): InertiaResponse
+    public function create(): InertiaResponse
     {
-        if (Session::has('company')) {
-            return Inertia::render('Admin/Company/Create', [
-                'company' => Session::get('company'),
-                'kvk' => $kvk,
-            ]);
-        }
-
-        return Inertia::render('Admin/Company/Create', ['kvk' => $kvk]);
+        return Inertia::render('Admin/Log/Create', [
+            'companies' => Auth::user()->companies()->get()
+        ]);
     }
 
     /**
      * @throws InvalidRequestToDTOException
      * @throws InvalidArrayParamsException
      */
-    public function store(CreateCompanyRequest $request): RedirectResponse
+    public function store(CreateLogRequest $request): RedirectResponse
     {
-        $this->companyService->createForAuth(CompanyDTO::fromRequest($request));
+        $this->logService->create(LogDTO::fromRequest($request));
 
-        return redirect()->route('companies.index');
+        return redirect()->route('logs.index');
     }
 
-    public function destroy(Company $company): SymfonyResponse
+    public function destroy(Log $log): SymfonyResponse
     {
-        UserCompany::authFind($company->id)->delete();
+        $log->delete();
 
-        return redirect()->route('companies.index');
-    }
-
-    public function find(): InertiaResponse
-    {
-        return Inertia::render('Admin/Company/Find');
-    }
-
-    public function found(FindKVKRequest $request): RedirectResponse
-    {
-        $company = Company::fromKvk($request->kvk_to_find);
-
-        if ($company->exists()) {
-            $this->companyService->attachToAuth($company->first());
-
-            return redirect()->route('companies.index');
-        }
-
-        return KVKHelper::redirectOnSuccess($request->kvk_to_find, 'company.create');
+        return redirect()->route('logs.index');
     }
 }
