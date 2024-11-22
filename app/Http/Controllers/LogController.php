@@ -47,18 +47,17 @@ final class LogController extends Controller
 
     /**
      * @throws InvalidRequestToDTOException
-     * @throws InvalidArrayParamsException
      */
     public function store(CreateLogRequest $request): RedirectResponse
     {
-        $this->logService->create(LogDTO::fromRequest($request));
+        $this->logService->store(LogDTO::fromRequest($request));
 
         return redirect()->route('logs.index');
     }
 
     public function destroy(Log $log): SymfonyResponse
     {
-        $log->delete();
+        $this->logService->delete($log);
 
         return redirect()->route('logs.index');
     }
