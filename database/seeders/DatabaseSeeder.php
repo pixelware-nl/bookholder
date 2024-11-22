@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Enums\ProductType;
 use App\Models\Company;
-use App\Models\FreelanceLogEntry;
-use App\Models\Product;
+use App\Models\Log;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Database\Factories\CompanyFactory;
+use App\Models\UserCompany;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,16 +25,16 @@ class DatabaseSeeder extends Seeder
             'country' => 'Netherlands',
         ]);
 
-        $inshared = Company::create([
-            'name' => 'InShared',
-            'kvk' => '08053410',
-            'street_address' => '56 Leusderend',
-            'city' => 'Leusden',
-            'postal_code' => '3832RC',
+        $friva = Company::create([
+            'name' => 'Friva B.V.',
+            'kvk' => '92892159',
+            'street_address' => 'Vondellaan 22',
+            'city' => 'Zandvoort',
+            'postal_code' => '2041BD',
             'country' => 'Netherlands',
         ]);
 
-        $user = User::create([
+        User::create([
             'company_id' => $pixelware->id,
             'full_name' => 'Test Account',
             'email' => 'test@pixelware.nl',
@@ -46,43 +43,32 @@ class DatabaseSeeder extends Seeder
             'remember_token' => null,
         ]);
 
-        $productDevelopmentTeamFinance = Product::create([
-            'company_id' => $inshared->id,
-            'name' => 'Development Team Finance',
-            'type' => ProductType::DEVELOPMENT
+        $user = User::create([
+            'company_id' => $pixelware->id,
+            'full_name' => 'Okan Ozbek',
+            'email' => 'o.ozbek@pixelware.nl',
+            'email_verified_at' => now(),
+            'password' => Hash::make('qwedsazxc321'),
+            'remember_token' => null,
         ]);
 
-        $productDevelopmentAlgorithm = Product::create([
-            'company_id' => $inshared->id,
-            'name' => 'Development algorithm',
-            'type' => ProductType::DEVELOPMENT
-        ]);
-
-        $productDocumentationAlgorithm = Product::create([
-            'company_id' => $inshared->id,
-            'name' => 'Documentation algorithm',
-            'type' => ProductType::DOCUMENTATION
-        ]);
-
-        FreelanceLogEntry::create([
+        UserCompany::create([
             'user_id' => $user->id,
-            'product_id' => $productDevelopmentTeamFinance->id,
-            'rate' => 80,
-            'hours' => 88,
+            'company_id' => $pixelware->id,
         ]);
 
-        FreelanceLogEntry::create([
+        UserCompany::create([
             'user_id' => $user->id,
-            'product_id' => $productDevelopmentAlgorithm->id,
-            'rate' => 80,
-            'hours' => 57,
+            'company_id' => $friva->id,
         ]);
 
-        FreelanceLogEntry::create([
+        Log::create([
             'user_id' => $user->id,
-            'product_id' => $productDocumentationAlgorithm->id,
-            'rate' => 80,
-            'hours' => 15,
+            'company_id' => $friva->id,
+            'rate' => 60,
+            'hours' => 6,
+            'name' => 'Kolibri Mediapartners',
+            'description' => 'Apart Laravel project met Kolibri Mediapartners integratie aangemaakt.',
         ]);
     }
 }

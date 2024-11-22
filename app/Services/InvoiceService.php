@@ -3,24 +3,27 @@
 namespace App\Services;
 
 use App\Models\Invoice;
+use App\Repositories\LogRepository;
 use Exception;
 use Illuminate\Http\Response;
 use Throwable;
 
-class InvoiceService
+readonly class InvoiceService
 {
+    public function __construct(
+        private LogService $logService,
+        private PDFService $pdfService
+    ) {}
+
     /**
      * @throws Exception|Throwable
      */
     public function generatePDF(Invoice $invoice): Response
     {
-        $freelanceLogService = new FreelanceLogService();
-        $pdfService = new PDFService();
+        $logs = $this->logService->getLogs($invoice->start_date, $invoice->end_date);
+        $total = $this->logService->getTotalLogs($logs);
 
-        $logs = $freelanceLogService->getFreelanceLogsForCompany($invoice->toCompany, $invoice->start_date, $invoice->end_date);
-        $total = $freelanceLogService->getFreelanceLogsTotal($logs);
-
-        return $pdfService->streamToPdf(
+        return $this->pdfService->streamToPdf(
             view('pdf.invoice', [
                 'toCompany' => $invoice->toCompany,
                 'fromCompany' => $invoice->fromCompany,

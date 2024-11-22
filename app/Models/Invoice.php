@@ -76,7 +76,7 @@ class Invoice extends Model
 
     public function scopeForAuthenticatedUser(Builder $query): Builder
     {
-        return $query->where('user_id', Auth::user()->id);
+        return $query->where('user_id', Auth::id());
     }
 
     public function fromCompany(): HasOne

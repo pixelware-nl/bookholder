@@ -6,31 +6,34 @@ use App\DTO\CompanyDTO;
 use App\Exceptions\InvalidArrayParamsException;
 use App\Models\Company;
 use App\Models\UserCompany;
+use App\Repositories\CompanyRepository;
 
-class CompanyService
+readonly class CompanyService
 {
+    public function __construct(
+        private CompanyRepository $companyRepository
+    ) {}
+
+    public function findByKvk(string $kvk): ?Company
+    {
+        return $this->companyRepository->findByKvk($kvk);
+    }
+
     /**
      * @throws InvalidArrayParamsException
      */
-    public function createForAuth(CompanyDTO $companyDTO): Company
+    public function store(CompanyDTO $companyDTO): Company
     {
-        $company = Company::createOrGet($companyDTO->toArray());
-
-        return $this->attachToAuth($company);
+        return $this->companyRepository->store($companyDTO);
     }
 
-    public function attachToAuth(Company $company): Company
+    public function attach(Company $company): Company
     {
-        $userCompany = UserCompany::authFind($company->id);
+        return $this->companyRepository->attach($company);
+    }
 
-        if ($userCompany->exists()) {
-            $userCompany->restore();
-
-            return $company;
-        }
-
-        UserCompany::authCreate($company->id);
-
-        return $company;
+    public function detach(Company $company): void
+    {
+        $this->companyRepository->detach($company);
     }
 }

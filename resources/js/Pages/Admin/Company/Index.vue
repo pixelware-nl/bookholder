@@ -10,6 +10,11 @@
                 </tr>
             </template>
             <template #tbody>
+                <tr class="text-slate-400">
+                    <td> {{ userCompany.name }} </td>
+                    <td> {{ userCompany.street_address }}, {{ userCompany.city }} </td>
+                    <td></td>
+                </tr>
                 <tr v-for="company in companies">
                     <td> {{ company.name }} </td>
                     <td> {{ company.street_address }}, {{ company.city }} </td>
@@ -20,12 +25,13 @@
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
+import {defineProps, onMounted} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
 
 interface Props {
+    userCompany: object,
     companies: object,
 }
 

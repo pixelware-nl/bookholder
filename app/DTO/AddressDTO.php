@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 final class AddressDTO implements DTOInterface
 {
+    private const REQUIRED_ARRAY_PARAMS = [
+        'street_address',
+        'city',
+        'postal_code',
+        'country'
+    ];
+
     public function __construct(
         private readonly string $streetAddress,
         private readonly string $city,
@@ -36,7 +43,7 @@ final class AddressDTO implements DTOInterface
      */
     public static function fromRequest(Request $request): AddressDTO
     {
-        if (ValidationHelper::isMissingRequiredRequestParams(['street_address', 'city', 'postal_code', 'country'], $request)) {
+        if (ValidationHelper::isMissingRequiredRequestParams(self::REQUIRED_ARRAY_PARAMS, $request)) {
             throw new InvalidRequestToDTOException();
         }
 

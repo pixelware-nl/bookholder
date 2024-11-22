@@ -40,7 +40,7 @@
             </tr>
             @foreach($logs as $log)
                 <tr>
-                    <td> {{ $log->product->name }} </td>
+                    <td> {{ $log->name }} </td>
                     <td> {{ $log->hours }} </td>
                     <td> {{ sprintf('€%s', number_format($log->rate, decimal_separator: ',', thousands_separator: '.')) }} </td>
                     <td> {{ sprintf('€%s', number_format($log->rate * $log->hours, decimal_separator: ',', thousands_separator: '.')) }} </td>
