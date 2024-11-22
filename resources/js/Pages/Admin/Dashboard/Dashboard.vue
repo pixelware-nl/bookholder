@@ -19,13 +19,13 @@
                     <th> Product </th>
                     <th> Type </th>
                 </tr>
-                <tbody v-for="log in freelanceLogs">
+                <tbody v-for="log in logs">
                     <tr v-for="data in log">
                         <td> {{ data.company_name }} </td>
                         <td> {{ getCurrency(data.rate) }} </td>
                         <td> {{ data.hours }} </td>
-                        <td> {{ data.product_name }} </td>
-                        <td> {{ data.product_type }} </td>
+                        <td> {{ data.name }} </td>
+                        <td> {{ data.description }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -36,15 +36,15 @@
 import {computed, defineProps, onMounted} from "vue";
 
 interface Props {
-    freelanceLogs: object,
-    freelanceLogTotal: number
+    logs: object,
+    totalLogs: number
     daysUntilNewMonth: number
 }
 
 const props = defineProps<Props>();
 
 const totalAsCurrency = computed(() => {
-    return getCurrency(props.freelanceLogTotal);
+    return getCurrency(props.totalLogs);
 })
 
 function getCurrency(value) {
@@ -58,7 +58,7 @@ function getCurrency(value) {
 }
 
 onMounted(() => {
-    console.log(props.freelanceLogs)
+    console.log(props.logs)
 })
 </script>
 <style scoped>

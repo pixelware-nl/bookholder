@@ -11,8 +11,8 @@ use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
 use App\Models\UserCompany;
 use App\Services\CompanyService;
-use Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -21,12 +21,13 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 final class CompanyController extends Controller
 {
     public function __construct(
-        private readonly CompanyService $companyService = new CompanyService()
+        private readonly CompanyService $companyService
     ) {}
 
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Company/Index', [
+            'userCompany' => Auth::user()->company()->first(),
             'companies' => Auth::user()->companies()->get(),
         ]);
     }
@@ -49,14 +50,14 @@ final class CompanyController extends Controller
      */
     public function store(CreateCompanyRequest $request): RedirectResponse
     {
-        $this->companyService->createForAuth(CompanyDTO::fromRequest($request));
+        $this->companyService->store(CompanyDTO::fromRequest($request));
 
         return redirect()->route('companies.index');
     }
 
     public function destroy(Company $company): SymfonyResponse
     {
-        UserCompany::authFind($company->id)->delete();
+        $this->companyService->detach($company);
 
         return redirect()->route('companies.index');
     }
@@ -68,10 +69,10 @@ final class CompanyController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
-        $company = Company::fromKvk($request->kvk_to_find);
+        $company = $this->companyService->findByKvk($request->kvk_to_find);
 
-        if ($company->exists()) {
-            $this->companyService->attachToAuth($company->first());
+        if ($company !== null) {
+            $this->companyService->attach($company->first());
 
             return redirect()->route('companies.index');
         }
