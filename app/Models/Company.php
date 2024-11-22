@@ -96,11 +96,6 @@ class Company extends Model
         return $query->where('kvk', $kvk);
     }
 
-    public function products(): HasMany
-    {
-        return $this->hasMany(Product::class, 'company_id', 'id');
-    }
-
     public function employees(): HasMany
     {
         return $this->hasMany(User::class, 'company_kvk', 'kvk');

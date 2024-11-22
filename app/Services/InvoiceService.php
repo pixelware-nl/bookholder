@@ -14,11 +14,11 @@ class InvoiceService
      */
     public function generatePDF(Invoice $invoice): Response
     {
-        $freelanceLogService = new FreelanceLogService();
+        $logService = new LogService();
         $pdfService = new PDFService();
 
-        $logs = $freelanceLogService->getFreelanceLogsForCompany($invoice->toCompany, $invoice->start_date, $invoice->end_date);
-        $total = $freelanceLogService->getFreelanceLogsTotal($logs);
+        $logs = $logService->getLogs($invoice->start_date, $invoice->end_date);
+        $total = $logService->getTotalLogs($logs);
 
         return $pdfService->streamToPdf(
             view('pdf.invoice', [

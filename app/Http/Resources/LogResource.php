@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FreelanceLogEntryResource extends JsonResource
+class LogResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +16,11 @@ class FreelanceLogEntryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product_name' => $this->product->name,
-            'product_type' => $this->product->type->name,
+            'name' => $this->name,
+            'description' => $this->description,
             'rate' => $this->rate,
             'hours' => $this->hours,
-            'company_name' => $this->product->company->name,
+            'company_name' => $this->company->name,
         ];
     }
 }

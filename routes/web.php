@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\LogController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -17,12 +18,13 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('invoices', InvoiceController::class);
         Route::resource('companies', CompanyController::class)->only(['index', 'store', 'destroy']);
+        Route::resource('logs', LogController::class)->only(['index', 'create', 'store', 'destroy']);
+
         Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');
 
         Route::prefix('companies')->group(function () {
             Route::get('find', [CompanyController::class, 'find'])->name('companies.find');
             Route::post('find', [CompanyController::class, 'found'])->name('companies.found');
         });
-
     });
 });

@@ -3,13 +3,15 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -27,26 +29,28 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Product|null $product
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry query()
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereHours($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereProductId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereRate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereHours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereProductId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereUpdatedAt($value)
  * @mixin Eloquent
  * @property int $user_id
  * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|FreelanceLogEntry whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereUserId($value)
+ * @property int $company_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Log whereCompanyId($value)
  * @mixin \Eloquent
  */
-class FreelanceLogEntry extends Model
+class Log extends Model
 {
     use HasFactory;
 
-    protected $table = 'freelance_log_entries';
+    protected $table = 'logs';
 
     /**
      * The attributes that are mass assignable.
@@ -59,13 +63,18 @@ class FreelanceLogEntry extends Model
         'hours',
     ];
 
+    public function scopeForAuthenticatedUser(Builder $query): Builder
+    {
+        return $query->where('user_id', Auth::id());
+    }
+
     public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function product(): HasOne
+    public function company(): HasOne
     {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+        return $this->hasOne(Company::class, 'id', 'company_id');
     }
 }

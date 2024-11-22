@@ -1,0 +1,62 @@
+<template>
+    <AdminContainer form-title="Invoice settings" :route-name="route('invoices.index')">
+        <form @submit.prevent="form.post(route('invoices.store'))">
+            <InputContainer>
+                <SelectInput
+                    id="companies"
+                    :options="companies"
+                    name="company_id"
+                    v-model="form.company_id"
+                    label="Companies"
+                    :error="errors.company_id"
+                />
+            </InputContainer>
+            <InputContainer class="flex">
+                <DoubleInputContainer>
+                    <DateInput
+                        id="start-date"
+                        name="start_date"
+                        v-model="form.start_date"
+                        label="Start date"
+                        placeholder="01-01-2024"
+                        :error="errors.start_date"
+                    />
+                </DoubleInputContainer>
+                <DoubleInputContainer>
+                    <DateInput
+                        id="end-date"
+                        name="end_date"
+                        v-model="form.end_date"
+                        label="End date"
+                        placeholder="31-01-2024"
+                        :error="errors.end_date"
+                    />
+                </DoubleInputContainer>
+            </InputContainer>
+            <SubmitButton :form-processing="form.processing"> Create PDF </SubmitButton>
+        </form>
+    </AdminContainer>
+</template>
+<script setup lang="ts">
+import {defineProps} from "vue";
+import {useForm} from "@inertiajs/vue3";
+import InputContainer from "../../Partials/Containers/InputContainer.vue";
+import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
+import DateInput from "../../Partials/Inputs/DateInput.vue";
+import SelectInput from "../../Partials/Inputs/SelectInput.vue";
+import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
+import AdminContainer from "../Partials/AdminContainer.vue";
+
+interface Props {
+    companies: object,
+    errors: object,
+}
+
+const props = defineProps<Props>();
+
+const form = useForm({
+    company_id: null,
+    start_date: null,
+    end_date: null,
+});
+</script>

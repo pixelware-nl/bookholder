@@ -40,8 +40,8 @@ use Illuminate\Notifications\Notifiable;
  * @property int $company_id
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Company> $companies
  * @property-read int|null $companies_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FreelanceLogEntry> $freelanceLogEntries
- * @property-read int|null $freelance_log_entries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Log> $logs
+ * @property-read int|null $logs_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @mixin \Eloquent
@@ -70,9 +70,9 @@ class User extends Authenticatable implements CanResetPassword
         ];
     }
 
-    public function freelanceLogEntries(): hasMany
+    public function logs(): hasMany
     {
-        return $this->hasMany(FreelanceLogEntry::class, 'user_id', 'id');
+        return $this->hasMany(Log::class, 'user_id', 'id');
     }
 
     public function company(): BelongsTo

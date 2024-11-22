@@ -67,7 +67,13 @@ class KVKService
      */
     private function getJsonDecodedRequest(string $url, string $kvk): mixed
     {
-        $request = $this->getRequest($url, $kvk);
+        try {
+            $request = $this->getRequest($url, $kvk);
+        }
+        catch (\Exception $exception) {
+            throw new ConnectionException();
+        }
+
 
         if ($request->status() !== ResponseAlias::HTTP_OK) {
             throw new ConnectionException();

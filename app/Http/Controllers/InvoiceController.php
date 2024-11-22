@@ -19,7 +19,7 @@ use Throwable;
 final class InvoiceController extends Controller
 {
     public function __construct(
-        private readonly InvoiceService $invoiceService = new InvoiceService()
+        private readonly InvoiceService $invoiceService
     ) {}
 
     public function index(): InertiaResponse
