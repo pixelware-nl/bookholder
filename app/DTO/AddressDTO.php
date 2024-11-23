@@ -7,21 +7,34 @@ use App\Exceptions\InvalidRequestToDTOException;
 use App\Helpers\ValidationHelper;
 use Illuminate\Http\Request;
 
-final class AddressDTO implements DTOInterface
+final readonly class AddressDTO implements DTOInterface
 {
-    private const REQUIRED_ARRAY_PARAMS = [
-        'street_address',
-        'city',
-        'postal_code',
-        'country'
-    ];
-
     public function __construct(
-        private readonly string $streetAddress,
-        private readonly string $city,
-        private readonly string $postalCode,
-        private readonly string $country,
+        private string $streetAddress,
+        private string $city,
+        private string $postalCode,
+        private string $country,
     ) {}
+
+    public static function fromRequest(Request $request): AddressDTO
+    {
+        return new self(
+            $request->street_address,
+            $request->city,
+            $request->postal_code,
+            $request->country,
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'street_address' => $this->getStreetAddress(),
+            'city' => $this->getCity(),
+            'postal_code' => $this->getPostalCode(),
+            'country' => $this->getCountry(),
+        ];
+    }
 
     public function getStreetAddress(): string {
         return $this->streetAddress;
@@ -37,32 +50,5 @@ final class AddressDTO implements DTOInterface
 
     public function getCountry(): string {
         return $this->country;
-    }
-
-    /**
-     * @throws InvalidRequestToDTOException
-     */
-    public static function fromRequest(Request $request): AddressDTO
-    {
-        if (ValidationHelper::isMissingRequiredRequestParams(self::REQUIRED_ARRAY_PARAMS, $request)) {
-            throw new InvalidRequestToDTOException();
-        }
-
-        return new self(
-            $request->input('street_address'),
-            $request->input('city'),
-            $request->input('postal_code'),
-            $request->input('country'),
-        );
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'street_address' => $this->getStreetAddress(),
-            'city' => $this->getCity(),
-            'postal_code' => $this->getPostalCode(),
-            'country' => $this->getCountry(),
-        ];
     }
 }

@@ -38,9 +38,6 @@ final class LogController extends Controller
         ]);
     }
 
-    /**
-     * @throws InvalidRequestToDTOException
-     */
     public function store(CreateLogRequest $request): RedirectResponse
     {
         $this->logService->store(LogDTO::fromRequest($request));

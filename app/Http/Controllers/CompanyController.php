@@ -47,7 +47,6 @@ final class CompanyController extends Controller
     }
 
     /**
-     * @throws InvalidRequestToDTOException
      * @throws InvalidArrayParamsException
      */
     public function store(CreateCompanyRequest $request): RedirectResponse

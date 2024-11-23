@@ -85,24 +85,4 @@ class Company extends Model
         'postal_code',
         'country'
     ];
-
-    public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
-    {
-        return $query->whereNot('id', Auth::user()->company_id);
-    }
-
-    public static function scopeFromKvk(Builder $query, string $kvk): Builder
-    {
-        return $query->where('kvk', $kvk);
-    }
-
-    public function employees(): HasMany
-    {
-        return $this->hasMany(User::class, 'company_kvk', 'kvk');
-    }
-
-    public function partners(): belongsToMany
-    {
-        return $this->belongsToMany(User::class, 'user_companies', 'company_id', 'user_id');
-    }
 }

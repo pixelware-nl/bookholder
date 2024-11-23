@@ -17,7 +17,7 @@ interface CompanyRepositoryInterface
 
     public function store(CompanyDTO $companyDTO): Company;
 
-    public function storeOrGet(array $array): Company;
+    public function storeOrGet(CompanyDTO $companyDTO): Company;
 
     public function attach(Company $company): Company;
 

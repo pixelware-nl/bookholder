@@ -21,12 +21,9 @@ readonly class CompanyService
 
     public function storeOrGet(CompanyDTO $companyDTO): Company
     {
-        return $this->companyRepository->storeOrGet($companyDTO->toArray());
+        return $this->companyRepository->storeOrGet($companyDTO);
     }
 
-    /**
-     * @throws InvalidArrayParamsException
-     */
     public function store(CompanyDTO $companyDTO): Company
     {
         return $this->companyRepository->store($companyDTO);

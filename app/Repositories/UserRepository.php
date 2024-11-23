@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Request;
 
 class UserRepository implements UserRepositoryInterface
@@ -35,16 +36,16 @@ class UserRepository implements UserRepositoryInterface
     public function store(UserDTO $userDTO): User
     {
         $fullname = strtolower(
-            sprintf('%s %s', ucfirst($userDTO->firstname), ucfirst($userDTO->lastname))
+            sprintf('%s %s', ucfirst($userDTO->getFirstname()), ucfirst($userDTO->getLastname()))
         );
 
-        $email = strtolower($userDTO->email);
+        $email = strtolower($userDTO->getEmail());
 
         return User::create([
             'full_name' => $fullname,
             'email' => $email,
-            'password' => \Hash::make($userDTO->password),
-            'company_id' => $userDTO->company_id
+            'password' => Hash::make($userDTO->getPassword()),
+            'company_id' => $userDTO->getCompanyId()
         ]);
     }
 }

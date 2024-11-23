@@ -29,34 +29,22 @@ class CompanyRepository implements CompanyRepositoryInterface
         return Company::fromKvk($kvk)->first();
     }
 
-    /**
-     * @throws InvalidArrayParamsException
-     */
     public function store(CompanyDTO $companyDTO): Company
     {
         return $this->attach(
-            $this->storeOrGet($companyDTO->toArray())
+            $this->storeOrGet($companyDTO)
         );
     }
 
-    /**
-     * @throws InvalidArrayParamsException
-     */
-    public function storeOrGet(array $array): Company
+    public function storeOrGet(CompanyDTO $companyDTO): Company
     {
-        $required = ['name', 'kvk', 'street_address', 'city', 'postal_code', 'country'];
-
-        if (ValidationHelper::isMissingRequiredArrayParams($required, $array)) {
-            throw new InvalidArrayParamsException();
-        }
-
-        $company = Company::fromKvk($array['kvk']);
+        $company = Company::fromKvk($companyDTO->getKvk());
 
         if ($company->exists()) {
             return $company->first();
         }
 
-        return Company::create($array);
+        return Company::create($companyDTO->toArray());
     }
 
     public function attach(Company $company): Company
