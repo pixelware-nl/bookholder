@@ -13,12 +13,12 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 {
     public function all(): Collection
     {
-        return Invoice::all();
+        return Invoice::where('user_id', Auth::id())->get();
     }
 
     public function findByCompany(Company $company): Collection
     {
-        return Invoice::where('from_company_id', Auth::id())->where('to_company_id', $company->id)->get();
+        return Invoice::where('user_id', Auth::id())->where('to_company_id', $company->id)->get();
     }
 
     public function store(InvoiceDTO $invoiceDTO): Invoice

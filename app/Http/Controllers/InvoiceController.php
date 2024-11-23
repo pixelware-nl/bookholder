@@ -6,12 +6,10 @@ use App\DTO\InvoiceDTO;
 use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Http\Requests\Invoices\UpdateInvoiceRequest;
 use App\Http\Resources\InvoiceResource;
-use App\Models\Company;
 use App\Models\Invoice;
-use App\Models\UserCompany;
+use App\Repositories\UserRepository;
 use App\Services\InvoiceService;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
@@ -22,14 +20,15 @@ final class InvoiceController extends Controller
     // TODO adde repository for this
 
     public function __construct(
-        private readonly InvoiceService $invoiceService
+        private readonly InvoiceService $invoiceService,
+        private readonly UserRepository $userRepository
     ) {}
 
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Index', [
             'invoices' => InvoiceResource::collection(
-                Invoice::forAuthenticatedUser()->get()
+                $this->invoiceService->all()
             )
         ]);
     }
@@ -37,7 +36,7 @@ final class InvoiceController extends Controller
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Create', [
-            'companies' => Auth::user()->companies()->get()
+            'companies' => $this->userRepository->getCompanies()
         ]);
     }
 

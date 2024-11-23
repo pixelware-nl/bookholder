@@ -2,6 +2,7 @@
 
 namespace App\DTO;
 
+use App\DTO\Interfaces\DTOInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

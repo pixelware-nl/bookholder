@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\DTO\CompanyDTO;
+use App\DTO\UserDTO;
 use App\Exceptions\InvalidArrayParamsException;
 use App\Exceptions\InvalidRequestToDTOException;
 use App\Helpers\KVKHelper;
@@ -12,7 +13,9 @@ use App\Http\Requests\Auth\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
 use App\Models\User;
+use App\Repositories\UserRepository;
 use App\Services\CompanyService;
+use App\Services\KVKService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -21,6 +24,12 @@ use Inertia\Response as InertiaResponse;
 
 class RegisterController extends Controller
 {
+    public function __construct(
+        private readonly KVKService $kvkService,
+        private readonly CompanyService $companyService,
+        private readonly UserRepository $userRepository
+    ) {}
+
     public function find(): InertiaResponse
     {
         return Inertia::render('Auth/Find');
@@ -28,13 +37,13 @@ class RegisterController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
-        $company = Company::fromKvk($request->kvk_to_find);
+        $company = $this->companyService->findByKvk($request->kvk_to_find);
 
         if ($company->exists()) {
             return redirect()->route('register.create')->with(['company' => $company->first()]);
         }
 
-        return KVKHelper::redirectOnSuccess($request->kvk_to_find, 'register.create');
+        return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'register.create');
     }
 
     public function getCompany(?string $kvk = null): InertiaResponse
@@ -55,8 +64,7 @@ class RegisterController extends Controller
      */
     public function setCompany(CreateCompanyRequest $request): RedirectResponse
     {
-        $companyDTO = CompanyDTO::fromRequest($request);
-        $company = Company::createOrGet($companyDTO->toArray());
+        $company = $this->companyService->storeOrGet(CompanyDTO::fromRequest($request));
 
         return redirect()->route('register.create')->with(['company' => $company]);
     }
@@ -78,18 +86,7 @@ class RegisterController extends Controller
 
     public function store(CreateUserRequest $request): RedirectResponse
     {
-        $fullname = strtolower(
-            sprintf('%s %s', ucfirst($request->firstname), ucfirst($request->lastname))
-        );
-
-        $email = strtolower($request->email);
-
-        User::create([
-            'full_name' => $fullname,
-            'email' => $email,
-            'password' => \Hash::make($request->password),
-            'company_id' => $request->company_id
-        ]);
+        $this->userRepository->store(UserDTO::fromRequest($request));
 
         return redirect()->route('login');
     }

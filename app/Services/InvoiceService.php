@@ -7,6 +7,7 @@ use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Models\Invoice;
 use App\Repositories\InvoiceRepository;
 use Exception;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use Throwable;
 
@@ -36,6 +37,11 @@ readonly class InvoiceService
                 'total' => $total,
             ])
         );
+    }
+
+    public function all(): Collection
+    {
+        return $this->invoiceRepository->all();
     }
 
     public function store(InvoiceDTO $invoiceDTO): Invoice
