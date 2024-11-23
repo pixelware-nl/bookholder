@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Services\CompanyService;
 use App\Services\KVKService;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
     public function __construct(
         private readonly KVKService $kvkService,
         private readonly CompanyService $companyService,
-        private readonly UserRepository $userRepository
+        private readonly UserService $userService
     ) {}
 
     public function find(): InertiaResponse
@@ -86,7 +87,7 @@ class RegisterController extends Controller
 
     public function store(CreateUserRequest $request): RedirectResponse
     {
-        $this->userRepository->store(UserDTO::fromRequest($request));
+        $this->userService->store(UserDTO::fromRequest($request));
 
         return redirect()->route('login');
     }

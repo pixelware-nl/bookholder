@@ -9,6 +9,7 @@ use App\Http\Resources\LogResource;
 use App\Models\Log;
 use App\Repositories\UserRepository;
 use App\Services\LogService;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -18,14 +19,14 @@ final class LogController extends Controller
 {
     public function __construct(
         private readonly LogService $logService,
-        private readonly UserRepository $userRepository
+        private readonly UserService $userService
     ) {}
 
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Log/Index', [
             'logs' => LogResource::collection(
-                $this->userRepository->getLogs()
+                $this->userService->getLogs()
             )
         ]);
     }
@@ -33,7 +34,7 @@ final class LogController extends Controller
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Log/Create', [
-            'companies' => $this->userRepository->getCompanies()
+            'companies' => $this->userService->getCompanies()
         ]);
     }
 

@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Repositories\UserRepository;
 use App\Services\CompanyService;
 use App\Services\KVKService;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
@@ -22,14 +23,14 @@ final class CompanyController extends Controller
     public function __construct(
         private readonly CompanyService $companyService,
         private readonly KVKService $kvkService,
-        private readonly UserRepository $userRepository
+        private readonly UserService $userService
     ) {}
 
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Company/Index', [
-            'userCompany' => $this->userRepository->getCompany(),
-            'companies' => $this->userRepository->getCompanies(),
+            'userCompany' => $this->userService->getCompany(),
+            'companies' => $this->userService->getCompanies(),
         ]);
     }
 
