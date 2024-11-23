@@ -10,7 +10,7 @@
                 <h1 class="text-4xl font-black">{{ daysUntilNewMonth }} day(s)</h1>
             </div>
         </div>
-        <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center justify-center ml-8 py-8">
+        <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center ml-8 py-8">
             <table class="w-[58rem]">
                 <tr>
                     <th> Company </th>
