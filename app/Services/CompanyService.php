@@ -19,6 +19,11 @@ readonly class CompanyService
         return $this->companyRepository->findByKvk($kvk);
     }
 
+    public function storeOrGet(CompanyDTO $companyDTO): Company
+    {
+        return $this->companyRepository->storeOrGet($companyDTO->toArray());
+    }
+
     /**
      * @throws InvalidArrayParamsException
      */

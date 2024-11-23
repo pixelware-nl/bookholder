@@ -17,7 +17,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -104,25 +104,5 @@ class Company extends Model
     public function partners(): belongsToMany
     {
         return $this->belongsToMany(User::class, 'user_companies', 'company_id', 'user_id');
-    }
-
-    /**
-     * @throws InvalidArrayParamsException
-     */
-    public static function createOrGet(array $array): Company
-    {
-        $required = ['name', 'kvk', 'street_address', 'city', 'postal_code', 'country'];
-
-        if (ValidationHelper::isMissingRequiredArrayParams($required, $array)) {
-            throw new InvalidArrayParamsException();
-        }
-
-        $company = Company::fromKvk($array['kvk']);
-
-        if ($company->exists()) {
-            return $company->first();
-        }
-
-        return Company::create($array);
     }
 }

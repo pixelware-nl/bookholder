@@ -2,6 +2,7 @@
 
 namespace App\DTO;
 
+use App\DTO\Interfaces\DTOInterface;
 use App\Exceptions\InvalidRequestToDTOException;
 use App\Helpers\ValidationHelper;
 use App\Models\Company;
