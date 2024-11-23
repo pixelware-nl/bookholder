@@ -3,6 +3,7 @@
 namespace App\DTO;
 
 use App\DTO\Interfaces\DTOInterface;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 final readonly class UserDTO implements DTOInterface
@@ -14,6 +15,17 @@ final readonly class UserDTO implements DTOInterface
         private string $password,
         private int $company_id
     ) {}
+
+    public function User(): User
+    {
+        return new User([
+            'firstname' => $this->getFirstname(),
+            'lastname' => $this->getLastname(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPassword(),
+            'company_id' => $this->getCompanyId()
+        ]);
+    }
 
     public static function fromRequest(Request $request)
     {

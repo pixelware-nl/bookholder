@@ -34,12 +34,12 @@ final readonly class CompanyDTO implements DTOInterface
     public static function fromRequest(Request $request): CompanyDTO
     {
         return new self(
-            $request->input('name'),
-            $request->input('kvk'),
-            $request->input('street_address'),
-            $request->input('city'),
-            $request->input('postal_code'),
-            $request->input('country')
+            $request->name,
+            $request->kvk,
+            $request->street_address,
+            $request->city,
+            $request->postal_code,
+            $request->country
         );
     }
 

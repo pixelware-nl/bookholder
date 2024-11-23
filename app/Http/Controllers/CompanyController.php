@@ -46,9 +46,6 @@ final class CompanyController extends Controller
         return Inertia::render('Admin/Company/Create', ['kvk' => $kvk]);
     }
 
-    /**
-     * @throws InvalidArrayParamsException
-     */
     public function store(CreateCompanyRequest $request): RedirectResponse
     {
         $this->companyService->store(CompanyDTO::fromRequest($request));
