@@ -27,7 +27,7 @@ final readonly class UserDTO implements DTOInterface
         ]);
     }
 
-    public static function fromRequest(Request $request)
+    public static function fromRequest(Request $request): UserDTO
     {
         return new self(
             $request->firstname,
