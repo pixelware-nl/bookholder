@@ -9,7 +9,6 @@ use App\Helpers\KVKHelper;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
-use App\Models\UserCompany;
 use App\Services\CompanyService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;

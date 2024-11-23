@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DTO\InvoiceDTO;
 use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Http\Requests\Invoices\UpdateInvoiceRequest;
 use App\Http\Resources\InvoiceResource;
@@ -42,15 +43,7 @@ final class InvoiceController extends Controller
 
     public function store(CreateInvoiceRequest $request): SymfonyResponse
     {
-        $user = Auth::user();
-
-        Invoice::create([
-            'user_id' => $user->id,
-            'from_company_id' => $user->company_id,
-            'to_company_id' => $request->company_id,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
-        ]);
+        $this->invoiceService->store(InvoiceDTO::fromRequest($request));
 
         return redirect()->route('invoices.index');
     }
@@ -75,7 +68,7 @@ final class InvoiceController extends Controller
 
     public function destroy(Invoice $invoice): SymfonyResponse
     {
-        $invoice->delete();
+        $this->invoiceService->delete($invoice);
 
         return redirect()->route('invoices.index');
     }

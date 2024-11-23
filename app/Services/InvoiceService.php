@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\DTO\InvoiceDTO;
+use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Models\Invoice;
-use App\Repositories\LogRepository;
+use App\Repositories\InvoiceRepository;
 use Exception;
 use Illuminate\Http\Response;
 use Throwable;
@@ -12,7 +14,8 @@ readonly class InvoiceService
 {
     public function __construct(
         private LogService $logService,
-        private PDFService $pdfService
+        private PDFService $pdfService,
+        private InvoiceRepository $invoiceRepository
     ) {}
 
     /**
@@ -33,5 +36,15 @@ readonly class InvoiceService
                 'total' => $total,
             ])
         );
+    }
+
+    public function store(InvoiceDTO $invoiceDTO): Invoice
+    {
+        return $this->invoiceRepository->store($invoiceDTO);
+    }
+
+    public function delete(Invoice $invoice): void
+    {
+        $this->invoiceRepository->delete($invoice);
     }
 }
