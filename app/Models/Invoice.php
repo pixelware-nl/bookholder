@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
- *
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -73,11 +73,6 @@ class Invoice extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
-
-    public function scopeForAuthenticatedUser(Builder $query): Builder
-    {
-        return $query->where('user_id', Auth::id());
-    }
 
     public function fromCompany(): HasOne
     {

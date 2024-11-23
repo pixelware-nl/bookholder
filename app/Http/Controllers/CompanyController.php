@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\DTO\CompanyDTO;
 use App\Exceptions\InvalidArrayParamsException;
 use App\Exceptions\InvalidRequestToDTOException;
-use App\Helpers\KVKHelper;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
-use App\Models\UserCompany;
+use App\Repositories\UserRepository;
 use App\Services\CompanyService;
+use App\Services\KVKService;
+use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -21,14 +21,16 @@ use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 final class CompanyController extends Controller
 {
     public function __construct(
-        private readonly CompanyService $companyService
+        private readonly CompanyService $companyService,
+        private readonly KVKService $kvkService,
+        private readonly UserService $userService
     ) {}
 
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Company/Index', [
-            'userCompany' => Auth::user()->company()->first(),
-            'companies' => Auth::user()->companies()->get(),
+            'userCompany' => $this->userService->getCompany(),
+            'companies' => $this->userService->getCompanies(),
         ]);
     }
 
@@ -77,6 +79,6 @@ final class CompanyController extends Controller
             return redirect()->route('companies.index');
         }
 
-        return KVKHelper::redirectOnSuccess($request->kvk_to_find, 'company.create');
+        return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'company.create');
     }
 }

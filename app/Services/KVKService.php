@@ -8,6 +8,7 @@ use App\Enums\KVKAddressType;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\Response;
+use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class KVKService
@@ -33,6 +34,19 @@ class KVKService
             $addressDTO->getPostalCode(),
             $addressDTO->getCountry(),
         );
+    }
+
+    public function redirectOnSuccess(string $kvk, string $route): RedirectResponse
+    {
+        $companyDTO = $this->getCompanyDetails($kvk);
+
+        if ($companyDTO == null) {
+            return redirect()->back()->withErrors([
+                'kvk_to_find' => 'KVK not found.'
+            ]);
+        }
+
+        return redirect()->route($route)->with(['company' => $companyDTO->company()]);
     }
 
     private function getAddress(object $address): ?AddressDTO

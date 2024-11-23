@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
- *
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -44,6 +44,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereUserId($value)
  * @property int $company_id
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereCompanyId($value)
+ * @property-read \App\Models\Company|null $company
  * @mixin \Eloquent
  */
 class Log extends Model
