@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DTO\CompanyDTO;
-use App\Exceptions\InvalidArrayParamsException;
-use App\Exceptions\InvalidRequestToDTOException;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
 use App\Models\Company;
-use App\Repositories\UserRepository;
 use App\Services\CompanyService;
 use App\Services\KVKService;
 use App\Services\UserService;
@@ -46,10 +43,6 @@ final class CompanyController extends Controller
         return Inertia::render('Admin/Company/Create', ['kvk' => $kvk]);
     }
 
-    /**
-     * @throws InvalidRequestToDTOException
-     * @throws InvalidArrayParamsException
-     */
     public function store(CreateCompanyRequest $request): RedirectResponse
     {
         $this->companyService->store(CompanyDTO::fromRequest($request));
@@ -74,7 +67,7 @@ final class CompanyController extends Controller
         $company = $this->companyService->findByKvk($request->kvk_to_find);
 
         if ($company !== null) {
-            $this->companyService->attach($company->first());
+            $this->companyService->attach($company);
 
             return redirect()->route('companies.index');
         }

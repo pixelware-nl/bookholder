@@ -2,19 +2,12 @@
 
 namespace App\Models;
 
-use App\Exceptions\InvalidArrayParamsException;
-use App\Helpers\ValidationHelper;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -85,24 +78,4 @@ class Company extends Model
         'postal_code',
         'country'
     ];
-
-    public function scopeWithoutAuthenticatedUserCompany(Builder $query): Builder
-    {
-        return $query->whereNot('id', Auth::user()->company_id);
-    }
-
-    public static function scopeFromKvk(Builder $query, string $kvk): Builder
-    {
-        return $query->where('kvk', $kvk);
-    }
-
-    public function employees(): HasMany
-    {
-        return $this->hasMany(User::class, 'company_kvk', 'kvk');
-    }
-
-    public function partners(): belongsToMany
-    {
-        return $this->belongsToMany(User::class, 'user_companies', 'company_id', 'user_id');
-    }
 }

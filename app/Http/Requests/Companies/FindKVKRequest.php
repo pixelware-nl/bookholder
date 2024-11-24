@@ -5,6 +5,11 @@ namespace App\Http\Requests\Companies;
 use App\Rules\ValidKVKNumberRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class FindKVKRequest
+ * @package App\Http\Requests\Companies
+ * @property string $kvk_to_find
+ */
 class FindKVKRequest extends FormRequest
 {
     public function authorize(): bool

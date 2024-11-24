@@ -24,7 +24,8 @@ readonly class InvoiceService
      */
     public function generatePDF(Invoice $invoice): Response
     {
-        $logs = $this->logService->getLogs($invoice->start_date, $invoice->end_date);
+        $toCompany = $invoice->toCompany()->first();
+        $logs = $this->logService->getCompanyLogs($toCompany, $invoice->start_date, $invoice->end_date);
         $total = $this->logService->getTotalLogs($logs);
 
         return $this->pdfService->streamToPdf(

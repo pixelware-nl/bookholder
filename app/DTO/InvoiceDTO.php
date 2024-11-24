@@ -3,43 +3,30 @@
 namespace App\DTO;
 
 use App\DTO\Interfaces\DTOInterface;
+use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InvoiceDTO implements DTOInterface
+final readonly class InvoiceDTO implements DTOInterface
 {
     public function __construct(
-        public int $user_id,
-        public int $from_company_id,
-        public int $to_company_id,
-        public string $start_date,
-        public string $end_date
+        private int    $user_id,
+        private int    $from_company_id,
+        private int    $to_company_id,
+        private string $start_date,
+        private string $end_date
     ) {}
 
-    public function getUserId(): int
+    public function invoice(): Invoice
     {
-        return $this->user_id;
-    }
-
-    public function getFromCompanyId(): int
-    {
-        return $this->from_company_id;
-    }
-
-    public function getToCompanyId(): int
-    {
-        return $this->to_company_id;
-    }
-
-    public function getStartDate(): string
-    {
-        return $this->start_date;
-    }
-
-    public function getEndDate(): string
-    {
-        return $this->end_date;
+        return new Invoice([
+            'user_id' => $this->getUserId(),
+            'from_company_id' => $this->getFromCompanyId(),
+            'to_company_id' => $this->getToCompanyId(),
+            'start_date' => $this->getStartDate(),
+            'end_date' => $this->getEndDate()
+        ]);
     }
 
     public static function fromRequest(Request $request, User $user = null): self
@@ -66,5 +53,30 @@ class InvoiceDTO implements DTOInterface
             'start_date' => $this->start_date,
             'end_date' => $this->end_date
         ];
+    }
+
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+    public function getFromCompanyId(): int
+    {
+        return $this->from_company_id;
+    }
+
+    public function getToCompanyId(): int
+    {
+        return $this->to_company_id;
+    }
+
+    public function getStartDate(): string
+    {
+        return $this->start_date;
+    }
+
+    public function getEndDate(): string
+    {
+        return $this->end_date;
     }
 }

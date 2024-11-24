@@ -10,9 +10,10 @@
                 <h1 class="text-4xl font-black">{{ daysUntilNewMonth }} day(s)</h1>
             </div>
         </div>
-        <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center ml-8 py-8">
-            <table class="w-[58rem]">
-                <tr>
+        <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center ml-8 pb-4 max-h-[39.5em] overflow-auto">
+            <div class="p-2.5 w-full sticky top-0 bg-white"></div>
+            <table class="w-[58rem] bg-white">
+                <tr class="sticky top-5 bg-white">
                     <th> Company </th>
                     <th> Rate </th>
                     <th> Hours </th>
@@ -62,7 +63,30 @@ onMounted(() => {
 })
 </script>
 <style scoped>
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
 .link-button {
     @apply inline-block bg-black text-white py-6 px-6 rounded-lg hover:bg-gray-800 hover:text-slate-200 mb-4
+}
+
+tbody tr:nth-child(even) {
+    @apply bg-slate-50
 }
 </style>

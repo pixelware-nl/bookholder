@@ -4,16 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\DTO\CompanyDTO;
 use App\DTO\UserDTO;
-use App\Exceptions\InvalidArrayParamsException;
-use App\Exceptions\InvalidRequestToDTOException;
-use App\Helpers\KVKHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Auth\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
-use App\Models\Company;
-use App\Models\User;
-use App\Repositories\UserRepository;
 use App\Services\CompanyService;
 use App\Services\KVKService;
 use App\Services\UserService;
@@ -59,10 +53,6 @@ class RegisterController extends Controller
         return Inertia::render('Auth/Company', ['kvk' => $kvk]);
     }
 
-    /**
-     * @throws InvalidRequestToDTOException
-     * @throws InvalidArrayParamsException
-     */
     public function setCompany(CreateCompanyRequest $request): RedirectResponse
     {
         $company = $this->companyService->storeOrGet(CompanyDTO::fromRequest($request));

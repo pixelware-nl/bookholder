@@ -36,10 +36,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-onMounted(() => {
-    console.log(props.logs)
-})
 </script>
 <style scoped>
 .link-button {
