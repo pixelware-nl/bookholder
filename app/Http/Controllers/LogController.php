@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\DTO\LogDTO;
-use App\Exceptions\InvalidRequestToDTOException;
 use App\Http\Requests\Logs\CreateLogRequest;
 use App\Http\Resources\LogResource;
 use App\Models\Log;
-use App\Repositories\UserRepository;
 use App\Services\LogService;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -38,9 +36,6 @@ final class LogController extends Controller
         ]);
     }
 
-    /**
-     * @throws InvalidRequestToDTOException
-     */
     public function store(CreateLogRequest $request): RedirectResponse
     {
         $this->logService->store(LogDTO::fromRequest($request));

@@ -3,29 +3,18 @@
 namespace App\DTO;
 
 use App\DTO\Interfaces\DTOInterface;
-use App\Exceptions\InvalidRequestToDTOException;
-use App\Helpers\ValidationHelper;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
-final class CompanyDTO implements DTOInterface
+final readonly class CompanyDTO implements DTOInterface
 {
-    private const REQUIRED_ARRAY_PARAMS = [
-        'name',
-        'kvk',
-        'street_address',
-        'city',
-        'postal_code',
-        'country'
-    ];
-
     public function __construct(
-        private readonly string $name,
-        private readonly string $kvk,
-        private readonly string $streetAddress,
-        private readonly string $city,
-        private readonly string $postalCode,
-        private readonly string $country,
+        private string $name,
+        private string $kvk,
+        private string $streetAddress,
+        private string $city,
+        private string $postalCode,
+        private string $country,
     ) {}
 
     public function company(): Company
@@ -40,22 +29,15 @@ final class CompanyDTO implements DTOInterface
         ]);
     }
 
-    /**
-     * @throws InvalidRequestToDTOException
-     */
     public static function fromRequest(Request $request): CompanyDTO
     {
-        if (ValidationHelper::isMissingRequiredRequestParams(self::REQUIRED_ARRAY_PARAMS, $request)) {
-            throw new InvalidRequestToDTOException();
-        }
-
         return new self(
-            $request->input('name'),
-            $request->input('kvk'),
-            $request->input('street_address'),
-            $request->input('city'),
-            $request->input('postal_code'),
-            $request->input('country')
+            $request->name,
+            $request->kvk,
+            $request->street_address,
+            $request->city,
+            $request->postal_code,
+            $request->country
         );
     }
 

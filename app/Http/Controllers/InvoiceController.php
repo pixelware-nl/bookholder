@@ -18,8 +18,6 @@ use Throwable;
 
 final class InvoiceController extends Controller
 {
-    // TODO adde repository for this
-
     public function __construct(
         private readonly InvoiceService $invoiceService,
         private readonly UserService $userService

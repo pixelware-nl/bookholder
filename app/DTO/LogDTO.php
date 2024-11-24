@@ -3,20 +3,11 @@
 namespace App\DTO;
 
 use App\DTO\Interfaces\DTOInterface;
-use App\Exceptions\InvalidRequestToDTOException;
-use App\Helpers\ValidationHelper;
+use App\Models\Log;
 use Illuminate\Http\Request;
 
 final readonly class LogDTO implements DTOInterface
 {
-    private const REQUIRED_ARRAY_PARAMS = [
-        'company_id',
-        'rate',
-        'hours',
-        'name',
-        'description',
-    ];
-
     public function __construct(
         private int    $companyId,
         private int    $rate,
@@ -24,6 +15,39 @@ final readonly class LogDTO implements DTOInterface
         private string $name,
         private string $description,
     ) {}
+
+    public function Log(): Log
+    {
+        return new Log([
+            'company_id' => $this->getCompanyId(),
+            'rate' => $this->getRate(),
+            'hours' => $this->getHours(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+        ]);
+    }
+
+    public static function fromRequest(Request $request): LogDTO
+    {
+        return new self(
+            $request->company_id,
+            $request->rate,
+            $request->hours,
+            $request->name,
+            $request->description,
+        );
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'company_id' => $this->getCompanyId(),
+            'rate' => $this->getRate(),
+            'hours' => $this->getHours(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+        ];
+    }
 
     public function getCompanyId(): int
     {
@@ -48,34 +72,5 @@ final readonly class LogDTO implements DTOInterface
     public function getDescription(): string
     {
         return $this->description;
-    }
-
-    /**
-     * @throws InvalidRequestToDTOException
-     */
-    public static function fromRequest(Request $request): LogDTO
-    {
-        if (ValidationHelper::isMissingRequiredRequestParams(self::REQUIRED_ARRAY_PARAMS, $request)) {
-            throw new InvalidRequestToDTOException();
-        }
-
-        return new self(
-            $request->input('company_id'),
-            $request->input('rate'),
-            $request->input('hours'),
-            $request->input('name'),
-            $request->input('description'),
-        );
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'company_id' => $this->getCompanyId(),
-            'rate' => $this->getRate(),
-            'hours' => $this->getHours(),
-            'name' => $this->getName(),
-            'description' => $this->getDescription(),
-        ];
     }
 }

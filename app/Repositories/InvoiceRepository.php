@@ -24,11 +24,11 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     public function store(InvoiceDTO $invoiceDTO): Invoice
     {
         return Invoice::create([
-            'user_id' => $invoiceDTO->user_id,
-            'from_company_id' => $invoiceDTO->from_company_id,
-            'to_company_id' => $invoiceDTO->to_company_id,
-            'start_date' => $invoiceDTO->start_date,
-            'end_date' => $invoiceDTO->end_date
+            'user_id' => $invoiceDTO->getUserId(),
+            'from_company_id' => $invoiceDTO->getFromCompanyId(),
+            'to_company_id' => $invoiceDTO->getToCompanyId(),
+            'start_date' => $invoiceDTO->getStartDate(),
+            'end_date' => $invoiceDTO->getEndDate()
         ]);
     }
 

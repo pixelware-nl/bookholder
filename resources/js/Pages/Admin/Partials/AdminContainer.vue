@@ -19,8 +19,27 @@ interface Props {
 const props = defineProps<Props>();
 </script>
 <style scoped>
+::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 20px;
+}
+
 .container {
-    @apply sm:w-full px-8 pt-12 pb-8 rounded-lg sm:shadow-xl bg-white
+    @apply sm:w-full px-8 pt-12 pb-8 rounded-lg sm:shadow-xl bg-white max-h-[85vh] overflow-auto
 }
 
 .header-title {

@@ -4,6 +4,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\ReturnBackOn404;
 use Illuminate\Support\Facades\Route;
 
 include_once __DIR__ . '/auth.php';

@@ -29,4 +29,8 @@ tr td {
 .table-item-link {
     @apply text-blue-600 hover:text-blue-900 select-none
 }
+
+tbody tr:nth-child(even) {
+    @apply bg-slate-50
+}
 </style>

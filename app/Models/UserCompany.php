@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -46,19 +46,6 @@ class UserCompany extends Model
         'user_id',
         'company_id',
     ];
-
-    public static function scopeAuthCreate(Builder $query, int $company_id): UserCompany
-    {
-        return $query->create([
-            'user_id' => Auth::id(),
-            'company_id' => $company_id,
-        ]);
-    }
-
-    public static function scopeAuthFind(Builder $query, int $company_id): Builder
-    {
-        return $query->where('user_id', Auth::id())->where('company_id', $company_id)->withTrashed();
-    }
 
     public function user(): BelongsTo
     {

@@ -3,9 +3,7 @@
 namespace App\Services;
 
 use App\DTO\CompanyDTO;
-use App\Exceptions\InvalidArrayParamsException;
 use App\Models\Company;
-use App\Models\UserCompany;
 use App\Repositories\CompanyRepository;
 
 readonly class CompanyService
@@ -21,12 +19,9 @@ readonly class CompanyService
 
     public function storeOrGet(CompanyDTO $companyDTO): Company
     {
-        return $this->companyRepository->storeOrGet($companyDTO->toArray());
+        return $this->companyRepository->storeOrGet($companyDTO);
     }
 
-    /**
-     * @throws InvalidArrayParamsException
-     */
     public function store(CompanyDTO $companyDTO): Company
     {
         return $this->companyRepository->store($companyDTO);
