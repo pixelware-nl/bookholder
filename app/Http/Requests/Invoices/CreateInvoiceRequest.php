@@ -6,6 +6,16 @@ use App\Rules\NotAuthenticatedUserCompanyRule;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CreateInvoiceRequest
+ * @package App\Http\Requests\Invoices
+ * @property int $company_id
+ * @property int $client_id
+ * @property string $invoice_date
+ * @property string $due_date
+ * @property string $description
+ * @property array $logs
+ */
 class CreateInvoiceRequest extends FormRequest
 {
     public function authorize(): true

@@ -3,9 +3,7 @@
 namespace App\Services;
 
 use App\DTO\CompanyDTO;
-use App\Exceptions\InvalidArrayParamsException;
 use App\Models\Company;
-use App\Models\UserCompany;
 use App\Repositories\CompanyRepository;
 
 readonly class CompanyService

@@ -4,6 +4,15 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class CreateUserRequest
+ * @package App\Http\Requests\Auth
+ * @property string $firstname
+ * @property string $lastname
+ * @property string $email
+ * @property string $password
+ * @property string $company_id
+ */
 class CreateUserRequest extends FormRequest
 {
     public function authorize(): bool

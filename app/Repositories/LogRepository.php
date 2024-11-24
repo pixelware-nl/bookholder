@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DTO\LogDTO;
+use App\Models\Company;
 use App\Models\Log;
 use App\Repositories\Interfaces\LogRepositoryInterface;
 use Carbon\Carbon;
@@ -20,6 +21,15 @@ class LogRepository implements LogRepositoryInterface
     public function findByTimeRange(Carbon $startDate, Carbon $endDate): Collection
     {
         return Auth::user()->logs()
+            ->where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->get();
+    }
+
+    public function findByCompanyTimeRange(Company $company, Carbon $startDate, Carbon $endDate): Collection
+    {
+        return Auth::user()->logs()
+            ->where('company_id', $company->id)
             ->where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate)
             ->get();

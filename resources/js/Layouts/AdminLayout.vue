@@ -1,7 +1,8 @@
 <template>
     <div class="min-h-screen sm:bg-slate-100 xs:bg-white">
-        <nav>
-            <ul class="flex justify-end p-6 bg-slate-900 text-slate-100">
+        <nav class="flex p-6 bg-slate-900 text-slate-100">
+            <p class="font-black"> Pixelware<span class="text-red-600">.</span> </p>
+            <ul class="flex justify-end w-full">
                 <NavLink slug="dashboard" route-name="dashboard.index"> Dashboard </NavLink>
                 <NavLink slug="invoices" route-name="invoices.index"> Invoicing </NavLink>
                 <NavLink slug="logs" route-name="logs.index"> Logs </NavLink>

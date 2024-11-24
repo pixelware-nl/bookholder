@@ -3,13 +3,12 @@
 namespace App\Repositories;
 
 use App\DTO\CompanyDTO;
-use App\Exceptions\InvalidArrayParamsException;
-use App\Helpers\ValidationHelper;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\UserCompany;
 use App\Repositories\Interfaces\CompanyRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyRepository implements CompanyRepositoryInterface
 {
@@ -26,7 +25,7 @@ class CompanyRepository implements CompanyRepositoryInterface
 
     public function findByKvk(string $kvk): ?Company
     {
-        return Company::fromKvk($kvk)->first();
+        return Company::where('kvk', $kvk)->first();
     }
 
     public function store(CompanyDTO $companyDTO): Company
@@ -38,7 +37,7 @@ class CompanyRepository implements CompanyRepositoryInterface
 
     public function storeOrGet(CompanyDTO $companyDTO): Company
     {
-        $company = Company::fromKvk($companyDTO->getKvk());
+        $company = Company::where('kvk', $companyDTO->getKvk());
 
         if ($company->exists()) {
             return $company->first();
@@ -49,7 +48,7 @@ class CompanyRepository implements CompanyRepositoryInterface
 
     public function attach(Company $company): Company
     {
-        $userCompany = UserCompany::authFind($company->id);
+        $userCompany = UserCompany::where('user_id', Auth::id())->where('company_id', $company->id);
 
         if ($userCompany->exists()) {
             $userCompany->restore();
@@ -57,13 +56,16 @@ class CompanyRepository implements CompanyRepositoryInterface
             return $company;
         }
 
-        UserCompany::authCreate($company->id);
+        UserCompany::create([
+            'user_id' => Auth::id(),
+            'company_id' => $company->id,
+        ]);
 
         return $company;
     }
 
     public function detach(Company $company): void
     {
-        UserCompany::authFind($company->id)->delete();
+        UserCompany::where('user_id', Auth::id())->where('company_id', $company->id)->delete();
     }
 }

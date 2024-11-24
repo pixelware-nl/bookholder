@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DTO\LogDTO;
+use App\Models\Company;
 use App\Models\Log;
 use App\Repositories\LogRepository;
 use Illuminate\Support\Carbon;
@@ -17,6 +18,11 @@ readonly class LogService
     public function getLogs(Carbon $startDate, Carbon $endDate): Collection
     {
         return $this->logRepository->findByTimeRange($startDate, $endDate);
+    }
+
+    public function getCompanyLogs(Company $company, Carbon $startDate, Carbon $endDate): Collection
+    {
+        return $this->logRepository->findByCompanyTimeRange($company, $startDate, $endDate);
     }
 
     public function getTotalLogs(Collection $logs): int
