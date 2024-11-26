@@ -2,13 +2,10 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\DTO\CompanyDTO;
 use App\DTO\InvoiceDTO;
 use App\Models\Company;
 use App\Models\Invoice;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 
 interface InvoiceRepositoryInterface
 {

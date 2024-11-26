@@ -24,7 +24,7 @@ final class LogController extends Controller
     {
         return Inertia::render('Admin/Log/Index', [
             'logs' => LogResource::collection(
-                $this->userService->getLogs()
+                $this->userService->logs()
             )
         ]);
     }
@@ -32,7 +32,7 @@ final class LogController extends Controller
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Log/Create', [
-            'companies' => $this->userService->getCompanies()
+            'companies' => $this->userService->companies()
         ]);
     }
 

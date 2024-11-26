@@ -6,6 +6,7 @@ use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -78,4 +79,10 @@ class Company extends Model
         'postal_code',
         'country'
     ];
+
+    public function users(): belongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_companies', 'company_id', 'user_id')
+            ->whereNull('user_companies.deleted_at');
+    }
 }

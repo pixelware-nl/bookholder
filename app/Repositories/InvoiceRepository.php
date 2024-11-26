@@ -28,7 +28,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             'from_company_id' => $invoiceDTO->getFromCompanyId(),
             'to_company_id' => $invoiceDTO->getToCompanyId(),
             'start_date' => $invoiceDTO->getStartDate(),
-            'end_date' => $invoiceDTO->getEndDate()
+            'end_date' => $invoiceDTO->getEndDate(),
+            'body' => $invoiceDTO->getBody()
         ]);
     }
 
