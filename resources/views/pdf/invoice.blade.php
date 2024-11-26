@@ -38,7 +38,7 @@
                 <th> Tarief (€) </th>
                 <th> Totaal </th>
             </tr>
-            @foreach($logs as $log)
+            @foreach($body->logs as $log)
                 <tr>
                     <td> {{ $log->name }} </td>
                     <td> {{ $log->hours }} </td>
@@ -50,7 +50,7 @@
                 <th></th>
                 <th></th>
                 <th> Totaal </th>
-                <th> {{ sprintf('€%s', number_format($total, decimal_separator: ',', thousands_separator: '.')) }} </th>
+                <th> {{ sprintf('€%s', number_format($body->total, decimal_separator: ',', thousands_separator: '.')) }} </th>
             </tr>
         </table>
     </div>
