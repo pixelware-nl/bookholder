@@ -7,7 +7,6 @@ use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Http\Requests\Invoices\UpdateInvoiceRequest;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
-use App\Repositories\UserRepository;
 use App\Services\InvoiceService;
 use App\Services\UserService;
 use Illuminate\Http\Response;
@@ -35,7 +34,7 @@ final class InvoiceController extends Controller
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Create', [
-            'companies' => $this->userService->getCompanies()
+            'companies' => $this->userService->companies()
         ]);
     }
 

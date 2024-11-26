@@ -3,19 +3,22 @@
 namespace App\DTO;
 
 use App\DTO\Interfaces\DTOInterface;
+use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-final readonly class InvoiceDTO implements DTOInterface
+final class InvoiceDTO implements DTOInterface
 {
     public function __construct(
-        private int    $user_id,
-        private int    $from_company_id,
-        private int    $to_company_id,
-        private string $start_date,
-        private string $end_date
+        private readonly int    $user_id,
+        private readonly int    $from_company_id,
+        private readonly int    $to_company_id,
+        private readonly Carbon $start_date,
+        private readonly Carbon $end_date,
+        private ?array          $body = null
     ) {}
 
     public function invoice(): Invoice
@@ -25,8 +28,19 @@ final readonly class InvoiceDTO implements DTOInterface
             'from_company_id' => $this->getFromCompanyId(),
             'to_company_id' => $this->getToCompanyId(),
             'start_date' => $this->getStartDate(),
-            'end_date' => $this->getEndDate()
+            'end_date' => $this->getEndDate(),
+            'body' => $this->getBody()
         ]);
+    }
+
+    public function fromCompany(): Company
+    {
+        return Company::find($this->getFromCompanyId());
+    }
+
+    public function toCompany(): Company
+    {
+        return Company::find($this->getToCompanyId());
     }
 
     public static function fromRequest(Request $request, User $user = null): self
@@ -70,13 +84,23 @@ final readonly class InvoiceDTO implements DTOInterface
         return $this->to_company_id;
     }
 
-    public function getStartDate(): string
+    public function getStartDate(): Carbon
     {
         return $this->start_date;
     }
 
-    public function getEndDate(): string
+    public function getEndDate(): Carbon
     {
         return $this->end_date;
+    }
+
+    public function getBody(): ?array
+    {
+        return $this->body;
+    }
+
+    public function setBody(array $body): void
+    {
+        $this->body = $body;
     }
 }

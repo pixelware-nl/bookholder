@@ -26,8 +26,8 @@ final class CompanyController extends Controller
     public function index(): InertiaResponse
     {
         return Inertia::render('Admin/Company/Index', [
-            'userCompany' => $this->userService->getCompany(),
-            'companies' => $this->userService->getCompanies(),
+            'userCompany' => $this->userService->company(),
+            'companies' => $this->userService->companies(),
         ]);
     }
 

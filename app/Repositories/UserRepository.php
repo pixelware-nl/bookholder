@@ -18,17 +18,17 @@ class UserRepository implements UserRepositoryInterface
         return User::all();
     }
 
-    public function getCompany(): Company
+    public function company(): Company
     {
         return Auth::user()->company()->first();
     }
 
-    public function getCompanies(): Collection
+    public function companies(): Collection
     {
         return Auth::user()->companies()->get();
     }
 
-    public function getLogs(): Collection
+    public function logs(): Collection
     {
         return Auth::user()->logs()->get();
     }
