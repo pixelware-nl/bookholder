@@ -16,8 +16,8 @@ class DashboardController extends Controller
 
     public function index(): InertiaResponse
     {
-        $logs = $this->logService->getLogs(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
-        $totalLogs = $this->logService->getTotalLogs($logs);
+        $logs = $this->logService->findByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
+        $totalLogs = $this->logService->sum($logs);
 
         return Inertia::render('Admin/Dashboard/Dashboard', [
             'logs' => LogResource::collection($logs),

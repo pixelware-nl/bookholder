@@ -7,7 +7,8 @@
                     <th> Ref nr. </th>
                     <th> From </th>
                     <th> To </th>
-                    <th> Date </th>
+                    <th> Date range </th>
+                    <th> Created at</th>
                     <th> View </th>
                     <th> Delete </th>
                     <th> Mail </th>
@@ -19,6 +20,7 @@
                     <td> {{ data.from_company }} </td>
                     <td> {{ data.to_company }} </td>
                     <td> {{ data.start_date }} to {{ data.end_date }}</td>
+                    <td> {{ data.created_at }} </td>
                     <td class="table-item table-item-link"> <a :href="route('invoices.show', data.id)" target="_blank"> View </a> </td>
                     <td class="table-item table-item-link"> <Link :href="route('invoices.destroy', data.id)" method="delete"> Delete </Link> </td>
                     <td class="table-item table-item-link"> <a href="#"> Send </a> </td>

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\DTO\InvoiceDTO;
-use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Models\Invoice;
 use App\Repositories\InvoiceRepository;
 use Exception;
@@ -24,18 +23,13 @@ readonly class InvoiceService
      */
     public function generatePDF(Invoice $invoice): Response
     {
-        $toCompany = $invoice->toCompany()->first();
-        $logs = $this->logService->getCompanyLogs($toCompany, $invoice->start_date, $invoice->end_date);
-        $total = $this->logService->getTotalLogs($logs);
-
         return $this->pdfService->streamToPdf(
             view('pdf.invoice', [
                 'toCompany' => $invoice->toCompany,
                 'fromCompany' => $invoice->fromCompany,
                 'start_date' => $invoice->start_date,
                 'end_date' => $invoice->end_date,
-                'logs' => $logs,
-                'total' => $total,
+                'body' => $invoice->body,
             ])
         );
     }
@@ -47,11 +41,29 @@ readonly class InvoiceService
 
     public function store(InvoiceDTO $invoiceDTO): Invoice
     {
+        $body = $this->generateBody($invoiceDTO);
+        $invoiceDTO->setBody($body);
+
         return $this->invoiceRepository->store($invoiceDTO);
     }
 
     public function delete(Invoice $invoice): void
     {
         $this->invoiceRepository->delete($invoice);
+    }
+
+    public function generateBody(InvoiceDTO $invoiceDTO): array
+    {
+        $logs = $this->logService->findByCompanyTimeRange(
+            $invoiceDTO->toCompany(),
+            $invoiceDTO->getStartDate(),
+            $invoiceDTO->getEndDate()
+        );
+        $total = $this->logService->sum($logs);
+
+        return [
+            'logs' => $logs,
+            'total' => $total,
+        ];
     }
 }

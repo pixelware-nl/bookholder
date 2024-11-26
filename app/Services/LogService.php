@@ -6,7 +6,7 @@ use App\DTO\LogDTO;
 use App\Models\Company;
 use App\Models\Log;
 use App\Repositories\LogRepository;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 readonly class LogService
@@ -15,17 +15,17 @@ readonly class LogService
         private LogRepository $logRepository
     ) {}
 
-    public function getLogs(Carbon $startDate, Carbon $endDate): Collection
+    public function findByTimeRange(Carbon $startDate, Carbon $endDate): Collection
     {
         return $this->logRepository->findByTimeRange($startDate, $endDate);
     }
 
-    public function getCompanyLogs(Company $company, Carbon $startDate, Carbon $endDate): Collection
+    public function findByCompanyTimeRange(Company $company, Carbon $startDate, Carbon $endDate): Collection
     {
         return $this->logRepository->findByCompanyTimeRange($company, $startDate, $endDate);
     }
 
-    public function getTotalLogs(Collection $logs): int
+    public function sum(Collection $logs): int
     {
         return $logs->sum(function($log) {
            return $log->rate * $log->hours;

@@ -18,19 +18,19 @@ readonly class UserService
         return $this->userRepository->all();
     }
 
-    public function getLogs(): Collection
+    public function logs(): Collection
     {
-        return $this->userRepository->getLogs();
+        return $this->userRepository->logs();
     }
 
-    public function getCompany(): Company
+    public function company(): Company
     {
-        return $this->userRepository->getCompany();
+        return $this->userRepository->company();
     }
 
-    public function getCompanies(): Collection
+    public function companies(): Collection
     {
-        return $this->userRepository->getCompanies();
+        return $this->userRepository->companies();
     }
 
     public function store($userDTO): User

@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -63,7 +63,8 @@ class Invoice extends Model
         'from_company_id',
         'to_company_id',
         'start_date',
-        'end_date'
+        'end_date',
+        'body'
     ];
 
     protected $casts = [
@@ -73,6 +74,16 @@ class Invoice extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
+
+    public function getBodyAttribute($value): mixed
+    {
+        return json_decode($value);
+    }
+
+    public function setBodyAttribute(array $value): void
+    {
+        $this->attributes['body'] = json_encode($value);
+    }
 
     public function fromCompany(): HasOne
     {
