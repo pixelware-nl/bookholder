@@ -6,6 +6,7 @@
 
     <title> {{ $title }} </title>
 
+    <link href="{{ resource_path('css/fonts.css') }}" rel="stylesheet" />
     <link href="{{ resource_path('scss/pdf.scss') }}" rel="stylesheet" />
 </head>
 <body class="pdf">
