@@ -18,7 +18,7 @@
                     <th> Rate </th>
                     <th> Hours </th>
                     <th> Product </th>
-                    <th> Type </th>
+                    <th> Total </th>
                 </tr>
                 <tbody v-for="log in logs">
                     <tr v-for="data in log">
@@ -26,7 +26,7 @@
                         <td> {{ getCurrency(data.rate) }} </td>
                         <td> {{ data.hours }} </td>
                         <td> {{ data.name }} </td>
-                        <td> {{ data.description }} </td>
+                        <td class="font-bold"> {{ rowTotalAsCurrency(data) }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -48,6 +48,10 @@ const totalAsCurrency = computed(() => {
     return getCurrency(props.totalLogs);
 })
 
+function rowTotalAsCurrency(data) {
+    return getCurrency(data.rate * data.hours);
+}
+
 function getCurrency(value) {
     let formatter = new Intl.NumberFormat('nl-NL', {
         style: 'currency',
@@ -57,10 +61,6 @@ function getCurrency(value) {
 
     return formatter.format(<number>value);
 }
-
-onMounted(() => {
-    console.log(props.logs)
-})
 </script>
 <style scoped>
 ::-webkit-scrollbar-thumb {

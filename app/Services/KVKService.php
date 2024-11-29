@@ -99,7 +99,7 @@ class KVKService
     /**
      * @throws ConnectionException
      */
-    private function getRequest(string $url, string $kvk): PromiseInterface|Response
+    private function getRequest(string $url, array $headers = [], string ...$parameters, ): PromiseInterface|Response
     {
         return \Http::withHeaders([
             'apikey' => config('kvk.api_key')

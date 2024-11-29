@@ -3,10 +3,11 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import AdminLayout from './Layouts/AdminLayout.vue';
 import { ZiggyVue } from 'ziggy-js';
 import AuthLayout from "./Layouts/AuthLayout.vue";
+import { FontAwesomeIcon } from "./../ts/font-awesome.ts"
 
 createInertiaApp({
     resolve: name => {
-        const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
+        const pages = import.meta.glob('./Pages/**/*.vue', {eager: true})
         let page = pages[`./Pages/${name}.vue`]
         let urlFirstElementName = name.split('/')[0]
 
@@ -21,10 +22,13 @@ createInertiaApp({
 
         return page
     },
-    setup({ el, App, props, plugin }) {
-        return createApp({ render: () => h(App, props) })
+    setup({el, App, props, plugin}) {
+        return createApp({render: () => h(App, props)})
             .use(ZiggyVue)
             .use(plugin)
+            .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el)
     },
+}).then(response => {
+
 });
