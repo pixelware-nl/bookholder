@@ -9,7 +9,7 @@
                     <th> Hours </th>
                     <th> Name </th>
                     <th> Description </th>
-                    <th> Delete </th>
+                    <th class="w-[50px]"> </th>
                 </tr>
             </template>
             <template #tbody>
@@ -19,7 +19,11 @@
                     <td> {{ log.hours }} </td>
                     <td> {{ log.name }} </td>
                     <td> {{ log.description }} </td>
-                    <td class="table-item table-item-link"> <Link :href="route('logs.destroy', log.id)" method="delete"> Delete </Link> </td>
+                    <td class="table-item table-item-link ">
+                        <Link :href="route('logs.destroy', log.id)" method="delete">
+                            <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
                 </tr>
             </template>
         </TableContainer>

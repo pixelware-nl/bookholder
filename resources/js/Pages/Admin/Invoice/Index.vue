@@ -9,9 +9,9 @@
                     <th> To </th>
                     <th> Date range </th>
                     <th> Created at</th>
-                    <th> View </th>
-                    <th> Delete </th>
-                    <th> Mail </th>
+                    <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
                 </tr>
             </template>
             <template #tbody v-for="invoice in invoices">
@@ -19,11 +19,23 @@
                     <td> {{ data.id }} </td>
                     <td> {{ data.from_company }} </td>
                     <td> {{ data.to_company }} </td>
-                    <td> {{ data.start_date }} to {{ data.end_date }}</td>
+                    <td> {{ data.start_date }} t/m {{ data.end_date }}</td>
                     <td> {{ data.created_at }} </td>
-                    <td class="table-item table-item-link"> <a :href="route('invoices.show', data.id)" target="_blank"> View </a> </td>
-                    <td class="table-item table-item-link"> <Link :href="route('invoices.destroy', data.id)" method="delete"> Delete </Link> </td>
-                    <td class="table-item table-item-link"> <a href="#"> Send </a> </td>
+                    <td class="table-item table-item-link">
+                        <a :href="route('invoices.show', data.id)" target="_blank">
+                            <font-awesome-icon icon="fa-solid fa-file-pdf" class="text-slate-600 hover:text-slate-800"/>
+                        </a>
+                    </td>
+                    <td class="table-item table-item-link">
+                        <Link :href="route('invoices.destroy', data.id)" method="delete">
+                            <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
+                    <td class="table-item table-item-link">
+                        <a href="#">
+                            <font-awesome-icon icon="fa-solid fa-envelope" class="text-slate-600 hover:text-slate-800"/>
+                        </a>
+                    </td>
                 </tr>
             </template>
         </TableContainer>

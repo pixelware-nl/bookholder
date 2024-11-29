@@ -6,7 +6,7 @@
                 <tr>
                     <th> Name </th>
                     <th> Location </th>
-                    <th> Delete </th>
+                    <th class="w-[50px]"> </th>
                 </tr>
             </template>
             <template #tbody>
@@ -18,7 +18,11 @@
                 <tr v-for="company in companies">
                     <td> {{ company.name }} </td>
                     <td> {{ company.street_address }}, {{ company.city }} </td>
-                    <td class="table-item table-item-link"> <Link :href="route('companies.destroy', company.id)" method="delete"> Delete </Link> </td>
+                    <td class="table-item table-item-link">
+                        <Link :href="route('companies.destroy', company.id)" method="delete">
+                            <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
                 </tr>
             </template>
         </TableContainer>
