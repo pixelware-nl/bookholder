@@ -5,7 +5,7 @@
     <table class="from-to mb-2">
         <tr>
             <td> <span> Gegenereerd op: </span> {{ \Carbon\Carbon::now()->format('d-m-Y') }} </p> </td>
-            <td> <span> Uren reeks: </span> {{ $start_date->format('d/m/Y') }} - {{ $end_date->format('d/m/Y') }}  </p> </td>
+            <td> <span> Uren reeks: </span> {{ $invoice->start_date->format('d/m/Y') }} t/m {{ $invoice->end_date->format('d/m/Y') }}  </p> </td>
         </tr>
     </table>
     <table class="from-to mb-2">
@@ -14,20 +14,20 @@
             <td> <span> Van: </span> </td>
         </tr>
         <tr>
-            <td> {{ $toCompany->name }} </td>
-            <td> {{ $fromCompany->name }} </td>
+            <td> {{ $invoice->toCompany->name }} </td>
+            <td> {{ $invoice->fromCompany->name }} </td>
         </tr>
         <tr>
-            <td> {{ sprintf('%s, %s', $toCompany->street_address, $toCompany->city) }} </td>
-            <td> {{ sprintf('%s, %s', $fromCompany->street_address, $fromCompany->city) }} </td>
+            <td> {{ sprintf('%s, %s', $invoice->toCompany->street_address, $invoice->toCompany->city) }} </td>
+            <td> {{ sprintf('%s, %s', $invoice->fromCompany->street_address, $invoice->fromCompany->city) }} </td>
         </tr>
         <tr>
-            <td> {{ sprintf('%s, %s', $toCompany->postal_code, $toCompany->country) }} </td>
-            <td> {{ sprintf('%s, %s', $fromCompany->postal_code, $fromCompany->country) }} </td>
+            <td> {{ sprintf('%s, %s', $invoice->toCompany->postal_code, $invoice->toCompany->country) }} </td>
+            <td> {{ sprintf('%s, %s', $invoice->fromCompany->postal_code, $invoice->fromCompany->country) }} </td>
         </tr>
         <tr>
-            <td> {{ $toCompany->email }} </td>
-            <td> {{ $fromCompany->email }}</td>
+            <td> {{ $invoice->toCompany->email }} </td>
+            <td> {{ $invoice->fromCompany->email }}</td>
         </tr>
     </table>
     <div>
@@ -38,7 +38,7 @@
                 <th> Tarief (€) </th>
                 <th> Totaal </th>
             </tr>
-            @foreach($body->logs as $log)
+            @foreach($invoice->body->logs as $log)
                 <tr>
                     <td> {{ $log->name }} </td>
                     <td> {{ $log->hours }} </td>
@@ -50,7 +50,7 @@
                 <th></th>
                 <th></th>
                 <th> Totaal </th>
-                <th> {{ sprintf('€%s', number_format($body->total, decimal_separator: ',', thousands_separator: '.')) }} </th>
+                <th> {{ sprintf('€%s', number_format($invoice->body->total, decimal_separator: ',', thousands_separator: '.')) }} </th>
             </tr>
         </table>
     </div>
