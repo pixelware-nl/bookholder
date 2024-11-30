@@ -1,14 +1,14 @@
 <template>
-    <AdminContainer form-title="Log Settings">
-        <Link :href="route('logs.create')" method="get" class="link-button"> Create Logs </Link>
+    <AdminContainer form-title="Logboek">
+        <Link :href="route('logs.create')" method="get" class="link-button"> Log toevoegen </Link>
         <TableContainer>
             <template #thead>
                 <tr>
-                    <th> Company </th>
-                    <th> Rate </th>
-                    <th> Hours </th>
-                    <th> Name </th>
-                    <th> Description </th>
+                    <th> Bedrijf </th>
+                    <th> Tarief </th>
+                    <th> Uren </th>
+                    <th> Naam </th>
+                    <th> Beschrijving </th>
                     <th class="w-[50px]"> </th>
                 </tr>
             </template>

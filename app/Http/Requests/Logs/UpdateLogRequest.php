@@ -35,15 +35,15 @@ class UpdateLogRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'company_id.required' => 'You must select a company.',
-            'rate.required' => 'You must fill in a rate.',
-            'rate.integer' => 'The rate must be a number.',
-            'hours.required' => 'You must fill in the hours.',
-            'hours.integer' => 'The hours must be a number.',
-            'name.required' => 'You must fill in a name.',
-            'name.string' => 'The name must be a string.',
-            'description.required' => 'You must fill in a description.',
-            'description.string' => 'The description must be a string.',
+            'company_id.required' => 'U moet een bedrijf selecteren.',
+            'rate.required' => 'U moet een tarief invullen.',
+            'rate.integer' => 'Het tarief moet een getal zijn.',
+            'hours.required' => 'U moet de uren invullen.',
+            'hours.integer' => 'De uren moeten een getal zijn.',
+            'name.required' => 'U moet een naam invullen.',
+            'name.string' => 'De naam moet een string zijn.',
+            'description.required' => 'U moet een beschrijving invullen.',
+            'description.string' => 'De beschrijving moet een string zijn.',
         ];
     }
 }

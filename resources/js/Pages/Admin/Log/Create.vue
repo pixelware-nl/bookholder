@@ -1,5 +1,5 @@
 <template>
-    <AdminContainer form-title="Invoice settings" :route-name="route('logs.index')">
+    <AdminContainer form-title="Logboek" :route-name="route('logs.index')">
         <form @submit.prevent="form.post(route('logs.store'))">
             <InputContainer>
                 <SelectInput
@@ -7,7 +7,7 @@
                     :options="companies"
                     name="company_id"
                     v-model="form.company_id"
-                    label="Companies"
+                    label="Bedrijven"
                     :error="errors.company_id"
                 />
             </InputContainer>
@@ -17,7 +17,7 @@
                         id="rate"
                         name="rate"
                         v-model="form.rate"
-                        label="Rate"
+                        label="Tarief"
                         :error="errors.rate"
                         placeholder="60"
                     />
@@ -27,7 +27,7 @@
                         id="hours"
                         name="hours"
                         v-model="form.hours"
-                        label="Hours"
+                        label="Uren"
                         :error="errors.hours"
                         placeholder="10"
                     />
@@ -38,7 +38,7 @@
                     id="name"
                     name="name"
                     v-model="form.name"
-                    label="Name"
+                    label="Naam"
                     :error="errors.name"
                     placeholder="API koppeling aangemaakt"
                 />
@@ -48,12 +48,12 @@
                     id="description"
                     name="description"
                     v-model="form.description"
-                    label="Description"
+                    label="Beschrijving"
                     :error="errors.description"
                     placeholder="Uitleg over het specifieke API koppeling"
                 />
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Create Log </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> Log toevoegen </SubmitButton>
         </form>
     </AdminContainer>
 </template>

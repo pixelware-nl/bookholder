@@ -1,11 +1,11 @@
 <template>
-    <AdminContainer form-title="Company settings">
-        <Link :href="route('companies.find')" method="get" class="link-button"> Create Company </Link>
+    <AdminContainer form-title="Bedrijven">
+        <Link :href="route('companies.find')" method="get" class="link-button"> Bedrijf toevoegen </Link>
         <TableContainer>
             <template #thead>
                 <tr>
-                    <th> Name </th>
-                    <th> Location </th>
+                    <th> Naam </th>
+                    <th> Locatie </th>
                     <th class="w-[50px]"> </th>
                 </tr>
             </template>
