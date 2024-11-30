@@ -1,6 +1,6 @@
 <template>
-    <AdminContainer form-title="Company settings" :route-name="route('companies.index')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> Search KVK </h2>
+    <AdminContainer form-title="Bedrijven" :route-name="route('companies.index')">
+        <h2 class="text-xl font-bold mb-2 uppercase"> Zoek KVK </h2>
         <form @submit.prevent="kvkForm.post(route('companies.found'))">
             <InputContainer>
                 <TextInput
@@ -13,10 +13,10 @@
                 />
             </InputContainer>
 
-            <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Search KVK </SubmitButton>
+            <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Zoek KVK </SubmitButton>
             <div v-if="errors.kvk_to_find">
                 <hr>
-                <p class="w-full text-center mt-6"> Sure that your company exists? <Link :href="route('companies.create', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">Create it manually</Link> </p>
+                <p class="w-full text-center mt-6"> Weet je zeker dat het bedrijf bestaat? <Link :href="route('companies.create', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">Voeg het handmatig toe</Link> </p>
             </div>
         </form>
     </AdminContainer>

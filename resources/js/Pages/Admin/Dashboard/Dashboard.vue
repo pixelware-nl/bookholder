@@ -2,23 +2,23 @@
     <div class="flex flex-row">
         <div class="flex flex-col w-1/3">
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px]">
-                <p class="text-lg text-gray-400">Expected revenue</p>
+                <p class="text-lg text-gray-400">Verwachte omzet</p>
                 <h1 class="text-4xl font-black">{{ totalAsCurrency }}</h1>
             </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
-                <p class="text-lg text-gray-400">New month in</p>
-                <h1 class="text-4xl font-black">{{ daysUntilNewMonth }} day(s)</h1>
+                <p class="text-lg text-gray-400">Nieuwe maand in</p>
+                <h1 class="text-4xl font-black">{{ daysUntilNewMonth }} dag(en)</h1>
             </div>
         </div>
         <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center ml-8 pb-4 max-h-[39.5em] overflow-auto">
             <div class="p-2.5 w-full sticky top-0 bg-white"></div>
             <table class="w-[58rem] bg-white">
                 <tr class="sticky top-5 bg-white">
-                    <th> Company </th>
-                    <th> Rate </th>
-                    <th> Hours </th>
+                    <th> Bedrijf </th>
+                    <th> Tarief </th>
+                    <th> Uren </th>
                     <th> Product </th>
-                    <th> Total </th>
+                    <th> Totaal </th>
                 </tr>
                 <tbody v-for="log in logs">
                     <tr v-for="data in log">
@@ -34,7 +34,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, onMounted} from "vue";
+import {computed, defineProps} from "vue";
 
 interface Props {
     logs: object,

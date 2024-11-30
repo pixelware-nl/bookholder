@@ -6,7 +6,8 @@ import {
     faFileArrowDown,
     faFilePdf,
     faFilePen,
-    faEnvelope
+    faEnvelope,
+    faBackspace
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -15,7 +16,8 @@ library.add(
     faFileArrowDown,
     faFilePdf,
     faFilePen,
-    faEnvelope
+    faEnvelope,
+    faBackspace
 );
 
 export { FontAwesomeIcon };

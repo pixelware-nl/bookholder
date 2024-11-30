@@ -5,17 +5,17 @@
         @click="showHasCompanyNotification = false"
         class="bg-emerald-200 w-full text-emerald-900 p-8 rounded-lg shadow-lg mb-8 flex justify-between hover:cursor-pointer"
     >
-        <p>Company details found.</p>
+        <p>Bedrijf details gevonden.</p>
     </div>
-    <AdminContainer form-title="Company settings" :route-name="route('companies.find')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> Create new </h2>
+    <AdminContainer form-title="Bedrijven" :route-name="route('companies.find')">
+        <h2 class="text-xl font-bold mb-2 uppercase"> Nieuw bedrijf toevoegen </h2>
         <form @submit.prevent="form.post(route('companies.store'))">
             <InputContainer>
                 <TextInput
                     id="name"
                     name="name"
                     v-model="form.name"
-                    label="Company name"
+                    label="Bedrijf naam"
                     placeholder="Pixelware"
                     :error="errors.name"
                     :disabled="hasCompany"
@@ -26,7 +26,7 @@
                     id="kvk"
                     name="kvk"
                     v-model="form.kvk"
-                    label="KVK number"
+                    label="KVK nummer"
                     placeholder="12345678"
                     :error="errors.kvk"
                     :disabled="hasCompany"
@@ -38,7 +38,7 @@
                         id="street_address"
                         name="street_address"
                         v-model="form.street_address"
-                        label="Street address"
+                        label="Straatadres"
                         placeholder="Weena 4B"
                         :error="errors.street_address"
                         :disabled="hasCompany"
@@ -49,7 +49,7 @@
                         id="city"
                         name="city"
                         v-model="form.city"
-                        label="City"
+                        label="Stad"
                         placeholder="Rotterdam"
                         :error="errors.city"
                         :disabled="hasCompany"
@@ -62,7 +62,7 @@
                         id="postal_code"
                         name="postal_code"
                         v-model="form.postal_code"
-                        label="Postal code"
+                        label="Postcode"
                         placeholder="4111KK"
                         :error="errors.postal_code"
                         :disabled="hasCompany"
@@ -73,14 +73,14 @@
                         id="country"
                         name="country"
                         v-model="form.country"
-                        label="Country"
-                        placeholder="Netherlands"
+                        label="Land"
+                        placeholder="Nederland"
                         :error="errors.country"
                         :disabled="hasCompany"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Create company </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> Bedrijf toevoegen </SubmitButton>
         </form>
     </AdminContainer>
 </template>
@@ -111,7 +111,7 @@ const form = useForm({
     street_address: props.company?.street_address,
     city: props.company?.city,
     postal_code: props.company?.postal_code,
-    country: props.company?.country,
+    country: props.company?.country ?? 'Nederland',
 });
 
 onMounted(() => {
