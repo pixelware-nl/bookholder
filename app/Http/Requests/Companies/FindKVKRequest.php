@@ -26,7 +26,8 @@ class FindKVKRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'kvk_to_find.required' => 'The KVK field is required.',
+            'kvk.required' => 'U moet een KVK-nummer invoeren.',
+            'kvk.valid_kvk_number' => 'Dit KVK-nummer is niet geldig.',
         ];
     }
 
