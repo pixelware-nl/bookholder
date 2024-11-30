@@ -42,7 +42,7 @@ class KVKService
 
         if ($companyDTO == null) {
             return redirect()->back()->withErrors([
-                'kvk_to_find' => 'KVK not found.'
+                'kvk_to_find' => 'KVK niet gevonden.'
             ]);
         }
 
@@ -99,10 +99,10 @@ class KVKService
     /**
      * @throws ConnectionException
      */
-    private function getRequest(string $url, array $headers = [], string ...$parameters, ): PromiseInterface|Response
+    private function getRequest(string $url, array $headers = [], string ...$parameters): PromiseInterface|Response
     {
         return \Http::withHeaders([
             'apikey' => config('kvk.api_key')
-        ])->get(sprintf($url, $kvk));
+        ])->get(sprintf($url, $parameters));
     }
 }

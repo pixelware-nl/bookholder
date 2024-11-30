@@ -6,8 +6,8 @@
                 <h1 class="text-4xl font-black">{{ totalAsCurrency }}</h1>
             </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
-                <p class="text-lg text-gray-400">Nieuwe maand in</p>
-                <h1 class="text-4xl font-black">{{ daysUntilNewMonth }} dag(en)</h1>
+                <p class="text-lg text-gray-400">Nieuwe maand</p>
+                <h1 class="text-4xl font-black">{{ daysText }}</h1>
             </div>
         </div>
         <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center ml-8 pb-4 max-h-[39.5em] overflow-auto">
@@ -46,6 +46,18 @@ const props = defineProps<Props>();
 
 const totalAsCurrency = computed(() => {
     return getCurrency(props.totalLogs);
+})
+
+const daysText = computed(() => {
+    if (props.daysUntilNewMonth === 0) {
+        return 'Morgen';
+    }
+
+    if (props.daysUntilNewMonth === 1) {
+        return 'Overmorgen'
+    }
+
+    return props.daysUntilNewMonth + ' dagen';
 })
 
 function rowTotalAsCurrency(data) {
