@@ -82,7 +82,7 @@ class KVKService
     private function getJsonDecodedRequest(string $url, string $kvk): mixed
     {
         try {
-            $request = $this->getRequest($url, $kvk);
+            $request = $this->getRequest($url, [], $kvk);
         }
         catch (\Exception $exception) {
             throw new ConnectionException();
@@ -93,7 +93,7 @@ class KVKService
             throw new ConnectionException();
         }
 
-        return json_decode($this->getRequest($url, $kvk)->body());
+        return json_decode($this->getRequest($url, [], $kvk)->body());
     }
 
     /**
