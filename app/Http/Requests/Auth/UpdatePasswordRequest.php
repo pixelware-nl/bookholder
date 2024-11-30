@@ -13,25 +13,31 @@ use Illuminate\Foundation\Http\FormRequest;
  */
 class UpdatePasswordRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
             'token' => 'required',
             'email' => 'required|email|exists:users,email',
             'password' => 'required|string|min:6|confirmed',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'token.required' => 'Token is verplicht',
+            'email.required' => 'E-mail is verplicht',
+            'email.email' => 'E-mail is ongeldig',
+            'email.exists' => 'Dit e-mailadres is niet bekend',
+            'password.required' => 'Wachtwoord is verplicht',
+            'password.string' => 'Wachtwoord moet een tekst zijn',
+            'password.min' => 'Wachtwoord moet minimaal 6 tekens bevatten',
+            'password.confirmed' => 'Wachtwoord komt niet overeen',
         ];
     }
 }

@@ -2,14 +2,21 @@
     <div class="container">
         <div class="flex mb-8 items-center justify-between">
             <h1 class="header-title">{{ formTitle }}</h1>
-            <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none"> Return </Link>
+            <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none">
+                <FontIcon
+                    icon="fa-backspace"
+                    :size="iconSize.large"
+                />
+            </Link>
         </div>
         <slot />
     </div>
 </template>
 <script setup lang="ts">
 import {defineProps} from "vue";
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
+import FontIcon from "../../Partials/Externals/FontIcon.vue";
+import {iconSize} from "../../../../ts/icon-size";
 
 interface Props {
     formTitle: string,

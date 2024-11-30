@@ -38,7 +38,16 @@ class CreateCompanyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'kvk.unique' => 'This KVK already exists in the database.',
+            'kvk.required' => 'U moet een KVK-nummer invoeren.',
+            'kvk.valid_kvk_number' => 'Dit KVK-nummer is niet geldig.',
+            'name.required' => 'U moet een naam invoeren.',
+            'name.max' => 'De naam mag niet langer zijn dan 256 tekens.',
+            'street_address.required' => 'U moet een straatadres invoeren.',
+            'street_address.max' => 'Het straatadres mag niet langer zijn dan 256 tekens.',
+            'city.required' => 'U moet een stad invoeren.',
+            'postal_code.required' => 'U moet een postcode invoeren.',
+            'postal_code.valid_postal_code' => 'Deze postcode is niet geldig.',
+            'country.required' => 'U moet een land invoeren.',
         ];
     }
 }

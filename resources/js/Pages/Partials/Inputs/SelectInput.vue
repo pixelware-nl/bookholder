@@ -9,7 +9,7 @@
 
         @input="$emit('update:modelValue', $event.target.value)"
     >
-        <option value="" selected>Choose an option</option>
+        <option value="" selected>Kies een optie</option>
         <option v-for="option in options" :value="option.id">
             {{ option.name }}
         </option>

@@ -42,7 +42,7 @@ class KVKService
 
         if ($companyDTO == null) {
             return redirect()->back()->withErrors([
-                'kvk_to_find' => 'KVK not found.'
+                'kvk_to_find' => 'KVK niet gevonden.'
             ]);
         }
 
@@ -82,7 +82,7 @@ class KVKService
     private function getJsonDecodedRequest(string $url, string $kvk): mixed
     {
         try {
-            $request = $this->getRequest($url, $kvk);
+            $request = $this->getRequest($url, [], $kvk);
         }
         catch (\Exception $exception) {
             throw new ConnectionException();
@@ -93,16 +93,16 @@ class KVKService
             throw new ConnectionException();
         }
 
-        return json_decode($this->getRequest($url, $kvk)->body());
+        return json_decode($this->getRequest($url, [], $kvk)->body());
     }
 
     /**
      * @throws ConnectionException
      */
-    private function getRequest(string $url, array $headers = [], string ...$parameters, ): PromiseInterface|Response
+    private function getRequest(string $url, array $headers = [], string ...$parameters): PromiseInterface|Response
     {
         return \Http::withHeaders([
             'apikey' => config('kvk.api_key')
-        ])->get(sprintf($url, $kvk));
+        ])->get(sprintf($url, $parameters));
     }
 }

@@ -25,6 +25,15 @@ class AuthenticateLoginRequest extends FormRequest
         ];
     }
 
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'E-mail is verplicht',
+            'email.email' => 'E-mail is ongeldig',
+            'password.required' => 'Wachtwoord is verplicht',
+        ];
+    }
+
     public function passedValidation(): void
     {
         $this->replace([

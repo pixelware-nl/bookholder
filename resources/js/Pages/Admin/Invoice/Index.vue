@@ -1,14 +1,14 @@
 <template>
-    <AdminContainer form-title="Invoice settings">
-        <Link :href="route('invoices.create')" method="get" class="link-button"> Create Invoice </Link>
+    <AdminContainer form-title="Facturen">
+        <Link :href="route('invoices.create')" method="get" class="link-button"> Factuur toevoegen </Link>
         <TableContainer>
             <template #thead>
                 <tr>
                     <th> Ref nr. </th>
-                    <th> From </th>
-                    <th> To </th>
-                    <th> Date range </th>
-                    <th> Created at</th>
+                    <th> Van </th>
+                    <th> Naar </th>
+                    <th> Datumbereik </th>
+                    <th> Aangemaakt op </th>
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>

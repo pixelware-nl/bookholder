@@ -4,9 +4,9 @@
             <p class="font-black"> Pixelware<span class="text-red-600">.</span> </p>
             <ul class="flex justify-end w-full">
                 <NavLink slug="dashboard" route-name="dashboard.index"> Dashboard </NavLink>
-                <NavLink slug="invoices" route-name="invoices.index"> Invoicing </NavLink>
-                <NavLink slug="logs" route-name="logs.index"> Logs </NavLink>
-                <NavLink slug="companies" route-name="companies.index"> Companies </NavLink>
+                <NavLink slug="invoices" route-name="invoices.index"> Facturen </NavLink>
+                <NavLink slug="logs" route-name="logs.index"> Logboek </NavLink>
+                <NavLink slug="companies" route-name="companies.index"> Bedrijven </NavLink>
                 <NavLink slug="logout" route-name="logout" method="post"> Logout </NavLink>
             </ul>
         </nav>
