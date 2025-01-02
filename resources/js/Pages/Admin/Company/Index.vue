@@ -1,11 +1,11 @@
 <template>
-    <AdminContainer form-title="Bedrijven">
-        <Link :href="route('companies.find')" method="get" class="link-button"> Bedrijf toevoegen </Link>
+    <AdminContainer :form-title="$t('company.index.title')">
+        <Link :href="route('companies.find')" method="get" class="link-button"> {{ $t('company.index.add_company') }} </Link>
         <TableContainer>
             <template #thead>
                 <tr>
-                    <th> Naam </th>
-                    <th> Locatie </th>
+                    <th> {{ $t('company.index.name') }} </th>
+                    <th> {{ $t('company.index.address') }} </th>
                     <th class="w-[50px]"> </th>
                 </tr>
             </template>
