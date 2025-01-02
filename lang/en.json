@@ -2,5 +2,21 @@
     "company.index.title": "Companies",
     "company.index.add_company": "Add company",
     "company.index.name": "Name",
-    "company.index.address": "Address"
+    "company.index.address": "Address",
+
+    "company.find.title": "Companies",
+    "company.find.search_kvk": "Search KVK",
+    "company.find.manual_create_question": "Are you sure the company exists?",
+    "company.find.manual_create_link": "Create it manually",
+
+    "company.create.found": "Company details found.",
+    "company.create.title": "Companies",
+    "company.create.description": "Add new company",
+    "company.create.name": "Company name",
+    "company.create.kvk": "KVK number",
+    "company.create.street_address": "Street address",
+    "company.create.city": "City",
+    "company.create.postal_code": "Postal code",
+    "company.create.country": "Country",
+    "company.create.submit": "Add company"
 }

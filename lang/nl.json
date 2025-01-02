@@ -2,5 +2,21 @@
     "company.index.title": "Bedrijven",
     "company.index.add_company": "Bedrijf toevoegen",
     "company.index.name": "Naam",
-    "company.index.address": "Adres"
+    "company.index.address": "Adres",
+
+    "company.find.title": "Bedrijven",
+    "company.find.search_kvk": "Zoek KVK",
+    "company.find.manual_create_question": "Weet je zeker dat dit bedrijf bestaat?",
+    "company.find.manual_create_link": "Voeg het handmatig toe",
+
+    "company.create.found": "Bedrijf details gevonden.",
+    "company.create.title": "Bedrijven",
+    "company.create.description": "Nieuw bedrijf toevoegen",
+    "company.create.name": "Bedrijf naam",
+    "company.create.kvk": "KVK nummer",
+    "company.create.street_address": "Straatadres",
+    "company.create.city": "Stad",
+    "company.create.postal_code": "Postcode",
+    "company.create.country": "Land",
+    "company.create.submit": "Bedrijf toevoegen"
 }
