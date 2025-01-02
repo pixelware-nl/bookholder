@@ -1,13 +1,13 @@
 
 <template>
-    <AuthFormContainer form-title="Register" :route-name="route('login')">
+    <AuthFormContainer :form-title="$t('auth.company.title')" :route-name="route('login')">
         <form @submit.prevent="form.post(route('register.set-company'))" class="pb-10 border-b">
             <InputContainer>
                 <TextInput
                     id="name"
                     name="name"
                     v-model="form.name"
-                    label="Company name"
+                    :label="$t('auth.company.company_name')"
                     placeholder="Pixelware"
                     :error="errors.name"
                     :disabled="hasCompany"
@@ -18,7 +18,7 @@
                     id="kvk"
                     name="kvk"
                     v-model="form.kvk"
-                    label="KVK number"
+                    :label="$t('auth.company.kvk')"
                     placeholder="12345678"
                     :error="errors.kvk"
                     :disabled="hasCompany"
@@ -30,7 +30,7 @@
                         id="street_address"
                         name="street_address"
                         v-model="form.street_address"
-                        label="Street address"
+                        :label="$t('auth.company.street_address')"
                         placeholder="Weena 4B"
                         :error="errors.street_address"
                         :disabled="hasCompany"
@@ -41,7 +41,7 @@
                         id="city"
                         name="city"
                         v-model="form.city"
-                        label="City"
+                        :label="$t('auth.company.city')"
                         placeholder="Rotterdam"
                         :error="errors.city"
                         :disabled="hasCompany"
@@ -54,7 +54,7 @@
                         id="postal_code"
                         name="postal_code"
                         v-model="form.postal_code"
-                        label="Postal code"
+                        :label="$t('auth.company.postal_code')"
                         placeholder="4111KK"
                         :error="errors.postal_code"
                         :disabled="hasCompany"
@@ -65,16 +65,16 @@
                         id="country"
                         name="country"
                         v-model="form.country"
-                        label="Country"
+                        :label="$t('auth.company.country')"
                         placeholder="Netherlands"
                         :error="errors.country"
                         :disabled="hasCompany"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Continue </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('auth.company.submit') }} </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
+        <p class="mt-6 text-center"> {{ $t('auth.company.already_registered_question') }} <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.company.already_registered_link') }} </Link> </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">

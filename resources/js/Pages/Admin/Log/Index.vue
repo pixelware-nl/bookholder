@@ -1,14 +1,14 @@
 <template>
-    <AdminContainer form-title="Logboek">
-        <Link :href="route('logs.create')" method="get" class="link-button"> Log toevoegen </Link>
+    <AdminContainer :form-title="$t('log.index.title')">
+        <Link :href="route('logs.create')" method="get" class="link-button"> {{ $t('log.index.add_log') }} </Link>
         <TableContainer>
             <template #thead>
                 <tr>
-                    <th> Bedrijf </th>
-                    <th> Tarief </th>
-                    <th> Uren </th>
-                    <th> Naam </th>
-                    <th> Beschrijving </th>
+                    <th> {{ $t('log.index.company') }} </th>
+                    <th> {{ $t('log.index.rate') }} </th>
+                    <th> {{ $t('log.index.hours') }} </th>
+                    <th> {{ $t('log.index.name') }} </th>
+                    <th> {{ $t('log.index.description') }} </th>
                     <th class="w-[50px]"> </th>
                 </tr>
             </template>

@@ -1,5 +1,5 @@
 <template>
-    <AuthFormContainer form-title="Register" :logo-to-route="route('login')">
+    <AuthFormContainer :form-title="$t('auth.register.title')" :logo-to-route="route('login')">
         <form @submit.prevent="form.post(route('register.store'))" class="pb-10 border-b">
             <input type="hidden" name="company_id" :value="form.company_id" />
             <InputContainer class="flex">
@@ -8,7 +8,7 @@
                         v-model="form.firstname"
                         id="firstname"
                         name="firstname"
-                        label="First name"
+                        :label="$t('auth.register.first_name')"
                         placeholder="John"
                         :error="errors.firstname"
                     />
@@ -18,7 +18,7 @@
                         v-model="form.lastname"
                         id="lastname"
                         name="lastname"
-                        label="Last name"
+                        :label="$t('auth.register.last_name')"
                         placeholder="Doe"
                         :error="errors.lastname"
                     />
@@ -29,7 +29,7 @@
                     v-model="form.email"
                     id="email"
                     name="email"
-                    label="Email"
+                    :label="$t('auth.register.email')"
                     placeholder="j.doe@pixelware.nl"
                     :error="errors.email"
                 />
@@ -39,7 +39,7 @@
                     v-model="form.password"
                     id="password"
                     name="password"
-                    label="Password"
+                    :label="$t('auth.register.password')"
                     placeholder="••••••••"
                     :error="errors.password"
                 />
@@ -49,14 +49,14 @@
                     v-model="form.password_confirmation"
                     id="password-confirmation"
                     name="password_confirmation"
-                    label="Password"
+                    :label="$t('auth.register.password_confirmation')"
                     placeholder="••••••••"
                     :error="errors.password_confirmation"
                 />
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Register </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('auth.register.submit') }} </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
+        <p class="mt-6 text-center"> {{ $t('auth.register.already_registered_question') }} <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.register.already_registered_link') }} </Link> </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">

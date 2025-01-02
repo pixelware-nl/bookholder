@@ -35,15 +35,15 @@ class CreateLogRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'company_id.required' => 'U moet een bedrijf selecteren.',
-            'rate.required' => 'U moet een tarief invullen.',
-            'rate.integer' => 'Het tarief moet een getal zijn.',
-            'hours.required' => 'U moet de uren invullen.',
-            'hours.integer' => 'De uren moeten een getal zijn.',
-            'name.required' => 'U moet een naam invullen.',
-            'name.string' => 'De naam moet een string zijn.',
-            'description.required' => 'U moet een beschrijving invullen.',
-            'description.string' => 'De beschrijving moet een string zijn.',
+            'company_id.required' => __('validation.company_id.required'),
+            'rate.required' => __('validation.rate.required'),
+            'rate.integer' => __('validation.rate.integer'),
+            'hours.required' => __('validation.hours.required'),
+            'hours.integer' => __('validation.hours.integer'),
+            'name.required' => __('validation.name.required'),
+            'name.string' => __('validation.name.string'),
+            'description.required' => __('validation.description.required'),
+            'description.string' => __('validation.description.string'),
         ];
     }
 }

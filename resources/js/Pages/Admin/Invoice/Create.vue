@@ -1,5 +1,5 @@
 <template>
-    <AdminContainer form-title="Facturen" :route-name="route('invoices.index')">
+    <AdminContainer :form-title="$t('invoice.create.title')" :route-name="route('invoices.index')">
         <form @submit.prevent="form.post(route('invoices.store'))">
             <InputContainer>
                 <SelectInput
@@ -7,7 +7,7 @@
                     :options="companies"
                     name="company_id"
                     v-model="form.company_id"
-                    label="Bedrijven"
+                    :label="$t('invoice.create.companies')"
                     :error="errors.company_id"
                 />
             </InputContainer>
@@ -17,7 +17,7 @@
                         id="start-date"
                         name="start_date"
                         v-model="form.start_date"
-                        label="Startdatum"
+                        :label="$t('invoice.create.start_date')"
                         placeholder="01-01-2024"
                         :error="errors.start_date"
                     />
@@ -27,13 +27,13 @@
                         id="end-date"
                         name="end_date"
                         v-model="form.end_date"
-                        label="Einddatum"
+                        :label="$t('invoice.create.end_date')"
                         placeholder="31-01-2024"
                         :error="errors.end_date"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> PDF toevoegen </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('invoice.create.submit') }} </SubmitButton>
         </form>
     </AdminContainer>
 </template>
