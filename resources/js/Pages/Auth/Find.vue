@@ -1,24 +1,24 @@
 <template>
-    <AuthFormContainer form-title="Register" :route-name="route('login')">
+    <AuthFormContainer :form-title="$t('auth.find.title')" :route-name="route('login')">
         <form @submit.prevent="kvkForm.post(route('register.found'))" class="pb-4 border-b">
             <InputContainer>
                 <TextInput
                     id="kvk"
                     name="kvk_to_find"
                     v-model="kvkForm.kvk_to_find"
-                    label="KVK"
+                    :label="$t('auth.find.kvk')"
                     placeholder="12345678"
                     :error="errors.kvk_to_find"
                 />
             </InputContainer>
 
-            <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Search KVK </SubmitButton>
+            <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> {{ $t('auth.find.search_kvk') }} </SubmitButton>
             <div v-if="errors.kvk_to_find">
                 <hr>
-                <p class="w-full text-center mt-6 mb-2"> Sure that your company exists? <Link :href="route('register.get-company', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">Create it manually</Link> </p>
+                <p class="w-full text-center mt-6 mb-2"> {{ $t('auth.find.manual_create_question') }} <Link :href="route('register.get-company', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">{{ $t('auth.find.manual_create_link') }}</Link> </p>
             </div>
         </form>
-        <p class="mt-6 text-center"> Already have an account? <Link :href="route('login')" class="text-blue-600 hover:underline"> Signin now </Link> </p>
+        <p class="mt-6 text-center"> {{ $t('auth.find.already_registered_question') }} <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.find.already_registered_link') }} </Link> </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">

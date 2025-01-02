@@ -5,17 +5,17 @@
         @click="showHasCompanyNotification = false"
         class="bg-emerald-200 w-full text-emerald-900 p-8 rounded-lg shadow-lg mb-8 flex justify-between hover:cursor-pointer"
     >
-        <p>Bedrijf details gevonden.</p>
+        <p>{{ $t('company.create.found') }}</p>
     </div>
-    <AdminContainer form-title="Bedrijven" :route-name="route('companies.find')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> Nieuw bedrijf toevoegen </h2>
+    <AdminContainer :form-title="$t('company.create.found')" :route-name="route('companies.find')">
+        <h2 class="text-xl font-bold mb-2 uppercase"> {{ $t('company.create.description') }} </h2>
         <form @submit.prevent="form.post(route('companies.store'))">
             <InputContainer>
                 <TextInput
                     id="name"
                     name="name"
                     v-model="form.name"
-                    label="Bedrijf naam"
+                    :label="$t('company.create.name')"
                     placeholder="Pixelware"
                     :error="errors.name"
                     :disabled="hasCompany"
@@ -26,7 +26,7 @@
                     id="kvk"
                     name="kvk"
                     v-model="form.kvk"
-                    label="KVK nummer"
+                    :label="$t('company.create.kvk')"
                     placeholder="12345678"
                     :error="errors.kvk"
                     :disabled="hasCompany"
@@ -38,7 +38,7 @@
                         id="street_address"
                         name="street_address"
                         v-model="form.street_address"
-                        label="Straatadres"
+                        :label="$t('company.create.street_address')"
                         placeholder="Weena 4B"
                         :error="errors.street_address"
                         :disabled="hasCompany"
@@ -49,7 +49,7 @@
                         id="city"
                         name="city"
                         v-model="form.city"
-                        label="Stad"
+                        :label="$t('company.create.city')"
                         placeholder="Rotterdam"
                         :error="errors.city"
                         :disabled="hasCompany"
@@ -62,7 +62,7 @@
                         id="postal_code"
                         name="postal_code"
                         v-model="form.postal_code"
-                        label="Postcode"
+                        :label="$t('company.create.postal_code')"
                         placeholder="4111KK"
                         :error="errors.postal_code"
                         :disabled="hasCompany"
@@ -73,14 +73,14 @@
                         id="country"
                         name="country"
                         v-model="form.country"
-                        label="Land"
+                        :label="$t('company.create.country')"
                         placeholder="Nederland"
                         :error="errors.country"
                         :disabled="hasCompany"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Bedrijf toevoegen </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('company.create.submit') }} </SubmitButton>
         </form>
     </AdminContainer>
 </template>

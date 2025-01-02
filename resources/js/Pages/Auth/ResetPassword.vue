@@ -1,5 +1,5 @@
 <template>
-    <AuthFormContainer form-title="Reset password" :logo-to-route="route('login')">
+    <AuthFormContainer :form-title="$t('auth.reset_password.title')" :logo-to-route="route('login')">
         <form @submit.prevent="form.post(route('password.update'))">
             <input type="hidden" name="token" :value="form.token" />
             <InputContainer>
@@ -7,7 +7,7 @@
                     v-model="form.email"
                     id="email"
                     name="email"
-                    label="Email"
+                    :label="$t('auth.reset_password.email')"
                     :disabled="true"
                     aria-disabled="true"
                     :error="errors.email"
@@ -18,7 +18,7 @@
                     v-model="form.password"
                     id="password"
                     name="password"
-                    label="Password"
+                    :label="$t('auth.reset_password.password')"
                     placeholder="••••••••"
                     :error="errors.password"
                 />
@@ -28,12 +28,12 @@
                     v-model="form.password_confirmation"
                     id="password-confirmation"
                     name="password_confirmation"
-                    label="Password"
+                    :label="$t('auth.reset_password.password_confirmation')"
                     placeholder="••••••••"
                     :error="errors.password_confirmation"
                 />
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Reset password </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('auth.reset_password.submit') }} </SubmitButton>
         </form>
     </AuthFormContainer>
 </template>

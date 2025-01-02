@@ -26,9 +26,9 @@ class PasswordResetRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'E-mail is verplicht',
-            'email.email' => 'E-mail is ongeldig',
-            'email.exists' => 'Dit e-mailadres is niet bekend',
+            'email.required' => __('validation.email.required'),
+            'email.email' => __('validation.email.email'),
+            'email.exists' => __('validation.email.exists'),
         ];
     }
 }
