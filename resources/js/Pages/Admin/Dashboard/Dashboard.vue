@@ -2,11 +2,11 @@
     <div class="flex flex-row">
         <div class="flex flex-col w-1/3">
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px]">
-                <p class="text-lg text-gray-400">Verwachte omzet</p>
+                <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }}</p>
                 <h1 class="text-4xl font-black">{{ totalAsCurrency }}</h1>
             </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
-                <p class="text-lg text-gray-400">Nieuwe maand</p>
+                <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
                 <h1 class="text-4xl font-black">{{ daysText }}</h1>
             </div>
         </div>
@@ -14,11 +14,11 @@
             <div class="p-2.5 w-full sticky top-0 bg-white"></div>
             <table class="w-[58rem] bg-white">
                 <tr class="sticky top-5 bg-white">
-                    <th> Bedrijf </th>
-                    <th> Tarief </th>
-                    <th> Uren </th>
-                    <th> Product </th>
-                    <th> Totaal </th>
+                    <th> {{ $t('dashboard.company') }} </th>
+                    <th> {{ $t('dashboard.rate') }} </th>
+                    <th> {{ $t('dashboard.hours') }} </th>
+                    <th> {{ $t('dashboard.product') }} </th>
+                    <th> {{ $t('dashboard.total') }} </th>
                 </tr>
                 <tbody v-for="log in logs">
                     <tr v-for="data in log">
@@ -35,6 +35,7 @@
 </template>
 <script setup lang="ts">
 import {computed, defineProps} from "vue";
+import {trans} from "laravel-vue-i18n";
 
 interface Props {
     logs: object,
@@ -50,14 +51,14 @@ const totalAsCurrency = computed(() => {
 
 const daysText = computed(() => {
     if (props.daysUntilNewMonth === 0) {
-        return 'Morgen';
+        return trans('dashboard.tomorrow');
     }
 
     if (props.daysUntilNewMonth === 1) {
-        return 'Overmorgen'
+        return trans('dashboard.day_after_tomorrow');
     }
 
-    return props.daysUntilNewMonth + ' dagen';
+    return props.daysUntilNewMonth + ' ' + trans('dashboard.days').toLowerCase();
 })
 
 function rowTotalAsCurrency(data) {

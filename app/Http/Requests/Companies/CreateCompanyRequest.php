@@ -38,16 +38,16 @@ class CreateCompanyRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'kvk.required' => 'U moet een KVK-nummer invoeren.',
-            'kvk.valid_kvk_number' => 'Dit KVK-nummer is niet geldig.',
-            'name.required' => 'U moet een naam invoeren.',
-            'name.max' => 'De naam mag niet langer zijn dan 256 tekens.',
-            'street_address.required' => 'U moet een straatadres invoeren.',
-            'street_address.max' => 'Het straatadres mag niet langer zijn dan 256 tekens.',
-            'city.required' => 'U moet een stad invoeren.',
-            'postal_code.required' => 'U moet een postcode invoeren.',
-            'postal_code.valid_postal_code' => 'Deze postcode is niet geldig.',
-            'country.required' => 'U moet een land invoeren.',
+            'kvk.required' => __('validation.kvk.required'),
+            'kvk.valid_kvk_number' => __('validation.kvk.valid_kvk_number'),
+            'name.required' => __('validation.name.required'),
+            'name.max' => __('validation.name.max'),
+            'street_address.required' => __('validation.street_address.required'),
+            'street_address.max' => __('validation.street_address.max'),
+            'city.required' => __('validation.city.required'),
+            'postal_code.required' => __('validation.postal_code.required'),
+            'postal_code.valid_postal_code' => __('validation.postal_code.valid_postal_code'),
+            'country.required' => __('validation.country.required'),
         ];
     }
 }

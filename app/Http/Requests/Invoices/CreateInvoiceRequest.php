@@ -35,12 +35,12 @@ class CreateInvoiceRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'company_id.required' => 'U moet een bedrijf selecteren.',
-            'start_date.required' => 'U moet een startdatum selecteren.',
-            'start_date.date' => 'De ingevulde datum is niet correct.',
-            'end_date.required' => 'U moet een einddatum selecteren.',
-            'end_date.date' => 'De ingevulde datum is niet correct.',
-            'end_date.after_or_equal' => 'De einddatum moet na of gelijk aan de startdatum zijn.',
+            'company_id.required' => __('validation.company_id.required'),
+            'start_date.required' => __('validation.start_date.required'),
+            'start_date.date' => __('validation.start_date.date'),
+            'end_date.required' => __('validation.end_date.required'),
+            'end_date.date' => __('validation.end_date.date'),
+            'end_date.after_or_equal' => __('validation.end_date.after_or_equal'),
         ];
     }
 

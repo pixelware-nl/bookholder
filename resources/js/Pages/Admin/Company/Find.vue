@@ -1,6 +1,6 @@
 <template>
-    <AdminContainer form-title="Bedrijven" :route-name="route('companies.index')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> Zoek KVK </h2>
+    <AdminContainer :form-title="$t('company.find.title')" :route-name="route('companies.index')">
+        <h2 class="text-xl font-bold mb-2 uppercase"> {{ $t('company.find.search_kvk') }} </h2>
         <form @submit.prevent="kvkForm.post(route('companies.found'))">
             <InputContainer>
                 <TextInput
@@ -13,10 +13,10 @@
                 />
             </InputContainer>
 
-            <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> Zoek KVK </SubmitButton>
+            <SubmitButton :form-processing="kvkForm.processing" class="mb-8"> {{ $t('company.find.search_kvk') }} </SubmitButton>
             <div v-if="errors.kvk_to_find">
                 <hr>
-                <p class="w-full text-center mt-6"> Weet je zeker dat het bedrijf bestaat? <Link :href="route('companies.create', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">Voeg het handmatig toe</Link> </p>
+                <p class="w-full text-center mt-6"> {{ $t('company.find.manual_create_question') }} <Link :href="route('companies.create', kvkForm.kvk_to_find)" class="text-blue-600 hover:underline">{{ $t('company.find.manual_create_link') }}</Link> </p>
             </div>
         </form>
     </AdminContainer>

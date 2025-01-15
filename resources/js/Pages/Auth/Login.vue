@@ -1,12 +1,12 @@
 <template>
-    <AuthFormContainer form-title="Login">
+    <AuthFormContainer :form-title="$t('auth.login.title')">
         <form @submit.prevent="form.post(route('login.authenticate'))" class="pb-10 border-b">
             <InputContainer>
                 <TextInput
                     v-model="form.email"
                     id="email"
                     name="email"
-                    label="Email"
+                    :label="$t('auth.login.email')"
                     placeholder="j.doe@pixelware.nl"
                     :error="errors.email"
                 />
@@ -16,17 +16,17 @@
                     v-model="form.password"
                     id="password"
                     name="password"
-                    label="Password"
+                    :label="$t('auth.login.password')"
                     placeholder="••••••••"
                     :error="errors.password"
                 />
                 <div class="text-right">
-                    <Link :href="route('password.request')" class="text-blue-600 hover:underline text-xs"> Forgot password? </Link>
+                    <Link :href="route('password.request')" class="text-blue-600 hover:underline text-xs"> {{ $t('auth.login.forgot_password') }} </Link>
                 </div>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> Login </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('auth.login.submit') }} </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> Don't have an account? <Link :href="route('register.find')" class="text-blue-600 hover:underline"> Signup now </Link> </p>
+        <p class="mt-6 text-center"> {{ $t('auth.login.not_registered_question') }} <Link :href="route('register.find')" class="text-blue-600 hover:underline"> {{ $t('auth.login.not_registered_link') }} </Link> </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
