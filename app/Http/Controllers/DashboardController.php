@@ -18,10 +18,12 @@ class DashboardController extends Controller
     {
         $logs = $this->logService->findByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
         $totalLogs = $this->logService->sum($logs);
+        $totalOwed = $this->logService->owed($logs);
 
         return Inertia::render('Admin/Dashboard/Dashboard', [
             'logs' => LogResource::collection($logs),
             'totalLogs' => $totalLogs,
+            'totalOwed' => $totalOwed,
             'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()))
         ]);
     }

@@ -3,7 +3,11 @@
         <div class="flex flex-col w-1/3">
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px]">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }}</p>
-                <h1 class="text-4xl font-black">{{ totalAsCurrency }}</h1>
+                <div class="flex items-center">
+                    <span class="text-4xl font-black pe-2">{{ totalAsCurrency }}</span>
+                    <span class="text-red-600 text-lg font-bold">(-{{ owedAsCurrency }})</span>
+                </div>
+                <p class="text-2xl font-bold text-gray-200 mt-2">{{ getCurrency((props.totalLogs - props.totalOwed) * 0.7) }}</p>
             </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
@@ -34,12 +38,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps} from "vue";
+import {computed, defineProps, onMounted} from "vue";
 import {trans} from "laravel-vue-i18n";
 
 interface Props {
     logs: object,
-    totalLogs: number
+    totalLogs: number,
+    totalOwed: number,
     daysUntilNewMonth: number
 }
 
@@ -47,6 +52,10 @@ const props = defineProps<Props>();
 
 const totalAsCurrency = computed(() => {
     return getCurrency(props.totalLogs);
+})
+
+const owedAsCurrency = computed(() => {
+    return getCurrency(props.totalOwed);
 })
 
 const daysText = computed(() => {
