@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('invoices', InvoiceController::class);
         Route::resource('companies', CompanyController::class)->only(['index', 'store', 'destroy']);
-        Route::resource('logs', LogController::class)->only(['index', 'create', 'store', 'destroy']);
+        Route::resource('logs', LogController::class);
 
         Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');
 

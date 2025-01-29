@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\LogDTO;
 use App\Http\Requests\Logs\CreateLogRequest;
+use App\Http\Requests\Logs\UpdateLogRequest;
 use App\Http\Resources\LogResource;
 use App\Models\Log;
 use App\Services\LogService;
@@ -29,6 +30,14 @@ final class LogController extends Controller
         ]);
     }
 
+    public function show(Log $log): InertiaResponse
+    {
+        return Inertia::render('Admin/Log/Show', [
+            'log' => LogResource::make($log),
+            'companies' => $this->userService->companies()
+        ]);
+    }
+
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Log/Create', [
@@ -36,9 +45,24 @@ final class LogController extends Controller
         ]);
     }
 
+    public function edit(Log $log): InertiaResponse
+    {
+        return Inertia::render('Admin/Log/Edit', [
+            'log' => $log,
+            'companies' => $this->userService->companies()
+        ]);
+    }
+
     public function store(CreateLogRequest $request): RedirectResponse
     {
         $this->logService->store(LogDTO::fromRequest($request));
+
+        return redirect()->route('logs.index');
+    }
+
+    public function update(Log $log, UpdateLogRequest $request): RedirectResponse
+    {
+        $this->logService->update($log, LogDTO::fromRequest($request));
 
         return redirect()->route('logs.index');
     }

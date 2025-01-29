@@ -8,7 +8,8 @@
                     <th> {{ $t('log.index.rate') }} </th>
                     <th> {{ $t('log.index.hours') }} </th>
                     <th> {{ $t('log.index.name') }} </th>
-                    <th> {{ $t('log.index.description') }} </th>
+                    <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
                 </tr>
             </template>
@@ -18,7 +19,16 @@
                     <td> {{ log.rate }} </td>
                     <td> {{ log.hours }} </td>
                     <td> {{ log.name }} </td>
-                    <td> {{ log.description }} </td>
+                    <td class="table-item table-item-link ">
+                        <Link :href="route('logs.show', log.id)">
+                            <font-awesome-icon icon="fa-solid fa-eye" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
+                    <td class="table-item table-item-link ">
+                        <Link :href="route('logs.edit', log.id)">
+                            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
                     <td class="table-item table-item-link ">
                         <Link :href="route('logs.destroy', log.id)" method="delete">
                             <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
@@ -34,6 +44,7 @@ import {defineProps, onMounted} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 interface Props {
     logs: object,

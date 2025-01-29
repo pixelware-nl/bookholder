@@ -6,7 +6,7 @@
         :value="modelValue"
         :class="{'input-field-error': error}"
         class="input-select"
-
+        :disabled="disabled"
         @input="$emit('update:modelValue', $event.target.value)"
     >
         <option value="" selected>Kies een optie</option>
