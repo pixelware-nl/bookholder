@@ -12,28 +12,34 @@
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
                 </tr>
             </template>
             <template #tbody v-for="invoice in invoices">
-                <tr v-for="data in invoice">
+                <tr v-for="data in invoice" :class="{'payed': data.payed}">
                     <td> {{ data.id }} </td>
                     <td> {{ data.from_company }} </td>
                     <td> {{ data.to_company }} </td>
                     <td> {{ data.start_date }} t/m {{ data.end_date }}</td>
                     <td> {{ data.created_at }} </td>
                     <td class="table-item table-item-link">
+                        <Link v-if="data.payed == false" :href="route('invoices.payed', data.id)" method="post">
+                            <FontAwesomeIcon icon="fa-solid fa-circle-check" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
+                    <td class="table-item table-item-link">
                         <a :href="route('invoices.show', data.id)" target="_blank">
-                            <font-awesome-icon icon="fa-solid fa-file-pdf" class="text-slate-600 hover:text-slate-800"/>
+                            <FontAwesomeIcon icon="fa-solid fa-file-pdf"/>
                         </a>
                     </td>
                     <td class="table-item table-item-link">
                         <Link :href="route('invoices.destroy', data.id)" method="delete">
-                            <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
+                            <FontAwesomeIcon icon="fa-solid fa-trash"/>
                         </Link>
                     </td>
                     <td class="table-item table-item-link">
                         <a href="#">
-                            <font-awesome-icon icon="fa-solid fa-envelope" class="text-slate-600 hover:text-slate-800"/>
+                            <FontAwesomeIcon icon="fa-solid fa-envelope"/>
                         </a>
                     </td>
                 </tr>
@@ -46,6 +52,7 @@ import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 interface Props {
     invoices: object,

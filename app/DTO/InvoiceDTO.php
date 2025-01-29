@@ -18,6 +18,7 @@ final class InvoiceDTO implements DTOInterface
         private readonly int    $to_company_id,
         private readonly Carbon $start_date,
         private readonly Carbon $end_date,
+        private bool            $payed = false,
         private ?array          $body = null
     ) {}
 
@@ -94,13 +95,27 @@ final class InvoiceDTO implements DTOInterface
         return $this->end_date;
     }
 
+    public function isPayed(): bool
+    {
+        return $this->payed;
+    }
+
+    public function setPayed(bool $payed): InvoiceDTO
+    {
+        $this->payed = $payed;
+
+        return $this;
+    }
+
     public function getBody(): ?array
     {
         return $this->body;
     }
 
-    public function setBody(array $body): void
+    public function setBody(array $body): InvoiceDTO
     {
         $this->body = $body;
+
+        return $this;
     }
 }

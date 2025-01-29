@@ -9,7 +9,8 @@ import {
     faEnvelope,
     faBackspace,
     faPenToSquare,
-    faEye
+    faEye,
+    faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -21,7 +22,8 @@ library.add(
     faEnvelope,
     faBackspace,
     faPenToSquare,
-    faEye
+    faEye,
+    faCircleCheck,
 );
 
 export { FontAwesomeIcon };

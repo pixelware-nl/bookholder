@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * 
+ *
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -65,6 +65,7 @@ class Log extends Model
         'hours',
         'name',
         'description',
+        'payed'
     ];
 
     public function user(): HasOne

@@ -48,6 +48,23 @@ readonly class InvoiceService
         $this->invoiceRepository->delete($invoice);
     }
 
+    public function payed(Invoice $invoice): Invoice
+    {
+        $invoice = $this->invoiceRepository->payed($invoice);
+
+        $logs = $this->logService->findByCompanyTimeRange(
+            $invoice->toCompany,
+            $invoice->start_date,
+            $invoice->end_date
+        );
+
+        foreach ($logs as $log) {
+            $this->logService->payed($log);
+        }
+
+        return $invoice;
+    }
+
     public function generateBody(InvoiceDTO $invoiceDTO): array
     {
         $logs = $this->logService->findByCompanyTimeRange(

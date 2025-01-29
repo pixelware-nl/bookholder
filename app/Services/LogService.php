@@ -52,4 +52,9 @@ readonly class LogService
     {
         $this->logRepository->delete($logDTO);
     }
+
+    public function payed(Log $log): Log
+    {
+        return $this->logRepository->payed($log);
+    }
 }

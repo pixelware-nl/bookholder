@@ -14,24 +14,24 @@
                 </tr>
             </template>
             <template #tbody>
-                <tr v-for="log in logs.data">
+                <tr v-for="log in logs.data" :class="{'payed': log.payed}">
                     <td> {{ log.company_name }} </td>
                     <td> {{ log.rate }} </td>
                     <td> {{ log.hours }} </td>
                     <td> {{ log.name }} </td>
-                    <td class="table-item table-item-link ">
+                    <td class="table-item table-item-link">
                         <Link :href="route('logs.show', log.id)">
-                            <font-awesome-icon icon="fa-solid fa-eye" class="text-slate-600 hover:text-slate-800"/>
+                            <FontAwesomeIcon icon="fa-solid fa-eye"/>
                         </Link>
                     </td>
-                    <td class="table-item table-item-link ">
-                        <Link :href="route('logs.edit', log.id)">
-                            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="text-slate-600 hover:text-slate-800"/>
+                    <td class="table-item table-item-link">
+                        <Link v-if="log.payed == false" :href="route('logs.edit', log.id)">
+                            <FontAwesomeIcon icon="fa-solid fa-pen-to-square"/>
                         </Link>
                     </td>
-                    <td class="table-item table-item-link ">
+                    <td class="table-item table-item-link">
                         <Link :href="route('logs.destroy', log.id)" method="delete">
-                            <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
+                            <FontAwesomeIcon icon="fa-solid fa-trash"/>
                         </Link>
                     </td>
                 </tr>

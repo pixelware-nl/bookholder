@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
 
         Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');
 
+        Route::post('/invoices/{invoice}/payed', [InvoiceController::class, 'payed'])->name('invoices.payed');
+
         Route::prefix('companies')->group(function () {
             Route::get('find', [CompanyController::class, 'find'])->name('companies.find');
             Route::post('find', [CompanyController::class, 'found'])->name('companies.found');

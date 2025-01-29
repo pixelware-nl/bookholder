@@ -69,4 +69,11 @@ final class InvoiceController extends Controller
 
         return redirect()->route('invoices.index');
     }
+
+    public function payed(Invoice $invoice): SymfonyResponse
+    {
+        $this->invoiceService->payed($invoice);
+
+        return redirect()->route('invoices.index');
+    }
 }

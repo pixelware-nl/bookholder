@@ -16,6 +16,7 @@ class LogResource extends JsonResource
             'rate' => $this->rate,
             'hours' => $this->hours,
             'company_name' => $this->company->name,
+            'payed' => $this->payed,
         ];
     }
 }

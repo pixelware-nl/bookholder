@@ -60,6 +60,15 @@ class LogRepository implements LogRepositoryInterface
         return $log;
     }
 
+    public function payed(Log $log): Log
+    {
+        $log->update([
+            'payed' => true
+        ]);
+
+        return $log;
+    }
+
     public function delete(Log $log): void
     {
         $log->delete();

@@ -33,6 +33,28 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         ]);
     }
 
+    public function update(Invoice $invoice, InvoiceDTO $invoiceDTO): Invoice
+    {
+        $invoice->update([
+            'from_company_id' => $invoiceDTO->getFromCompanyId(),
+            'to_company_id' => $invoiceDTO->getToCompanyId(),
+            'start_date' => $invoiceDTO->getStartDate(),
+            'end_date' => $invoiceDTO->getEndDate(),
+            'body' => $invoiceDTO->getBody()
+        ]);
+
+        return $invoice;
+    }
+
+    public function payed(Invoice $invoice): Invoice
+    {
+        $invoice->update([
+            'payed' => true
+        ]);
+
+        return $invoice;
+    }
+
     public function delete(Invoice $invoice): void
     {
         $invoice->delete();

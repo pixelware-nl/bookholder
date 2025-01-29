@@ -64,7 +64,8 @@ class Invoice extends Model
         'to_company_id',
         'start_date',
         'end_date',
-        'body'
+        'body',
+        'payed',
     ];
 
     protected $casts = [

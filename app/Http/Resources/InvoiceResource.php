@@ -18,6 +18,7 @@ class InvoiceResource extends JsonResource
             'start_date' => $this->start_date->format('Y-m-d'),
             'end_date' => $this->end_date->format('Y-m-d'),
             'created_at' => $this->created_at->format('Y-m-d H:i'),
+            'payed' => $this->payed
         ];
     }
 }
