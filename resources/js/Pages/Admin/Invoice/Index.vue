@@ -13,6 +13,7 @@
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
                 </tr>
             </template>
             <template #tbody v-for="invoice in invoices">
@@ -31,6 +32,11 @@
                         <a :href="route('invoices.show', data.id)" target="_blank">
                             <FontAwesomeIcon icon="fa-solid fa-file-pdf"/>
                         </a>
+                    </td>
+                    <td class="table-item table-item-link">
+                        <Link v-if="data.payed == false" :href="route('invoices.edit', data.id)">
+                            <FontAwesomeIcon icon="fa-solid fa-pen-to-square"/>
+                        </Link>
                     </td>
                     <td class="table-item table-item-link">
                         <Link :href="route('invoices.destroy', data.id)" method="delete">

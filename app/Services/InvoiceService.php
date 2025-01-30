@@ -43,14 +43,24 @@ readonly class InvoiceService
         return $this->invoiceRepository->store($invoiceDTO);
     }
 
+    public function update(Invoice $invoice, InvoiceDTO $invoiceDTO): Invoice
+    {
+        $body = $this->generateBody($invoiceDTO);
+        $invoiceDTO->setBody($body);
+
+        return $this->invoiceRepository->update($invoice, $invoiceDTO);
+    }
+
     public function delete(Invoice $invoice): void
     {
+        $this->payed($invoice, false);
+
         $this->invoiceRepository->delete($invoice);
     }
 
-    public function payed(Invoice $invoice): Invoice
+    public function payed(Invoice $invoice, bool $payed): Invoice
     {
-        $invoice = $this->invoiceRepository->payed($invoice);
+        $invoice = $this->invoiceRepository->payed($invoice, $payed);
 
         $logs = $this->logService->findByCompanyTimeRange(
             $invoice->toCompany,
@@ -59,7 +69,7 @@ readonly class InvoiceService
         );
 
         foreach ($logs as $log) {
-            $this->logService->payed($log);
+            $this->logService->payed($log, $payed);
         }
 
         return $invoice;

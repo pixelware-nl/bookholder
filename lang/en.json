@@ -76,6 +76,7 @@
     "company.create.submit": "Add company",
 
     "dashboard.expected_revenue": "Expected revenue",
+    "dashboard.realised_profit": "Realised profit",
     "dashboard.new_month": "New month",
     "dashboard.company": "Company",
     "dashboard.rate": "Rate",
@@ -99,6 +100,12 @@
     "invoice.create.start_date": "Start date",
     "invoice.create.end_date": "End date",
     "invoice.create.submit": "Add invoice",
+
+    "invoice.edit.title": "Invoices",
+    "invoice.edit.companies": "Companies",
+    "invoice.edit.start_date": "Start date",
+    "invoice.edit.end_date": "End date",
+    "invoice.edit.submit": "Change invoice",
 
     "log.index.title": "Logbook",
     "log.index.add_log": "Add log",

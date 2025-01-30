@@ -76,6 +76,7 @@
     "company.create.submit": "Bedrijf toevoegen",
 
     "dashboard.expected_revenue": "Verwachte omzet",
+    "dashboard.realised_profit": "Gerealiseerde winst",
     "dashboard.new_month": "Nieuwe maand",
     "dashboard.company": "Bedrijf",
     "dashboard.rate": "Tarief",
@@ -99,6 +100,12 @@
     "invoice.create.start_date": "Startdatum",
     "invoice.create.end_date": "Einddatum",
     "invoice.create.submit": "Factuur toevoegen",
+
+    "invoice.edit.title": "Facturen",
+    "invoice.edit.companies": "Bedrijven",
+    "invoice.edit.start_date": "Startdatum",
+    "invoice.edit.end_date": "Einddatum",
+    "invoice.edit.submit": "Factuur aanpassen",
 
     "log.index.title": "Logboek",
     "log.index.add_log": "Log toevoegen",

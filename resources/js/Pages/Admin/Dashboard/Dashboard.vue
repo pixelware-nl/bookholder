@@ -4,12 +4,17 @@
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px]">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }}</p>
                 <div class="flex items-center">
-                    <span class="text-4xl font-black pe-2">{{ totalAsCurrency }}</span>
-                    <span class="text-red-600 text-lg font-bold">(-{{ owedAsCurrency }})</span>
+                    <span class="text-4xl font-black pe-2">{{ sumUnpaidTotalCurrency }}</span>
+                    <span class="text-red-600 text-lg font-bold">(-{{ sumUnpaidOwedCurrency }})</span>
                 </div>
-                <p class="text-2xl font-bold text-gray-200 mt-2">{{ getCurrency((props.totalLogs - props.totalOwed) * 0.7) }}</p>
             </div>
-            <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
+            <div class="bg-green-50 w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
+                <p class="text-lg text-green-600">{{ $t('dashboard.realised_profit') }}</p>
+                <div class="flex items-center">
+                    <span class="text-4xl font-black text-green-800 pe-2">{{ sumPayedTotalCurrency }}</span>
+                </div>
+            </div>
+            <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8 mb-8">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
                 <h1 class="text-4xl font-black">{{ daysText }}</h1>
             </div>
@@ -25,7 +30,7 @@
                     <th> {{ $t('dashboard.total') }} </th>
                 </tr>
                 <tbody v-for="log in logs">
-                    <tr v-for="data in log">
+                    <tr v-for="data in log" :class="{'payed': data.payed}">
                         <td> {{ data.company_name }} </td>
                         <td> {{ getCurrency(data.rate) }} </td>
                         <td> {{ data.hours }} </td>
@@ -38,24 +43,33 @@
     </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, onMounted} from "vue";
+import {computed, defineProps} from "vue";
 import {trans} from "laravel-vue-i18n";
 
 interface Props {
     logs: object,
-    totalLogs: number,
-    totalOwed: number,
+    sumUnpaidTotal: number,
+    sumUnpaidOwed: number,
+    sumPayedTotal: number,
     daysUntilNewMonth: number
 }
 
 const props = defineProps<Props>();
 
-const totalAsCurrency = computed(() => {
-    return getCurrency(props.totalLogs);
+const sumUnpaidTotalCurrency = computed(() => {
+    return getCurrency(props.sumUnpaidTotal);
 })
 
-const owedAsCurrency = computed(() => {
-    return getCurrency(props.totalOwed);
+const sumUnpaidOwedCurrency = computed(() => {
+    return getCurrency(props.sumUnpaidOwed);
+})
+
+const sumUnpaidTaxDeductedCurrency = computed(() => {
+    return getCurrency((props.sumUnpaidTotal - props.sumUnpaidOwed) * 0.7);
+})
+
+const sumPayedTotalCurrency = computed(() => {
+    return getCurrency(props.sumPayedTotal);
 })
 
 const daysText = computed(() => {
@@ -106,9 +120,5 @@ function getCurrency(value) {
 
 .link-button {
     @apply inline-block bg-black text-white py-6 px-6 rounded-lg hover:bg-gray-800 hover:text-slate-200 mb-4
-}
-
-tbody tr:nth-child(even) {
-    @apply bg-slate-50
 }
 </style>

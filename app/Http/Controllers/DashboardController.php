@@ -17,13 +17,18 @@ class DashboardController extends Controller
     public function index(): InertiaResponse
     {
         $logs = $this->logService->findByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
-        $totalLogs = $this->logService->sum($logs);
-        $totalOwed = $this->logService->owed($logs);
+        $unpaidLogs = $this->logService->findUnpaidByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
+        $payedLogs = $this->logService->findPayedByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
+
+        $sumUnpaidTotal = $this->logService->sum($unpaidLogs);
+        $sumUnpaidOwed = $this->logService->owed($unpaidLogs);
+        $sumPayedTotal = $this->logService->sum($payedLogs);
 
         return Inertia::render('Admin/Dashboard/Dashboard', [
             'logs' => LogResource::collection($logs),
-            'totalLogs' => $totalLogs,
-            'totalOwed' => $totalOwed,
+            'sumPayedTotal' => $sumPayedTotal,
+            'sumUnpaidTotal' => $sumUnpaidTotal,
+            'sumUnpaidOwed' => $sumUnpaidOwed,
             'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()))
         ]);
     }

@@ -46,10 +46,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         return $invoice;
     }
 
-    public function payed(Invoice $invoice): Invoice
+    public function payed(Invoice $invoice, bool $payed): Invoice
     {
         $invoice->update([
-            'payed' => true
+            'payed' => $payed
         ]);
 
         return $invoice;
