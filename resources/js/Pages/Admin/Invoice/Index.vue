@@ -54,7 +54,7 @@
                     </td>
                 </tr>
                 <tr v-else>
-                    <td colspan="10" class="text-center"> {{ $t('invoice.index.no_entries') }} </td>
+                    <td colspan="10" class="text-center !text-gray-400"> {{ $t('invoice.index.no_entries') }} </td>
                 </tr>
             </template>
         </TableContainer>

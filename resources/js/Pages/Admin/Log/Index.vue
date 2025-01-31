@@ -40,7 +40,7 @@
                     </td>
                 </tr>
                 <tr v-else>
-                    <td colspan="7" class="text-center"> {{ $t('logs.index.no_entries') }} </td>
+                    <td colspan="7" class="text-center !text-gray-400"> {{ $t('log.index.no_entries') }} </td>
                 </tr>
             </template>
         </TableContainer>
