@@ -1,4 +1,8 @@
 <template>
+    <TabContainer
+        :tabs="['pending', 'payed']"
+        v-model="currentTab"
+    />
     <AdminContainer :form-title="$t('log.index.title')">
         <Link :href="route('logs.create')" method="get" class="link-button"> {{ $t('log.index.add_log') }} </Link>
         <TableContainer>
@@ -14,7 +18,7 @@
                 </tr>
             </template>
             <template #tbody>
-                <tr v-for="log in logs.data" :class="{'payed': log.payed}">
+                <tr v-if="filteredLogs.length > 0" v-for="log in filteredLogs" :class="{'payed': log.payed}">
                     <td> {{ log.company_name }} </td>
                     <td> {{ log.rate }} </td>
                     <td> {{ log.hours }} </td>
@@ -35,22 +39,36 @@
                         </Link>
                     </td>
                 </tr>
+                <tr v-else>
+                    <td colspan="7" class="text-center"> {{ $t('logs.index.no_entries') }} </td>
+                </tr>
             </template>
         </TableContainer>
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {defineProps, onMounted} from "vue";
+import {computed, defineProps, onMounted, ref} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import TabContainer from "../../Partials/Containers/TabContainer.vue";
 
 interface Props {
     logs: object,
 }
 
 const props = defineProps<Props>();
+
+const currentTab = ref('pending')
+
+const filteredLogs = computed(() => {
+    return props.logs.data.filter((invoice: any) => {
+        return currentTab.value === 'pending'
+            ? invoice.payed == false
+            : invoice.payed;
+    });
+});
 </script>
 <style scoped>
 .link-button {

@@ -42,12 +42,6 @@ readonly class LogService
         });
     }
 
-    public function owed(Collection $logs): int
-    {
-        return $logs->sum(function($log) {
-            return 10 * $log->hours;
-        });
-    }
     public function store(LogDTO $logDTO): Log
     {
         return $this->logRepository->store($logDTO);

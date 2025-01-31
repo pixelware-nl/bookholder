@@ -23,6 +23,11 @@ readonly class InvoiceService
      */
     public function generatePDF(Invoice $invoice): Response
     {
+        if ($invoice->payed == false) {
+            $invoiceDTO = InvoiceDTO::fromModel($invoice);
+            $invoice = $this->update($invoice, $invoiceDTO);
+        }
+
         return $this->pdfService->streamToPdf(
             view('pdf.invoice', [
                 'invoice' => $invoice,
@@ -86,7 +91,8 @@ readonly class InvoiceService
 
         return [
             'logs' => $logs,
-            'total' => $total,
+            'total' => $total * 1.21,
+            'btw' => $total * 0.21,
         ];
     }
 }

@@ -77,6 +77,7 @@
 
     "dashboard.expected_revenue": "Expected revenue",
     "dashboard.realised_profit": "Realised profit",
+    "dashboard.net_profit": "Net profit",
     "dashboard.new_month": "New month",
     "dashboard.company": "Company",
     "dashboard.rate": "Rate",
@@ -94,6 +95,7 @@
     "invoice.index.to": "To",
     "invoice.index.date_range": "Date range",
     "invoice.index.created_at": "Created at",
+    "invoice.index.no_entries": "No invoices found",
 
     "invoice.create.title": "Invoices",
     "invoice.create.companies": "Companies",
@@ -114,6 +116,7 @@
     "log.index.hours": "Hours",
     "log.index.name": "Name",
     "log.index.description": "Description",
+    "log.index.no_entries": "No logs found",
 
     "log.create.title": "Logbook",
     "log.create.companies": "Companies",

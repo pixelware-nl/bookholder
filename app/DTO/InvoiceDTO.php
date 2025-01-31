@@ -59,6 +59,21 @@ final class InvoiceDTO implements DTOInterface
         );
     }
 
+    public static function fromModel(Invoice $invoice): self
+    {
+        $body = json_decode(json_encode($invoice->body), true);
+
+        return new self(
+            user_id: $invoice->user_id,
+            from_company_id: $invoice->from_company_id,
+            to_company_id: $invoice->to_company_id,
+            start_date: $invoice->start_date,
+            end_date: $invoice->end_date,
+            payed: $invoice->payed,
+            body: $body
+        );
+    }
+
     public function toArray(): array
     {
         return [

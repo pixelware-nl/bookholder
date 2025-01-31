@@ -28,9 +28,17 @@
                 <td> {{ sprintf('%s, %s', $invoice->toCompany->postal_code, $invoice->toCompany->country) }} </td>
                 <td> {{ sprintf('%s, %s', $invoice->fromCompany->postal_code, $invoice->fromCompany->country) }} </td>
             </tr>
+{{--            <tr>--}}
+{{--                <td> {{ $invoice->toCompany->email }} </td>--}}
+{{--                <td> {{ $invoice->fromCompany->email }}</td>--}}
+{{--            </tr>--}}
             <tr>
-                <td> {{ $invoice->toCompany->email }} </td>
-                <td> {{ $invoice->fromCompany->email }}</td>
+                <td> {{ $invoice->toCompany->kvk }}</td>
+                <td> {{ $invoice->fromCompany->kvk }} </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td> NL41 INGB 0003 4219 27 </td>
             </tr>
         </tbody>
     </table>
@@ -55,6 +63,12 @@
                         <td> {{ sprintf('€%s', number_format($log->rate * $log->hours, decimal_separator: ',', thousands_separator: '.')) }} </td>
                     </tr>
                 @endforeach
+                <tr>
+                    <th colspan="2"></th>
+                    <th></th>
+                    <th> BTW (21%) </th>
+                    <th> {{ sprintf('€%s', number_format($invoice->body->btw, decimal_separator: ',', thousands_separator: '.')) }}</th>
+                </tr>
                 <tr>
                     <th colspan="2"></th>
                     <th></th>

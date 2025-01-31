@@ -53,6 +53,7 @@ class Log extends Model
 
     protected $table = 'logs';
 
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *

@@ -77,6 +77,7 @@
 
     "dashboard.expected_revenue": "Verwachte omzet",
     "dashboard.realised_profit": "Gerealiseerde winst",
+    "dashboard.net_profit": "Netto winst",
     "dashboard.new_month": "Nieuwe maand",
     "dashboard.company": "Bedrijf",
     "dashboard.rate": "Tarief",
@@ -94,6 +95,7 @@
     "invoice.index.to": "Naar",
     "invoice.index.date_range": "Datum bereik",
     "invoice.index.created_at": "Aangemaakt op",
+    "invoice.index.no_entries": "Geen facturen gevonden",
 
     "invoice.create.title": "Facturen",
     "invoice.create.companies": "Bedrijven",
@@ -114,6 +116,7 @@
     "log.index.hours": "Uren",
     "log.index.name": "Naam",
     "log.index.description": "Omschrijving",
+    "log.index.no_entries": "Geen logs gevonden",
 
     "log.create.title": "Logboek",
     "log.create.companies": "Bedrijven",

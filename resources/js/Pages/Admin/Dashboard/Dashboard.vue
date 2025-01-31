@@ -5,7 +5,6 @@
                 <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }}</p>
                 <div class="flex items-center">
                     <span class="text-4xl font-black pe-2">{{ sumUnpaidTotalCurrency }}</span>
-                    <span class="text-red-600 text-lg font-bold">(-{{ sumUnpaidOwedCurrency }})</span>
                 </div>
             </div>
             <div class="bg-green-50 w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
@@ -14,12 +13,15 @@
                     <span class="text-4xl font-black text-green-800 pe-2">{{ sumPayedTotalCurrency }}</span>
                 </div>
             </div>
-            <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8 mb-8">
-                <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
-                <h1 class="text-4xl font-black">{{ daysText }}</h1>
+            <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
+                <p class="text-lg text-gray-400">{{ $t('dashboard.net_profit') }}</p>
+                <div class="flex items-center">
+                    <span class="text-4xl font-black pe-2">{{ sumPayedNet }}</span>
+                </div>
             </div>
         </div>
-        <div class="bg-white w-2/3 flex rounded-md shadow-md flex-col items-center ml-8 pb-4 max-h-[39.5em] overflow-auto">
+        <div class="flex flex-col w-2/3">
+        <div class="bg-white flex rounded-md shadow-md flex-col items-center ml-8 pb-4 min-h-[39.5em] overflow-auto">
             <div class="p-2.5 w-full sticky top-0 bg-white"></div>
             <table class="w-[58rem] bg-white">
                 <tr class="sticky top-5 bg-white">
@@ -39,6 +41,12 @@
                     </tr>
                 </tbody>
             </table>
+
+        </div>
+        <div class="bg-white w-1/2 flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8 mb-8 ms-8">
+            <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
+            <h1 class="text-4xl font-black">{{ daysText }}</h1>
+        </div>
         </div>
     </div>
 </template>
@@ -60,12 +68,8 @@ const sumUnpaidTotalCurrency = computed(() => {
     return getCurrency(props.sumUnpaidTotal);
 })
 
-const sumUnpaidOwedCurrency = computed(() => {
-    return getCurrency(props.sumUnpaidOwed);
-})
-
-const sumUnpaidTaxDeductedCurrency = computed(() => {
-    return getCurrency((props.sumUnpaidTotal - props.sumUnpaidOwed) * 0.7);
+const sumPayedNet = computed(() => {
+    return getCurrency(props.sumPayedTotal * 0.6);
 })
 
 const sumPayedTotalCurrency = computed(() => {
