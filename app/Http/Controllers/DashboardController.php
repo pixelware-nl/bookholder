@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
         $logs = $this->logService->findByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
         $unpaidLogs = $this->logService->findUnpaidByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
-        $payedLogs = $this->logService->findPayedByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
+        $payedLogs = $this->logService->findByPayed(true);
 
         $sumUnpaidTotal = $this->logService->sum($unpaidLogs);
         $sumPayedTotal = $this->logService->sum($payedLogs);

@@ -52,7 +52,7 @@ class Log extends Model
     use HasFactory;
 
     protected $table = 'logs';
-    
+
     /**
      * The attributes that are mass assignable.
      *

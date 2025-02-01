@@ -2,7 +2,7 @@
     <div class="flex flex-row">
         <div class="flex flex-col w-1/3">
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px]">
-                <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }}</p>
+                <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }} </p>
                 <div class="flex items-center">
                     <span class="text-4xl font-black pe-2">{{ sumUnpaidTotalCurrency }}</span>
                 </div>
@@ -10,7 +10,7 @@
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.net_profit') }}</p>
                 <div class="flex items-center">
-                    <span class="text-4xl font-black pe-2">{{ sumPayedNet }}</span>
+                    <span class="text-4xl font-black pe-2 text-green-900 glow">{{ sumPayedNet }}</span>
                 </div>
             </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
@@ -139,7 +139,8 @@ function getCurrency(value) {
     width: 20px;
 }
 
-.link-button {
-    @apply inline-block bg-black text-white py-6 px-6 rounded-lg hover:bg-gray-800 hover:text-slate-200 mb-4
+.glow {
+    transition: 0.5s;
+    text-shadow: 0 0 80px #00ff00;
 }
 </style>

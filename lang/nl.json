@@ -77,7 +77,7 @@
 
     "dashboard.expected_revenue": "Verwachte omzet",
     "dashboard.realised_profit": "Gerealiseerde winst",
-    "dashboard.net_profit": "Netto winst",
+    "dashboard.net_profit": "Netto winst (altijd)",
     "dashboard.new_month": "Nieuwe maand",
     "dashboard.company": "Bedrijf",
     "dashboard.rate": "Tarief",

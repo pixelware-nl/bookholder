@@ -15,7 +15,12 @@ class LogRepository implements LogRepositoryInterface
 
     public function all(): Collection
     {
-        return Log::all();
+        return Auth::user()->logs()->get();
+    }
+
+    public function findByPayed(bool $payed): Collection
+    {
+        return Auth::user()->logs()->where('payed', $payed)->get();
     }
 
     public function findByTimeRange(Carbon $startDate, Carbon $endDate, ?bool $payed = null): Collection

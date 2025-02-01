@@ -42,6 +42,12 @@
                 <tr v-else>
                     <td colspan="7" class="text-center !text-gray-400"> {{ $t('log.index.no_entries') }} </td>
                 </tr>
+                <tr :class="{'payed': currentTab == 'payed'}">
+                    <td class="font-bold">Total</td>
+                    <td class="font-bold">{{ sumTotalMoneyAsCurrency }}</td>
+                    <td class="font-bold">{{ sumTotalHours }}</td>
+                    <td colspan="4"></td>
+                </tr>
             </template>
         </TableContainer>
     </AdminContainer>
@@ -68,6 +74,31 @@ const filteredLogs = computed(() => {
             : logs.payed;
     });
 });
+
+const sumTotalHours = computed(() => {
+    return filteredLogs.value.reduce((total, log) => {
+        return total + log.hours;
+    }, 0);
+})
+
+const sumTotalMoneyAsCurrency = computed(() => {
+    return getCurrency(
+        filteredLogs.value.reduce((total, log) => {
+            return total + log.rate;
+        }, 0)
+    );
+})
+
+
+function getCurrency(value) {
+    let formatter = new Intl.NumberFormat('nl-NL', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 0
+    });
+
+    return formatter.format(<number>value);
+}
 </script>
 <style scoped>
 .link-button {

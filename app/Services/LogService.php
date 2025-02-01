@@ -15,6 +15,16 @@ readonly class LogService
         private LogRepository $logRepository
     ) {}
 
+    public function all(): Collection
+    {
+        return $this->logRepository->all();
+    }
+
+    public function findByPayed(bool $payed): Collection
+    {
+        return $this->logRepository->findByPayed($payed);
+    }
+
     public function findByTimeRange(Carbon $startDate, Carbon $endDate): Collection
     {
         return $this->logRepository->findByTimeRange($startDate, $endDate);
