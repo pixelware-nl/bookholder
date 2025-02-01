@@ -123,9 +123,9 @@
     "log.create.rate": "Tarief",
     "log.create.hours": "Uren",
     "log.create.name": "Naam",
-    "log.create.name.placeholder": "API koppeling aangemaakt",
+    "log.create.name_placeholder": "API koppeling aangemaakt",
     "log.create.description": "Omschrijving",
-    "log.create.description.placeholder": "Uitleg over specifieke API koppeling",
+    "log.create.description_placeholder": "Uitleg over specifieke API koppeling",
     "log.create.submit": "Log toevoegen",
 
     "log.edit.title": "Logboek",

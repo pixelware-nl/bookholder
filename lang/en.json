@@ -123,9 +123,9 @@
     "log.create.rate": "Rate",
     "log.create.hours": "Hours",
     "log.create.name": "Name",
-    "log.create.name.placeholder": "Created an API connection",
+    "log.create.name_placeholder": "Created an API connection",
     "log.create.description": "Description",
-    "log.create.description.placeholder": "Explaination about the API connection",
+    "log.create.description_placeholder": "Explaination about the API connection",
     "log.create.submit": "Add log",
 
     "log.edit.title": "Logbook",

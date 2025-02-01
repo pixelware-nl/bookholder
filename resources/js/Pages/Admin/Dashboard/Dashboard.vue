@@ -7,52 +7,60 @@
                     <span class="text-4xl font-black pe-2">{{ sumUnpaidTotalCurrency }}</span>
                 </div>
             </div>
-            <div class="bg-green-50 w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
-                <p class="text-lg text-green-600">{{ $t('dashboard.realised_profit') }}</p>
-                <div class="flex items-center">
-                    <span class="text-4xl font-black text-green-800 pe-2">{{ sumPayedTotalCurrency }}</span>
-                </div>
-            </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.net_profit') }}</p>
                 <div class="flex items-center">
                     <span class="text-4xl font-black pe-2">{{ sumPayedNet }}</span>
                 </div>
             </div>
+            <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
+                <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
+                <div class="flex items-center">
+                    <span class="text-4xl font-black pe-2">{{ daysText }}</span>
+                </div>
+            </div>
         </div>
         <div class="flex flex-col w-2/3">
-        <div class="bg-white flex rounded-md shadow-md flex-col items-center ml-8 pb-4 min-h-[39.5em] overflow-auto">
-            <div class="p-2.5 w-full sticky top-0 bg-white"></div>
-            <table class="w-[58rem] bg-white">
-                <tr class="sticky top-5 bg-white">
-                    <th> {{ $t('dashboard.company') }} </th>
-                    <th> {{ $t('dashboard.rate') }} </th>
-                    <th> {{ $t('dashboard.hours') }} </th>
-                    <th> {{ $t('dashboard.product') }} </th>
-                    <th> {{ $t('dashboard.total') }} </th>
-                </tr>
-                <tbody v-for="log in logs">
-                    <tr v-for="data in log" :class="{'payed': data.payed}">
-                        <td> {{ data.company_name }} </td>
-                        <td> {{ getCurrency(data.rate) }} </td>
-                        <td> {{ data.hours }} </td>
-                        <td> {{ data.name }} </td>
-                        <td class="font-bold"> {{ rowTotalAsCurrency(data) }} </td>
+            <TabContainer
+                class="ms-8"
+                :tabs="['pending', 'payed']"
+                v-model="currentTab"
+            />
+            <div class="bg-white flex rounded-md shadow-md flex-col items-center ml-8 pb-4 min-h-[39.5em] overflow-auto">
+                <div class="p-2.5 w-full sticky top-0 bg-white"></div>
+                <table class="w-[58rem] bg-white">
+                    <tr class="sticky top-5 bg-white">
+                        <th> {{ $t('dashboard.company') }} </th>
+                        <th> {{ $t('dashboard.rate') }} </th>
+                        <th> {{ $t('dashboard.hours') }} </th>
+                        <th> {{ $t('dashboard.product') }} </th>
+                        <th> {{ $t('dashboard.total') }} </th>
                     </tr>
-                </tbody>
-            </table>
-
-        </div>
-        <div class="bg-white w-1/2 flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8 mb-8 ms-8">
-            <p class="text-lg text-gray-400">{{ $t('dashboard.new_month') }}</p>
-            <h1 class="text-4xl font-black">{{ daysText }}</h1>
-        </div>
+                    <tbody>
+                        <tr
+                            v-if="filteredLogs.length > 0"
+                            v-for="log in filteredLogs"
+                            :class="{'payed': log.payed}"
+                        >
+                            <td> {{ log.company_name }} </td>
+                            <td> {{ getCurrency(log.rate) }} </td>
+                            <td> {{ log.hours }} </td>
+                            <td> {{ log.name }} </td>
+                            <td class="font-bold"> {{ rowTotalAsCurrency(log) }} </td>
+                        </tr>
+                        <tr v-else>
+                            <td colspan="7" class="text-center !text-gray-400"> {{ $t('log.index.no_entries') }} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps} from "vue";
+import {computed, defineProps, ref} from "vue";
 import {trans} from "laravel-vue-i18n";
+import TabContainer from "@/Pages/Partials/Containers/TabContainer.vue";
 
 interface Props {
     logs: object,
@@ -63,6 +71,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+const currentTab = ref('pending')
 
 const sumUnpaidTotalCurrency = computed(() => {
     return getCurrency(props.sumUnpaidTotal);
@@ -75,6 +84,14 @@ const sumPayedNet = computed(() => {
 const sumPayedTotalCurrency = computed(() => {
     return getCurrency(props.sumPayedTotal);
 })
+
+const filteredLogs = computed(() => {
+    return props.logs.data.filter((logs: any) => {
+        return currentTab.value === 'pending'
+            ? logs.payed == false
+            : logs.payed;
+    });
+});
 
 const daysText = computed(() => {
     if (props.daysUntilNewMonth === 0) {

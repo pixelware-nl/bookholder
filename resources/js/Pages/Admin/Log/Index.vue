@@ -47,7 +47,7 @@
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, onMounted, ref} from "vue";
+import {computed, defineProps, ref} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
@@ -59,14 +59,13 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
 const currentTab = ref('pending')
 
 const filteredLogs = computed(() => {
-    return props.logs.data.filter((invoice: any) => {
+    return props.logs.data.filter((logs: any) => {
         return currentTab.value === 'pending'
-            ? invoice.payed == false
-            : invoice.payed;
+            ? logs.payed == false
+            : logs.payed;
     });
 });
 </script>

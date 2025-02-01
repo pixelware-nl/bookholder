@@ -73,7 +73,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
 const currentTab = ref('pending')
 
 const filteredInvoices = computed(() => {
