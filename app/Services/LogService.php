@@ -20,6 +20,16 @@ readonly class LogService
         return $this->logRepository->findByTimeRange($startDate, $endDate);
     }
 
+    public function findUnpaidByTimeRange(Carbon $startDate, Carbon $endDate): Collection
+    {
+        return $this->logRepository->findByTimeRange($startDate, $endDate, false);
+    }
+
+    public function findPayedByTimeRange(Carbon $startDate, Carbon $endDate): Collection
+    {
+        return $this->logRepository->findByTimeRange($startDate, $endDate, true);
+    }
+
     public function findByCompanyTimeRange(Company $company, Carbon $startDate, Carbon $endDate): Collection
     {
         return $this->logRepository->findByCompanyTimeRange($company, $startDate, $endDate);
@@ -32,18 +42,23 @@ readonly class LogService
         });
     }
 
-    public function store(LogDTO $logDTO): void
+    public function store(LogDTO $logDTO): Log
     {
-        $this->logRepository->store($logDTO);
+        return $this->logRepository->store($logDTO);
     }
 
-    public function update(Log $log, LogDTO $logDTO): void
+    public function update(Log $log, LogDTO $logDTO): Log
     {
-        $this->logRepository->update($log, $logDTO);
+        return $this->logRepository->update($log, $logDTO);
     }
 
     public function delete(Log $logDTO): void
     {
         $this->logRepository->delete($logDTO);
+    }
+
+    public function payed(Log $log, bool $payed): Log
+    {
+        return $this->logRepository->payed($log, $payed);
     }
 }

@@ -76,6 +76,8 @@
     "company.create.submit": "Bedrijf toevoegen",
 
     "dashboard.expected_revenue": "Verwachte omzet",
+    "dashboard.realised_profit": "Gerealiseerde winst",
+    "dashboard.net_profit": "Netto winst",
     "dashboard.new_month": "Nieuwe maand",
     "dashboard.company": "Bedrijf",
     "dashboard.rate": "Tarief",
@@ -86,6 +88,8 @@
     "dashboard.day_after_tomorrow": "Overmorgen",
     "dashboard.days": "Dagen",
 
+    "invoice.pdf.name": "factuur",
+
     "invoice.index.title": "Facturen",
     "invoice.index.add_invoice": "Factuur toevoegen",
     "invoice.index.ref_number": "Ref nr.",
@@ -93,12 +97,19 @@
     "invoice.index.to": "Naar",
     "invoice.index.date_range": "Datum bereik",
     "invoice.index.created_at": "Aangemaakt op",
+    "invoice.index.no_entries": "Geen facturen gevonden",
 
     "invoice.create.title": "Facturen",
     "invoice.create.companies": "Bedrijven",
     "invoice.create.start_date": "Startdatum",
     "invoice.create.end_date": "Einddatum",
     "invoice.create.submit": "Factuur toevoegen",
+
+    "invoice.edit.title": "Facturen",
+    "invoice.edit.companies": "Bedrijven",
+    "invoice.edit.start_date": "Startdatum",
+    "invoice.edit.end_date": "Einddatum",
+    "invoice.edit.submit": "Factuur aanpassen",
 
     "log.index.title": "Logboek",
     "log.index.add_log": "Log toevoegen",
@@ -107,14 +118,27 @@
     "log.index.hours": "Uren",
     "log.index.name": "Naam",
     "log.index.description": "Omschrijving",
+    "log.index.no_entries": "Geen logs gevonden",
 
     "log.create.title": "Logboek",
     "log.create.companies": "Bedrijven",
     "log.create.rate": "Tarief",
     "log.create.hours": "Uren",
     "log.create.name": "Naam",
+    "log.create.name_placeholder": "API koppeling aangemaakt",
     "log.create.description": "Omschrijving",
+    "log.create.description_placeholder": "Uitleg over specifieke API koppeling",
     "log.create.submit": "Log toevoegen",
+
+    "log.edit.title": "Logboek",
+    "log.edit.companies": "Bedrijven",
+    "log.edit.rate": "Tarief",
+    "log.edit.hours": "Uren",
+    "log.edit.name": "Naam",
+    "log.edit.name.placeholder": "API koppeling aangemaakt",
+    "log.edit.description": "Omschrijving",
+    "log.edit.description.placeholder": "Uitleg over specifieke API koppeling",
+    "log.edit.submit": "Log aanpassen",
 
     "validation.email.required": "E-mail is verplicht",
     "validation.email.email": "E-mail is ongeldig",

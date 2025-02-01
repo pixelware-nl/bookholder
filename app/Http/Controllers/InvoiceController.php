@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DTO\InvoiceDTO;
 use App\Http\Requests\Invoices\CreateInvoiceRequest;
 use App\Http\Requests\Invoices\UpdateInvoiceRequest;
+use App\Http\Resources\EditInvoiceResource;
 use App\Http\Resources\InvoiceResource;
 use App\Models\Invoice;
 use App\Services\InvoiceService;
@@ -31,11 +32,12 @@ final class InvoiceController extends Controller
         ]);
     }
 
-    public function create(): InertiaResponse
+    /**
+     * @throws Throwable
+     */
+    public function show(Invoice $invoice): Response
     {
-        return Inertia::render('Admin/Invoice/Create', [
-            'companies' => $this->userService->companies()
-        ]);
+        return $this->invoiceService->generatePDF($invoice);
     }
 
     public function store(CreateInvoiceRequest $request): SymfonyResponse
@@ -45,27 +47,38 @@ final class InvoiceController extends Controller
         return redirect()->route('invoices.index');
     }
 
-    /**
-     * @throws Throwable
-     */
-    public function show(Invoice $invoice): Response
+    public function create(): InertiaResponse
     {
-        return $this->invoiceService->generatePDF($invoice);
+        return Inertia::render('Admin/Invoice/Create', [
+            'companies' => $this->userService->companies()
+        ]);
     }
 
-    public function edit(Invoice $invoice): void
+    public function edit(Invoice $invoice): InertiaResponse
     {
-        // @TODO add edit capabilities
+        return Inertia::render('Admin/Invoice/Edit', [
+            'invoice' => EditInvoiceResource::make($invoice),
+            'companies' => $this->userService->companies()
+        ]);
     }
 
-    public function update(UpdateInvoiceRequest $request, Invoice $invoice): void
+    public function update(UpdateInvoiceRequest $request, Invoice $invoice): SymfonyResponse
     {
-        // @TODO update invoice
+        $this->invoiceService->update($invoice, InvoiceDTO::fromRequest($request));
+
+        return redirect()->route('invoices.index');
     }
 
     public function destroy(Invoice $invoice): SymfonyResponse
     {
         $this->invoiceService->delete($invoice);
+
+        return redirect()->route('invoices.index');
+    }
+
+    public function payed(Invoice $invoice): SymfonyResponse
+    {
+        $this->invoiceService->payed($invoice, true);
 
         return redirect()->route('invoices.index');
     }

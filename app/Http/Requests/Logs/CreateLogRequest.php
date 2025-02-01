@@ -5,15 +5,6 @@ namespace App\Http\Requests\Logs;
 use App\Rules\NotAuthenticatedUserCompanyRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * Class CreateLogRequest
- * @package App\Http\Requests\Logs
- * @property int $company_id
- * @property int $rate
- * @property int $hours
- * @property string $name
- * @property string $description
- */
 class CreateLogRequest extends FormRequest
 {
     public function authorize(): true

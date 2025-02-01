@@ -19,9 +19,11 @@ Route::middleware('auth')->group(function () {
 
         Route::resource('invoices', InvoiceController::class);
         Route::resource('companies', CompanyController::class)->only(['index', 'store', 'destroy']);
-        Route::resource('logs', LogController::class)->only(['index', 'create', 'store', 'destroy']);
+        Route::resource('logs', LogController::class);
 
         Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');
+
+        Route::post('/invoices/{invoice}/payed', [InvoiceController::class, 'payed'])->name('invoices.payed');
 
         Route::prefix('companies')->group(function () {
             Route::get('find', [CompanyController::class, 'find'])->name('companies.find');

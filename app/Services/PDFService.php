@@ -12,7 +12,7 @@ class PDFService
     /**
      * @throws Throwable
      */
-    public function streamToPdf(View $view): Response
+    public function streamToPdf(View $view, ?string $name = null): Response
     {
         $pdf = Pdf::loadHTML($view->render());
 
@@ -20,13 +20,13 @@ class PDFService
         $pdf->setPaper('a4');
         $pdf->render();
 
-        return $pdf->stream('invoice.pdf');
+        return $pdf->stream($name ?? 'invoice.pdf');
     }
 
     /**
      * @throws Throwable
      */
-    public function downloadToPdf(View $view): Response
+    public function downloadToPdf(View $view, ?string $name = null): Response
     {
         $pdf = Pdf::loadHTML($view->render());
 
@@ -34,6 +34,6 @@ class PDFService
         $pdf->setPaper('a4');
         $pdf->render();
 
-        return $pdf->download('invoice.pdf');
+        return $pdf->download($name ?? 'invoice.pdf');
     }
 }

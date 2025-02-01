@@ -7,7 +7,10 @@ import {
     faFilePdf,
     faFilePen,
     faEnvelope,
-    faBackspace
+    faBackspace,
+    faPenToSquare,
+    faEye,
+    faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -17,7 +20,10 @@ library.add(
     faFilePdf,
     faFilePen,
     faEnvelope,
-    faBackspace
+    faBackspace,
+    faPenToSquare,
+    faEye,
+    faCircleCheck,
 );
 
 export { FontAwesomeIcon };

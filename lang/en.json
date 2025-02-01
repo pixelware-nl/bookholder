@@ -76,6 +76,8 @@
     "company.create.submit": "Add company",
 
     "dashboard.expected_revenue": "Expected revenue",
+    "dashboard.realised_profit": "Realised profit",
+    "dashboard.net_profit": "Net profit",
     "dashboard.new_month": "New month",
     "dashboard.company": "Company",
     "dashboard.rate": "Rate",
@@ -93,12 +95,21 @@
     "invoice.index.to": "To",
     "invoice.index.date_range": "Date range",
     "invoice.index.created_at": "Created at",
+    "invoice.index.no_entries": "No invoices found",
+
+    "invoice.pdf.name": "invoice",
 
     "invoice.create.title": "Invoices",
     "invoice.create.companies": "Companies",
     "invoice.create.start_date": "Start date",
     "invoice.create.end_date": "End date",
     "invoice.create.submit": "Add invoice",
+
+    "invoice.edit.title": "Invoices",
+    "invoice.edit.companies": "Companies",
+    "invoice.edit.start_date": "Start date",
+    "invoice.edit.end_date": "End date",
+    "invoice.edit.submit": "Change invoice",
 
     "log.index.title": "Logbook",
     "log.index.add_log": "Add log",
@@ -107,14 +118,27 @@
     "log.index.hours": "Hours",
     "log.index.name": "Name",
     "log.index.description": "Description",
+    "log.index.no_entries": "No logs found",
 
     "log.create.title": "Logbook",
     "log.create.companies": "Companies",
     "log.create.rate": "Rate",
     "log.create.hours": "Hours",
     "log.create.name": "Name",
+    "log.create.name_placeholder": "Created an API connection",
     "log.create.description": "Description",
+    "log.create.description_placeholder": "Explaination about the API connection",
     "log.create.submit": "Add log",
+
+    "log.edit.title": "Logbook",
+    "log.edit.companies": "Companies",
+    "log.edit.rate": "Rate",
+    "log.edit.hours": "Hours",
+    "log.edit.name": "Name",
+    "log.edit.name.placeholder": "Created an API connection",
+    "log.edit.description": "Description",
+    "log.edit.description.placeholder": "Explaination about the API connection",
+    "log.edit.submit": "Change log",
 
     "validation.email.required": "Email is required",
     "validation.email.email": "Email is invalid",

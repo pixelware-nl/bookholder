@@ -18,12 +18,17 @@ class LogRepository implements LogRepositoryInterface
         return Log::all();
     }
 
-    public function findByTimeRange(Carbon $startDate, Carbon $endDate): Collection
+    public function findByTimeRange(Carbon $startDate, Carbon $endDate, ?bool $payed = null): Collection
     {
-        return Auth::user()->logs()
+        $builder = Auth::user()->logs()
             ->where('created_at', '>=', $startDate)
-            ->where('created_at', '<=', $endDate)
-            ->get();
+            ->where('created_at', '<=', $endDate);
+
+        if ($payed !== null) {
+            $builder->where('payed', $payed);
+        }
+
+        return $builder->get();
     }
 
     public function findByCompanyTimeRange(Company $company, Carbon $startDate, Carbon $endDate): Collection
@@ -55,6 +60,15 @@ class LogRepository implements LogRepositoryInterface
             'hours' => $logDTO->getHours(),
             'name' => $logDTO->getName(),
             'description' => $logDTO->getDescription()
+        ]);
+
+        return $log;
+    }
+
+    public function payed(Log $log, bool $payed): Log
+    {
+        $log->update([
+            'payed' => $payed
         ]);
 
         return $log;

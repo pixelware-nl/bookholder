@@ -1,4 +1,8 @@
 <template>
+    <TabContainer
+        :tabs="['pending', 'payed']"
+        v-model="currentTab"
+    />
     <AdminContainer :form-title="$t('invoice.index.title')">
         <Link :href="route('invoices.create')" method="get" class="link-button"> {{ $t('invoice.index.add_invoice') }} </Link>
         <TableContainer>
@@ -12,54 +16,72 @@
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
                     <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
+                    <th class="w-[50px]"> </th>
                 </tr>
             </template>
-            <template #tbody v-for="invoice in invoices">
-                <tr v-for="data in invoice">
-                    <td> {{ data.id }} </td>
-                    <td> {{ data.from_company }} </td>
-                    <td> {{ data.to_company }} </td>
-                    <td> {{ data.start_date }} t/m {{ data.end_date }}</td>
-                    <td> {{ data.created_at }} </td>
+            <template #tbody>
+                <tr v-if="filteredInvoices.length > 0" v-for="invoice in filteredInvoices" :class="{'payed': invoice.payed}">
+                    <td> {{ invoice.id }} </td>
+                    <td> {{ invoice.from_company }} </td>
+                    <td> {{ invoice.to_company }} </td>
+                    <td> {{ invoice.start_date }} t/m {{ invoice.end_date }}</td>
+                    <td> {{ invoice.created_at }} </td>
                     <td class="table-item table-item-link">
-                        <a :href="route('invoices.show', data.id)" target="_blank">
-                            <font-awesome-icon icon="fa-solid fa-file-pdf" class="text-slate-600 hover:text-slate-800"/>
+                        <Link v-if="invoice.payed == false" :href="route('invoices.payed', invoice.id)" method="post">
+                            <FontAwesomeIcon icon="fa-solid fa-circle-check" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
+                    <td class="table-item table-item-link">
+                        <a :href="route('invoices.show', invoice.id)" target="_blank">
+                            <FontAwesomeIcon icon="fa-solid fa-file-pdf"/>
                         </a>
                     </td>
                     <td class="table-item table-item-link">
-                        <Link :href="route('invoices.destroy', data.id)" method="delete">
-                            <font-awesome-icon icon="fa-solid fa-trash" class="text-slate-600 hover:text-slate-800"/>
+                        <Link v-if="invoice.payed == false" :href="route('invoices.edit', invoice.id)">
+                            <FontAwesomeIcon icon="fa-solid fa-pen-to-square"/>
+                        </Link>
+                    </td>
+                    <td class="table-item table-item-link">
+                        <Link :href="route('invoices.destroy', invoice.id)" method="delete">
+                            <FontAwesomeIcon icon="fa-solid fa-trash"/>
                         </Link>
                     </td>
                     <td class="table-item table-item-link">
                         <a href="#">
-                            <font-awesome-icon icon="fa-solid fa-envelope" class="text-slate-600 hover:text-slate-800"/>
+                            <FontAwesomeIcon icon="fa-solid fa-envelope"/>
                         </a>
                     </td>
+                </tr>
+                <tr v-else>
+                    <td colspan="10" class="text-center !text-gray-400"> {{ $t('invoice.index.no_entries') }} </td>
                 </tr>
             </template>
         </TableContainer>
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
+import {computed, defineProps, ref} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
+import TabContainer from "../../Partials/Containers/TabContainer.vue";
 
 interface Props {
     invoices: object,
 }
 
 const props = defineProps<Props>();
+const currentTab = ref('pending')
 
-const data = {
-    id: null,
-    from_company: null,
-    to_company: null,
-    start_date: null,
-    end_date: null,
-}
+const filteredInvoices = computed(() => {
+    return props.invoices.data.filter((invoice: any) => {
+        return currentTab.value === 'pending'
+            ? invoice.payed == false
+            : invoice.payed;
+    });
+});
 </script>
 <style scoped>
 .link-button {

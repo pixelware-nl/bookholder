@@ -12,7 +12,7 @@ interface LogRepositoryInterface
 {
     public function all(): Collection;
 
-    public function findByTimeRange(Carbon $startDate, Carbon $endDate): Collection;
+    public function findByTimeRange(Carbon $startDate, Carbon $endDate, bool $payed): Collection;
 
     public function findByCompanyTimeRange(Company $company, Carbon $startDate, Carbon $endDate): Collection;
 

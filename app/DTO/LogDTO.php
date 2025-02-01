@@ -14,6 +14,7 @@ final readonly class LogDTO implements DTOInterface
         private int    $hours,
         private string $name,
         private string $description,
+        private bool   $payed = false,
     ) {}
 
     public function Log(): Log
@@ -24,6 +25,7 @@ final readonly class LogDTO implements DTOInterface
             'hours' => $this->getHours(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            'payed' => $this->isPayed(),
         ]);
     }
 
@@ -46,6 +48,7 @@ final readonly class LogDTO implements DTOInterface
             'hours' => $this->getHours(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            'payed' => $this->isPayed(),
         ];
     }
 
@@ -72,5 +75,10 @@ final readonly class LogDTO implements DTOInterface
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function isPayed(): bool
+    {
+        return $this->payed;
     }
 }
