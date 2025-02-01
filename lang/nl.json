@@ -88,6 +88,8 @@
     "dashboard.day_after_tomorrow": "Overmorgen",
     "dashboard.days": "Dagen",
 
+    "invoice.pdf.name": "factuur",
+
     "invoice.index.title": "Facturen",
     "invoice.index.add_invoice": "Factuur toevoegen",
     "invoice.index.ref_number": "Ref nr.",

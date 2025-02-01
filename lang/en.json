@@ -97,6 +97,8 @@
     "invoice.index.created_at": "Created at",
     "invoice.index.no_entries": "No invoices found",
 
+    "invoice.pdf.name": "invoice",
+
     "invoice.create.title": "Invoices",
     "invoice.create.companies": "Companies",
     "invoice.create.start_date": "Start date",

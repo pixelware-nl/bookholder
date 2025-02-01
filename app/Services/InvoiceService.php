@@ -28,10 +28,19 @@ readonly class InvoiceService
             $invoice = $this->update($invoice, $invoiceDTO);
         }
 
+        $filename = sprintf(
+            "%s-%s-%s_%s.pdf",
+            __('invoice.pdf.name'),
+            strtolower($invoice->fromCompany->name),
+            DateService::format($invoice->start_date),
+            DateService::format($invoice->end_date)
+        );
+
         return $this->pdfService->streamToPdf(
             view('pdf.invoice', [
                 'invoice' => $invoice,
-            ])
+            ]),
+            $filename
         );
     }
 
