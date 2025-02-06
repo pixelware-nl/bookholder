@@ -140,6 +140,9 @@
     "log.edit.description.placeholder": "Uitleg over specifieke API koppeling",
     "log.edit.submit": "Log aanpassen",
 
+    "vue.components.tabs.pending": "In afwachting",
+    "vue.components.tabs.payed": "Betaald",
+
     "validation.email.required": "E-mail is verplicht",
     "validation.email.email": "E-mail is ongeldig",
     "validation.email.max": "E-mail mag niet langer zijn dan 256 karakters",

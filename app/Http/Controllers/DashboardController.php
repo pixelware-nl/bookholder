@@ -27,7 +27,8 @@ class DashboardController extends Controller
             'logs' => LogResource::collection($logs),
             'sumPayedTotal' => $sumPayedTotal,
             'sumUnpaidTotal' => $sumUnpaidTotal,
-            'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()))
+            'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth())),
+            'currentTab' => __('vue.components.tabs.pending')
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <TabContainer
-        :tabs="['pending', 'payed']"
+        :tabs="[$t('vue.components.tabs.pending'), $t('vue.components.tabs.payed')]"
         v-model="currentTab"
     />
     <AdminContainer :form-title="$t('invoice.index.title')">
@@ -61,23 +61,29 @@
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, ref} from "vue";
+import {computed, defineProps, onMounted, ref} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import TabContainer from "../../Partials/Containers/TabContainer.vue";
+import {trans} from "laravel-vue-i18n";
 
 interface Props {
     invoices: object,
+    currentTab: string,
 }
 
 const props = defineProps<Props>();
-const currentTab = ref('pending')
+const currentTab = ref('')
+
+onMounted(() => {
+    currentTab.value = props.currentTab;
+})
 
 const filteredInvoices = computed(() => {
     return props.invoices.data.filter((invoice: any) => {
-        return currentTab.value === 'pending'
+        return currentTab.value === trans('vue.components.tabs.pending')
             ? invoice.payed == false
             : invoice.payed;
     });

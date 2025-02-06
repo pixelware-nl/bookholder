@@ -28,7 +28,8 @@ final class InvoiceController extends Controller
         return Inertia::render('Admin/Invoice/Index', [
             'invoices' => InvoiceResource::collection(
                 $this->invoiceService->all()
-            )
+            ),
+            'currentTab' => __('vue.components.tabs.pending')
         ]);
     }
 

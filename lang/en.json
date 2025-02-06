@@ -140,6 +140,9 @@
     "log.edit.description.placeholder": "Explaination about the API connection",
     "log.edit.submit": "Change log",
 
+    "vue.components.tabs.pending": "Pending",
+    "vue.components.tabs.payed": "Payed",
+
     "validation.email.required": "Email is required",
     "validation.email.email": "Email is invalid",
     "validation.email.max": "Email must not be longer than 256 characters",
