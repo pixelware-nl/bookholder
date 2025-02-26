@@ -1,7 +1,7 @@
 <template>
     <li
         :class="{'font-bold text-white': (slug === pageSlug)}"
-        class="px-4 text-slate-100 hover:cursor-pointer hover:text-white hover:underline"
+        class="px-4 text-neutral-900 hover:cursor-pointer hover:text-red-600 hover:underline"
     >
         <Link :href="route(routeName)" :method="method"> <slot /> </Link>
     </li>

@@ -9,6 +9,9 @@ import { columns } from '../../../../ts/columns'
 import DataTable from '@/Pages/Partials/Containers/FakeTable.vue'
 import {onMounted, ref} from "vue";
 import FakeTable from "@/Pages/Partials/Containers/FakeTable.vue";
+import {DonutChart} from "@/components/ui/chart-donut";
+import FakeDonutChart from "@/Pages/Partials/Containers/FakeDonutChart.vue";
+import {LineChart} from "@/components/ui/chart-line";
 
 const data = [
     { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: 2000 },
@@ -124,6 +127,45 @@ onMounted(async () => {
                 </CardHeader>
                 <CardContent>
                     <FakeTable :columns="columns" :data="tableData" />
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-2">
+                <CardHeader>
+                    <CardTitle> Revenue by companies</CardTitle>
+                    <CardDescription>The amount of revenue earned per company</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <table class="w-full mb-10">
+                        <tbody>
+                            <tr>
+                                <td>Friva</td>
+                                <td>$3.233,34</td>
+                            </tr>
+                            <tr>
+                                <td>Rituals</td>
+                                <td>$3.233,34</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <FakeDonutChart />
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-6">
+                <CardHeader>
+                    <CardTitle> Overview </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <LineChart
+                        :data="data"
+                        index="name"
+                        :categories="['total', 'predicted']"
+                        :y-formatter="(tick, i) => {
+                            return typeof tick === 'number'
+                                ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
+                                : ''
+                        }"
+                        :custom-tooltip="CustomChartTooltip"
+                    />
                 </CardContent>
             </Card>
 
