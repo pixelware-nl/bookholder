@@ -1,37 +1,133 @@
 <script setup lang="ts">
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/registry/new-york/ui/breadcrumb'
-import { Separator } from '@/registry/new-york/ui/separator'
-import { SidebarTrigger } from '@/registry/new-york/ui/sidebar'
+import Card from "@/components/ui/card/Card.vue";
+import CardDescription from "@/components/ui/card/CardDescription.vue";
+import CardContent from "@/components/ui/card/CardContent.vue";
+import CardTitle from "@/components/ui/card/CardTitle.vue";
+import CardHeader from "@/components/ui/card/CardHeader.vue";
+import {BarChart} from "@/components/ui/chart-bar";
+import { columns } from '../../../../ts/columns'
+import DataTable from '@/Pages/Partials/Containers/FakeTable.vue'
+import {onMounted, ref} from "vue";
+import FakeTable from "@/Pages/Partials/Containers/FakeTable.vue";
+
+const data = [
+    { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: 2000 },
+    { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: 1900 },
+    { name: 'Mar', total: Math.floor(Math.random() * 2000) + 500, predicted: 1800 },
+    { name: 'Apr', total: Math.floor(Math.random() * 2000) + 500, predicted: 1700 },
+    { name: 'May', total: Math.floor(Math.random() * 2000) + 500, predicted: 1600 },
+    { name: 'Jun', total: Math.floor(Math.random() * 2000) + 500, predicted: 1500 },
+    { name: 'Jul', total: Math.floor(Math.random() * 2000) + 500, predicted: 1400 },
+    { name: 'Aug', total: Math.floor(Math.random() * 2000) + 500, predicted: 1300 },
+    { name: 'Sep', total: Math.floor(Math.random() * 2000) + 500, predicted: 1200 },
+    { name: 'Oct', total: Math.floor(Math.random() * 2000) + 500, predicted: 1100 },
+    { name: 'Nov', total: Math.floor(Math.random() * 2000) + 500, predicted: 1000 },
+    { name: 'Dec', total: Math.floor(Math.random() * 2000) + 500, predicted: 900 },
+]
+
+const tableData = [
+    {
+        hours: 16,
+        rate: 60,
+        company: 'Friva',
+    },
+    {
+        hours: 8,
+        rate: 60,
+        company: 'Friva',
+    },
+    {
+        hours: 4,
+        rate: 60,
+        company: 'Friva',
+    },
+    {
+        hours: 7,
+        rate: 60,
+        company: 'Friva',
+    },
+    {
+        hours: 2,
+        rate: 60,
+        company: 'Friva',
+    },
+]
+
+onMounted(async () => {
+    data.value = await getData()
+})
 </script>
 <template>
-    <header class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
-        <div class="flex items-center gap-2 px-4">
-            <SidebarTrigger class="-ml-1" />
-            <Separator orientation="vertical" class="mr-2 h-4" />
-            <Breadcrumb>
-                <BreadcrumbList>
-                    <BreadcrumbItem class="hidden md:block">
-                        <BreadcrumbLink href="#">
-                            Building Your Application
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator class="hidden md:block" />
-                    <BreadcrumbItem>
-                        <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                    </BreadcrumbItem>
-                </BreadcrumbList>
-            </Breadcrumb>
-        </div>
-    </header>
-    <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div class="rounded-xl bg-muted/50">
+    <div class="mt-12 flex justify-center items-center">
+        <div class="w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
+            <Card class="col-span-1 md:col-span-2">
+                <CardHeader>
+                    <CardTitle> Accumulated revenue </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <h4 class="font-bold text-2xl">$45.234,12</h4>
+                    <span class="text-sm text-gray-500">+20% from last month</span>
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-2">
+                <CardHeader>
+                    <CardTitle> Hours worked</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <h4 class="font-bold text-2xl">43</h4>
+                    <span class="text-sm text-gray-500">+17% from last month</span>
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-2">
+                <CardHeader>
+                    <CardTitle> Until next month </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <h4 class="font-bold text-2xl">4 days left</h4>
+                    <span class="text-sm text-gray-500">Automatic invoicing is turned off</span>
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-2">
+                <CardHeader>
+                    <CardTitle> Freelance wage </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <h4 class="font-bold text-2xl">$60/hr</h4>
+                    <span class="text-sm text-gray-500">No increase from last month</span>
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-5">
+                <CardHeader>
+                    <CardTitle> Overview </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div class="mt-8">
+                        <BarChart
+                            index="name"
+                            :data="data"
+                            :categories="['total', 'predicted']"
+                            :y-formatter="(tick, i) => {
+                              return typeof tick === 'number'
+                                ? `€${new Intl.NumberFormat('nl').format(tick).toString()}`
+                                : ''
+                            }"
+                            :type="'stacked'"
+                            :rounded-corners="8"
+                            :colors="['#7bd38d', '#272727']"
+                        />
+                    </div>
+                </CardContent>
+            </Card>
+            <Card class="col-span-1 md:col-span-3">
+                <CardHeader>
+                    <CardTitle> Logs </CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <FakeTable :columns="columns" :data="tableData" />
+                </CardContent>
+            </Card>
 
-            </div>
-            <div class="aspect-video rounded-xl bg-muted/50" />
-            <div class="aspect-video rounded-xl bg-muted/50" />
-            <div class="aspect-video rounded-xl bg-muted/50" />
         </div>
-        <div class="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
     </div>
+
 </template>

@@ -1,22 +1,7 @@
 <template>
-    <SidebarProvider>
-        <AdminSidebar
-            :user="user"
-        />
-        <SidebarInset>
-            <slot />
-        </SidebarInset>
-    </SidebarProvider>
+    <div class="bg-muted/50 min-h-screen w-full pt-8">
+        <slot />
+    </div>
 </template>
 <script setup lang="ts">
-import {SidebarInset, SidebarProvider} from "@/registry/new-york/ui/sidebar";
-import AdminSidebar from "@/Pages/Partials/Containers/AdminSidebar.vue";
-import {usePage} from "@inertiajs/vue3";
-import {computed, onMounted} from "vue";
-
-
-
-onMounted(() => {
-    console.log(user.value);
-})
 </script>

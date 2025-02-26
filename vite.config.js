@@ -9,7 +9,10 @@ export default defineConfig({
         vue(),
         i18n(),
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js'
+            ],
             refresh: true,
         }),
     ],
@@ -17,6 +20,5 @@ export default defineConfig({
         alias: {
             '@': path.resolve(__dirname, 'resources/js')
         },
-        extensions: ['.js', '.ts', '.vue'],
     }
 });
