@@ -2,7 +2,6 @@
 import type { SidebarProps } from '@/registry/new-york/ui/sidebar'
 
 import NavMain from '@/registry/new-york/block/Sidebar07/components/NavMain.vue'
-import NavProjects from '@/registry/new-york/block/Sidebar07/components/NavProjects.vue'
 import NavUser from '@/registry/new-york/block/Sidebar07/components/NavUser.vue'
 import TeamSwitcher from '@/registry/new-york/block/Sidebar07/components/TeamSwitcher.vue'
 import {
@@ -25,9 +24,14 @@ import {
   Settings2,
   SquareTerminal,
 } from 'lucide-vue-next'
+import {computed, onMounted} from "vue";
 
-const props = withDefaults(defineProps<SidebarProps>(), {
-  collapsible: 'icon',
+
+
+const user = computed(() => page.props.auth.user);
+
+onMounted(() => {
+    console.log(user.value);
 })
 
 // This is sample data.
@@ -39,7 +43,7 @@ const data = {
   },
   teams: [
     {
-      name: 'Acme Inc',
+      name: 'Pixelware',
       logo: GalleryVerticalEnd,
       plan: 'Enterprise',
     },
@@ -56,17 +60,17 @@ const data = {
   ],
   navMain: [
     {
-      title: 'Playground',
+      title: 'Invoicing',
       url: '#',
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: 'History',
+          title: 'Overview',
           url: '#',
         },
         {
-          title: 'Starred',
+          title: 'History',
           url: '#',
         },
         {
@@ -76,43 +80,31 @@ const data = {
       ],
     },
     {
-      title: 'Models',
+      title: 'Logging',
       url: '#',
       icon: Bot,
       items: [
         {
-          title: 'Genesis',
+          title: 'Overview',
           url: '#',
         },
         {
-          title: 'Explorer',
+          title: 'History',
           url: '#',
         },
         {
-          title: 'Quantum',
+          title: 'Settings',
           url: '#',
         },
       ],
     },
     {
-      title: 'Documentation',
+      title: 'Companies',
       url: '#',
       icon: BookOpen,
       items: [
         {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
+          title: 'Overview',
           url: '#',
         },
       ],
@@ -140,24 +132,7 @@ const data = {
         },
       ],
     },
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
-  ],
+  ]
 }
 </script>
 
@@ -168,7 +143,6 @@ const data = {
     </SidebarHeader>
     <SidebarContent>
       <NavMain :items="data.navMain" />
-      <NavProjects :projects="data.projects" />
     </SidebarContent>
     <SidebarFooter>
       <NavUser :user="data.user" />
