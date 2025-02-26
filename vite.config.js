@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import i18n from 'laravel-vue-i18n/vite';
 import vue from "@vitejs/plugin-vue";
 import laravel from 'laravel-vite-plugin';
+import * as path from "node:path";
 
 export default defineConfig({
     plugins: [
@@ -12,4 +13,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'resources/js')
+        },
+        extensions: ['.js', '.ts', '.vue'],
+    }
 });
