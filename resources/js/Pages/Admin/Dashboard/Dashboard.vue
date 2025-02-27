@@ -61,8 +61,8 @@ onMounted(async () => {
 })
 </script>
 <template>
-    <div class="mt-12 flex justify-center items-center">
-        <div class="w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
+    <div class="mt-12 pb-12 flex justify-center items-center">
+        <div class="w-11/12 md:w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
             <Card class="col-span-1 md:col-span-2">
                 <CardHeader>
                     <CardTitle> Accumulated revenue </CardTitle>
