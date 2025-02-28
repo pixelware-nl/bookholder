@@ -13,6 +13,25 @@ import {DonutChart} from "@/components/ui/chart-donut";
 import FakeDonutChart from "@/Pages/Partials/Containers/FakeDonutChart.vue";
 import {LineChart} from "@/components/ui/chart-line";
 
+const internetData = [
+    {
+        tijd: '12:00:00',
+        snelheid: 123
+    },
+    {
+        tijd: '13:00:00',
+        snelheid: 346
+    },
+    {
+        tijd: '14:00:00',
+        snelheid: 344
+    },
+    {
+        tijd: '15:00:00',
+        snelheid: 654
+    },
+]
+
 const data = [
     { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: 2000 },
     { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: 1900 },
@@ -150,24 +169,24 @@ onMounted(async () => {
                     <FakeDonutChart />
                 </CardContent>
             </Card>
-            <Card class="col-span-1 md:col-span-6">
-                <CardHeader>
-                    <CardTitle> Overview </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <LineChart
-                        :data="data"
-                        index="name"
-                        :categories="['total', 'predicted']"
-                        :y-formatter="(tick, i) => {
-                            return typeof tick === 'number'
-                                ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`
-                                : ''
-                        }"
-                        :custom-tooltip="CustomChartTooltip"
-                    />
-                </CardContent>
-            </Card>
+<!--            <Card class="col-span-1 md:col-span-6">-->
+<!--                <CardHeader>-->
+<!--                    <CardTitle> Overview </CardTitle>-->
+<!--                </CardHeader>-->
+<!--                <CardContent>-->
+<!--                    <LineChart-->
+<!--                        :data="internetData"-->
+<!--                        index="tijd"-->
+<!--                        :categories="['snelheid']"-->
+<!--                        :y-formatter="(tick, i) => {-->
+<!--                            return typeof tick === 'number'-->
+<!--                                ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`-->
+<!--                                : ''-->
+<!--                        }"-->
+<!--                        :custom-tooltip="CustomChartTooltip"-->
+<!--                    />-->
+<!--                </CardContent>-->
+<!--            </Card>-->
 
         </div>
     </div>
