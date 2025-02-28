@@ -1,14 +1,12 @@
-
 <template>
-    <AdminContainer :form-title="$t('company.update.title')" :route-name="route('companies.index')">
-        <h2 class="text-xl font-bold mb-2 uppercase"> {{ $t('company.update.description') }} </h2>
+    <AdminContainer :form-title="$t('company.edit.title')" :route-name="route('companies.index')">
         <form @submit.prevent="form.put(route('companies.update', company.id))">
             <InputContainer>
                 <TextInput
                     id="name"
                     name="name"
                     v-model="form.name"
-                    :label="$t('company.update.name')"
+                    :label="$t('company.edit.name')"
                     placeholder="Pixelware"
                     :error="errors.name"
                     :disabled="true"
@@ -19,7 +17,7 @@
                     id="kvk"
                     name="kvk"
                     v-model="form.kvk"
-                    :label="$t('company.update.kvk')"
+                    :label="$t('company.edit.kvk')"
                     placeholder="12345678"
                     :error="errors.kvk"
                     :disabled="true"
@@ -30,7 +28,7 @@
                     id="iban"
                     name="iban"
                     v-model="form.iban"
-                    :label="$t('company.update.iban')"
+                    :label="$t('company.edit.iban')"
                     placeholder="NL01 INGB 1234 5678 90"
                     :error="errors.iban"
                 />
@@ -41,7 +39,7 @@
                         id="street_address"
                         name="street_address"
                         v-model="form.street_address"
-                        :label="$t('company.update.street_address')"
+                        :label="$t('company.edit.street_address')"
                         placeholder="Weena 4B"
                         :error="errors.street_address"
                         :disabled="true"
@@ -52,7 +50,7 @@
                         id="city"
                         name="city"
                         v-model="form.city"
-                        :label="$t('company.update.city')"
+                        :label="$t('company.edit.city')"
                         placeholder="Rotterdam"
                         :error="errors.city"
                         :disabled="true"
@@ -65,7 +63,7 @@
                         id="postal_code"
                         name="postal_code"
                         v-model="form.postal_code"
-                        :label="$t('company.update.postal_code')"
+                        :label="$t('company.edit.postal_code')"
                         placeholder="4111KK"
                         :error="errors.postal_code"
                         :disabled="true"
@@ -76,14 +74,14 @@
                         id="country"
                         name="country"
                         v-model="form.country"
-                        :label="$t('company.update.country')"
+                        :label="$t('company.edit.country')"
                         placeholder="Nederland"
                         :error="errors.country"
                         :disabled="true"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> {{ $t('company.update.submit') }} </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('company.edit.submit') }} </SubmitButton>
         </form>
     </AdminContainer>
 </template>
