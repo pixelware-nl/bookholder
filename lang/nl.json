@@ -8,6 +8,7 @@
     "auth.company.title": "Registreer",
     "auth.company.company_name": "Bedrijfsnaam",
     "auth.company.kvk": "KVK nummer",
+    "auth.company.iban": "IBAN nummer",
     "auth.company.street_address": "Straatadres",
     "auth.company.city": "Stad",
     "auth.company.postal_code": "Postcode",
@@ -75,9 +76,19 @@
     "company.create.country": "Land",
     "company.create.submit": "Bedrijf toevoegen",
 
+    "company.edit.title": "Bedrijven",
+    "company.edit.name": "Bedrijf naam",
+    "company.edit.kvk": "KVK nummer",
+    "company.edit.iban": "IBAN nummer",
+    "company.edit.street_address": "Straatadres",
+    "company.edit.city": "Stad",
+    "company.edit.postal_code": "Postcode",
+    "company.edit.country": "Land",
+    "company.edit.submit": "Bedrijf aanpassen",
+
     "dashboard.expected_revenue": "Verwachte omzet",
     "dashboard.realised_profit": "Gerealiseerde winst",
-    "dashboard.net_profit": "Netto winst",
+    "dashboard.net_profit": "Netto winst (altijd)",
     "dashboard.new_month": "Nieuwe maand",
     "dashboard.company": "Bedrijf",
     "dashboard.rate": "Tarief",
@@ -139,6 +150,9 @@
     "log.edit.description": "Omschrijving",
     "log.edit.description.placeholder": "Uitleg over specifieke API koppeling",
     "log.edit.submit": "Log aanpassen",
+
+    "vue.components.tabs.pending": "In afwachting",
+    "vue.components.tabs.payed": "Betaald",
 
     "validation.email.required": "E-mail is verplicht",
     "validation.email.email": "E-mail is ongeldig",

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Rules\ValidIBANRule;
 use App\Rules\ValidKVKNumberRule;
 use App\Rules\ValidPostalCodeRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -28,6 +29,7 @@ class CreateCompanyRequest extends FormRequest
         return [
             'name' => ['required', 'max:256'],
             'kvk' => ['required', new ValidKVKNumberRule()],
+            'iban' => ['nullable', new ValidIBANRule()],
             'street_address' => ['required', 'max:256'],
             'city' => ['required'],
             'postal_code' => ['required', new ValidPostalCodeRule()],

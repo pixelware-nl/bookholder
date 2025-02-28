@@ -2,7 +2,7 @@
     <div class="flex flex-row">
         <div class="flex flex-col w-1/3">
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px]">
-                <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }}</p>
+                <p class="text-lg text-gray-400">{{ $t('dashboard.expected_revenue') }} </p>
                 <div class="flex items-center">
                     <span class="text-4xl font-black pe-2">{{ sumUnpaidTotalCurrency }}</span>
                 </div>
@@ -10,7 +10,7 @@
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
                 <p class="text-lg text-gray-400">{{ $t('dashboard.net_profit') }}</p>
                 <div class="flex items-center">
-                    <span class="text-4xl font-black pe-2">{{ sumPayedNet }}</span>
+                    <span class="text-4xl font-black pe-2 text-green-900">{{ sumPayedNet }}</span>
                 </div>
             </div>
             <div class="bg-white w-full flex rounded-md shadow-md flex-col items-center justify-center min-h-[300px] max-h-[300px] mt-8">
@@ -23,7 +23,7 @@
         <div class="flex flex-col w-2/3">
             <TabContainer
                 class="ms-8"
-                :tabs="['pending', 'payed']"
+                :tabs="[$t('vue.components.tabs.pending'), $t('vue.components.tabs.payed')]"
                 v-model="currentTab"
             />
             <div class="bg-white flex rounded-md shadow-md flex-col items-center ml-8 pb-4 min-h-[39.5em] overflow-auto">
@@ -58,7 +58,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, ref} from "vue";
+import {computed, defineProps, onMounted, ref} from "vue";
 import {trans} from "laravel-vue-i18n";
 import TabContainer from "@/Pages/Partials/Containers/TabContainer.vue";
 
@@ -68,10 +68,15 @@ interface Props {
     sumUnpaidOwed: number,
     sumPayedTotal: number,
     daysUntilNewMonth: number
+    currentTab: string,
 }
 
 const props = defineProps<Props>();
-const currentTab = ref('pending')
+const currentTab = ref('');
+
+onMounted(() => {
+    currentTab.value = props.currentTab;
+})
 
 const sumUnpaidTotalCurrency = computed(() => {
     return getCurrency(props.sumUnpaidTotal);
@@ -81,13 +86,9 @@ const sumPayedNet = computed(() => {
     return getCurrency(props.sumPayedTotal * 0.6);
 })
 
-const sumPayedTotalCurrency = computed(() => {
-    return getCurrency(props.sumPayedTotal);
-})
-
 const filteredLogs = computed(() => {
     return props.logs.data.filter((logs: any) => {
-        return currentTab.value === 'pending'
+        return currentTab.value === trans('vue.components.tabs.pending')
             ? logs.payed == false
             : logs.payed;
     });
@@ -137,9 +138,5 @@ function getCurrency(value) {
 
 ::-webkit-scrollbar {
     width: 20px;
-}
-
-.link-button {
-    @apply inline-block bg-black text-white py-6 px-6 rounded-lg hover:bg-gray-800 hover:text-slate-200 mb-4
 }
 </style>

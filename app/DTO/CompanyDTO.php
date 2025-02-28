@@ -11,6 +11,7 @@ final readonly class CompanyDTO implements DTOInterface
     public function __construct(
         private string $name,
         private string $kvk,
+        private string $iban,
         private string $streetAddress,
         private string $city,
         private string $postalCode,
@@ -22,6 +23,7 @@ final readonly class CompanyDTO implements DTOInterface
         return new Company([
             'name' => $this->getName(),
             'kvk' => $this->getKvk(),
+            'iban' => $this->getIban(),
             'street_address' => $this->getStreetAddress(),
             'city' => $this->getCity(),
             'postal_code' => $this->getPostalCode(),
@@ -34,6 +36,7 @@ final readonly class CompanyDTO implements DTOInterface
         return new self(
             $request->name,
             $request->kvk,
+            $request->iban,
             $request->street_address,
             $request->city,
             $request->postal_code,
@@ -46,6 +49,7 @@ final readonly class CompanyDTO implements DTOInterface
         return [
             'name' => $this->getName(),
             'kvk' => $this->getKvk(),
+            'iban' => $this->getIban(),
             'street_address' => $this->getStreetAddress(),
             'city' => $this->getCity(),
             'postal_code' => $this->getPostalCode(),
@@ -63,7 +67,13 @@ final readonly class CompanyDTO implements DTOInterface
         return $this->kvk;
     }
 
-    public function getStreetAddress(): string {
+    public function getIban(): string
+    {
+        return $this->iban;
+    }
+
+    public function getStreetAddress(): string
+    {
         return $this->streetAddress;
     }
 
@@ -71,11 +81,13 @@ final readonly class CompanyDTO implements DTOInterface
         return $this->city;
     }
 
-    public function getPostalCode(): string {
+    public function getPostalCode(): string
+    {
         return $this->postalCode;
     }
 
-    public function getCountry(): string {
+    public function getCountry(): string
+    {
         return $this->country;
     }
 }

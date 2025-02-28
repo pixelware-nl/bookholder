@@ -18,7 +18,7 @@ class DashboardController extends Controller
     {
         $logs = $this->logService->findByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
         $unpaidLogs = $this->logService->findUnpaidByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
-        $payedLogs = $this->logService->findPayedByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
+        $payedLogs = $this->logService->findByPayed(true);
 
         $sumUnpaidTotal = $this->logService->sum($unpaidLogs);
         $sumPayedTotal = $this->logService->sum($payedLogs);
@@ -27,7 +27,8 @@ class DashboardController extends Controller
             'logs' => LogResource::collection($logs),
             'sumPayedTotal' => $sumPayedTotal,
             'sumUnpaidTotal' => $sumUnpaidTotal,
-            'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()))
+            'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth())),
+            'currentTab' => __('vue.components.tabs.pending')
         ]);
     }
 }

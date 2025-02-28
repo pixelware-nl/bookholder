@@ -1,6 +1,6 @@
 <template>
     <TabContainer
-        :tabs="['pending', 'payed']"
+        :tabs="[$t('vue.components.tabs.pending'), $t('vue.components.tabs.payed')]"
         v-model="currentTab"
     />
     <AdminContainer :form-title="$t('log.index.title')">
@@ -42,32 +42,69 @@
                 <tr v-else>
                     <td colspan="7" class="text-center !text-gray-400"> {{ $t('log.index.no_entries') }} </td>
                 </tr>
+                <tr v-if="filteredLogs.length > 0" :class="{'payed': currentTab == $t('vue.components.tabs.payed')}">
+                    <td class="font-bold">Total</td>
+                    <td class="font-bold">{{ sumTotalMoneyAsCurrency }}</td>
+                    <td class="font-bold">{{ sumTotalHours }}</td>
+                    <td colspan="4"></td>
+                </tr>
             </template>
         </TableContainer>
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {computed, defineProps, ref} from "vue";
+import { computed, defineProps, onMounted, ref} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
 import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import TabContainer from "../../Partials/Containers/TabContainer.vue";
+import {trans} from "laravel-vue-i18n";
 
 interface Props {
     logs: object,
+    currentTab: string
 }
 
 const props = defineProps<Props>();
-const currentTab = ref('pending')
+const currentTab = ref('');
+
+onMounted(() => {
+    currentTab.value = props.currentTab;
+})
 
 const filteredLogs = computed(() => {
     return props.logs.data.filter((logs: any) => {
-        return currentTab.value === 'pending'
+        return currentTab.value == trans('vue.components.tabs.pending')
             ? logs.payed == false
             : logs.payed;
     });
 });
+
+const sumTotalHours = computed(() => {
+    return filteredLogs.value.reduce((total, log) => {
+        return total + log.hours;
+    }, 0);
+})
+
+const sumTotalMoneyAsCurrency = computed(() => {
+    return getCurrency(
+        filteredLogs.value.reduce((total, log) => {
+            return total + log.rate * log.hours;
+        }, 0)
+    );
+})
+
+
+function getCurrency(value) {
+    let formatter = new Intl.NumberFormat('nl-NL', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 0
+    });
+
+    return formatter.format(<number>value);
+}
 </script>
 <style scoped>
 .link-button {

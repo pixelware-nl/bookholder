@@ -34,7 +34,7 @@ class RegisterController extends Controller
     {
         $company = $this->companyService->findByKvk($request->kvk_to_find);
 
-        if ($company->exists()) {
+        if ($company !== null && $company->exists()) {
             return redirect()->route('register.create')->with(['company' => $company->first()]);
         }
 

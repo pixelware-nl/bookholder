@@ -35,10 +35,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function store(UserDTO $userDTO): User
     {
-        $fullname = strtolower(
-            sprintf('%s %s', ucfirst($userDTO->getFirstname()), ucfirst($userDTO->getLastname()))
-        );
-
+        $fullname = sprintf('%s %s', ucfirst($userDTO->getFirstname()), ucfirst($userDTO->getLastname()));
         $email = strtolower($userDTO->getEmail());
 
         return User::create([

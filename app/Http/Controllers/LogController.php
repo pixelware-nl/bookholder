@@ -26,7 +26,8 @@ final class LogController extends Controller
         return Inertia::render('Admin/Log/Index', [
             'logs' => LogResource::collection(
                 $this->userService->logs()
-            )
+            ),
+            'currentTab' => __('vue.components.tabs.pending')
         ]);
     }
 

@@ -4,7 +4,7 @@ import AdminLayout from './Layouts/AdminLayout.vue';
 import { ZiggyVue } from 'ziggy-js';
 import AuthLayout from "./Layouts/AuthLayout.vue";
 import { FontAwesomeIcon } from "./../ts/font-awesome.ts"
-import { i18nVue } from 'laravel-vue-i18n';
+import { i18nVue, trans } from 'laravel-vue-i18n';
 
 createInertiaApp({
     resolve: name => {
@@ -30,7 +30,6 @@ createInertiaApp({
             .use(i18nVue, {
                 resolve: async languageCode => {
                     const locale = props.initialPage.props.locale;
-                    console.log(locale);
                     const language = import.meta.glob('../../lang/*.json');
                     return await language[`../../lang/${locale}.json`]();
                 }

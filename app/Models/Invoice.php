@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 /**
- *
+ * 
  *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
@@ -45,6 +45,10 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice forAuthenticatedUser()
+ * @property mixed|null $body
+ * @property int $payed
+ * @method static Builder|Invoice whereBody($value)
+ * @method static Builder|Invoice wherePayed($value)
  * @mixin \Eloquent
  */
 class Invoice extends Model
