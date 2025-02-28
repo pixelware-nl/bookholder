@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DTO\CompanyDTO;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
+use App\Http\Requests\Companies\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Services\CompanyService;
 use App\Services\KVKService;
@@ -46,6 +47,20 @@ final class CompanyController extends Controller
     public function store(CreateCompanyRequest $request): RedirectResponse
     {
         $this->companyService->store(CompanyDTO::fromRequest($request));
+
+        return redirect()->route('companies.index');
+    }
+
+    public function edit(Company $company): InertiaResponse
+    {
+        return Inertia::render('Admin/Company/Edit', [
+            'company' => $company,
+        ]);
+    }
+
+    public function update(UpdateCompanyRequest $request, Company $company): RedirectResponse
+    {
+        $this->companyService->update($company, CompanyDTO::fromRequest($request));
 
         return redirect()->route('companies.index');
     }

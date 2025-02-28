@@ -1,16 +1,17 @@
 
 <template>
-    <AuthFormContainer :form-title="$t('auth.company.title')" :route-name="route('login')">
-        <form @submit.prevent="form.post(route('register.set-company'))" class="pb-10 border-b">
+    <AdminContainer :form-title="$t('company.update.title')" :route-name="route('companies.index')">
+        <h2 class="text-xl font-bold mb-2 uppercase"> {{ $t('company.update.description') }} </h2>
+        <form @submit.prevent="form.put(route('companies.update', company.id))">
             <InputContainer>
                 <TextInput
                     id="name"
                     name="name"
                     v-model="form.name"
-                    :label="$t('auth.company.company_name')"
+                    :label="$t('company.update.name')"
                     placeholder="Pixelware"
                     :error="errors.name"
-                    :disabled="hasCompany"
+                    :disabled="true"
                 />
             </InputContainer>
             <InputContainer>
@@ -18,10 +19,10 @@
                     id="kvk"
                     name="kvk"
                     v-model="form.kvk"
-                    :label="$t('auth.company.kvk')"
+                    :label="$t('company.update.kvk')"
                     placeholder="12345678"
                     :error="errors.kvk"
-                    :disabled="hasCompany"
+                    :disabled="true"
                 />
             </InputContainer>
             <InputContainer>
@@ -29,7 +30,7 @@
                     id="iban"
                     name="iban"
                     v-model="form.iban"
-                    :label="$t('auth.company.iban')"
+                    :label="$t('company.update.iban')"
                     placeholder="NL01 INGB 1234 5678 90"
                     :error="errors.iban"
                 />
@@ -40,10 +41,10 @@
                         id="street_address"
                         name="street_address"
                         v-model="form.street_address"
-                        :label="$t('auth.company.street_address')"
+                        :label="$t('company.update.street_address')"
                         placeholder="Weena 4B"
                         :error="errors.street_address"
-                        :disabled="hasCompany"
+                        :disabled="true"
                     />
                 </DoubleInputContainer>
                 <DoubleInputContainer>
@@ -51,10 +52,10 @@
                         id="city"
                         name="city"
                         v-model="form.city"
-                        :label="$t('auth.company.city')"
+                        :label="$t('company.update.city')"
                         placeholder="Rotterdam"
                         :error="errors.city"
-                        :disabled="hasCompany"
+                        :disabled="true"
                     />
                 </DoubleInputContainer>
             </InputContainer>
@@ -64,10 +65,10 @@
                         id="postal_code"
                         name="postal_code"
                         v-model="form.postal_code"
-                        :label="$t('auth.company.postal_code')"
+                        :label="$t('company.update.postal_code')"
                         placeholder="4111KK"
                         :error="errors.postal_code"
-                        :disabled="hasCompany"
+                        :disabled="true"
                     />
                 </DoubleInputContainer>
                 <DoubleInputContainer>
@@ -75,50 +76,41 @@
                         id="country"
                         name="country"
                         v-model="form.country"
-                        :label="$t('auth.company.country')"
-                        placeholder="Netherlands"
+                        :label="$t('company.update.country')"
+                        placeholder="Nederland"
                         :error="errors.country"
-                        :disabled="hasCompany"
+                        :disabled="true"
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> {{ $t('auth.company.submit') }} </SubmitButton>
+            <SubmitButton :form-processing="form.processing"> {{ $t('company.update.submit') }} </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> {{ $t('auth.company.already_registered_question') }} <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.company.already_registered_link') }} </Link> </p>
-    </AuthFormContainer>
+    </AdminContainer>
 </template>
 <script setup lang="ts">
-import InputContainer from "../Partials/Containers/InputContainer.vue";
-import TextInput from "../Partials/Inputs/TextInput.vue";
-import DoubleInputContainer from "../Partials/Containers/DoubleInputContainer.vue";
-import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
+import AdminContainer from "../Partials/AdminContainer.vue";
+import InputContainer from "../../Partials/Containers/InputContainer.vue";
+import TextInput from "../../Partials/Inputs/TextInput.vue";
+import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
+import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 import {defineProps} from "vue/dist/vue";
-import {Link, useForm} from "@inertiajs/vue3";
+import {useForm} from "@inertiajs/vue3";
 import {onMounted, ref} from "vue";
-import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
     errors?: object,
-    company?: object,
-    kvk?: string
+    company: object,
 }
 
 const props = defineProps<Props>();
 
-const hasCompany = ref(false);
-const showHasCompanyNotification = ref(false);
-
 const form = useForm({
-    name: props.company?.name,
-    kvk: props.company?.kvk ?? props.kvk,
+    name: props.company.name,
+    kvk: props.company.kvk,
     iban: props.company?.iban,
-    street_address: props.company?.street_address,
-    city: props.company?.city,
-    postal_code: props.company?.postal_code,
-    country: props.company?.country,
+    street_address: props.company.street_address,
+    city: props.company.city,
+    postal_code: props.company.postal_code,
+    country: props.company?.country ?? 'Nederland',
 });
-
-onMounted(() => {
-    showHasCompanyNotification.value = hasCompany.value = (props.company != null);
-})
 </script>

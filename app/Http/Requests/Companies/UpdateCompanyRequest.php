@@ -18,7 +18,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * @property string      $postal_code
  * @property string      $country
  */
-class CreateCompanyRequest extends FormRequest
+class UpdateCompanyRequest extends FormRequest
 {
     public function authorize(): true
     {

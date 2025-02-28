@@ -58,6 +58,8 @@ use Illuminate\Support\Collection;
  * @property-read int|null $partners_count
  * @method static Builder|Company fromKvk(string $kvk)
  * @method static Builder|Company whereKvk($value)
+ * @property string|null $iban
+ * @method static Builder|Company whereIban($value)
  * @mixin \Eloquent
  */
 class Company extends Model
@@ -74,6 +76,7 @@ class Company extends Model
     protected $fillable = [
         'name',
         'kvk',
+        'iban',
         'street_address',
         'city',
         'postal_code',
