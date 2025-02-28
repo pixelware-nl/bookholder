@@ -27,6 +27,11 @@ readonly class CompanyService
         return $this->companyRepository->store($companyDTO);
     }
 
+    public function update(Company $company, CompanyDTO $companyDTO): Company
+    {
+        return $this->companyRepository->update($company, $companyDTO);
+    }
+
     public function attach(Company $company): Company
     {
         return $this->companyRepository->attach($company);

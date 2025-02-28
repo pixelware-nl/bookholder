@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
         Route::resource('invoices', InvoiceController::class);
-        Route::resource('companies', CompanyController::class)->only(['index', 'store', 'destroy']);
+        Route::resource('companies', CompanyController::class)->only(['index', 'store', 'update', 'edit', 'destroy']);
         Route::resource('logs', LogController::class);
 
         Route::get('companies/create/{kvk?}', [CompanyController::class, 'create'])->name('companies.create');
