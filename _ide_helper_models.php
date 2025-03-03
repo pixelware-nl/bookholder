@@ -60,6 +60,8 @@ namespace App\Models{
  * @property-read int|null $partners_count
  * @method static Builder|Company fromKvk(string $kvk)
  * @method static Builder|Company whereKvk($value)
+ * @property string|null $iban
+ * @method static Builder|Company whereIban($value)
  * @mixin \Eloquent
  */
 	class Company extends \Eloquent {}
@@ -101,9 +103,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice forAuthenticatedUser()
- * @mixin \Eloquent
  * @property mixed|null $body
- * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereBody($value)
+ * @property int $payed
+ * @method static Builder|Invoice whereBody($value)
+ * @method static Builder|Invoice wherePayed($value)
+ * @mixin \Eloquent
  */
 	class Invoice extends \Eloquent {}
 }
@@ -144,11 +148,13 @@ namespace App\Models{
  * @property int $company_id
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereCompanyId($value)
  * @property-read \App\Models\Company|null $company
- * @mixin \Eloquent
  * @property string $name
  * @property string $description
- * @method static \Illuminate\Database\Eloquent\Builder|Log whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Log whereName($value)
+ * @property int $payed
+ * @method static Builder|Log whereDescription($value)
+ * @method static Builder|Log whereName($value)
+ * @method static Builder|Log wherePayed($value)
+ * @mixin \Eloquent
  */
 	class Log extends \Eloquent {}
 }

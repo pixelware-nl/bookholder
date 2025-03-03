@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td> NL41 INGB 0003 4219 27 </td>
+                <td> {{ $invoice->fromCompany->iban }} </td>
             </tr>
         </tbody>
     </table>

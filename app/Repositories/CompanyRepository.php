@@ -35,6 +35,13 @@ class CompanyRepository implements CompanyRepositoryInterface
         );
     }
 
+    public function update(Company $company, CompanyDTO $companyDTO): Company
+    {
+        $company->update($companyDTO->toArray());
+
+        return $company;
+    }
+
     public function storeOrGet(CompanyDTO $companyDTO): Company
     {
         $company = Company::where('kvk', $companyDTO->getKvk());

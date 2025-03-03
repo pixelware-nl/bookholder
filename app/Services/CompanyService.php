@@ -9,12 +9,19 @@ use App\Repositories\CompanyRepository;
 readonly class CompanyService
 {
     public function __construct(
-        private CompanyRepository $companyRepository
+        private CompanyRepository $companyRepository,
+        private KVKService $kvkService
     ) {}
 
     public function findByKvk(string $kvk): ?Company
     {
-        return $this->companyRepository->findByKvk($kvk);
+        $internalSearch = $this->companyRepository->findByKvk($kvk);
+
+        if ($internalSearch !== null) {
+            return $internalSearch;
+        }
+
+        return $this->kvkService->getCompanyDetails($kvk);
     }
 
     public function storeOrGet(CompanyDTO $companyDTO): Company
@@ -25,6 +32,11 @@ readonly class CompanyService
     public function store(CompanyDTO $companyDTO): Company
     {
         return $this->companyRepository->store($companyDTO);
+    }
+
+    public function update(Company $company, CompanyDTO $companyDTO): Company
+    {
+        return $this->companyRepository->update($company, $companyDTO);
     }
 
     public function attach(Company $company): Company

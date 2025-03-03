@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Auth\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
+use App\Models\Company;
 use App\Services\CompanyService;
 use App\Services\KVKService;
 use App\Services\UserService;
@@ -32,10 +33,10 @@ class RegisterController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
-        $company = $this->companyService->findByKvk($request->kvk_to_find);
+        $companyDTO = $this->companyService->findByKvk($request->kvk_to_find);
 
-        if ($company->exists()) {
-            return redirect()->route('register.create')->with(['company' => $company->first()]);
+        if ($companyDTO !== null) {
+            return redirect()->route('register.get-company', ['kvk' => $request->kvk_to_find])->with(['company' => $companyDTO]);
         }
 
         return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'register.create');

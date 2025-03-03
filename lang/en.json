@@ -8,6 +8,7 @@
     "auth.company.title": "Register",
     "auth.company.company_name": "Company name",
     "auth.company.kvk": "KVK number",
+    "auth.company.iban": "IBAN number",
     "auth.company.street_address": "Street address",
     "auth.company.city": "City",
     "auth.company.postal_code": "Postal code",
@@ -65,7 +66,7 @@
     "company.find.manual_create_link": "Create it manually",
 
     "company.create.found": "Company details found.",
-    "company.create.title": "Companies¬",
+    "company.create.title": "Companies",
     "company.create.description": "Add new company",
     "company.create.name": "Company name",
     "company.create.kvk": "KVK number",
@@ -74,6 +75,16 @@
     "company.create.postal_code": "Postal code",
     "company.create.country": "Country",
     "company.create.submit": "Add company",
+
+    "company.edit.title": "Companies",
+    "company.edit.name": "Company name",
+    "company.edit.kvk": "KVK number",
+    "company.edit.iban": "IBAN number",
+    "company.edit.street_address": "Street address",
+    "company.edit.city": "City",
+    "company.edit.postal_code": "Postal code",
+    "company.edit.country": "Country",
+    "company.edit.submit": "Update company",
 
     "dashboard.expected_revenue": "Expected revenue",
     "dashboard.realised_profit": "Realised profit",

@@ -8,12 +8,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote')->hourly();
 
 Artisan::command('test', function() {
-    \App\Models\Log::where('payed', 0)->get()->each(function($log) {
-        $this->info('Updating log: ' . $log->id);
-        $success = $log->update([
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        $this->info('Success: ' . $success);
-    });
+    // Test case here
 });

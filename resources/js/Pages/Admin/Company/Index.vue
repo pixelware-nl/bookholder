@@ -13,7 +13,11 @@
                 <tr class="text-slate-400">
                     <td> {{ userCompany.name }} </td>
                     <td> {{ userCompany.street_address }}, {{ userCompany.city }} </td>
-                    <td></td>
+                    <td class="table-item table-item-link">
+                        <Link :href="route('companies.edit', userCompany.id)">
+                            <font-awesome-icon icon="fa-solid fa-pen-to-square" class="text-slate-600 hover:text-slate-800"/>
+                        </Link>
+                    </td>
                 </tr>
                 <tr v-for="company in companies">
                     <td> {{ company.name }} </td>
@@ -33,6 +37,7 @@ import {defineProps, onMounted} from "vue";
 import { Link } from '@inertiajs/vue3'
 import TableContainer from "../../Partials/Tables/TableContainer.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 
 interface Props {
     userCompany: object,

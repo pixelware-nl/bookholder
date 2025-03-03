@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DTO\CompanyDTO;
 use App\Http\Requests\Companies\CreateCompanyRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
+use App\Http\Requests\Companies\UpdateCompanyRequest;
 use App\Models\Company;
 use App\Services\CompanyService;
 use App\Services\KVKService;
@@ -50,6 +51,20 @@ final class CompanyController extends Controller
         return redirect()->route('companies.index');
     }
 
+    public function edit(Company $company): InertiaResponse
+    {
+        return Inertia::render('Admin/Company/Edit', [
+            'company' => $company,
+        ]);
+    }
+
+    public function update(UpdateCompanyRequest $request, Company $company): RedirectResponse
+    {
+        $this->companyService->update($company, CompanyDTO::fromRequest($request));
+
+        return redirect()->route('companies.index');
+    }
+
     public function destroy(Company $company): SymfonyResponse
     {
         $this->companyService->detach($company);
@@ -66,12 +81,13 @@ final class CompanyController extends Controller
     {
         $company = $this->companyService->findByKvk($request->kvk_to_find);
 
-        if ($company !== null) {
-            $this->companyService->attach($company);
-
-            return redirect()->route('companies.index');
+        if ($company == null) {
+            return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'company.create');
         }
 
-        return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'company.create');
+        $company = $this->companyService->storeOrGet(CompanyDTO::fromCompany($company));
+        $this->companyService->attach($company);
+
+        return redirect()->route('companies.index');
     }
 }
