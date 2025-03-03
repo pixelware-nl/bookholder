@@ -5,35 +5,49 @@ namespace App\Services;
 use App\DTO\AddressDTO;
 use App\DTO\CompanyDTO;
 use App\Enums\KVKAddressType;
-use GuzzleHttp\Promise\PromiseInterface;
+use App\Enums\MethodType;
+use App\External\ExternalClient;
+use App\Models\Company;
 use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Http\Client\Response;
 use Illuminate\Http\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use Sentry\EventHint;
+use function Sentry\captureException;
 
 class KVKService
 {
     const BASIC_PROFILE_MAIN_COMPANY_URL = 'https://api.kvk.nl/test/api/v1/basisprofielen/%s/hoofdvestiging';
 
-    public function getCompanyDetails(string $kvk): ?CompanyDTO
+    public function __construct(
+        private readonly ExternalClient $externalClient
+    ) {}
+
+    public function getCompanyDetails(string $kvk): ?Company
     {
         try {
-            $response = $this->getJsonDecodedRequest(self::BASIC_PROFILE_MAIN_COMPANY_URL, $kvk);
-        } catch (ConnectionException) {
+            $response = $this->externalClient->request(
+                self::BASIC_PROFILE_MAIN_COMPANY_URL,
+                MethodType::GET,
+                ['apiKey' => config('kvk.api_key')],
+                $kvk
+            );
+        } catch (\Exception $e) {
             return null;
         }
 
         $address = $response->adressen[0];
         $addressDTO = $this->getAddress($address);
 
-        return new CompanyDTO(
+        $companyDTO = new CompanyDTO(
             $response->eersteHandelsnaam,
             $response->kvkNummer,
+            null,
             $addressDTO->getStreetAddress(),
             $addressDTO->getCity(),
             $addressDTO->getPostalCode(),
             $addressDTO->getCountry(),
         );
+
+        return $companyDTO->company();
     }
 
     public function redirectOnSuccess(string $kvk, string $route): RedirectResponse
@@ -74,35 +88,5 @@ class KVKService
         }
 
         return null;
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    private function getJsonDecodedRequest(string $url, string $kvk): mixed
-    {
-        try {
-            $request = $this->getRequest($url, [], $kvk);
-        }
-        catch (\Exception $exception) {
-            throw new ConnectionException();
-        }
-
-
-        if ($request->status() !== ResponseAlias::HTTP_OK) {
-            throw new ConnectionException();
-        }
-
-        return json_decode($this->getRequest($url, [], $kvk)->body());
-    }
-
-    /**
-     * @throws ConnectionException
-     */
-    private function getRequest(string $url, array $headers = [], string ...$parameters): PromiseInterface|Response
-    {
-        return \Http::withHeaders([
-            'apikey' => config('kvk.api_key')
-        ])->get(sprintf($url, $parameters));
     }
 }
