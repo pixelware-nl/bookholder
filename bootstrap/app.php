@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\SentryContext;
 use App\Http\Middleware\ShareLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ShareLocale::class,
             HandleInertiaRequests::class,
             ValidateCsrfToken::class,
+            SentryContext::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
