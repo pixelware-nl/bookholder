@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 final readonly class CompanyDTO implements DTOInterface
 {
     public function __construct(
-        private string $name,
-        private string $kvk,
-        private string $iban,
-        private string $streetAddress,
-        private string $city,
-        private string $postalCode,
-        private string $country,
+        private string  $name,
+        private string  $kvk,
+        private ?string $iban,
+        private string  $streetAddress,
+        private string  $city,
+        private string  $postalCode,
+        private string  $country,
     ) {}
 
     public function company(): Company
@@ -44,6 +44,19 @@ final readonly class CompanyDTO implements DTOInterface
         );
     }
 
+    public static function fromCompany(Company $company): CompanyDTO
+    {
+        return new self(
+            $company->name,
+            $company->kvk,
+            $company->iban,
+            $company->street_address,
+            $company->city,
+            $company->postal_code,
+            $company->country
+        );
+    }
+
     public function toArray(): array
     {
         return [
@@ -67,7 +80,7 @@ final readonly class CompanyDTO implements DTOInterface
         return $this->kvk;
     }
 
-    public function getIban(): string
+    public function getIban(): ?string
     {
         return $this->iban;
     }
