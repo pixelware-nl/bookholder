@@ -81,14 +81,13 @@ final class CompanyController extends Controller
     {
         $company = $this->companyService->findByKvk($request->kvk_to_find);
 
-        dd($company);
-
-        if ($company !== null) {
-            $this->companyService->attach($company);
-
-            return redirect()->route('companies.index');
+        if ($company == null) {
+            return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'company.create');
         }
 
-        return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'company.create');
+        $company = $this->companyService->storeOrGet(CompanyDTO::fromCompany($company));
+        $this->companyService->attach($company);
+
+        return redirect()->route('companies.index');
     }
 }
