@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container col-span-12">
         <div class="flex mb-8 items-center justify-between">
             <h1 class="header-title">{{ formTitle }}</h1>
             <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none">

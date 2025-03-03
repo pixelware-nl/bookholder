@@ -74,121 +74,93 @@ const tableData = [
         company: 'Friva',
     },
 ]
-
-onMounted(async () => {
-    data.value = await getData()
-})
 </script>
 <template>
-    <div class="mt-12 pb-12 flex justify-center items-center">
-        <div class="w-11/12 md:w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
-            <Card class="col-span-1 md:col-span-2">
-                <CardHeader>
-                    <CardTitle> Accumulated revenue </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <h4 class="font-bold text-2xl">$45.234,12</h4>
-                    <span class="text-sm text-gray-500">+20% from last month</span>
-                </CardContent>
-            </Card>
-            <Card class="col-span-1 md:col-span-2">
-                <CardHeader>
-                    <CardTitle> Hours worked</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <h4 class="font-bold text-2xl">43</h4>
-                    <span class="text-sm text-gray-500">+17% from last month</span>
-                </CardContent>
-            </Card>
-            <Card class="col-span-1 md:col-span-2">
-                <CardHeader>
-                    <CardTitle> Until next month </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <h4 class="font-bold text-2xl">4 days left</h4>
-                    <span class="text-sm text-gray-500">Automatic invoicing is turned off</span>
-                </CardContent>
-            </Card>
-            <Card class="col-span-1 md:col-span-2">
-                <CardHeader>
-                    <CardTitle> Freelance wage </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <h4 class="font-bold text-2xl">$60/hr</h4>
-                    <span class="text-sm text-gray-500">No increase from last month</span>
-                </CardContent>
-            </Card>
-            <Card class="col-span-1 md:col-span-5">
-                <CardHeader>
-                    <CardTitle> Overview </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <div class="mt-8">
-                        <BarChart
-                            index="name"
-                            :data="data"
-                            :categories="['total', 'predicted']"
-                            :y-formatter="(tick, i) => {
-                              return typeof tick === 'number'
-                                ? `€${new Intl.NumberFormat('nl').format(tick).toString()}`
-                                : ''
-                            }"
-                            :type="'stacked'"
-                            :rounded-corners="8"
-                            :colors="['#7bd38d', '#272727']"
-                        />
-                    </div>
-                </CardContent>
-            </Card>
-            <Card class="col-span-1 md:col-span-3">
-                <CardHeader>
-                    <CardTitle> Logs </CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <FakeTable :columns="columns" :data="tableData" />
-                </CardContent>
-            </Card>
-            <Card class="col-span-1 md:col-span-2">
-                <CardHeader>
-                    <CardTitle> Revenue by companies</CardTitle>
-                    <CardDescription>The amount of revenue earned per company</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <table class="w-full mb-10">
-                        <tbody>
-                            <tr>
-                                <td>Friva</td>
-                                <td>$3.233,34</td>
-                            </tr>
-                            <tr>
-                                <td>Rituals</td>
-                                <td>$3.233,34</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <FakeDonutChart />
-                </CardContent>
-            </Card>
-<!--            <Card class="col-span-1 md:col-span-6">-->
-<!--                <CardHeader>-->
-<!--                    <CardTitle> Overview </CardTitle>-->
-<!--                </CardHeader>-->
-<!--                <CardContent>-->
-<!--                    <LineChart-->
-<!--                        :data="internetData"-->
-<!--                        index="tijd"-->
-<!--                        :categories="['snelheid']"-->
-<!--                        :y-formatter="(tick, i) => {-->
-<!--                            return typeof tick === 'number'-->
-<!--                                ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}`-->
-<!--                                : ''-->
-<!--                        }"-->
-<!--                        :custom-tooltip="CustomChartTooltip"-->
-<!--                    />-->
-<!--                </CardContent>-->
-<!--            </Card>-->
-
-        </div>
-    </div>
-
+    <Card class="col-span-1 md:col-span-2">
+        <CardHeader>
+            <CardTitle> Accumulated revenue </CardTitle>
+        </CardHeader>
+        <CardContent>
+            <h4 class="font-bold text-2xl">$45.234,12</h4>
+            <span class="text-sm text-gray-500">+20% from last month</span>
+        </CardContent>
+    </Card>
+    <Card class="col-span-1 md:col-span-2">
+        <CardHeader>
+            <CardTitle> Hours worked</CardTitle>
+        </CardHeader>
+        <CardContent>
+            <h4 class="font-bold text-2xl">43</h4>
+            <span class="text-sm text-gray-500">+17% from last month</span>
+        </CardContent>
+    </Card>
+    <Card class="col-span-1 md:col-span-2">
+        <CardHeader>
+            <CardTitle> Until next month </CardTitle>
+        </CardHeader>
+        <CardContent>
+            <h4 class="font-bold text-2xl">4 days left</h4>
+            <span class="text-sm text-gray-500">Automatic invoicing is turned off</span>
+        </CardContent>
+    </Card>
+    <Card class="col-span-1 md:col-span-2">
+        <CardHeader>
+            <CardTitle> Freelance wage </CardTitle>
+        </CardHeader>
+        <CardContent>
+            <h4 class="font-bold text-2xl">$60/hr</h4>
+            <span class="text-sm text-gray-500">No increase from last month</span>
+        </CardContent>
+    </Card>
+    <Card class="col-span-1 md:col-span-5">
+        <CardHeader>
+            <CardTitle> Overview </CardTitle>
+        </CardHeader>
+        <CardContent>
+            <div class="mt-8">
+                <BarChart
+                    index="name"
+                    :data="data"
+                    :categories="['total', 'predicted']"
+                    :y-formatter="(tick, i) => {
+                      return typeof tick === 'number'
+                        ? `€${new Intl.NumberFormat('nl').format(tick).toString()}`
+                        : ''
+                    }"
+                    :type="'stacked'"
+                    :rounded-corners="8"
+                    :colors="['#7bd38d', '#272727']"
+                />
+            </div>
+        </CardContent>
+    </Card>
+    <Card class="col-span-1 md:col-span-3">
+        <CardHeader>
+            <CardTitle> Logs </CardTitle>
+        </CardHeader>
+        <CardContent>
+            <FakeTable :columns="columns" :data="tableData" />
+        </CardContent>
+    </Card>
+<!--    <Card class="col-span-1 md:col-span-2">-->
+<!--        <CardHeader>-->
+<!--            <CardTitle> Revenue by companies</CardTitle>-->
+<!--            <CardDescription>The amount of revenue earned per company</CardDescription>-->
+<!--        </CardHeader>-->
+<!--        <CardContent>-->
+<!--            <table class="w-full mb-10">-->
+<!--                <tbody>-->
+<!--                    <tr>-->
+<!--                        <td>Friva</td>-->
+<!--                        <td>$3.233,34</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>Rituals</td>-->
+<!--                        <td>$3.233,34</td>-->
+<!--                    </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--            <FakeDonutChart />-->
+<!--        </CardContent>-->
+<!--    </Card>-->
 </template>

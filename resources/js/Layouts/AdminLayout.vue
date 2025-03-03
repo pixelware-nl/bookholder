@@ -10,7 +10,11 @@
                 <NavLink slug="logout" route-name="logout" method="post"> {{ $t('layout.admin.logout') }} </NavLink>
             </ul>
         </nav>
-        <slot />
+        <div class="mt-12 pb-12 flex justify-center items-center">
+            <div class="w-11/12 md:w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
+                <slot />
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
