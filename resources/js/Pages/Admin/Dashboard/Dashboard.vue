@@ -6,7 +6,7 @@
         </CardHeader>
         <CardContent>
             <h4 class="font-bold text-2xl">€{{ accumulatedRevenue }}</h4>
-            <span class="text-sm text-gray-500">+20% from last month</span>
+            <span class="text-sm text-gray-500">+{{ accumulatedRevenueGrowth }}% from last month</span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-2">
@@ -15,7 +15,7 @@
         </CardHeader>
         <CardContent>
             <h4 class="font-bold text-2xl">{{ hoursWorked }}</h4>
-            <span class="text-sm text-gray-500">+17% from last month</span>
+            <span class="text-sm text-gray-500">+{{ hoursWorkedGrowth }}% from last month</span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-2">
@@ -24,16 +24,16 @@
         </CardHeader>
         <CardContent>
             <h4 class="font-bold text-2xl">{{ daysLeft }} day(s) left</h4>
-            <span class="text-sm text-gray-500">Automatic invoicing is turned off</span>
+            <span class="text-sm text-gray-500">Automatic invoicing off</span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-2">
         <CardHeader>
-            <CardTitle> Average freelance wage </CardTitle>
+            <CardTitle> Average hourly wage </CardTitle>
         </CardHeader>
         <CardContent>
             <h4 class="font-bold text-2xl">€{{ averageFreelanceWage }}/hr</h4>
-            <span class="text-sm text-gray-500">No increase from last month</span>
+            <span class="text-sm text-gray-500">+{{ averageFreelanceWageGrowth }}% since last month </span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-5">
@@ -77,11 +77,13 @@ import {defineProps, onMounted} from "vue";
 interface Props {
     logs: object,
     monthlyRevenue: Record<string, any>[],
-
     accumulatedRevenue: Number,
+    accumulatedRevenueGrowth: Number,
     hoursWorked: Number,
+    hoursWorkedGrowth: Number,
     daysLeft: Number,
     averageFreelanceWage: Number,
+    averageFreelanceWageGrowth: Number,
 }
 
 const props = defineProps<Props>();
