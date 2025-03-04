@@ -42,7 +42,7 @@ class DashboardController extends Controller
             $accumulatedRevenueGrowth = 0;
         }
 
-        $hoursWorked = $this->logService->hours($currentMonthlogs);
+        $hoursWorked = $this->logService->hours($currentMonthLogs);
         $hoursWorkedPreviousMonth = $this->logService->hours($previousMonthLogs);
         if ($hoursWorkedPreviousMonth !== 0 && $hoursWorked !== 0) {
             $hoursWorkedGrowth = ($hoursWorked - $hoursWorkedPreviousMonth) / $hoursWorkedPreviousMonth * 100;
