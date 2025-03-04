@@ -45,7 +45,7 @@
                 <BarChart
                     index="name"
                     :data="monthlyRevenue"
-                    :categories="['revenue', 'profit']"
+                    :categories="['profit', 'tax']"
                     :y-formatter="(tick, i) => {
                       return typeof tick === 'number'
                         ? `€${new Intl.NumberFormat('nl').format(tick).toString()}`
@@ -87,13 +87,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-onBeforeMount(() => {
-    props.monthlyRevenue.forEach((item) => {
-        item.revenue = getCurrency(item.revenue);
-        item.profit = getCurrency(item.profit);
-    });
-})
 
 const tableData = [
     {

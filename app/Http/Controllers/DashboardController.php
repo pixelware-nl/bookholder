@@ -24,15 +24,16 @@ class DashboardController extends Controller
 
             return [
                 'name' => $date->format('F'),
-                'revenue' => $revenue,
-                'profit' => $revenue * 0.6
+                'profit' => $revenue * 0.6,
+                'tax' => $revenue * 0.4
             ];
         });
 
+        $allTimeLogs = $this->logService->all();
         $currentMonthLogs = $this->logService->findByTimeRange(Carbon::now()->copy()->startOfMonth(), Carbon::now()->copy()->endOfMonth());
         $previousMonthLogs = $this->logService->findByTimeRange(Carbon::now()->copy()->subMonth()->startOfMonth(), Carbon::now()->copy()->subMonth()->endOfMonth());
 
-        $accumulatedRevenue = $this->logService->sum($currentMonthLogs);
+        $accumulatedRevenue = $this->logService->sum($allTimeLogs);
         $accumulatedRevenuePreviousMonth = $this->logService->sum($previousMonthLogs);
         if ($accumulatedRevenuePreviousMonth !== 0 && $accumulatedRevenue !== 0) {
             $accumulatedRevenueGrowth = ($accumulatedRevenue - $accumulatedRevenuePreviousMonth) / $accumulatedRevenuePreviousMonth * 100;
@@ -42,7 +43,7 @@ class DashboardController extends Controller
             $accumulatedRevenueGrowth = 0;
         }
 
-        $hoursWorked = $this->logService->hours($currentMonthLogs);
+        $hoursWorked = $this->logService->hours($allTimeLogs);
         $hoursWorkedPreviousMonth = $this->logService->hours($previousMonthLogs);
         if ($hoursWorkedPreviousMonth !== 0 && $hoursWorked !== 0) {
             $hoursWorkedGrowth = ($hoursWorked - $hoursWorkedPreviousMonth) / $hoursWorkedPreviousMonth * 100;
@@ -55,9 +56,12 @@ class DashboardController extends Controller
         $daysLeft = round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()));
 
         // AVERAGE FREELANGE WAGE
-        $averageFreelanceWage = ($accumulatedRevenue !== 0 || $hoursWorked !== 0)
-            ? $accumulatedRevenue / $hoursWorked
-            : 0;
+        if ($accumulatedRevenue !== 0 && $hoursWorked !== 0) {
+            $averageFreelanceWage = $accumulatedRevenue / $hoursWorked;
+        } else {
+            $averageFreelanceWage = 0;
+        }
+
         $averageFreelanceWagePreviousMonth = ($accumulatedRevenuePreviousMonth !== 0 || $hoursWorkedPreviousMonth !== 0)
             ? $accumulatedRevenuePreviousMonth / $hoursWorkedPreviousMonth
             : 0;
@@ -74,12 +78,12 @@ class DashboardController extends Controller
             'logs' => LogResource::collection($currentMonthLogs),
             'monthlyRevenue' => $monthlyRevenue,
             'accumulatedRevenue' => $accumulatedRevenue,
-            'accumulatedRevenueGrowth' => $accumulatedRevenueGrowth,
+            'accumulatedRevenueGrowth' => round($accumulatedRevenueGrowth),
             'hoursWorked' => $hoursWorked,
-            'hoursWorkedGrowth' => $hoursWorkedGrowth,
+            'hoursWorkedGrowth' => round($hoursWorkedGrowth),
             'daysLeft' => $daysLeft,
             'averageFreelanceWage' => $averageFreelanceWage,
-            'averageFreelanceWageGrowth' => $averageFreelanceWageGrowth,
+            'averageFreelanceWageGrowth' => round($averageFreelanceWageGrowth),
         ]);
     }
 }
