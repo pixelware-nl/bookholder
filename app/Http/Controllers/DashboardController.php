@@ -16,19 +16,33 @@ class DashboardController extends Controller
 
     public function index(): InertiaResponse
     {
-        $logs = $this->logService->findByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
-        $unpaidLogs = $this->logService->findUnpaidByTimeRange(Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth());
-        $payedLogs = $this->logService->findByPayed(true);
+        $monthlyRevenue = collect(range(1, 12))->map(function($month) {
+            $date = Carbon::now()->month($month);
+            $revenue = $this->logService->sum(
+                $this->logService->findByTimeRange($date->copy()->startOfMonth(), $date->copy()->endOfMonth())
+            );
 
-        $sumUnpaidTotal = $this->logService->sum($unpaidLogs);
-        $sumPayedTotal = $this->logService->sum($payedLogs);
+            return [
+                'name' => $date->format('F'),
+                'revenue' => $revenue,
+                'profit' => $revenue * 0.6
+            ];
+        });
+
+        $logs = $this->logService->findByTimeRange(Carbon::now()->startOfYear(), Carbon::now()->endOfMonth());
+
+        $accumulatedRevenue = $this->logService->sum($logs);
+        $hoursWorked = $this->logService->hours($logs);
+        $daysLeft = round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()));
+        $averageFreelanceWage = $accumulatedRevenue / $hoursWorked;
 
         return Inertia::render('Admin/Dashboard/Dashboard', [
             'logs' => LogResource::collection($logs),
-            'sumPayedTotal' => $sumPayedTotal,
-            'sumUnpaidTotal' => $sumUnpaidTotal,
-            'daysUntilNewMonth' => round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth())),
-            'currentTab' => __('vue.components.tabs.pending')
+            'monthlyRevenue' => $monthlyRevenue,
+            'accumulatedRevenue' => $accumulatedRevenue,
+            'hoursWorked' => $hoursWorked,
+            'daysLeft' => $daysLeft,
+            'averageFreelanceWage' => $averageFreelanceWage,
         ]);
     }
 }
