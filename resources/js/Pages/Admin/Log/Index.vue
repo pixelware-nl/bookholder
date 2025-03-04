@@ -40,7 +40,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
 </script>
 <style scoped>
 .link-button {

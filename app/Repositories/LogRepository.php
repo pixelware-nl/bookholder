@@ -53,7 +53,8 @@ class LogRepository implements LogRepositoryInterface
             'rate' => $logDTO->getRate(),
             'hours' => $logDTO->getHours(),
             'name' => $logDTO->getName(),
-            'description' => $logDTO->getDescription()
+            'description' => $logDTO->getDescription(),
+            'created_at' => $logDTO->getCreatedAt()
         ]);
     }
 
@@ -64,7 +65,8 @@ class LogRepository implements LogRepositoryInterface
             'rate' => $logDTO->getRate(),
             'hours' => $logDTO->getHours(),
             'name' => $logDTO->getName(),
-            'description' => $logDTO->getDescription()
+            'description' => $logDTO->getDescription(),
+            'created_at' => $logDTO->getCreatedAt()
         ]);
 
         return $log;

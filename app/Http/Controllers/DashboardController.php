@@ -29,33 +29,49 @@ class DashboardController extends Controller
             ];
         });
 
-        $currentMonthlogs = $this->logService->findByTimeRange(Carbon::now()->copy()->startOfMonth(), Carbon::now()->copy()->endOfMonth());
+        $currentMonthLogs = $this->logService->findByTimeRange(Carbon::now()->copy()->startOfMonth(), Carbon::now()->copy()->endOfMonth());
         $previousMonthLogs = $this->logService->findByTimeRange(Carbon::now()->copy()->subMonth()->startOfMonth(), Carbon::now()->copy()->subMonth()->endOfMonth());
 
-        $accumulatedRevenue = $this->logService->sum($currentMonthlogs);
+        $accumulatedRevenue = $this->logService->sum($currentMonthLogs);
         $accumulatedRevenuePreviousMonth = $this->logService->sum($previousMonthLogs);
-        $accumulatedRevenueGrowth = ($accumulatedRevenuePreviousMonth !== 0)
-            ? ($accumulatedRevenue - $accumulatedRevenuePreviousMonth) / $accumulatedRevenuePreviousMonth * 100
-            : 100;
+        if ($accumulatedRevenuePreviousMonth !== 0 && $accumulatedRevenue !== 0) {
+            $accumulatedRevenueGrowth = ($accumulatedRevenue - $accumulatedRevenuePreviousMonth) / $accumulatedRevenuePreviousMonth * 100;
+        } else if ($accumulatedRevenuePreviousMonth === 0 && $accumulatedRevenue !== 0) {
+            $accumulatedRevenueGrowth = 100;
+        } else {
+            $accumulatedRevenueGrowth = 0;
+        }
 
         $hoursWorked = $this->logService->hours($currentMonthlogs);
         $hoursWorkedPreviousMonth = $this->logService->hours($previousMonthLogs);
-        $hoursWorkedGrowth = ($hoursWorkedPreviousMonth !== 0)
-            ? ($hoursWorked - $hoursWorkedPreviousMonth) / $hoursWorkedPreviousMonth * 100
-            : 100;
+        if ($hoursWorkedPreviousMonth !== 0 && $hoursWorked !== 0) {
+            $hoursWorkedGrowth = ($hoursWorked - $hoursWorkedPreviousMonth) / $hoursWorkedPreviousMonth * 100;
+        } else if ($hoursWorkedPreviousMonth === 0 && $hoursWorked !== 0) {
+            $hoursWorkedGrowth = 100;
+        } else {
+            $hoursWorkedGrowth = 0;
+        }
 
         $daysLeft = round(Carbon::now()->diffInDays(Carbon::now()->endOfMonth()));
 
-        $averageFreelanceWage = $accumulatedRevenue / $hoursWorked;
+        // AVERAGE FREELANGE WAGE
+        $averageFreelanceWage = ($accumulatedRevenue !== 0 || $hoursWorked !== 0)
+            ? $accumulatedRevenue / $hoursWorked
+            : 0;
         $averageFreelanceWagePreviousMonth = ($accumulatedRevenuePreviousMonth !== 0 || $hoursWorkedPreviousMonth !== 0)
             ? $accumulatedRevenuePreviousMonth / $hoursWorkedPreviousMonth
             : 0;
-        $averageFreelanceWageGrowth = ($averageFreelanceWagePreviousMonth !== 0)
-            ? ($averageFreelanceWage - $averageFreelanceWagePreviousMonth) / $averageFreelanceWagePreviousMonth * 100
-            : 100;
+
+        if ($averageFreelanceWagePreviousMonth !== 0 && $averageFreelanceWage !== 0) {
+            $averageFreelanceWageGrowth = ($averageFreelanceWage - $averageFreelanceWagePreviousMonth) / $averageFreelanceWagePreviousMonth * 100;
+        } else if ($averageFreelanceWagePreviousMonth === 0 && $averageFreelanceWage !== 0) {
+            $averageFreelanceWageGrowth = 100;
+        } else {
+            $averageFreelanceWageGrowth = 0;
+        }
 
         return Inertia::render('Admin/Dashboard/Dashboard', [
-            'logs' => LogResource::collection($currentMonthlogs),
+            'logs' => LogResource::collection($currentMonthLogs),
             'monthlyRevenue' => $monthlyRevenue,
             'accumulatedRevenue' => $accumulatedRevenue,
             'accumulatedRevenueGrowth' => $accumulatedRevenueGrowth,

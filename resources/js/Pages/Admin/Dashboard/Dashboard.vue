@@ -5,7 +5,7 @@
             <CardTitle> Accumulated revenue </CardTitle>
         </CardHeader>
         <CardContent>
-            <h4 class="font-bold text-2xl">€{{ accumulatedRevenue }}</h4>
+            <h4 class="font-bold text-2xl">{{ getCurrency(accumulatedRevenue) }}</h4>
             <span class="text-sm text-gray-500">+{{ accumulatedRevenueGrowth }}% from last month</span>
         </CardContent>
     </Card>
@@ -32,7 +32,7 @@
             <CardTitle> Average hourly wage </CardTitle>
         </CardHeader>
         <CardContent>
-            <h4 class="font-bold text-2xl">€{{ averageFreelanceWage }}/hr</h4>
+            <h4 class="font-bold text-2xl">{{ getCurrency(averageFreelanceWage) }}/hr</h4>
             <span class="text-sm text-gray-500">+{{ averageFreelanceWageGrowth }}% since last month </span>
         </CardContent>
     </Card>
@@ -72,7 +72,7 @@ import {Card, CardContent, CardTitle, CardHeader} from "@/components/ui/card";
 import {BarChart} from "@/components/ui/chart-bar";
 import { columns } from '../../../../ts/columns'
 import FakeTable from "@/Pages/Partials/Containers/FakeTable.vue";
-import {defineProps, onMounted} from "vue";
+import {defineProps, onBeforeMount} from "vue";
 
 interface Props {
     logs: object,
@@ -88,25 +88,12 @@ interface Props {
 
 const props = defineProps<Props>();
 
-onMounted(() => {
-    console.log(props.monthlyRevenue);
-    console.log(typeof data)
+onBeforeMount(() => {
+    props.monthlyRevenue.forEach((item) => {
+        item.revenue = getCurrency(item.revenue);
+        item.profit = getCurrency(item.profit);
+    });
 })
-
-const data = [
-    { name: 'Jan', total: Math.floor(Math.random() * 2000) + 500, predicted: 2000 },
-    { name: 'Feb', total: Math.floor(Math.random() * 2000) + 500, predicted: 1900 },
-    { name: 'Mar', total: Math.floor(Math.random() * 2000) + 500, predicted: 1800 },
-    { name: 'Apr', total: Math.floor(Math.random() * 2000) + 500, predicted: 1700 },
-    { name: 'May', total: Math.floor(Math.random() * 2000) + 500, predicted: 1600 },
-    { name: 'Jun', total: Math.floor(Math.random() * 2000) + 500, predicted: 1500 },
-    { name: 'Jul', total: Math.floor(Math.random() * 2000) + 500, predicted: 1400 },
-    { name: 'Aug', total: Math.floor(Math.random() * 2000) + 500, predicted: 1300 },
-    { name: 'Sep', total: Math.floor(Math.random() * 2000) + 500, predicted: 1200 },
-    { name: 'Oct', total: Math.floor(Math.random() * 2000) + 500, predicted: 1100 },
-    { name: 'Nov', total: Math.floor(Math.random() * 2000) + 500, predicted: 1000 },
-    { name: 'Dec', total: Math.floor(Math.random() * 2000) + 500, predicted: 900 },
-]
 
 const tableData = [
     {
@@ -135,4 +122,14 @@ const tableData = [
         company: 'Friva',
     },
 ]
+
+function getCurrency(value) {
+    let formatter = new Intl.NumberFormat('nl-NL', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 0
+    });
+
+    return formatter.format(<number>value);
+}
 </script>

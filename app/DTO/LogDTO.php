@@ -5,16 +5,18 @@ namespace App\DTO;
 use App\DTO\Interfaces\DTOInterface;
 use App\Models\Log;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 final readonly class LogDTO implements DTOInterface
 {
     public function __construct(
-        private int    $companyId,
-        private int    $rate,
-        private int    $hours,
-        private string $name,
-        private string $description,
-        private bool   $payed = false,
+        private int     $companyId,
+        private int     $rate,
+        private int     $hours,
+        private string  $name,
+        private string  $description,
+        private ?Carbon $created_at = null,
+        private bool    $payed = false,
     ) {}
 
     public function Log(): Log
@@ -25,6 +27,7 @@ final readonly class LogDTO implements DTOInterface
             'hours' => $this->getHours(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            'created_at' => $this->getCreatedAt(),
             'payed' => $this->isPayed(),
         ]);
     }
@@ -37,6 +40,7 @@ final readonly class LogDTO implements DTOInterface
             $request->hours,
             $request->name,
             $request->description,
+            Carbon::parse($request->created_at),
         );
     }
 
@@ -48,6 +52,7 @@ final readonly class LogDTO implements DTOInterface
             'hours' => $this->getHours(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
+            'created_at' => $this->getCreatedAt(),
             'payed' => $this->isPayed(),
         ];
     }
@@ -75,6 +80,11 @@ final readonly class LogDTO implements DTOInterface
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    public function getCreatedAt(): ?Carbon
+    {
+        return $this->created_at;
     }
 
     public function isPayed(): bool

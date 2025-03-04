@@ -1,15 +1,26 @@
 <template>
     <AdminContainer :form-title="$t('log.create.title')" :route-name="route('logs.index')">
         <form @submit.prevent="form.post(route('logs.store'))">
-            <InputContainer>
-                <SelectInput
-                    id="companies"
-                    :options="companies"
-                    name="company_id"
-                    v-model="form.company_id"
-                    :label="$t('log.create.companies')"
-                    :error="errors.company_id"
-                />
+            <InputContainer class="flex">
+                <DoubleInputContainer>
+                    <SelectInput
+                        id="companies"
+                        :options="companies"
+                        name="company_id"
+                        v-model="form.company_id"
+                        :label="$t('log.create.companies')"
+                        :error="errors.company_id"
+                    />
+                </DoubleInputContainer>
+                <DoubleInputContainer>
+                    <DateInput
+                        id="created-at"
+                        name="created-at"
+                        v-model="form.created_at"
+                        :label="$t('log.create.created_at')"
+                        :error="errors.created_at"
+                    />
+                </DoubleInputContainer>
             </InputContainer>
             <InputContainer class="flex">
                 <DoubleInputContainer>
@@ -67,6 +78,7 @@ import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
 import TextInput from "@/Pages/Partials/Inputs/TextInput.vue";
 import TextArea from "@/Pages/Partials/Inputs/TextArea.vue";
+import DateInput from "@/Pages/Partials/Inputs/DateInput.vue";
 
 interface Props {
     companies: object,
@@ -77,6 +89,7 @@ const props = defineProps<Props>();
 
 const form = useForm({
     company_id: null,
+    created_at: new Date().toISOString().split('T')[0],
     rate: null,
     hours: null,
     name: null,

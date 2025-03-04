@@ -1,6 +1,6 @@
 <template>
-    <div class="bg-white md:gradient-background min-h-screen w-full">
-        <nav class="flex p-6 bg-white text-neutral-900 border-b-2">
+    <div class="gradient-background md:gradient-background min-h-screen w-full">
+        <nav class="flex p-6 bg-neutral-50 text-neutral-900 border-b-2">
             <p class="font-black"> Pixelware<span class="text-red-600">.</span> </p>
             <ul class="flex justify-end w-full">
                 <NavLink slug="dashboard" route-name="dashboard.index"> {{ $t('layout.admin.dashboard') }} </NavLink>
@@ -22,6 +22,6 @@ import NavLink from "@/Layouts/Partials/NavLink.vue";
 </script>
 <style scoped>
 .gradient-background {
-    @apply bg-gradient-to-b from-sky-50 to-white
+    @apply bg-neutral-50
 }
 </style>
