@@ -5,8 +5,8 @@
             <CardTitle> Accumulated revenue </CardTitle>
         </CardHeader>
         <CardContent>
-            <h4 class="font-bold text-2xl">{{ getCurrency(accumulatedRevenue) }}</h4>
-            <span class="text-sm text-gray-500">+{{ accumulatedRevenueGrowth }}% from last month</span>
+            <h4 class="font-bold text-2xl">{{ getCurrency(accumulatedRevenue.current) }}</h4>
+            <span class="text-sm text-gray-500">+{{ accumulatedRevenue.growth }}% from last month</span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-2">
@@ -14,8 +14,8 @@
             <CardTitle> Hours worked</CardTitle>
         </CardHeader>
         <CardContent>
-            <h4 class="font-bold text-2xl">{{ hoursWorked }}</h4>
-            <span class="text-sm text-gray-500">+{{ hoursWorkedGrowth }}% from last month</span>
+            <h4 class="font-bold text-2xl">{{ hoursWorked.current }}</h4>
+            <span class="text-sm text-gray-500">+{{ hoursWorked.growth }}% from last month</span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-2">
@@ -32,8 +32,8 @@
             <CardTitle> Average hourly wage </CardTitle>
         </CardHeader>
         <CardContent>
-            <h4 class="font-bold text-2xl">{{ getCurrency(averageFreelanceWage) }}/hr</h4>
-            <span class="text-sm text-gray-500">+{{ averageFreelanceWageGrowth }}% since last month </span>
+            <h4 class="font-bold text-2xl">{{ getCurrency(freelanceWage.current) }}/hr</h4>
+            <span class="text-sm text-gray-500">+{{ freelanceWage.growth }}% since last month </span>
         </CardContent>
     </Card>
     <Card class="col-span-1 md:col-span-5">
@@ -72,18 +72,15 @@ import {Card, CardContent, CardTitle, CardHeader} from "@/components/ui/card";
 import {BarChart} from "@/components/ui/chart-bar";
 import { columns } from '../../../../ts/columns'
 import FakeTable from "@/Pages/Partials/Containers/FakeTable.vue";
-import {defineProps, onBeforeMount} from "vue";
+import {defineProps} from "vue";
 
 interface Props {
     logs: object,
     monthlyRevenue: Record<string, any>[],
-    accumulatedRevenue: Number,
-    accumulatedRevenueGrowth: Number,
-    hoursWorked: Number,
-    hoursWorkedGrowth: Number,
+    accumulatedRevenue: object,
+    hoursWorked: object,
+    freelanceWage: object,
     daysLeft: Number,
-    averageFreelanceWage: Number,
-    averageFreelanceWageGrowth: Number,
 }
 
 const props = defineProps<Props>();
