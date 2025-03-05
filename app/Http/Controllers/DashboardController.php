@@ -17,8 +17,6 @@ class DashboardController extends Controller
 
     public function index(): InertiaResponse
     {
-
-
         return Inertia::render('Admin/Dashboard/Dashboard', [
             'logs' => LogResource::collection($this->dashboardService->getCurrentMonthLogs()),
             'monthlyRevenue' => $this->dashboardService->getMonthlyRevenue(),
