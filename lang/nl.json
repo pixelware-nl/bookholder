@@ -133,6 +133,7 @@
 
     "log.create.title": "Logboek",
     "log.create.companies": "Bedrijven",
+    "log.create.created_at": "Aangemaakt op",
     "log.create.rate": "Tarief",
     "log.create.hours": "Uren",
     "log.create.name": "Naam",
@@ -143,6 +144,7 @@
 
     "log.edit.title": "Logboek",
     "log.edit.companies": "Bedrijven",
+    "log.edit.created_at": "Aangemaakt op",
     "log.edit.rate": "Tarief",
     "log.edit.hours": "Uren",
     "log.edit.name": "Naam",

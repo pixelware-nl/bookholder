@@ -1,15 +1,26 @@
 <template>
     <AdminContainer :form-title="$t('log.edit.title')" :route-name="route('logs.index')">
         <form @submit.prevent="form.put(route('logs.update', log))">
-            <InputContainer>
-                <SelectInput
-                    id="companies"
-                    :options="companies"
-                    name="company_id"
-                    v-model="form.company_id"
-                    :label="$t('log.edit.companies')"
-                    :error="errors.company_id"
-                />
+            <InputContainer class="flex">
+                <DoubleInputContainer>
+                    <SelectInput
+                        id="companies"
+                        :options="companies"
+                        name="company_id"
+                        v-model="form.company_id"
+                        :label="$t('log.create.companies')"
+                        :error="errors.company_id"
+                    />
+                </DoubleInputContainer>
+                <DoubleInputContainer>
+                    <DateInput
+                        id="created-at"
+                        name="created-at"
+                        v-model="form.created_at"
+                        :label="$t('log.edit.created_at')"
+                        :error="errors.created_at"
+                    />
+                </DoubleInputContainer>
             </InputContainer>
             <InputContainer class="flex">
                 <DoubleInputContainer>
@@ -58,7 +69,7 @@
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
+import {defineProps, onMounted} from "vue";
 import {useForm} from "@inertiajs/vue3";
 import InputContainer from "../../Partials/Containers/InputContainer.vue";
 import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
@@ -67,6 +78,7 @@ import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
 import AdminContainer from "../Partials/AdminContainer.vue";
 import TextInput from "@/Pages/Partials/Inputs/TextInput.vue";
 import TextArea from "@/Pages/Partials/Inputs/TextArea.vue";
+import DateInput from "@/Pages/Partials/Inputs/DateInput.vue";
 
 interface Props {
     log: object,
@@ -78,6 +90,7 @@ const props = defineProps<Props>();
 
 const form = useForm({
     company_id: props.log.company_id ?? null,
+    created_at: new Date(props.log.created_at).toISOString().split('T')[0] ?? null,
     rate: props.log.rate ?? null,
     hours: props.log.hours ?? null,
     name: props.log.name ?? null,
