@@ -45,7 +45,7 @@
                 <BarChart
                     index="name"
                     :data="monthlyRevenue"
-                    :categories="['revenue', 'profit']"
+                    :categories="['profit', 'tax']"
                     :y-formatter="(tick, i) => {
                       return typeof tick === 'number'
                         ? `€${new Intl.NumberFormat('nl').format(tick).toString()}`
