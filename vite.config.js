@@ -5,6 +5,13 @@ import laravel from 'laravel-vite-plugin';
 import * as path from "node:path";
 
 export default defineConfig({
+    server: {
+        hmr: {
+            host: "0.0.0.0",
+        },
+        port: 3000,
+        host: true,
+    },
     plugins: [
         vue(),
         i18n(),
