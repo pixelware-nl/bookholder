@@ -28,7 +28,8 @@ COPY --chown=www-data:www-data . /var/www/html
 USER www-data
 
 EXPOSE 9000
-CMD ["php-fpm"]
+COPY --chmod=755 .docker/entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
 
 FROM node:20 AS frontend
 
@@ -41,6 +42,5 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-
 CMD ["npm", "run", "dev"]
 
