@@ -1,4 +1,5 @@
-FROM php:8.3-fpm as app
+# Set the base image for subsequent instructions
+FROM php:8.3-fpm
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -40,24 +41,3 @@ USER www-data
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
-
-FROM node:20 as node
-
-# Set working directory
-WORKDIR /var/www
-
-# Copy `package.json` and `package-lock.json`
-COPY package*.json ./
-
-# Install project dependencies
-RUN npm install
-
-# Copy project files into the docker image
-COPY . .
-
-# Expose the port Vite runs on
-EXPOSE 3000
-
-# Start the Vite server
-CMD ["npm", "run", "dev"]
-

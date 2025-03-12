@@ -1,24 +1,12 @@
-services:
-  webserver:
-    image: nginx:alpine
-    container_name: bookholder-webserver
-    ports:
-      - "8000:80"
-    volumes:
-      - ./:/var/www
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    depends_on:
-      - app
-    networks:
-      - app-network
+version: '3.8'
 
+services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-      target: app
-    image: bookholder-app
-    container_name: bookholder-app
+    image: my-laravel-app
+    container_name: my-laravel-app
     restart: unless-stopped
     working_dir: /var/www
     volumes:
@@ -29,14 +17,26 @@ services:
     networks:
       - app-network
 
+  nginx:
+    image: nginx:alpine
+    container_name: my-nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+    networks:
+      - app-network
+
   node:
     platform: linux/arm64/v8 #this line is optional if you are using Mac Silicon chip (M1/M2/M3)
     build:
       context: .
-      dockerfile: Dockerfile
-      target: node
-    image: bookholder-node
-    container_name: bookholder-node
+      dockerfile: Dockerfile.node
+    image: my-laravel-node
+    container_name: my-laravel-node
     ports:
       - "3000:3000"
     restart: unless-stopped
@@ -47,25 +47,21 @@ services:
     networks:
       - app-network
 
-  database:
-    image: mysql:8.3
-    command:
-      - --authentication-policy=mysql_native_password
-      - --general-log=1
-      - --general-log-file=/var/lib/mysql/general.log
-      - --secure-file-priv=NULL
-    container_name: bookholder-database
+  db:
+    image: mysql:8.0
+    container_name: my-db
     ports:
-      - '3300:3306'
+      - '3306:3306'
     environment:
       MYSQL_DATABASE: bookholder
       MYSQL_ROOT_PASSWORD: secret
-    volumes:
-      - db:/var/lib/mysql/
+    networks:
+      - app-network
 
 networks:
   app-network:
     driver: bridge
 
 volumes:
-  db:
+  dbdata:
+    driver: local
