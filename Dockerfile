@@ -1,5 +1,4 @@
-# Set the base image for subsequent instructions
-FROM php:8.3-fpm
+FROM php:8.3-fpm AS backend
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
@@ -17,27 +16,31 @@ RUN apt-get update && apt-get install -y \
     libpng-dev && \
     docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-# Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Set working directory
-WORKDIR /var/www
+WORKDIR /var/www/html
 
-# Remove default server definition
-RUN rm -rf /var/www/html
+COPY . /var/www/html
+COPY --chown=www-data:www-data . /var/www/html
 
-# Copy existing application directory contents
-COPY . /var/www
-
-# Copy existing application directory permissions
-COPY --chown=www-data:www-data . /var/www
-
-# Change current user to www
 USER www-data
 
-# Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
+
+FROM node:20 AS frontend
+
+WORKDIR /var/www/html
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+
