@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Listeners\SendVerificationEmail;
+use Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Event::listen(
+            SendVerificationEmail::class
+        );
     }
 }

@@ -23,6 +23,9 @@ return Application::configure(basePath: dirname(__DIR__))
             SentryContext::class
         ]);
     })
+    ->withEvents(discover: [
+        __DIR__.'/../app/Listeners',
+    ])
     ->withExceptions(function (Exceptions $exceptions) {
         Integration::handles($exceptions);
     })->create();
