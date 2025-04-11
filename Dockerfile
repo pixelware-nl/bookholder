@@ -25,6 +25,10 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 COPY --chown=www-data:www-data . /var/www/html
 
+# Set ownership and permissions
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
+
 USER www-data
 
 EXPOSE 9000
