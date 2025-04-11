@@ -1,18 +1,23 @@
 <template>
-    <div class="container">
-        <div class="flex mb-8 items-center justify-between">
-            <h1 class="header-title">{{ formTitle }}</h1>
-            <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none">
-                <FontIcon
-                    icon="fa-backspace"
-                    :size="iconSize.large"
-                />
-            </Link>
-        </div>
-        <slot />
-    </div>
+    <Card class="container col-span-12">
+        <CardHeader>
+            <div class="flex mb-8 items-center justify-between">
+                <h1 class="header-title">{{ formTitle }}</h1>
+                <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none">
+                    <FontIcon
+                        icon="fa-backspace"
+                        :size="iconSize.large"
+                    />
+                </Link>
+            </div>
+        </CardHeader>
+        <CardContent>
+            <slot />
+        </CardContent>
+    </Card>
 </template>
 <script setup lang="ts">
+import {Card, CardContent, CardHeader} from "@/components/ui/card";
 import {defineProps} from "vue";
 import { Link } from '@inertiajs/vue3';
 import FontIcon from "../../Partials/Externals/FontIcon.vue";
@@ -46,7 +51,7 @@ const props = defineProps<Props>();
 }
 
 .container {
-    @apply sm:w-full px-8 pt-12 pb-8 rounded-lg sm:shadow-xl bg-white max-h-[85vh] overflow-auto
+    @apply sm:w-full px-8 pt-12 pb-8 rounded-lg bg-white max-h-[85vh] overflow-auto
 }
 
 .header-title {

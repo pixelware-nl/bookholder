@@ -16,6 +16,7 @@ class CreateLogRequest extends FormRequest
     {
         return [
             'company_id' => ['required', new NotAuthenticatedUserCompanyRule()],
+            'created_at' => ['required', 'date'],
             'rate' => ['required', 'integer'],
             'hours' => ['required', 'integer'],
             'name' => ['required', 'string'],

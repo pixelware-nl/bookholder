@@ -1,6 +1,6 @@
 <template>
-    <div class="min-h-screen sm:bg-slate-100 xs:bg-white">
-        <nav class="flex p-6 bg-slate-900 text-slate-100">
+    <div class="gradient-background md:gradient-background min-h-screen w-full">
+        <nav class="flex p-6 bg-neutral-50 text-neutral-900 border-b-2">
             <p class="font-black"> Pixelware<span class="text-red-600">.</span> </p>
             <ul class="flex justify-end w-full">
                 <NavLink slug="dashboard" route-name="dashboard.index"> {{ $t('layout.admin.dashboard') }} </NavLink>
@@ -10,18 +10,18 @@
                 <NavLink slug="logout" route-name="logout" method="post"> {{ $t('layout.admin.logout') }} </NavLink>
             </ul>
         </nav>
-        <main class="w-full flex justify-center pt-12">
-            <div class="container px-4 w-full">
+        <div class="mt-12 pb-12 flex justify-center items-center">
+            <div class="w-full md:w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
                 <slot />
             </div>
-        </main>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
-import {usePage} from "@inertiajs/vue3";
-import {computed} from "vue";
-import NavLink from "./Partials/NavLink.vue";
-
-const page = usePage();
-const user = computed(() => page.props.auth.user);
+import NavLink from "@/Layouts/Partials/NavLink.vue";
 </script>
+<style scoped>
+.gradient-background {
+    @apply bg-neutral-50
+}
+</style>
