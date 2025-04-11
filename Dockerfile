@@ -31,16 +31,8 @@ EXPOSE 9000
 COPY --chmod=755 .docker/entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 
-FROM node:20 AS frontend
 
-WORKDIR /var/www/html
 
-COPY package*.json ./
 
-RUN npm install
 
-COPY . .
-
-EXPOSE 3000
-CMD ["npm", "run", "dev"]
 

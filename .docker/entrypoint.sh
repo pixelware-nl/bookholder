@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+php artisan key:generate --no-interaction
+
 if [ "$APP_ENV" != 'prod' ]; then
     composer install
     php artisan ide-helper:generate
