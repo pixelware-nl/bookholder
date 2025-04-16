@@ -1,5 +1,5 @@
 services:
-  frontend:
+  node:
     image: node:20-alpine
     container_name: bookholder-frontend
     volumes:
@@ -9,7 +9,7 @@ services:
     ports:
       - "3000:3000"
 
-  backend:
+  app:
     build:
       context: .
       dockerfile: Dockerfile
