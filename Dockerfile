@@ -25,10 +25,12 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 COPY --chown=www-data:www-data . /var/www/html
 
+COPY --chmod=755 .docker/entrypoint.sh /entrypoint.sh
+
+# Then set user after copying files
 USER www-data
 
 EXPOSE 9000
-COPY --chmod=755 .docker/entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 
 
