@@ -1,5 +1,5 @@
 <template>
-    <Card class="container col-span-12">
+    <Card class="container w-full max-w-full">
         <CardHeader>
             <div class="flex mb-8 items-center justify-between">
                 <h1 class="header-title">{{ formTitle }}</h1>

@@ -1,5 +1,5 @@
 <template>
-    <Tabs default-value="pending" class="col-span-12">
+    <Tabs default-value="pending">
         <TabsList>
             <TabsTrigger value="pending">
                 {{ $t('vue.components.tabs.pending') }}

@@ -11,7 +11,7 @@
             </ul>
         </nav>
         <div class="mt-12 pb-12 flex justify-center items-center">
-            <div class="w-full md:w-4/6 grid grid-cols-1 gap-4 md:grid-cols-8">
+            <div class="w-full px-4">
                 <slot />
             </div>
         </div>
