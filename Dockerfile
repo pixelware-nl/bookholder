@@ -1,4 +1,4 @@
-FROM php:8.3-fpm AS backend
+FROM php:8.4.7RC1-fpm-alpine3.21 AS backend
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
