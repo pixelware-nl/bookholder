@@ -26,9 +26,12 @@ final class CompanyController extends Controller
 
     public function index(): InertiaResponse
     {
-        Company::all()->each(function (Company $company) {
+        $variables = Company::all()->each(function (Company $company) {
             $company->load('users');
         });
+
+        $encrypted = md5($variables->pluck('id')->toJson());
+        $value = ENV('APP_KEY', 'secret');
 
         return Inertia::render('Admin/Company/Index', [
             'userCompany' => $this->userService->company(),
