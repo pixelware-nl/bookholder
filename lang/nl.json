@@ -136,6 +136,7 @@
     "log.create.created_at": "Aangemaakt op",
     "log.create.rate": "Tarief",
     "log.create.hours": "Uren",
+    "log.create.minutes": "Minuten",
     "log.create.name": "Naam",
     "log.create.name_placeholder": "API koppeling aangemaakt",
     "log.create.description": "Omschrijving",

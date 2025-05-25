@@ -38,8 +38,16 @@
                         id="hours"
                         name="hours"
                         v-model="form.hours"
-                        :label="$t('log.edit.hours')"
+                        :label="$t('log.create.hours')"
                         :error="errors.hours"
+                        placeholder="10"
+                    />
+                    <TextInput
+                        id="minutes"
+                        name="minutes"
+                        v-model="form.minutes"
+                        :label="$t('log.create.minutes')"
+                        :error="errors.minutes"
                         placeholder="10"
                     />
                 </DoubleInputContainer>
@@ -93,6 +101,7 @@ const form = useForm({
     created_at: new Date(props.log.created_at).toISOString().split('T')[0] ?? null,
     rate: props.log.rate ?? null,
     hours: props.log.hours ?? null,
+    minutes: props.log.minutes ?? null,
     name: props.log.name ?? null,
     description: props.log.description ?? null,
 });

@@ -34,14 +34,22 @@
                     />
                 </DoubleInputContainer>
                 <DoubleInputContainer>
-                    <TextInput
-                        id="hours"
-                        name="hours"
-                        v-model="form.hours"
-                        :label="$t('log.create.hours')"
-                        :error="errors.hours"
-                        placeholder="10"
-                    />
+                        <TextInput
+                            id="hours"
+                            name="hours"
+                            v-model="form.hours"
+                            :label="$t('log.create.hours')"
+                            :error="errors.hours"
+                            placeholder="10"
+                        />
+                        <TextInput
+                            id="minutes"
+                            name="minutes"
+                            v-model="form.minutes"
+                            :label="$t('log.create.minutes')"
+                            :error="errors.minutes"
+                            placeholder="10"
+                        />
                 </DoubleInputContainer>
             </InputContainer>
             <InputContainer>
@@ -92,6 +100,7 @@ const form = useForm({
     created_at: new Date().toISOString().split('T')[0],
     rate: null,
     hours: null,
+    minutes: null,
     name: null,
     description: null,
 });

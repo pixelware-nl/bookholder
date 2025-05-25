@@ -52,6 +52,7 @@ class LogRepository implements LogRepositoryInterface
             'company_id' => $logDTO->getCompanyId(),
             'rate' => $logDTO->getRate(),
             'hours' => $logDTO->getHours(),
+            'minutes' => $logDTO->getMinutes(),
             'name' => $logDTO->getName(),
             'description' => $logDTO->getDescription(),
             'created_at' => $logDTO->getCreatedAt()
@@ -64,6 +65,7 @@ class LogRepository implements LogRepositoryInterface
             'company_id' => $logDTO->getCompanyId(),
             'rate' => $logDTO->getRate(),
             'hours' => $logDTO->getHours(),
+            'minutes' => $logDTO->getMinutes(),
             'name' => $logDTO->getName(),
             'description' => $logDTO->getDescription(),
             'created_at' => $logDTO->getCreatedAt()

@@ -15,7 +15,7 @@
             <tr v-if="filteredLogs.length > 0" v-for="log in filteredLogs" :class="{'payed': log.payed}">
                 <td> {{ log.company_name }} </td>
                 <td> {{ log.rate }} </td>
-                <td> {{ log.hours }} </td>
+                <td> {{ log.hours.toString().padStart(2, '0') }}:{{ log.minutes.toString().padStart(2, '0') }} </td>
                 <td> {{ log.name }} </td>
                 <td class="table-item table-item-link">
                     <Link :href="route('logs.show', log.id)">

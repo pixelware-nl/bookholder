@@ -69,6 +69,7 @@ class Log extends Model
         'company_id',
         'rate',
         'hours',
+        'minutes',
         'name',
         'description',
         'payed',

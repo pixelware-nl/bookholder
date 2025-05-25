@@ -48,7 +48,7 @@ readonly class LogService
     public function sum(Collection $logs): int
     {
         return $logs->sum(function($log) {
-           return $log->rate * $log->hours;
+           return $log->rate * ($log->hours + ($log->minutes / 60));
         });
     }
 

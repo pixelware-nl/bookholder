@@ -48,7 +48,7 @@
                 <tr>
                     <th> Product </th>
                     <th></th>
-                    <th> Aantal </th>
+                    <th> Aantal (uren) </th>
                     <th> Tarief (€) </th>
                     <th> Totaal </th>
                 </tr>
@@ -58,9 +58,9 @@
                 @foreach($invoice->body->logs as $log)
                     <tr>
                         <td colspan="2"> {{ $log->name }} </td>
-                        <td> {{ $log->hours }} </td>
+                        <td> {{ sprintf('%02d:%02d', $log->hours, $log->minutes) }} </td>
                         <td> {{ sprintf('€%s', number_format($log->rate, decimal_separator: ',', thousands_separator: '.')) }} </td>
-                        <td> {{ sprintf('€%s', number_format($log->rate * $log->hours, decimal_separator: ',', thousands_separator: '.')) }} </td>
+                        <td> {{ sprintf('€%s', number_format($log->rate * ($log->hours + ($log->minutes / 60)), decimal_separator: ',', thousands_separator: '.')) }} </td>
                     </tr>
                 @endforeach
                 <tr>
