@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LogRepository implements LogRepositoryInterface
 {
-
     public function all(): Collection
     {
         return Auth::user()->logs()->get();
@@ -55,7 +54,7 @@ class LogRepository implements LogRepositoryInterface
             'minutes' => $logDTO->getMinutes(),
             'name' => $logDTO->getName(),
             'description' => $logDTO->getDescription(),
-            'created_at' => $logDTO->getCreatedAt()
+            'created_at' => $logDTO->getCreatedAt(),
         ]);
     }
 
@@ -68,7 +67,7 @@ class LogRepository implements LogRepositoryInterface
             'minutes' => $logDTO->getMinutes(),
             'name' => $logDTO->getName(),
             'description' => $logDTO->getDescription(),
-            'created_at' => $logDTO->getCreatedAt()
+            'created_at' => $logDTO->getCreatedAt(),
         ]);
 
         return $log;
@@ -77,7 +76,7 @@ class LogRepository implements LogRepositoryInterface
     public function payed(Log $log, bool $payed): Log
     {
         $log->update([
-            'payed' => $payed
+            'payed' => $payed,
         ]);
 
         return $log;

@@ -16,7 +16,7 @@ class PDFService
     {
         $pdf = Pdf::loadHTML($view->render());
 
-        $pdf->setOption(['isRemoveEnabled' => true,]);
+        $pdf->setOption(['isRemoveEnabled' => true]);
         $pdf->setPaper('a4');
         $pdf->render();
 
@@ -30,7 +30,7 @@ class PDFService
     {
         $pdf = Pdf::loadHTML($view->render());
 
-        $pdf->setOption(['isRemoveEnabled' => true,]);
+        $pdf->setOption(['isRemoveEnabled' => true]);
         $pdf->setPaper('a4');
         $pdf->render();
 

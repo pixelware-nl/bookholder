@@ -23,7 +23,7 @@ final readonly class UserDTO implements DTOInterface
             'lastname' => $this->getLastname(),
             'email' => $this->getEmail(),
             'password' => $this->getPassword(),
-            'company_id' => $this->getCompanyId()
+            'company_id' => $this->getCompanyId(),
         ]);
     }
 
@@ -45,7 +45,7 @@ final readonly class UserDTO implements DTOInterface
             'lastname' => $this->lastname,
             'email' => $this->email,
             'password' => $this->password,
-            'company_id' => $this->company_id
+            'company_id' => $this->company_id,
         ];
     }
 

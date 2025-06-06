@@ -8,10 +8,7 @@ use App\Enums\KVKAddressType;
 use App\Enums\MethodType;
 use App\External\ExternalClient;
 use App\Models\Company;
-use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\RedirectResponse;
-use Sentry\EventHint;
-use function Sentry\captureException;
 
 class KVKService
 {
@@ -56,7 +53,7 @@ class KVKService
 
         if ($companyDTO == null) {
             return redirect()->back()->withErrors([
-                'kvk_to_find' => 'KVK niet gevonden.'
+                'kvk_to_find' => 'KVK niet gevonden.',
             ]);
         }
 

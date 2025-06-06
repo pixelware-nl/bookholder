@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CompanyRepository implements CompanyRepositoryInterface
 {
-
     public function all(): Collection
     {
         return Company::all();

@@ -9,7 +9,6 @@ use App\Repositories\Interfaces\UserRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Request;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -42,7 +41,7 @@ class UserRepository implements UserRepositoryInterface
             'full_name' => $fullname,
             'email' => $email,
             'password' => Hash::make($userDTO->getPassword()),
-            'company_id' => $userDTO->getCompanyId()
+            'company_id' => $userDTO->getCompanyId(),
         ]);
     }
 }

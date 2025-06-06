@@ -1,5 +1,8 @@
 <template>
-    <AdminContainer :form-title="$t('company.edit.title')" :route-name="route('companies.index')">
+    <AdminContainer
+        :form-title="$t('company.edit.title')"
+        :route-name="route('companies.index')"
+    >
         <form @submit.prevent="form.put(route('companies.update', company.id))">
             <InputContainer>
                 <TextInput
@@ -81,23 +84,24 @@
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> {{ $t('company.edit.submit') }} </SubmitButton>
+            <SubmitButton :form-processing="form.processing">
+                {{ $t("company.edit.submit") }}
+            </SubmitButton>
         </form>
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import AdminContainer from "../Partials/AdminContainer.vue";
-import InputContainer from "../../Partials/Containers/InputContainer.vue";
-import TextInput from "../../Partials/Inputs/TextInput.vue";
+import { useForm } from "@inertiajs/vue3";
+import { defineProps } from "vue/dist/vue";
 import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
+import InputContainer from "../../Partials/Containers/InputContainer.vue";
 import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
-import {defineProps} from "vue/dist/vue";
-import {useForm} from "@inertiajs/vue3";
-import {onMounted, ref} from "vue";
+import TextInput from "../../Partials/Inputs/TextInput.vue";
+import AdminContainer from "../Partials/AdminContainer.vue";
 
 interface Props {
-    errors?: object,
-    company: object,
+    errors?: object;
+    company: object;
 }
 
 const props = defineProps<Props>();
@@ -109,6 +113,6 @@ const form = useForm({
     street_address: props.company.street_address,
     city: props.company.city,
     postal_code: props.company.postal_code,
-    country: props.company?.country ?? 'Nederland',
+    country: props.company?.country ?? "Nederland",
 });
 </script>

@@ -15,7 +15,7 @@ class UpdateLogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => ['required', new NotAuthenticatedUserCompanyRule()],
+            'company_id' => ['required', new NotAuthenticatedUserCompanyRule],
             'created_at' => ['required', 'date'],
             'rate' => ['required', 'integer'],
             'hours' => ['required', 'integer'],

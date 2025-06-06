@@ -10,14 +10,14 @@ use Illuminate\Support\Carbon;
 final readonly class LogDTO implements DTOInterface
 {
     public function __construct(
-        private int     $companyId,
-        private int     $rate,
-        private int     $hours,
-        private int     $minutes,
-        private string  $name,
-        private string  $description,
+        private int $companyId,
+        private int $rate,
+        private int $hours,
+        private int $minutes,
+        private string $name,
+        private string $description,
         private ?Carbon $created_at = null,
-        private bool    $payed = false,
+        private bool $payed = false,
     ) {}
 
     public function Log(): Log

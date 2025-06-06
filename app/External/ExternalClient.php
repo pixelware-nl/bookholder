@@ -31,7 +31,7 @@ readonly class ExternalClient
         }
 
         if ($response->status() !== ResponseAlias::HTTP_OK) {
-            throw new ConnectionException();
+            throw new ConnectionException;
         }
 
         return json_decode($response->body());

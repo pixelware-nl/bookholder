@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class CreateInvoiceRequest
- * @package App\Http\Requests\Invoices
+ *
  * @property int $company_id
  * @property int $client_id
  * @property string $invoice_date
@@ -26,7 +26,7 @@ class CreateInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_id' => ['required', new NotAuthenticatedUserCompanyRule()],
+            'company_id' => ['required', new NotAuthenticatedUserCompanyRule],
             'start_date' => ['required', 'date'],
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
         ];

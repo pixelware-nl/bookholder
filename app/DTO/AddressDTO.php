@@ -34,19 +34,23 @@ final readonly class AddressDTO implements DTOInterface
         ];
     }
 
-    public function getStreetAddress(): string {
+    public function getStreetAddress(): string
+    {
         return $this->streetAddress;
     }
 
-    public function getCity(): string {
+    public function getCity(): string
+    {
         return $this->city;
     }
 
-    public function getPostalCode(): string {
+    public function getPostalCode(): string
+    {
         return $this->postalCode;
     }
 
-    public function getCountry(): string {
+    public function getCountry(): string
+    {
         return $this->country;
     }
 }

@@ -6,20 +6,20 @@ use App\DTO\Interfaces\DTOInterface;
 use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 final class InvoiceDTO implements DTOInterface
 {
     public function __construct(
-        private readonly int    $user_id,
-        private readonly int    $from_company_id,
-        private readonly int    $to_company_id,
+        private readonly int $user_id,
+        private readonly int $from_company_id,
+        private readonly int $to_company_id,
         private readonly Carbon $start_date,
         private readonly Carbon $end_date,
-        private bool            $payed = false,
-        private ?array          $body = null
+        private bool $payed = false,
+        private ?array $body = null
     ) {}
 
     public function invoice(): Invoice
@@ -30,7 +30,7 @@ final class InvoiceDTO implements DTOInterface
             'to_company_id' => $this->getToCompanyId(),
             'start_date' => $this->getStartDate(),
             'end_date' => $this->getEndDate(),
-            'body' => $this->getBody()
+            'body' => $this->getBody(),
         ]);
     }
 
@@ -44,7 +44,7 @@ final class InvoiceDTO implements DTOInterface
         return Company::find($this->getToCompanyId());
     }
 
-    public static function fromRequest(Request $request, User $user = null): self
+    public static function fromRequest(Request $request, ?User $user = null): self
     {
         if ($user === null) {
             $user = Auth::user();
@@ -81,7 +81,7 @@ final class InvoiceDTO implements DTOInterface
             'from_company_id' => $this->from_company_id,
             'to_company_id' => $this->to_company_id,
             'start_date' => $this->start_date,
-            'end_date' => $this->end_date
+            'end_date' => $this->end_date,
         ];
     }
 

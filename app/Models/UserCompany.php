@@ -7,11 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
 
 /**
- * 
- *
  * @property int $id
  * @property int $user_id
  * @property int $company_id
@@ -20,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Company $company
  * @property-read \App\Models\User $user
+ *
  * @method static Builder|UserCompany authCreate(int $company_id)
  * @method static Builder|UserCompany authFind(int $company_id)
  * @method static Builder|UserCompany newModelQuery()
@@ -34,6 +32,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static Builder|UserCompany whereUserId($value)
  * @method static Builder|UserCompany withTrashed()
  * @method static Builder|UserCompany withoutTrashed()
+ *
  * @mixin \Eloquent
  */
 class UserCompany extends Model

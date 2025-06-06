@@ -47,14 +47,14 @@ readonly class LogService
 
     public function sum(Collection $logs): int
     {
-        return $logs->sum(function($log) {
-           return $log->rate * ($log->hours + ($log->minutes / 60));
+        return $logs->sum(function ($log) {
+            return $log->rate * ($log->hours + ($log->minutes / 60));
         });
     }
 
     public function hours(Collection $logs): int
     {
-        return $logs->sum(function($log) {
+        return $logs->sum(function ($log) {
             return $log->hours;
         });
     }

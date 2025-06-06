@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 class DashboardService
 {
     private Collection $currentMonthLogs;
+
     private Collection $previousMonthLogs;
 
     public function __construct(
@@ -35,7 +36,7 @@ class DashboardService
 
     public function getMonthlyRevenue(): Collection
     {
-        return collect(range(1, 12))->map(function($month) {
+        return collect(range(1, 12))->map(function ($month) {
             $date = Carbon::now()->month($month);
             $revenue = $this->logService->sum(
                 $this->logService->findByTimeRange($date->copy()->startOfMonth(), $date->copy()->endOfMonth())
@@ -44,7 +45,7 @@ class DashboardService
             return [
                 'name' => $date->format('F'),
                 'revenue' => $revenue,
-                'profit' => $revenue * 0.6
+                'profit' => $revenue * 0.6,
             ];
         });
     }
@@ -117,7 +118,7 @@ class DashboardService
 
     private function getFreelanceWagePreviousMonth(): float
     {
-        if ($this->getAccumulatedRevenuePreviousMonth() == 0 || $this->getHoursWorked () == 0) {
+        if ($this->getAccumulatedRevenuePreviousMonth() == 0 || $this->getHoursWorked() == 0) {
             return 0;
         }
 

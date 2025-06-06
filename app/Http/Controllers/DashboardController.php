@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\LogResource;
 use App\Services\DashboardService;
-use App\Services\LogService;
-use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
 
