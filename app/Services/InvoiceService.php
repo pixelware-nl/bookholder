@@ -29,7 +29,7 @@ readonly class InvoiceService
         }
 
         $filename = sprintf(
-            "%s-%s-%s_%s.pdf",
+            '%s-%s-%s_%s.pdf',
             __('invoice.pdf.name'),
             strtolower($invoice->fromCompany->name),
             DateService::format($invoice->start_date),

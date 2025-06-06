@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class PasswordResetRequest
- * @package App\Http\Requests\Auth
+ *
  * @property string $email
  */
 class PasswordResetRequest extends FormRequest

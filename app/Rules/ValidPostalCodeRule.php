@@ -14,7 +14,7 @@ class ValidPostalCodeRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ((bool)preg_match('/^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$/', $value) === false) {
+        if ((bool) preg_match('/^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$/', $value) === false) {
             $fail('Invalid postal code.');
         }
     }

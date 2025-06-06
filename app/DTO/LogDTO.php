@@ -10,13 +10,14 @@ use Illuminate\Support\Carbon;
 final readonly class LogDTO implements DTOInterface
 {
     public function __construct(
-        private int     $companyId,
-        private int     $rate,
-        private int     $hours,
-        private string  $name,
-        private string  $description,
+        private int $companyId,
+        private int $rate,
+        private int $hours,
+        private int $minutes,
+        private string $name,
+        private string $description,
         private ?Carbon $created_at = null,
-        private bool    $payed = false,
+        private bool $payed = false,
     ) {}
 
     public function Log(): Log
@@ -25,6 +26,7 @@ final readonly class LogDTO implements DTOInterface
             'company_id' => $this->getCompanyId(),
             'rate' => $this->getRate(),
             'hours' => $this->getHours(),
+            'minutes' => $this->getMinutes(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'created_at' => $this->getCreatedAt(),
@@ -38,6 +40,7 @@ final readonly class LogDTO implements DTOInterface
             $request->company_id,
             $request->rate,
             $request->hours,
+            $request->minutes ?? 0,
             $request->name,
             $request->description,
             Carbon::parse($request->created_at),
@@ -50,6 +53,7 @@ final readonly class LogDTO implements DTOInterface
             'company_id' => $this->getCompanyId(),
             'rate' => $this->getRate(),
             'hours' => $this->getHours(),
+            'minutes' => $this->getMinutes(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
             'created_at' => $this->getCreatedAt(),
@@ -70,6 +74,11 @@ final readonly class LogDTO implements DTOInterface
     public function getHours(): int
     {
         return $this->hours;
+    }
+
+    public function getMinutes(): int
+    {
+        return $this->minutes;
     }
 
     public function getName(): string

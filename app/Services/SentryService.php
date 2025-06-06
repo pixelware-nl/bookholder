@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Log;
 use Sentry\Severity;
+
 use function Sentry\captureException;
 use function Sentry\captureMessage;
 
@@ -17,6 +17,7 @@ class SentryService
 
         if (is_string($value)) {
             captureMessage($value, $severity);
+
             return;
         }
 

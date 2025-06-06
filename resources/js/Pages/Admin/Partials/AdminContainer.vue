@@ -1,13 +1,14 @@
 <template>
-    <Card class="container col-span-12">
+    <Card class="container w-full max-w-full">
         <CardHeader>
-            <div class="flex mb-8 items-center justify-between">
+            <div class="mb-8 flex items-center justify-between">
                 <h1 class="header-title">{{ formTitle }}</h1>
-                <Link v-if="routeName != null" :href="routeName" class="font-bold pr-8 text-blue-600 hover:text-blue-900 select-none">
-                    <FontIcon
-                        icon="fa-backspace"
-                        :size="iconSize.large"
-                    />
+                <Link
+                    v-if="routeName != null"
+                    :href="routeName"
+                    class="select-none pr-8 font-bold text-blue-600 hover:text-blue-900"
+                >
+                    <FontIcon icon="fa-backspace" :size="iconSize.large" />
                 </Link>
             </div>
         </CardHeader>
@@ -17,18 +18,18 @@
     </Card>
 </template>
 <script setup lang="ts">
-import {Card, CardContent, CardHeader} from "@/components/ui/card";
-import {defineProps} from "vue";
-import { Link } from '@inertiajs/vue3';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Link } from "@inertiajs/vue3";
+import { defineProps } from "vue";
+import { iconSize } from "../../../../ts/icon-size";
 import FontIcon from "../../Partials/Externals/FontIcon.vue";
-import {iconSize} from "../../../../ts/icon-size";
 
 interface Props {
-    formTitle: string,
-    routeName?: string,
+    formTitle: string;
+    routeName?: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 ::-webkit-scrollbar-thumb {
@@ -51,10 +52,10 @@ const props = defineProps<Props>();
 }
 
 .container {
-    @apply sm:w-full px-8 pt-12 pb-8 rounded-lg bg-white max-h-[85vh] overflow-auto
+    @apply max-h-[85vh] overflow-auto rounded-lg bg-white px-8 pb-8 pt-12 sm:w-full;
 }
 
 .header-title {
-    @apply font-black uppercase text-3xl text-left
+    @apply text-left text-3xl font-black uppercase;
 }
 </style>

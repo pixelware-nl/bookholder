@@ -9,7 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class CreateCompanyRequest
- * @package App\Http\Requests\Auth
+ *
  * @property string $name
  * @property string $kvk
  * @property string $street_address
@@ -28,11 +28,11 @@ class CreateCompanyRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:256'],
-            'kvk' => ['required', new ValidKVKNumberRule()],
-            'iban' => ['nullable', new ValidIBANRule()],
+            'kvk' => ['required', new ValidKVKNumberRule],
+            'iban' => ['nullable', new ValidIBANRule],
             'street_address' => ['required', 'max:256'],
             'city' => ['required'],
-            'postal_code' => ['required', new ValidPostalCodeRule()],
+            'postal_code' => ['required', new ValidPostalCodeRule],
             'country' => ['required'],
         ];
     }

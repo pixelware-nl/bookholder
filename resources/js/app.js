@@ -1,42 +1,40 @@
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import AdminLayout from './Layouts/AdminLayout.vue';
-import { ZiggyVue } from 'ziggy-js';
+import { createInertiaApp } from "@inertiajs/vue3";
+import { i18nVue } from "laravel-vue-i18n";
+import { createApp, h } from "vue";
+import { ZiggyVue } from "ziggy-js";
+import { FontAwesomeIcon } from "./../ts/font-awesome.ts";
+import AdminLayout from "./Layouts/AdminLayout.vue";
 import AuthLayout from "./Layouts/AuthLayout.vue";
-import { FontAwesomeIcon } from "./../ts/font-awesome.ts"
-import { i18nVue, trans } from 'laravel-vue-i18n';
 
 createInertiaApp({
-    resolve: name => {
-        const pages = import.meta.glob('./Pages/**/*.vue', {eager: true})
-        let page = pages[`./Pages/${name}.vue`]
-        let urlFirstElementName = name.split('/')[0]
+    resolve: (name) => {
+        const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
+        let page = pages[`./Pages/${name}.vue`];
+        let urlFirstElementName = name.split("/")[0];
 
         switch (urlFirstElementName) {
-            case 'Admin':
-                page.default.layout = AdminLayout
+            case "Admin":
+                page.default.layout = AdminLayout;
                 break;
-            case 'Auth':
-                page.default.layout = AuthLayout
+            case "Auth":
+                page.default.layout = AuthLayout;
                 break;
         }
 
-        return page
+        return page;
     },
-    setup({el, App, props, plugin}) {
-        return createApp({render: () => h(App, props)})
+    setup({ el, App, props, plugin }) {
+        return createApp({ render: () => h(App, props) })
             .use(ZiggyVue)
             .use(plugin)
             .use(i18nVue, {
-                resolve: async languageCode => {
+                resolve: async () => {
                     const locale = props.initialPage.props.locale;
-                    const language = import.meta.glob('../../lang/*.json');
+                    const language = import.meta.glob("../../lang/*.json");
                     return await language[`../../lang/${locale}.json`]();
-                }
+                },
             })
-            .component('font-awesome-icon', FontAwesomeIcon)
-            .mount(el)
+            .component("font-awesome-icon", FontAwesomeIcon)
+            .mount(el);
     },
-}).then(response => {
-
-});
+}).then(() => {});

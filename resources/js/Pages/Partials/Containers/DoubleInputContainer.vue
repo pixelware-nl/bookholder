@@ -5,7 +5,7 @@
 </template>
 <style scoped>
 .input-two-inbetween {
-    @apply w-[47.5%]
+    @apply w-[47.5%];
 }
 
 .input-two-inbetween:last-child {

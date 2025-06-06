@@ -23,19 +23,19 @@ enum KVKNumber: string
 
     public static function toArray(): array
     {
-        return array_map(fn($case) => $case->value, self::cases());
+        return array_map(fn ($case) => $case->value, self::cases());
     }
 
     public static function successCases(): array
     {
-        return array_filter(self::cases(), function($case) {
+        return array_filter(self::cases(), function ($case) {
             return str_contains($case->name, 'SUCCESSFUL');
         });
     }
 
     public static function errorCases(): array
     {
-        return array_filter(self::cases(), function($case) {
+        return array_filter(self::cases(), function ($case) {
             return str_contains($case->name, 'ERROR');
         });
     }

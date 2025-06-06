@@ -2,87 +2,47 @@
 
 namespace Tests\Feature;
 
-use App\DTO\CompanyDTO;
-use App\Exceptions\InvalidArrayParamsException;
-use App\Helpers\ValidationHelper;
 use App\Models\Company;
-use Database\Seeders\DatabaseSeeder;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Request;
 use Tests\TestCase;
 
 class CompanyTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function testDTO(): CompanyDTO
+    public function test_get_company_index_should_return_success(): void
     {
-        return new CompanyDTO(
-            'Pixelware',
-            '93842343',
-            'Huidenclubplein 4C',
-            'Rotterdam',
-            '3029PB',
-            'Netherlands'
-        );
-    }
+        // Arrange
+        // Login as user with bearer token JWT
+        $user = User::factory()->create();
+        $this->actingAs($user);
 
-    public function test_create_dto()
-    {
-        $companyDTO = $this->testDTO();
-
-        $this->assertFalse($companyDTO === null);
-        $this->assertTrue($companyDTO instanceof CompanyDTO);
-    }
-
-    public function test_create_dto_from_request()
-    {
-        $request = new Request([
-            'name' => 'Pixelware',
-            'kvk' => '9384243',
-            'street_address' => 'Huidenclubplein 4C',
-            'city' => 'Rotterdam',
-            'postal_code' => '3029PB',
-            'country' => 'Netherlands'
+        // Create a company
+        $company = Company::factory()->create([
+            'name' => 'Test Company',
+            'kvk' => '12345678',
+            'street_address' => '123 Test St',
+            'postal_code' => '1234 AB',
+            'city' => 'Test City',
+            'country' => 'Test Country',
+            'iban' => 'NL91ABNA0417164300',
         ]);
 
-        $companyDTO = CompanyDTO::fromRequest($request);
+        // Act
+        $response = $this->get(route('companies.index'));
 
-        $this->assertTrue($companyDTO instanceof CompanyDTO);
+        // Assert
+        $response->assertStatus(200);
     }
 
-    public function test_return_dto_to_array()
+    public function test_get_unauthenticated_user_should_redirect_to_login(): void
     {
-        $required = ['name', 'kvk', 'street_address', 'city', 'postal_code', 'country'];
-        $companyArray = $this->testDTO()->toArray();
+        // Act
+        $response = $this->get(route('companies.index'));
 
-        $this->assertFalse(ValidationHelper::isMissingRequiredArrayParams($required, $companyArray));
-        $this->assertTrue(is_array($companyArray));
-    }
-
-    /**
-     * @throws InvalidArrayParamsException
-     */
-    public function test_insert_new_company_from_dto_array()
-    {
-        $companyDTO = $this->testDTO();
-
-        $company = Company::createOrGet($companyDTO->toArray());
-
-        $this->assertTrue($company instanceof Company);
-        $this->assertTrue(Company::fromKvk($companyDTO->getKvk())->exists());
-        $this->assertDatabaseHas('companies', $companyDTO->toArray());
-    }
-
-    public function test_delete_company()
-    {
-        $companyDTO = $this->testDTO();
-        $companyQuery = Company::fromKvk($companyDTO->getKvk());
-
-        if ($companyQuery->exists()) {
-            $companyQuery->delete();
-        }
-
-        $this->assertFalse($companyQuery->exists());
+        // Assert
+        $response->assertStatus(302);
+        $response->assertRedirect(route('login'));
     }
 }

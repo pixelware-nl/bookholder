@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class CreateUserRequest
- * @package App\Http\Requests\Auth
+ *
  * @property string $firstname
  * @property string $lastname
  * @property string $email

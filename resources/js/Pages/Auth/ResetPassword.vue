@@ -1,5 +1,8 @@
 <template>
-    <AuthFormContainer :form-title="$t('auth.reset_password.title')" :logo-to-route="route('login')">
+    <AuthFormContainer
+        :form-title="$t('auth.reset_password.title')"
+        :logo-to-route="route('login')"
+    >
         <form @submit.prevent="form.post(route('password.update'))">
             <input type="hidden" name="token" :value="form.token" />
             <InputContainer>
@@ -33,34 +36,36 @@
                     :error="errors.password_confirmation"
                 />
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> {{ $t('auth.reset_password.submit') }} </SubmitButton>
+            <SubmitButton :form-processing="form.processing">
+                {{ $t("auth.reset_password.submit") }}
+            </SubmitButton>
         </form>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import AuthFormContainer from "./Partials/AuthFormContainer.vue";
+import { useForm } from "@inertiajs/vue3";
+import { defineProps, onBeforeMount } from "vue";
 import InputContainer from "../Partials/Containers/InputContainer.vue";
-import TextInput from "../Partials/Inputs/TextInput.vue";
 import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
 import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
-import {useForm} from "@inertiajs/vue3";
-import {defineProps, onBeforeMount, onMounted} from "vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
-    errors: object,
+    errors: object;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const form = useForm({
     token: null,
     email: null,
     password: null,
     password_confirmation: null,
-})
+});
 
 onBeforeMount(() => {
     form.token = route().params.token;
     form.email = route().params.email;
-})
+});
 </script>

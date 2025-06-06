@@ -7,7 +7,7 @@
             :class="{
                 'active-tab': modelValue === tab,
                 'inactive-tab': modelValue !== tab,
-                '-ms-1': index !== 0
+                '-ms-1': index !== 0,
             }"
         >
             {{ tab }}
@@ -15,28 +15,26 @@
     </div>
 </template>
 <script setup lang="ts">
-
-import {defineProps, defineEmits} from "vue";
+import { defineEmits, defineProps } from "vue";
 
 interface Props {
-    tabs: string[],
-    modelValue: string,
+    tabs: string[];
+    modelValue: string;
 }
 
-const props = defineProps<Props>();
-const emit = defineEmits(['update:modelValue']);
+defineProps<Props>();
+const emit = defineEmits(["update:modelValue"]);
 
 const toggleTab = (tab: string) => {
-    emit('update:modelValue', tab);
-}
-
+    emit("update:modelValue", tab);
+};
 </script>
 <style scoped>
 .active-tab {
-    @apply bg-white -mb-1 pt-2 pb-3 px-6 rounded-tl-2xl rounded-tr-2xl z-10
+    @apply z-10 -mb-1 rounded-tl-2xl rounded-tr-2xl bg-white px-6 pb-3 pt-2;
 }
 
 .inactive-tab {
-    @apply bg-slate-300 text-slate-800 py-2 px-6 rounded-tl-2xl rounded-tr-2xl z-0
+    @apply z-0 rounded-tl-2xl rounded-tr-2xl bg-slate-300 px-6 py-2 text-slate-800;
 }
 </style>

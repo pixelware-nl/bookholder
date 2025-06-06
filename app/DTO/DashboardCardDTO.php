@@ -28,16 +28,14 @@ readonly class DashboardCardDTO implements DTOInterface
         return $this->growth;
     }
 
-    public static function fromRequest(Request $request): void
-    {
-    }
+    public static function fromRequest(Request $request): void {}
 
     public function toArray(): array
     {
         return [
-            'current'  => $this->getCurrent(),
+            'current' => $this->getCurrent(),
             'previous' => $this->getPrevious(),
-            'growth'   => $this->getGrowth(),
+            'growth' => $this->getGrowth(),
         ];
     }
 }
