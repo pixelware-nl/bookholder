@@ -81,10 +81,10 @@ interface Props {
     accumulatedRevenue: object;
     hoursWorked: object;
     freelanceWage: object;
-    daysLeft: Number;
+    daysLeft: number;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const tableData = [
     {
@@ -115,7 +115,7 @@ const tableData = [
 ];
 
 function getCurrency(value) {
-    let formatter = new Intl.NumberFormat('nl-NL', {
+    const formatter = new Intl.NumberFormat('nl-NL', {
         style: 'currency',
         currency: 'EUR',
         minimumFractionDigits: 0,

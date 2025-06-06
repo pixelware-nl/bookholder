@@ -31,7 +31,7 @@ interface Props {
     errors?: object;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const kvkForm = useForm({
     kvk_to_find: null,

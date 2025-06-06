@@ -17,7 +17,7 @@ interface Props {
     logoToRoute?: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .container {

@@ -28,7 +28,7 @@ createInertiaApp({
             .use(ZiggyVue)
             .use(plugin)
             .use(i18nVue, {
-                resolve: async (languageCode) => {
+                resolve: async () => {
                     const locale = props.initialPage.props.locale;
                     const language = import.meta.glob('../../lang/*.json');
                     return await language[`../../lang/${locale}.json`]();
@@ -37,4 +37,4 @@ createInertiaApp({
             .component('font-awesome-icon', FontAwesomeIcon)
             .mount(el);
     },
-}).then((response) => {});
+}).then(() => {});

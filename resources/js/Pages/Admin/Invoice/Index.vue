@@ -34,7 +34,7 @@ interface Props {
     currentTab: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .link-button {

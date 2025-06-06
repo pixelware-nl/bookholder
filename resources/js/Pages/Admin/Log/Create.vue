@@ -79,7 +79,7 @@ interface Props {
     errors: object;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const form = useForm({
     company_id: null,

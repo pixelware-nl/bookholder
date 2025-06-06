@@ -10,7 +10,7 @@ interface Props {
     formProcessing: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .input-submit {

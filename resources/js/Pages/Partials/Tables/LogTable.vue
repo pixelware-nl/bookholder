@@ -11,8 +11,8 @@
                 <th class="w-[50px]"></th>
             </tr>
         </template>
-        <template #tbody>
-            <tr v-if="filteredLogs.length > 0" v-for="log in filteredLogs" :class="{ payed: log.payed }">
+        <template #tbody v-if="filteredLogs.length > 0">
+            <tr v-for="log in filteredLogs" :class="{ payed: log.payed }" v-bind:key="log.id">
                 <td>{{ log.company_name }}</td>
                 <td>{{ log.rate }}</td>
                 <td>{{ log.hours.toString().padStart(2, '0') }}:{{ log.minutes.toString().padStart(2, '0') }}</td>
@@ -33,15 +33,15 @@
                     </Link>
                 </td>
             </tr>
-            <tr v-else>
-                <td colspan="7" class="text-center !text-gray-400">{{ $t('log.index.no_entries') }}</td>
-            </tr>
-            <tr v-if="filteredLogs.length > 0" :class="{ payed: payed }">
+            <tr :class="{ payed: payed }">
                 <td class="font-bold">Total</td>
                 <td class="font-bold">{{ sumTotalMoneyAsCurrency }}</td>
                 <td class="font-bold">{{ sumTotalHours }}</td>
                 <td colspan="4"></td>
             </tr>
+        </template>
+        <template #tbody v-else>
+            <td colspan="7" class="text-center !text-gray-400">{{ $t('log.index.no_entries') }}</td>
         </template>
     </TableContainer>
 </template>
@@ -79,7 +79,7 @@ const sumTotalMoneyAsCurrency = computed(() => {
 });
 
 function getCurrency(value) {
-    let formatter = new Intl.NumberFormat('nl-NL', {
+    const formatter = new Intl.NumberFormat('nl-NL', {
         style: 'currency',
         currency: 'EUR',
         minimumFractionDigits: 0,

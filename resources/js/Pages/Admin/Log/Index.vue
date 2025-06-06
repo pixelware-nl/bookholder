@@ -33,7 +33,7 @@ interface Props {
     logs: object;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .link-button {

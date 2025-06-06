@@ -9,7 +9,7 @@ interface Props {
     error?: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .input-field-error {

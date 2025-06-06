@@ -13,7 +13,7 @@ interface Props {
     method?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     method: 'get',
 });
 

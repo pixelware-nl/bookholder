@@ -19,7 +19,7 @@
                         </Link>
                     </td>
                 </tr>
-                <tr v-for="company in companies">
+                <tr v-for="company in companies" v-bind:key="company.id">
                     <td>{{ company.name }}</td>
                     <td>{{ company.street_address }}, {{ company.city }}</td>
                     <td class="table-item table-item-link">
@@ -44,7 +44,7 @@ interface Props {
     companies: object;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .header-title {

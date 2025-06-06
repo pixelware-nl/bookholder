@@ -14,8 +14,8 @@
                 <th class="w-[50px]"></th>
             </tr>
         </template>
-        <template #tbody>
-            <tr v-if="filteredInvoices.length > 0" v-for="invoice in filteredInvoices" :class="{ payed: invoice.payed }">
+        <template #tbody v-if="filteredInvoices.length > 0" >
+            <tr v-for="invoice in filteredInvoices" :class="{ payed: invoice.payed }" v-bind:key="invoice.id">
                 <td>{{ invoice.id }}</td>
                 <td>{{ invoice.from_company }}</td>
                 <td>{{ invoice.to_company }}</td>
@@ -47,7 +47,9 @@
                     </a>
                 </td>
             </tr>
-            <tr v-else>
+        </template>
+        <template #tbody v-else>
+            <tr>
                 <td colspan="10" class="text-center !text-gray-400">{{ $t('invoice.index.no_entries') }}</td>
             </tr>
         </template>

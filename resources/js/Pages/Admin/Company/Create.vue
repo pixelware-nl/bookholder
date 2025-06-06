@@ -86,13 +86,11 @@
 <script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
 import { onMounted, ref } from 'vue';
-import { defineProps } from 'vue/dist/vue';
 import DoubleInputContainer from '../../Partials/Containers/DoubleInputContainer.vue';
 import InputContainer from '../../Partials/Containers/InputContainer.vue';
 import SubmitButton from '../../Partials/Inputs/SubmitButton.vue';
 import TextInput from '../../Partials/Inputs/TextInput.vue';
 import AdminContainer from '../Partials/AdminContainer.vue';
-
 interface Props {
     errors?: object;
     company?: object;

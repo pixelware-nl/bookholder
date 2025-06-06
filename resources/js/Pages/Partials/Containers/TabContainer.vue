@@ -22,7 +22,7 @@ interface Props {
     modelValue: string;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 const emit = defineEmits(['update:modelValue']);
 
 const toggleTab = (tab: string) => {

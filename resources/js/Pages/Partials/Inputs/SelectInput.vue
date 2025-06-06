@@ -10,7 +10,7 @@
         @input="$emit('update:modelValue', $event.target.value)"
     >
         <option value="" selected>Kies een optie</option>
-        <option v-for="option in options" :value="option.id">
+        <option v-for="option in options" :value="option.id" v-bind:key="option.id">
             {{ option.name }}
         </option>
     </select>
@@ -32,7 +32,7 @@ interface Props {
     disabled?: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 <style scoped>
 .input-field-error {
