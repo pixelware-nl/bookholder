@@ -1,6 +1,9 @@
 <template>
     <AuthFormContainer :form-title="$t('auth.login.title')">
-        <form @submit.prevent="form.post(route('login.authenticate'))" class="border-b pb-10">
+        <form
+            @submit.prevent="form.post(route('login.authenticate'))"
+            class="border-b pb-10"
+        >
             <InputContainer>
                 <TextInput
                     v-model="form.email"
@@ -21,27 +24,37 @@
                     :error="errors.password"
                 />
                 <div class="text-right">
-                    <Link :href="route('password.request')" class="text-xs text-blue-600 hover:underline">
-                        {{ $t('auth.login.forgot_password') }}
+                    <Link
+                        :href="route('password.request')"
+                        class="text-xs text-blue-600 hover:underline"
+                    >
+                        {{ $t("auth.login.forgot_password") }}
                     </Link>
                 </div>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> {{ $t('auth.login.submit') }} </SubmitButton>
+            <SubmitButton :form-processing="form.processing">
+                {{ $t("auth.login.submit") }}
+            </SubmitButton>
         </form>
         <p class="mt-6 text-center">
-            {{ $t('auth.login.not_registered_question') }}
-            <Link :href="route('register.find')" class="text-blue-600 hover:underline"> {{ $t('auth.login.not_registered_link') }} </Link>
+            {{ $t("auth.login.not_registered_question") }}
+            <Link
+                :href="route('register.find')"
+                class="text-blue-600 hover:underline"
+            >
+                {{ $t("auth.login.not_registered_link") }}
+            </Link>
         </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import { Link, useForm } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
-import InputContainer from '../Partials/Containers/InputContainer.vue';
-import PasswordInput from '../Partials/Inputs/PasswordInput.vue';
-import SubmitButton from '../Partials/Inputs/SubmitButton.vue';
-import TextInput from '../Partials/Inputs/TextInput.vue';
-import AuthFormContainer from './Partials/AuthFormContainer.vue';
+import { Link, useForm } from "@inertiajs/vue3";
+import { defineProps } from "vue";
+import InputContainer from "../Partials/Containers/InputContainer.vue";
+import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
+import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
     errors: object;

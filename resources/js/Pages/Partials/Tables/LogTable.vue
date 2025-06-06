@@ -2,20 +2,28 @@
     <TableContainer>
         <template #thead>
             <tr>
-                <th>{{ $t('log.index.company') }}</th>
-                <th>{{ $t('log.index.rate') }}</th>
-                <th>{{ $t('log.index.hours') }}</th>
-                <th>{{ $t('log.index.name') }}</th>
+                <th>{{ $t("log.index.company") }}</th>
+                <th>{{ $t("log.index.rate") }}</th>
+                <th>{{ $t("log.index.hours") }}</th>
+                <th>{{ $t("log.index.name") }}</th>
                 <th class="w-[50px]"></th>
                 <th class="w-[50px]"></th>
                 <th class="w-[50px]"></th>
             </tr>
         </template>
         <template #tbody v-if="filteredLogs.length > 0">
-            <tr v-for="log in filteredLogs" :class="{ payed: log.payed }" v-bind:key="log.id">
+            <tr
+                v-for="log in filteredLogs"
+                :class="{ payed: log.payed }"
+                v-bind:key="log.id"
+            >
                 <td>{{ log.company_name }}</td>
                 <td>{{ log.rate }}</td>
-                <td>{{ log.hours.toString().padStart(2, '0') }}:{{ log.minutes.toString().padStart(2, '0') }}</td>
+                <td>
+                    {{ log.hours.toString().padStart(2, "0") }}:{{
+                        log.minutes.toString().padStart(2, "0")
+                    }}
+                </td>
                 <td>{{ log.name }}</td>
                 <td class="table-item table-item-link">
                     <Link :href="route('logs.show', log.id)">
@@ -23,7 +31,10 @@
                     </Link>
                 </td>
                 <td class="table-item table-item-link">
-                    <Link v-if="log.payed == false" :href="route('logs.edit', log.id)">
+                    <Link
+                        v-if="log.payed == false"
+                        :href="route('logs.edit', log.id)"
+                    >
                         <FontAwesomeIcon icon="fa-solid fa-pen-to-square" />
                     </Link>
                 </td>
@@ -41,15 +52,17 @@
             </tr>
         </template>
         <template #tbody v-else>
-            <td colspan="7" class="text-center !text-gray-400">{{ $t('log.index.no_entries') }}</td>
+            <td colspan="7" class="text-center !text-gray-400">
+                {{ $t("log.index.no_entries") }}
+            </td>
         </template>
     </TableContainer>
 </template>
 <script setup lang="ts">
-import TableContainer from '@/Pages/Partials/Tables/TableContainer.vue';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { Link } from '@inertiajs/vue3';
-import { computed, defineProps } from 'vue';
+import TableContainer from "@/Pages/Partials/Tables/TableContainer.vue";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { Link } from "@inertiajs/vue3";
+import { computed, defineProps } from "vue";
 
 interface Props {
     logs: object;
@@ -79,9 +92,9 @@ const sumTotalMoneyAsCurrency = computed(() => {
 });
 
 function getCurrency(value) {
-    const formatter = new Intl.NumberFormat('nl-NL', {
-        style: 'currency',
-        currency: 'EUR',
+    const formatter = new Intl.NumberFormat("nl-NL", {
+        style: "currency",
+        currency: "EUR",
         minimumFractionDigits: 0,
     });
 

@@ -10,16 +10,20 @@
         @input="$emit('update:modelValue', $event.target.value)"
     >
         <option value="" selected>Kies een optie</option>
-        <option v-for="option in options" :value="option.id" v-bind:key="option.id">
+        <option
+            v-for="option in options"
+            :value="option.id"
+            v-bind:key="option.id"
+        >
             {{ option.name }}
         </option>
     </select>
     <ErrorField :error="error" />
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue';
-import ErrorField from './ErrorField.vue';
-import LabelField from './LabelField.vue';
+import { defineProps } from "vue";
+import ErrorField from "./ErrorField.vue";
+import LabelField from "./LabelField.vue";
 
 interface Props {
     modelValue?: string | number;

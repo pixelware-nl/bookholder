@@ -3,7 +3,11 @@
         <CardHeader>
             <div class="mb-8 flex items-center justify-between">
                 <h1 class="header-title">{{ formTitle }}</h1>
-                <Link v-if="routeName != null" :href="routeName" class="select-none pr-8 font-bold text-blue-600 hover:text-blue-900">
+                <Link
+                    v-if="routeName != null"
+                    :href="routeName"
+                    class="select-none pr-8 font-bold text-blue-600 hover:text-blue-900"
+                >
                     <FontIcon icon="fa-backspace" :size="iconSize.large" />
                 </Link>
             </div>
@@ -14,11 +18,11 @@
     </Card>
 </template>
 <script setup lang="ts">
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Link } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
-import { iconSize } from '../../../../ts/icon-size';
-import FontIcon from '../../Partials/Externals/FontIcon.vue';
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Link } from "@inertiajs/vue3";
+import { defineProps } from "vue";
+import { iconSize } from "../../../../ts/icon-size";
+import FontIcon from "../../Partials/Externals/FontIcon.vue";
 
 interface Props {
     formTitle: string;

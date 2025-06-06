@@ -15,7 +15,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
+import { defineEmits, defineProps } from "vue";
 
 interface Props {
     tabs: string[];
@@ -23,10 +23,10 @@ interface Props {
 }
 
 defineProps<Props>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const toggleTab = (tab: string) => {
-    emit('update:modelValue', tab);
+    emit("update:modelValue", tab);
 };
 </script>
 <style scoped>

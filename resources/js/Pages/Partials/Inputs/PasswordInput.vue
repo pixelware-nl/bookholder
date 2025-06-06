@@ -13,10 +13,10 @@
     <ErrorField :error="error" />
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue';
-import BaseInput from './BaseInput.vue';
-import ErrorField from './ErrorField.vue';
-import LabelField from './LabelField.vue';
+import { defineProps } from "vue";
+import BaseInput from "./BaseInput.vue";
+import ErrorField from "./ErrorField.vue";
+import LabelField from "./LabelField.vue";
 
 interface Props {
     modelValue?: string;

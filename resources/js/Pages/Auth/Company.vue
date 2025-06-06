@@ -1,6 +1,12 @@
 <template>
-    <AuthFormContainer :form-title="$t('auth.company.title')" :route-name="route('login')">
-        <form @submit.prevent="form.post(route('register.set-company'))" class="border-b pb-10">
+    <AuthFormContainer
+        :form-title="$t('auth.company.title')"
+        :route-name="route('login')"
+    >
+        <form
+            @submit.prevent="form.post(route('register.set-company'))"
+            class="border-b pb-10"
+        >
             <InputContainer>
                 <TextInput
                     id="name"
@@ -81,22 +87,26 @@
                     />
                 </DoubleInputContainer>
             </InputContainer>
-            <SubmitButton :form-processing="form.processing"> {{ $t('auth.company.submit') }} </SubmitButton>
+            <SubmitButton :form-processing="form.processing">
+                {{ $t("auth.company.submit") }}
+            </SubmitButton>
         </form>
         <p class="mt-6 text-center">
-            {{ $t('auth.company.already_registered_question') }}
-            <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.company.already_registered_link') }} </Link>
+            {{ $t("auth.company.already_registered_question") }}
+            <Link :href="route('login')" class="text-blue-600 hover:underline">
+                {{ $t("auth.company.already_registered_link") }}
+            </Link>
         </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import { Link, useForm } from '@inertiajs/vue3';
-import { onMounted, ref } from 'vue';
-import DoubleInputContainer from '../Partials/Containers/DoubleInputContainer.vue';
-import InputContainer from '../Partials/Containers/InputContainer.vue';
-import SubmitButton from '../Partials/Inputs/SubmitButton.vue';
-import TextInput from '../Partials/Inputs/TextInput.vue';
-import AuthFormContainer from './Partials/AuthFormContainer.vue';
+import { Link, useForm } from "@inertiajs/vue3";
+import { onMounted, ref } from "vue";
+import DoubleInputContainer from "../Partials/Containers/DoubleInputContainer.vue";
+import InputContainer from "../Partials/Containers/InputContainer.vue";
+import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
+import TextInput from "../Partials/Inputs/TextInput.vue";
+import AuthFormContainer from "./Partials/AuthFormContainer.vue";
 
 interface Props {
     errors?: object;

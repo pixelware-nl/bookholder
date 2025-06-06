@@ -1,26 +1,29 @@
 <script setup lang="ts">
-import { DonutChart } from '@/components/ui/chart-donut';
+import { DonutChart } from "@/components/ui/chart-donut";
 
 const data = [
     {
-        name: 'Friva',
+        name: "Friva",
         total: Math.floor(Math.random() * 2000) + 500,
     },
     {
-        name: 'Rituals',
+        name: "Rituals",
         total: Math.floor(Math.random() * 2000) + 500,
     },
     {
-        name: 'Gemeente Rotterdam',
+        name: "Gemeente Rotterdam",
         total: Math.floor(Math.random() * 2000) + 500,
     },
     {
-        name: 'Bol.com',
+        name: "Bol.com",
         total: Math.floor(Math.random() * 2000) + 500,
     },
 ];
 
-const valueFormatter = (tick: number) => (typeof tick === 'number' ? `$ ${new Intl.NumberFormat('us').format(tick).toString()}` : '');
+const valueFormatter = (tick: number) =>
+    typeof tick === "number"
+        ? `$ ${new Intl.NumberFormat("us").format(tick).toString()}`
+        : "";
 </script>
 <template>
     <DonutChart

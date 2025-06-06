@@ -1,4 +1,4 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
+import { library } from "@fortawesome/fontawesome-svg-core";
 import {
     faBackspace,
     faCircleCheck,
@@ -10,9 +10,20 @@ import {
     faPenToSquare,
     faSquarePlus,
     faTrash,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faTrash, faSquarePlus, faFileArrowDown, faFilePdf, faFilePen, faEnvelope, faBackspace, faPenToSquare, faEye, faCircleCheck);
+library.add(
+    faTrash,
+    faSquarePlus,
+    faFileArrowDown,
+    faFilePdf,
+    faFilePen,
+    faEnvelope,
+    faBackspace,
+    faPenToSquare,
+    faEye,
+    faCircleCheck,
+);
 
 export { FontAwesomeIcon };

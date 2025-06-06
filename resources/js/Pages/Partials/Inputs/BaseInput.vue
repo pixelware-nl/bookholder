@@ -1,8 +1,13 @@
 <template>
-    <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" :class="{ 'input-field-error': error }" class="input" />
+    <input
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
+        :class="{ 'input-field-error': error }"
+        class="input"
+    />
 </template>
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
 interface Props {
     modelValue?: object | string | number;

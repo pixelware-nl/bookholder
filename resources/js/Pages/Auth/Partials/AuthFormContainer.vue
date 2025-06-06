@@ -1,7 +1,9 @@
 <template>
     <div class="container">
         <p v-if="logoToRoute" class="logo">
-            <Link :href="logoToRoute">PIXELWARE<span class="text-red-600">.</span></Link>
+            <Link :href="logoToRoute"
+                >PIXELWARE<span class="text-red-600">.</span></Link
+            >
         </p>
         <p v-else class="logo">PIXELWARE<span class="text-red-600">.</span></p>
         <h1 class="header-title">{{ formTitle }}</h1>
@@ -9,8 +11,8 @@
     </div>
 </template>
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-import { defineProps } from 'vue';
+import { Link } from "@inertiajs/vue3";
+import { defineProps } from "vue";
 
 interface Props {
     formTitle: string;
