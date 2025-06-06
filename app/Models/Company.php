@@ -11,8 +11,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 /**
- *
- *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
  * @method static firstOrFail(int $id)
@@ -22,6 +20,7 @@ use Illuminate\Support\Collection;
  * @method static firstOrCreate(array $array)
  * @method static first()
  * @method static exists()
+ *
  * @property int $id
  * @property string $name
  * @property string|null $street_address
@@ -36,6 +35,7 @@ use Illuminate\Support\Collection;
  * @property-read int|null $products_count
  * @property-read Collection<int, User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company query()
@@ -49,17 +49,24 @@ use Illuminate\Support\Collection;
  * @method static \Illuminate\Database\Eloquent\Builder|Company wherePostalCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereStreetAddress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
+ *
  * @mixin Eloquent
+ *
  * @method static Builder|Company withoutAuthenticatedUserCompany()
+ *
  * @property string $kvk
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $employees
  * @property-read int|null $employees_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $partners
  * @property-read int|null $partners_count
+ *
  * @method static Builder|Company fromKvk(string $kvk)
  * @method static Builder|Company whereKvk($value)
+ *
  * @property string|null $iban
+ *
  * @method static Builder|Company whereIban($value)
+ *
  * @mixin \Eloquent
  */
 class Company extends Model
@@ -80,7 +87,7 @@ class Company extends Model
         'street_address',
         'city',
         'postal_code',
-        'country'
+        'country',
     ];
 
     public function users(): belongsToMany

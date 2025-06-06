@@ -23,7 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             ShareLocale::class,
             HandleInertiaRequests::class,
             ValidateCsrfToken::class,
-            SentryContext::class
+            SentryContext::class,
         ]);
     })
     ->withEvents(discover: [

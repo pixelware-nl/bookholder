@@ -4,4 +4,4 @@ enum iconSize {
     large = 'text-2xl',
 }
 
-export {iconSize};
+export { iconSize };

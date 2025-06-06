@@ -1,6 +1,6 @@
 <template>
     <AuthFormContainer :form-title="$t('auth.login.title')">
-        <form @submit.prevent="form.post(route('login.authenticate'))" class="pb-10 border-b">
+        <form @submit.prevent="form.post(route('login.authenticate'))" class="border-b pb-10">
             <InputContainer>
                 <TextInput
                     v-model="form.email"
@@ -21,25 +21,30 @@
                     :error="errors.password"
                 />
                 <div class="text-right">
-                    <Link :href="route('password.request')" class="text-blue-600 hover:underline text-xs"> {{ $t('auth.login.forgot_password') }} </Link>
+                    <Link :href="route('password.request')" class="text-xs text-blue-600 hover:underline">
+                        {{ $t('auth.login.forgot_password') }}
+                    </Link>
                 </div>
             </InputContainer>
             <SubmitButton :form-processing="form.processing"> {{ $t('auth.login.submit') }} </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> {{ $t('auth.login.not_registered_question') }} <Link :href="route('register.find')" class="text-blue-600 hover:underline"> {{ $t('auth.login.not_registered_link') }} </Link> </p>
+        <p class="mt-6 text-center">
+            {{ $t('auth.login.not_registered_question') }}
+            <Link :href="route('register.find')" class="text-blue-600 hover:underline"> {{ $t('auth.login.not_registered_link') }} </Link>
+        </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
-import {useForm, Link} from "@inertiajs/vue3";
-import AuthFormContainer from "./Partials/AuthFormContainer.vue";
-import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
-import InputContainer from "../Partials/Containers/InputContainer.vue";
-import TextInput from "../Partials/Inputs/TextInput.vue";
-import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
+import { Link, useForm } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import InputContainer from '../Partials/Containers/InputContainer.vue';
+import PasswordInput from '../Partials/Inputs/PasswordInput.vue';
+import SubmitButton from '../Partials/Inputs/SubmitButton.vue';
+import TextInput from '../Partials/Inputs/TextInput.vue';
+import AuthFormContainer from './Partials/AuthFormContainer.vue';
 
 interface Props {
-    errors: object,
+    errors: object;
 }
 
 const props = defineProps<Props>();
@@ -51,22 +56,22 @@ const form = useForm({
 </script>
 <style scoped>
 .header-title {
-    @apply font-bold text-2xl uppercase mb-8
+    @apply mb-8 text-2xl font-bold uppercase;
 }
 
 .input-container {
-    @apply mb-6
+    @apply mb-6;
 }
 
 .input-submit {
-    @apply border bg-slate-800 border-gray-300 text-slate-50 text-sm rounded-lg py-3 w-full hover:bg-slate-900 hover:text-slate-200
+    @apply w-full rounded-lg border border-gray-300 bg-slate-800 py-3 text-sm text-slate-50 hover:bg-slate-900 hover:text-slate-200;
 }
 
 .input-error {
-    @apply text-red-600 text-sm mt-2
+    @apply mt-2 text-sm text-red-600;
 }
 
 .input-field-error {
-    @apply !border-red-600
+    @apply !border-red-600;
 }
 </style>

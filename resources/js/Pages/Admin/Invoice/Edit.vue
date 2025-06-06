@@ -38,19 +38,19 @@
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
-import {useForm} from "@inertiajs/vue3";
-import InputContainer from "../../Partials/Containers/InputContainer.vue";
-import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
-import DateInput from "../../Partials/Inputs/DateInput.vue";
-import SelectInput from "../../Partials/Inputs/SelectInput.vue";
-import SubmitButton from "../../Partials/Inputs/SubmitButton.vue";
-import AdminContainer from "../Partials/AdminContainer.vue";
+import { useForm } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import DoubleInputContainer from '../../Partials/Containers/DoubleInputContainer.vue';
+import InputContainer from '../../Partials/Containers/InputContainer.vue';
+import DateInput from '../../Partials/Inputs/DateInput.vue';
+import SelectInput from '../../Partials/Inputs/SelectInput.vue';
+import SubmitButton from '../../Partials/Inputs/SubmitButton.vue';
+import AdminContainer from '../Partials/AdminContainer.vue';
 
 interface Props {
-    invoice: object,
-    companies: object,
-    errors: object,
+    invoice: object;
+    companies: object;
+    errors: object;
 }
 
 const props = defineProps<Props>();

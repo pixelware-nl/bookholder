@@ -1,6 +1,6 @@
 <template>
     <AuthFormContainer :form-title="$t('auth.register.title')" :logo-to-route="route('login')">
-        <form @submit.prevent="form.post(route('register.store'))" class="pb-10 border-b">
+        <form @submit.prevent="form.post(route('register.store'))" class="border-b pb-10">
             <input type="hidden" name="company_id" :value="form.company_id" />
             <InputContainer class="flex">
                 <DoubleInputContainer>
@@ -56,22 +56,25 @@
             </InputContainer>
             <SubmitButton :form-processing="form.processing"> {{ $t('auth.register.submit') }} </SubmitButton>
         </form>
-        <p class="mt-6 text-center"> {{ $t('auth.register.already_registered_question') }} <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.register.already_registered_link') }} </Link> </p>
+        <p class="mt-6 text-center">
+            {{ $t('auth.register.already_registered_question') }}
+            <Link :href="route('login')" class="text-blue-600 hover:underline"> {{ $t('auth.register.already_registered_link') }} </Link>
+        </p>
     </AuthFormContainer>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
-import {useForm, Link} from "@inertiajs/vue3";
-import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
-import AuthFormContainer from "./Partials/AuthFormContainer.vue";
-import InputContainer from "../Partials/Containers/InputContainer.vue";
-import DoubleInputContainer from "../Partials/Containers/DoubleInputContainer.vue";
-import TextInput from "../Partials/Inputs/TextInput.vue";
-import PasswordInput from "../Partials/Inputs/PasswordInput.vue";
+import { Link, useForm } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import DoubleInputContainer from '../Partials/Containers/DoubleInputContainer.vue';
+import InputContainer from '../Partials/Containers/InputContainer.vue';
+import PasswordInput from '../Partials/Inputs/PasswordInput.vue';
+import SubmitButton from '../Partials/Inputs/SubmitButton.vue';
+import TextInput from '../Partials/Inputs/TextInput.vue';
+import AuthFormContainer from './Partials/AuthFormContainer.vue';
 
 interface Props {
-    company?: object,
-    errors: object,
+    company?: object;
+    errors: object;
 }
 
 const props = defineProps<Props>();
@@ -85,6 +88,4 @@ const form = useForm({
     password_confirmation: null,
 });
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

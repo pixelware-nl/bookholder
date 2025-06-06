@@ -11,7 +11,7 @@ class CompanyTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_getCompanyIndex_shouldReturnSuccess(): void
+    public function test_get_company_index_should_return_success(): void
     {
         // Arrange
         // Login as user with bearer token JWT
@@ -36,7 +36,7 @@ class CompanyTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_getUnauthenticatedUser_shouldRedirectToLogin(): void
+    public function test_get_unauthenticated_user_should_redirect_to_login(): void
     {
         // Act
         $response = $this->get(route('companies.index'));
@@ -45,7 +45,4 @@ class CompanyTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect(route('login'));
     }
-
-
-
 }

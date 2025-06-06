@@ -14,7 +14,7 @@ class ValidKVKNumberRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ((bool)preg_match('/^[0-9]{8}$/', $value) === false) {
+        if ((bool) preg_match('/^[0-9]{8}$/', $value) === false) {
             $fail('Dit KVK-nummer is niet geldig.');
         }
     }

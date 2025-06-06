@@ -81,19 +81,19 @@
     </AdminContainer>
 </template>
 <script setup lang="ts">
-import {defineProps, onMounted} from "vue";
-import {useForm} from "@inertiajs/vue3";
-import InputContainer from "../../Partials/Containers/InputContainer.vue";
-import DoubleInputContainer from "../../Partials/Containers/DoubleInputContainer.vue";
-import AdminContainer from "../Partials/AdminContainer.vue";
-import TextInput from "@/Pages/Partials/Inputs/TextInput.vue";
-import TextArea from "@/Pages/Partials/Inputs/TextArea.vue";
-import DateInput from "@/Pages/Partials/Inputs/DateInput.vue";
+import DateInput from '@/Pages/Partials/Inputs/DateInput.vue';
+import TextArea from '@/Pages/Partials/Inputs/TextArea.vue';
+import TextInput from '@/Pages/Partials/Inputs/TextInput.vue';
+import { useForm } from '@inertiajs/vue3';
+import { defineProps } from 'vue';
+import DoubleInputContainer from '../../Partials/Containers/DoubleInputContainer.vue';
+import InputContainer from '../../Partials/Containers/InputContainer.vue';
+import AdminContainer from '../Partials/AdminContainer.vue';
 
 interface Props {
-    log: object,
-    companies: object,
-    errors: object,
+    log: object;
+    companies: object;
+    errors: object;
 }
 
 const props = defineProps<Props>();

@@ -29,7 +29,7 @@ final class InvoiceController extends Controller
             'invoices' => InvoiceResource::collection(
                 $this->invoiceService->all()
             ),
-            'currentTab' => __('vue.components.tabs.pending')
+            'currentTab' => __('vue.components.tabs.pending'),
         ]);
     }
 
@@ -51,7 +51,7 @@ final class InvoiceController extends Controller
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Invoice/Create', [
-            'companies' => $this->userService->companies()
+            'companies' => $this->userService->companies(),
         ]);
     }
 
@@ -59,7 +59,7 @@ final class InvoiceController extends Controller
     {
         return Inertia::render('Admin/Invoice/Edit', [
             'invoice' => EditInvoiceResource::make($invoice),
-            'companies' => $this->userService->companies()
+            'companies' => $this->userService->companies(),
         ]);
     }
 

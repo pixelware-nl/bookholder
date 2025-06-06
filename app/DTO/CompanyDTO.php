@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 final readonly class CompanyDTO implements DTOInterface
 {
     public function __construct(
-        private string  $name,
-        private string  $kvk,
+        private string $name,
+        private string $kvk,
         private ?string $iban,
-        private string  $streetAddress,
-        private string  $city,
-        private string  $postalCode,
-        private string  $country,
+        private string $streetAddress,
+        private string $city,
+        private string $postalCode,
+        private string $country,
     ) {}
 
     public function company(): Company
@@ -27,7 +27,7 @@ final readonly class CompanyDTO implements DTOInterface
             'street_address' => $this->getStreetAddress(),
             'city' => $this->getCity(),
             'postal_code' => $this->getPostalCode(),
-            'country' => $this->getCountry()
+            'country' => $this->getCountry(),
         ]);
     }
 
@@ -66,7 +66,7 @@ final readonly class CompanyDTO implements DTOInterface
             'street_address' => $this->getStreetAddress(),
             'city' => $this->getCity(),
             'postal_code' => $this->getPostalCode(),
-            'country' => $this->getCountry()
+            'country' => $this->getCountry(),
         ];
     }
 
@@ -90,7 +90,8 @@ final readonly class CompanyDTO implements DTOInterface
         return $this->streetAddress;
     }
 
-    public function getCity(): string {
+    public function getCity(): string
+    {
         return $this->city;
     }
 

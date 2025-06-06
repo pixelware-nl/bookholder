@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class UpdatePasswordRequest
- * @package App\Http\Requests\Auth
+ *
  * @property string $token
  * @property string $email
  * @property string $password

@@ -3,16 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 /**
- * 
- *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
  * @method static firstOrFail(int $id)
@@ -22,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static firstOrCreate(array $array)
  * @method static first()
  * @method static exists()
+ *
  * @property int $id
  * @property int $user_id
  * @property int $from_company_id
@@ -33,6 +30,7 @@ use Illuminate\Support\Facades\Auth;
  * @property-read Company|null $fromCompany
  * @property-read Company|null $toCompany
  * @property-read User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice query()
@@ -45,10 +43,13 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Invoice forAuthenticatedUser()
+ *
  * @property mixed|null $body
  * @property int $payed
+ *
  * @method static Builder|Invoice whereBody($value)
  * @method static Builder|Invoice wherePayed($value)
+ *
  * @mixin \Eloquent
  */
 class Invoice extends Model
@@ -59,7 +60,7 @@ class Invoice extends Model
 
     protected $dates = [
         'start_date',
-        'end_date'
+        'end_date',
     ];
 
     protected $fillable = [

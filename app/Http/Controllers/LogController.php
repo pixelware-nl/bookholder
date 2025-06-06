@@ -27,7 +27,7 @@ final class LogController extends Controller
             'logs' => LogResource::collection(
                 $this->userService->logs()
             ),
-            'currentTab' => __('vue.components.tabs.pending')
+            'currentTab' => __('vue.components.tabs.pending'),
         ]);
     }
 
@@ -35,14 +35,14 @@ final class LogController extends Controller
     {
         return Inertia::render('Admin/Log/Show', [
             'log' => LogResource::make($log),
-            'companies' => $this->userService->companies()
+            'companies' => $this->userService->companies(),
         ]);
     }
 
     public function create(): InertiaResponse
     {
         return Inertia::render('Admin/Log/Create', [
-            'companies' => $this->userService->companies()
+            'companies' => $this->userService->companies(),
         ]);
     }
 
@@ -50,7 +50,7 @@ final class LogController extends Controller
     {
         return Inertia::render('Admin/Log/Edit', [
             'log' => $log,
-            'companies' => $this->userService->companies()
+            'companies' => $this->userService->companies(),
         ]);
     }
 

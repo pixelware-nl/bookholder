@@ -8,11 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Auth;
 
 /**
- *
- *
  * @method static find(int $get)
  * @method static findOrFail(int $id)
  * @method static firstOrFail(int $id)
@@ -22,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static firstOrCreate(array $array)
  * @method static first()
  * @method static exists()
+ *
  * @property int $id
  * @property int $product_id
  * @property int $rate
@@ -29,6 +27,7 @@ use Illuminate\Support\Facades\Auth;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Product|null $product
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Log newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Log newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Log query()
@@ -38,19 +37,27 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereProductId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereRate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereUpdatedAt($value)
+ *
  * @mixin Eloquent
+ *
  * @property int $user_id
  * @property-read \App\Models\User|null $user
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereUserId($value)
+ *
  * @property int $company_id
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Log whereCompanyId($value)
+ *
  * @property-read \App\Models\Company|null $company
  * @property string $name
  * @property string $description
  * @property int $payed
+ *
  * @method static Builder|Log whereDescription($value)
  * @method static Builder|Log whereName($value)
  * @method static Builder|Log wherePayed($value)
+ *
  * @mixin \Eloquent
  */
 class Log extends Model
@@ -73,7 +80,7 @@ class Log extends Model
         'name',
         'description',
         'payed',
-        'created_at'
+        'created_at',
     ];
 
     public function user(): HasOne

@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class FindKVKRequest
- * @package App\Http\Requests\Companies
+ *
  * @property string $kvk_to_find
  */
 class FindKVKRequest extends FormRequest
@@ -16,10 +16,11 @@ class FindKVKRequest extends FormRequest
     {
         return true;
     }
+
     public function rules(): array
     {
         return [
-            'kvk_to_find' => ['required', new ValidKVKNumberRule()]
+            'kvk_to_find' => ['required', new ValidKVKNumberRule],
         ];
     }
 
@@ -30,5 +31,4 @@ class FindKVKRequest extends FormRequest
             'kvk_to_find.valid_kvk_number' => __('validation.kvk_to_find.valid_kvk_number'),
         ];
     }
-
 }

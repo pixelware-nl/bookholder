@@ -4,16 +4,16 @@
     </button>
 </template>
 <script setup lang="ts">
-import {defineProps} from "vue";
+import { defineProps } from 'vue';
 
 interface Props {
-    formProcessing: boolean,
+    formProcessing: boolean;
 }
 
 const props = defineProps<Props>();
 </script>
 <style scoped>
 .input-submit {
-    @apply border bg-slate-800 border-gray-300 text-slate-50 text-sm rounded-lg py-3 w-full hover:bg-slate-900 hover:text-slate-200
+    @apply w-full rounded-lg border border-gray-300 bg-slate-800 py-3 text-sm text-slate-50 hover:bg-slate-900 hover:text-slate-200;
 }
 </style>

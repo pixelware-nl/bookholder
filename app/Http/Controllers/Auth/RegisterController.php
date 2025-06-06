@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\DTO\CompanyDTO;
 use App\DTO\UserDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Auth\CreateCompanyRequest;
+use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Companies\FindKVKRequest;
-use App\Models\Company;
 use App\Services\CompanyService;
 use App\Services\KVKService;
 use App\Services\UserService;
@@ -47,7 +46,7 @@ class RegisterController extends Controller
         if (Session::has('company')) {
             return Inertia::render('Auth/Company', [
                 'company' => Session::get('company'),
-                'kvk' => $kvk
+                'kvk' => $kvk,
             ]);
         }
 
@@ -69,7 +68,7 @@ class RegisterController extends Controller
 
         if (Session::has('company')) {
             return Inertia::render('Auth/Register', [
-                'company' => Session::get('company')
+                'company' => Session::get('company'),
             ]);
         }
 

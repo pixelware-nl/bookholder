@@ -15,7 +15,7 @@ class EditInvoiceResource extends JsonResource
             'to_company_id' => $this->toCompany->id,
             'start_date' => $this->start_date->format('Y-m-d'),
             'end_date' => $this->end_date->format('Y-m-d'),
-            'payed' => $this->payed
+            'payed' => $this->payed,
         ];
     }
 }

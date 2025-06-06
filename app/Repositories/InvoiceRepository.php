@@ -29,7 +29,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             'to_company_id' => $invoiceDTO->getToCompanyId(),
             'start_date' => $invoiceDTO->getStartDate(),
             'end_date' => $invoiceDTO->getEndDate(),
-            'body' => $invoiceDTO->getBody()
+            'body' => $invoiceDTO->getBody(),
         ]);
     }
 
@@ -40,7 +40,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             'to_company_id' => $invoiceDTO->getToCompanyId(),
             'start_date' => $invoiceDTO->getStartDate(),
             'end_date' => $invoiceDTO->getEndDate(),
-            'body' => $invoiceDTO->getBody()
+            'body' => $invoiceDTO->getBody(),
         ]);
 
         return $invoice;
@@ -49,7 +49,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     public function payed(Invoice $invoice, bool $payed): Invoice
     {
         $invoice->update([
-            'payed' => $payed
+            'payed' => $payed,
         ]);
 
         return $invoice;
