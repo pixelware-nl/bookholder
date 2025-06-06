@@ -92,7 +92,6 @@ import InputContainer from "../Partials/Containers/InputContainer.vue";
 import TextInput from "../Partials/Inputs/TextInput.vue";
 import DoubleInputContainer from "../Partials/Containers/DoubleInputContainer.vue";
 import SubmitButton from "../Partials/Inputs/SubmitButton.vue";
-import {defineProps} from "vue/dist/vue";
 import {Link, useForm} from "@inertiajs/vue3";
 import {onMounted, ref} from "vue";
 import AuthFormContainer from "./Partials/AuthFormContainer.vue";
