@@ -83,6 +83,7 @@ defineProps<{
                         <Checkbox id="remember" name="remember" :tabindex="3" />
                         <span>Remember me</span>
                     </Label>
+                    <TextLink :href="" class="text-sm">Forgot password?</TextLink>
                 </div>
 
                 <Button

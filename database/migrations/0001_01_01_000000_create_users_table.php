@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreignId('tenant_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreign('tenant_id')->references('id')->on('tenants');
             $table->timestamps();
         });
 

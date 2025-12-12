@@ -2,22 +2,37 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tenant;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Throwable;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     * @throws Throwable
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        try {
+            \DB::transaction(static function () {
+                $tenant = Tenant::create([
+                    'name' => 'pixelware',
+                    'slug' => 'pixelware',
+                ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+                User::create([
+                    'name' => 'okan ozbek',
+                    'email' => 'o.ozbek@pixelware.nl',
+                    'password' => \Hash::make(\Str::random()),
+                    'tenant_id' => $tenant->id,
+                ]);
+            });
+            \DB::commit();
+        } catch (Throwable $e) {
+            \DB::rollBack();
+            throw $e;
+        }
     }
 }
