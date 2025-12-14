@@ -12,9 +12,12 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { index as clients } from '@/routes/clients';
+import { index as invoices } from '@/routes/invoices';
+import { index as calendar } from '@/routes/calendar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
+import { BookOpen, Folder, LayoutGrid, BookText, CalendarDays, Users } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -22,6 +25,21 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
+    },
+    {
+        title: 'Invoices',
+        href: invoices(),
+        icon: BookText,
+    },
+    {
+        title: 'Calendar',
+        href: calendar(),
+        icon: CalendarDays,
+    },
+    {
+        title: 'Clients',
+        href: clients(),
+        icon: Users,
     },
 ];
 

@@ -11,6 +11,7 @@ import { store } from '@/routes/login';
 import { request } from '@/routes/password';
 import { Form, Head } from '@inertiajs/vue3';
 import { LoaderCircle } from 'lucide-vue-next';
+import { create } from '@/actions/App/Http/Controllers/Auth/PasswordResetLinkController';
 
 defineProps<{
     status?: string;
@@ -83,7 +84,7 @@ defineProps<{
                         <Checkbox id="remember" name="remember" :tabindex="3" />
                         <span>Remember me</span>
                     </Label>
-                    <TextLink :href="" class="text-sm">Forgot password?</TextLink>
+                    <TextLink :href="create()" class="text-sm">Forgot password?</TextLink>
                 </div>
 
                 <Button
