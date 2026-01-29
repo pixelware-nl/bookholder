@@ -20,6 +20,8 @@ class KVKService
 
     public function getCompanyDetails(string $kvk): ?Company
     {
+        return null;
+
         try {
             $response = $this->externalClient->request(
                 self::BASIC_PROFILE_MAIN_COMPANY_URL,

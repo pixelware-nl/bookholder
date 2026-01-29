@@ -48,8 +48,8 @@
                 <tr>
                     <th> Product </th>
                     <th></th>
-                    <th> Aantal (uren) </th>
-                    <th> Tarief (€) </th>
+                    <th> Aantal </th>
+                    <th> Bedrag </th>
                     <th> Totaal </th>
                 </tr>
             </thead>
@@ -58,7 +58,8 @@
                 @foreach($invoice->body->logs as $log)
                     <tr>
                         <td colspan="2"> {{ $log->name }} </td>
-                        <td> {{ sprintf('%02d:%02d', $log->hours, $log->minutes) }} </td>
+{{--                        <td> {{ sprintf('%02d:%02d', $log->hours, $log->minutes) }} </td>--}}
+                        <td> {{ $log->hours }} </td>
                         <td> {{ sprintf('€%s', number_format($log->rate, decimal_separator: ',', thousands_separator: '.')) }} </td>
                         <td> {{ sprintf('€%s', number_format($log->rate * ($log->hours + ($log->minutes / 60)), decimal_separator: ',', thousands_separator: '.')) }} </td>
                     </tr>
@@ -78,5 +79,5 @@
             </tbody>
         </table>
     </div>
-    <div class="footer"> <span> Termen: </span> Gelieve het factuur bedrag binnen 30 dagen betalen. </div>
+    <div class="footer"> <span> Termen: </span> Gelieve het factuur bedrag binnen 14 dagen betalen. </div>
 @endsection

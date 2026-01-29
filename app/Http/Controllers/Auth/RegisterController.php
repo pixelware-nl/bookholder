@@ -32,7 +32,7 @@ class RegisterController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
-        $companyDTO = $this->companyService->findByKvk($request->kvk_to_find);
+        $companyDTO = null; //$this->companyService->findByKvk($request->kvk_to_find);
 
         if ($companyDTO !== null) {
             return redirect()->route('register.get-company', ['kvk' => $request->kvk_to_find])->with(['company' => $companyDTO]);

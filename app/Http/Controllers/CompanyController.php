@@ -79,7 +79,7 @@ final class CompanyController extends Controller
 
     public function found(FindKVKRequest $request): RedirectResponse
     {
-        $company = $this->companyService->findByKvk($request->kvk_to_find);
+        $company = null; //$this->companyService->findByKvk($request->kvk_to_find);
 
         if ($company == null) {
             return $this->kvkService->redirectOnSuccess($request->kvk_to_find, 'company.create');
